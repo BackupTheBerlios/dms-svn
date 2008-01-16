@@ -1,5 +1,5 @@
 #/***************************************************************************
-# *   Copyright (C) 2007 by Alexander Saal                                  *
+# *   Copyright (C) 2008 by Alexander Saal                                  *
 # *   alex.saal@gmx.de                                                      *
 # *                                                                         *
 # *   This program is free software; you can redistribute it and/or modify  *
