@@ -1,0 +1,133 @@
+<ui version="4.0" >
+ <class>UiPreviewDocumentBase</class>
+ <widget class="QWidget" name="UiPreviewDocumentBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>395</width>
+    <height>83</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>395</width>
+    <height>83</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>395</width>
+    <height>83</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Preview document</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../../resource/dms.qrc" >:/picture/16/images/16x16/computer_16.png</iconset>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QLabel" name="labelDocument" >
+       <property name="minimumSize" >
+        <size>
+         <width>110</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>110</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Document:</string>
+       </property>
+       <property name="buddy" >
+        <cstring>comboBoxDocument</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBoxDocument" />
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0" >
+    <widget class="Line" name="line" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" >
+    <layout class="QHBoxLayout" >
+     <item>
+      <widget class="QPushButton" name="btnOk" >
+       <property name="minimumSize" >
+        <size>
+         <width>110</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>110</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>&amp;Ok</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer>
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" >
+        <size>
+         <width>392</width>
+         <height>26</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnCancel" >
+       <property name="minimumSize" >
+        <size>
+         <width>110</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>110</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>&amp;Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>comboBoxDocument</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../resource/dms.qrc" />
+ </resources>
+ <connections/>
+</ui>

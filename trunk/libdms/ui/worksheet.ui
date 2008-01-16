@@ -1,0 +1,52 @@
+<ui version="4.0" >
+ <class>UiWorkSheetBase</class>
+ <widget class="QWidget" name="UiWorkSheetBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>643</width>
+    <height>389</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Worksheet</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../../resource/dms.qrc" >:/picture/32/images/32x32/home_32.png</iconset>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <widget class="QTreeWidget" name="treeWidgetWorkSheet" >
+     <property name="contextMenuPolicy" >
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
+     <column>
+      <property name="text" >
+       <string>Group</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Document</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Date</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Checked out</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../resource/dms.qrc" />
+ </resources>
+ <connections/>
+</ui>

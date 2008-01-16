@@ -1,0 +1,74 @@
+object WizardForm: TISCustomForm
+  Left = 0
+  Top = 0
+  Width = 413
+  Height = 237
+  DesignPanel = frmISWizardPage.elDesignPanel
+  CodeEditorIndent = 0
+  CodeEditorCopyMode = 0
+  object lblInformation: TLabel
+    Left = 0
+    Top = 0
+    Width = 255
+    Height = 13
+    Caption = 'Whish sql version would you like use on your system?'
+  end
+  object rbtnMySql50: TRadioButton
+    Left = 0
+    Top = 24
+    Width = 413
+    Height = 17
+    Caption = 'My SQL 5.0.45 Generally Available (GA) Release'
+    Checked = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    TabStop = True
+  end
+  object rbtnMySql51: TRadioButton
+    Left = 0
+    Top = 48
+    Width = 413
+    Height = 17
+    Caption = 'MySQL 5.1.22 Development Release'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+  end
+  object rbznMsSql2005: TRadioButton
+    Left = 0
+    Top = 72
+    Width = 413
+    Height = 17
+    Caption = 'Microsoft SQL Server 2005'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+  end
+  object rbtnMsAccess2003: TRadioButton
+    Left = 0
+    Top = 96
+    Width = 413
+    Height = 17
+    Caption = 'Microsoft Access 2003'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+  end
+end

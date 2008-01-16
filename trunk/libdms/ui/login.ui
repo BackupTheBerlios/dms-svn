@@ -1,0 +1,171 @@
+<ui version="4.0" >
+ <class>UiLoginBase</class>
+ <widget class="QDialog" name="UiLoginBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>360</width>
+    <height>113</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>360</width>
+    <height>113</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>360</width>
+    <height>113</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Login</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../../resource/dms.qrc" >:/picture/16/images/16x16/computer_16.png</iconset>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
+    <layout class="QGridLayout" >
+     <item row="0" column="0" >
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QLabel" name="labelUserName" >
+         <property name="minimumSize" >
+          <size>
+           <width>110</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>110</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Username:</string>
+         </property>
+         <property name="buddy" >
+          <cstring>lineEditUserName</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditUserName" />
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0" >
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QLabel" name="labelUserPassword" >
+         <property name="minimumSize" >
+          <size>
+           <width>110</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>110</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Userpassword:</string>
+         </property>
+         <property name="buddy" >
+          <cstring>lineEditUserPassword</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditUserPassword" >
+         <property name="echoMode" >
+          <enum>QLineEdit::Password</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0" >
+      <widget class="Line" name="lineLoginSplit" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" >
+      <layout class="QHBoxLayout" >
+       <item>
+        <widget class="QPushButton" name="btnLogin" >
+         <property name="minimumSize" >
+          <size>
+           <width>110</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>110</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>&amp;Login</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCancel" >
+         <property name="minimumSize" >
+          <size>
+           <width>110</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>110</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>&amp;Cancel</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineEditUserName</tabstop>
+  <tabstop>lineEditUserPassword</tabstop>
+  <tabstop>btnLogin</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../resource/dms.qrc" />
+ </resources>
+ <connections/>
+</ui>

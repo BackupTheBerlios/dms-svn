@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libdms", "libdms\libdms.vcproj", "{28B2A859-84DC-3FF4-8E39-C2332156C12F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dms", "dms\dms.vcproj", "{195D9B85-0389-32EA-95D7-764411AD3611}"
+	ProjectSection(ProjectDependencies) = postProject
+		{28B2A859-84DC-3FF4-8E39-C2332156C12F} = {28B2A859-84DC-3FF4-8E39-C2332156C12F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28B2A859-84DC-3FF4-8E39-C2332156C12F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{28B2A859-84DC-3FF4-8E39-C2332156C12F}.Debug|Win32.Build.0 = Debug|Win32
+		{28B2A859-84DC-3FF4-8E39-C2332156C12F}.Release|Win32.ActiveCfg = Release|Win32
+		{28B2A859-84DC-3FF4-8E39-C2332156C12F}.Release|Win32.Build.0 = Release|Win32
+		{195D9B85-0389-32EA-95D7-764411AD3611}.Debug|Win32.ActiveCfg = Debug|Win32
+		{195D9B85-0389-32EA-95D7-764411AD3611}.Debug|Win32.Build.0 = Debug|Win32
+		{195D9B85-0389-32EA-95D7-764411AD3611}.Release|Win32.ActiveCfg = Release|Win32
+		{195D9B85-0389-32EA-95D7-764411AD3611}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
