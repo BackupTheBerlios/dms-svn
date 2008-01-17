@@ -71,20 +71,35 @@ namespace asaal
 
 	void DMSystem::login()
 	{
-
+#ifdef Q_OS_WIN32
 		QSettings *msSqlServerSettings = new QSettings( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Microsoft SQL Server\\90\\Machines", QSettings::NativeFormat );
 		QString origMachineName = msSqlServerSettings->value( "OriginalMachineName", QString( "" ) ).toString();
-		
-		if( !origMachineName.isEmpty() )
+		delete msSqlServerSettings;
+
+		QSettings *mySqlServerSettings = new QSettings( "HKEY_LOCAL_MACHINE\\SOFTWARE\\MySQL AB\\MySQL Server 5.1", QSettings::NativeFormat );
+		QString mySqlVersion = mySqlServerSettings->value( "Version", QString( "" ) ).toString();
+		delete mySqlServerSettings;
+
+		if( !origMachineName.isEmpty() && !mySqlVersion.isEmpty() )
+		{
+			// TODO code here to open the database option widget
+		}
+		else if( !origMachineName.isEmpty() && mySqlVersion.isEmpty() )
 		{
 			ldms->showDmsMsSqlConnection();
+			
 		}
-		else
+		else if( origMachineName.isEmpty() && !mySqlVersion.isEmpty() )
 		{
-			ldms->showDmsMySqlConnection();
+			ldms->showDmsMySqlConnection();			
 		}
+		else if( origMachineName.isEmpty() && mySqlVersion.isEmpty() )
+		{
 
-		delete msSqlServerSettings;
+		}
+#else
+		ldms->showDmsMySqlConnection();
+#endif
 
 		if ( ldms->isConnectionAvailabel( ldms->getUserId( ldms->loggedUser ) ) )
 		{
