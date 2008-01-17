@@ -80,22 +80,30 @@ namespace asaal
 		QString mySqlVersion = mySqlServerSettings->value( "Version", QString( "" ) ).toString();
 		delete mySqlServerSettings;
 
-		if( !origMachineName.isEmpty() && !mySqlVersion.isEmpty() )
+		QSettings *accessSqlServerSettings = new QSettings( "HKEY_CURRENT_USER\\Software\\Microsoft\\Office\\11.0\\Access", QSettings::NativeFormat );
+		QString accessName = accessSqlServerSettings->value( "AccessName", QString( "" ) ).toString();
+		delete accessSqlServerSettings;
+
+		if( !origMachineName.isEmpty() && !mySqlVersion.isEmpty() && !accessName.isEmpty() )
 		{
 			// TODO code here to open the database option widget
 		}
-		else if( !origMachineName.isEmpty() && mySqlVersion.isEmpty() )
+		else if( !origMachineName.isEmpty() && mySqlVersion.isEmpty() && accessName.isEmpty() )
 		{
 			ldms->showDmsMsSqlConnection();
 			
 		}
-		else if( origMachineName.isEmpty() && !mySqlVersion.isEmpty() )
+		else if( origMachineName.isEmpty() && !mySqlVersion.isEmpty() && accessName.isEmpty() )
 		{
 			ldms->showDmsMySqlConnection();			
 		}
-		else if( origMachineName.isEmpty() && mySqlVersion.isEmpty() )
+		else if( origMachineName.isEmpty() && mySqlVersion.isEmpty() && !accessName.isEmpty() )
 		{
-
+			//code here to connect to the access database
+		}
+		else if( origMachineName.isEmpty() && mySqlVersion.isEmpty() && accessName.isEmpty() )
+		{
+			// code here to display a message (database not found) or use sqlite
 		}
 #else
 		ldms->showDmsMySqlConnection();
