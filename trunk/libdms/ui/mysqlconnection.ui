@@ -1,6 +1,6 @@
 <ui version="4.0" >
  <class>UiMySqlConnectionBase</class>
- <widget class="QDialog" name="UiMySqlConnectionBase" >
+ <widget class="QWidget" name="UiMySqlConnectionBase" >
   <property name="geometry" >
    <rect>
     <x>0</x>
