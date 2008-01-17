@@ -272,6 +272,11 @@ namespace asaal
 			void deleteGroup( const QString &groupId );
 
 			/*!
+			* Show the database selection dialog
+			*/
+			void showDmsDatabaseSelection();
+
+			/*!
 			* Show the document widget
 			*
 			* @param ws The Workspace to add this widget

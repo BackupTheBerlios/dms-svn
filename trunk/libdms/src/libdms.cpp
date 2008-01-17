@@ -22,6 +22,7 @@
 
 #include <XMLPreferences.h>
 
+#include <dmsdatabase.h>
 #include <dmsdocument.h>
 #include <dmsgroup.h>
 #include <dmslogin.h>
@@ -718,6 +719,29 @@ namespace asaal
 		}
 
 		sqlDeleteGroupQuery.clear();
+	}
+
+	void LibDMS::showDmsDatabaseSelection()
+	{
+		if( !dmsdatabase ) {
+			dmsdatabase = new DMSDatabase();
+			dmsdatabase->rbtnMSSqlServer->setEnabled( true );
+			dmsdatabase->rbtnMySqlServer->setEnabled( true );
+
+			if( dmsdatabase->exec() == QDialog::Accepted )
+			{
+				if( dmsdatabase->rbtnMSSqlServer->isChecked() )
+				{
+					showDmsMsSqlConnection();
+				}
+				else if( dmsdatabase->rbtnMySqlServer->isChecked() )
+				{
+					showDmsMySqlConnection();
+				}
+			}
+		} else {			
+			dmsdatabase->setFocus( Qt::ActiveWindowFocusReason );
+		}
 	}
 
 	void LibDMS::showDmsDocument( QWorkspace *ws )

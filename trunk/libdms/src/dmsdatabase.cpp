@@ -34,8 +34,6 @@ namespace asaal
 		connect( btnSelect, SIGNAL( clicked() ), this, SLOT( selectDatabase() ) );
 		connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
 
-		btnOk->setEnabled( false );
-
 		QDesktopWidget *desktop = qApp->desktop();
 		const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
 		int left = ( rect.width() - width() ) / 2;
@@ -57,6 +55,7 @@ namespace asaal
 
 	void DMSDatabase::selectDatabase()
 	{
+		QDialog::accept();
 	}
 
 	void DMSDatabase::closeWidget()

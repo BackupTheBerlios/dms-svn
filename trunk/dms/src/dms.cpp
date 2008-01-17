@@ -86,16 +86,15 @@ namespace asaal
 
 		if( !origMachineName.isEmpty() && !mySqlVersion.isEmpty() && !accessName.isEmpty() )
 		{
-			// TODO code here to open the database option widget
+			ldms->showDmsDatabaseSelection();
 		}
 		else if( !origMachineName.isEmpty() && mySqlVersion.isEmpty() && accessName.isEmpty() )
 		{
-			ldms->showDmsMsSqlConnection();
-			
+			ldms->showDmsMsSqlConnection();			
 		}
 		else if( origMachineName.isEmpty() && !mySqlVersion.isEmpty() && accessName.isEmpty() )
 		{
-			ldms->showDmsMySqlConnection();			
+			ldms->showDmsMySqlConnection();	
 		}
 		else if( origMachineName.isEmpty() && mySqlVersion.isEmpty() && !accessName.isEmpty() )
 		{
