@@ -1,6 +1,6 @@
 <ui version="4.0" >
  <class>UiSelectDatabase</class>
- <widget class="QWidget" name="UiSelectDatabase" >
+ <widget class="QDialog" name="UiSelectDatabase" >
   <property name="geometry" >
    <rect>
     <x>0</x>
