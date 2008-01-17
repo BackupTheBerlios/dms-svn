@@ -1,0 +1,50 @@
+------------------------------------------------------------------------
+r12 | chmaster | 2008-01-17 22:34:45 +0100 (Do, 17 Jan 2008) | 1 line
+
+* add comment to unix define
+------------------------------------------------------------------------
+r11 | chmaster | 2008-01-17 21:59:40 +0100 (Do, 17 Jan 2008) | 1 line
+
+* add KDevelop 3.5.x project file
+------------------------------------------------------------------------
+r10 | chmaster | 2008-01-17 18:32:43 +0100 (Do, 17 Jan 2008) | 1 line
+
+* add functionality for select database on your system. it is not complete.
+------------------------------------------------------------------------
+r9 | chmaster | 2008-01-17 18:10:48 +0100 (Do, 17 Jan 2008) | 1 line
+
+* add source/header dmsdatabase.h/cpp and datatbase.ui to project files
+------------------------------------------------------------------------
+r8 | chmaster | 2008-01-17 18:07:55 +0100 (Do, 17 Jan 2008) | 1 line
+
+* change widget to QDialog
+------------------------------------------------------------------------
+r7 | chmaster | 2008-01-17 18:07:40 +0100 (Do, 17 Jan 2008) | 1 line
+
+* add source/header for database.ui
+------------------------------------------------------------------------
+r6 | chmaster | 2008-01-17 17:58:22 +0100 (Do, 17 Jan 2008) | 2 lines
+
+* add option to select tow more databases
+   * MS Access and SQLite (the support comes in future)
+------------------------------------------------------------------------
+r5 | chmaster | 2008-01-17 17:57:09 +0100 (Do, 17 Jan 2008) | 1 line
+
+* update widgets
+------------------------------------------------------------------------
+r4 | chmaster | 2008-01-17 17:56:35 +0100 (Do, 17 Jan 2008) | 1 line
+
+* add the widget for select your database
+------------------------------------------------------------------------
+r3 | chmaster | 2008-01-17 17:03:10 +0100 (Do, 17 Jan 2008) | 1 line
+
+* add option for database selection
+------------------------------------------------------------------------
+r2 | chmaster | 2008-01-16 23:51:31 +0100 (Mi, 16 Jan 2008) | 1 line
+
+* update license date to 2008
+------------------------------------------------------------------------
+r1 | chmaster | 2008-01-16 22:57:56 +0100 (Mi, 16 Jan 2008) | 1 line
+
+initial import of dms (Document Management System)
+------------------------------------------------------------------------
