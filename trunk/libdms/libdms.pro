@@ -38,6 +38,7 @@ DISTFILES += README
 DISTFILES += TODO
 
 # Project Ui files
+FORMS	+= ui/database.ui
 FORMS	+= ui/document.ui
 FORMS	+= ui/group.ui
 FORMS	+= ui/login.ui
@@ -50,6 +51,7 @@ FORMS	+= ui/worksheet.ui
 # Project Header
 HEADERS	+= base64/base64.h
 HEADERS	+= include/dllexport.h
+HEADERS	+= include/dmsdatabase.h
 HEADERS	+= include/dmsdocument.h
 HEADERS	+= include/dmsgroup.h
 HEADERS	+= include/dmslogin.h
@@ -65,6 +67,7 @@ HEADERS	+= xmlpref/XMLWriter.h
 
 # Project Source
 SOURCES	+= base64/base64.cpp
+SOURCES	+= src/dmsdatabase.cpp
 SOURCES	+= src/dmsdocument.cpp
 SOURCES	+= src/dmsgroup.cpp
 SOURCES	+= src/dmslogin.cpp
