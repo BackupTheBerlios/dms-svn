@@ -105,6 +105,7 @@ namespace asaal
 			// code here to display a message (database not found) or use sqlite
 		}
 #else
+		// TODO code her for using MySQL and SQLite3
 		ldms->showDmsMySqlConnection();
 #endif
 
