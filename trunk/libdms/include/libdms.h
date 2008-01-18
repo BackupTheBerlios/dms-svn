@@ -47,7 +47,7 @@ namespace asaal
 
 		public:
 			/*!
-			* For internal user enumaration
+			* For internal use enumaration
 			*
 			* @param ERROR
 			* @param WARNING
@@ -101,6 +101,8 @@ namespace asaal
 			* @return true if connection closed
 			*/
 			bool closeConnection();
+
+			
 
 			/*!
 			* Get the qt4 sql driver
@@ -173,10 +175,7 @@ namespace asaal
 			*
 			* @return <a href="http://doc.trolltech.com/4.3/qstring.html#QString">QString</a> with error message
 			*/
-			QString getErrorMessage()
-			{
-				return errorMessage;
-			}
+			QString getErrorMessage() { return errorMessage; }
 
 		public slots:
 			/*!

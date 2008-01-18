@@ -50,6 +50,21 @@ int main( int argc, char **argv )
 	libDmsTranslator.load ( libDmsTrFile );
 	app.installTranslator ( &libDmsTranslator );
 
+	QFile f( QString( ":/misc/misc/default.qss" ) );
+	if( !f.open( QIODevice::ReadOnly | QIODevice::Text ) )
+	{
+		DMSystem *dms = new DMSystem( app );
+		dms->show();
+
+		app.connect( &app, SIGNAL( lastWindowClosed() ), &app, SLOT( quit() ) );
+		return app.exec();
+	}
+
+	QString defStayle = f.readAll();
+	f.close();
+
+	app.setStyleSheet( defStayle );
+
 	DMSystem *dms = new DMSystem( app );
 	dms->show();
 

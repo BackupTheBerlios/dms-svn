@@ -114,7 +114,7 @@ namespace asaal
 	void DMSMySqlConnection::closeWidget()
 	{
 		if( connected )
-		{			
+		{
 			QString file = QDir::homePath();
 
 			QDir pref( file + "/.dms/connection" );
@@ -122,8 +122,6 @@ namespace asaal
 				pref.mkpath( file + "/.dms/connection" );
 
 			file.append ( "/.dms/connection/mysql.xml" );
-
-			qDebug() << comboBoxDatabase->currentText().replace( " (recommed)", "" );
 
 			XMLPreferences dbsettings( "DMSMySqlConnection", "" );
 			dbsettings.setVersion( "0.1.0.0" );

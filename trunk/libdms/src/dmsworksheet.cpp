@@ -22,6 +22,8 @@
 
 #include <dmsworksheet.h>
 
+#include <XMLPreferences.h>
+
 #include <QtCore>
 #include <QtGui>
 
@@ -49,6 +51,19 @@ namespace asaal
 
 	void DMSWorkSheet::closeEvent( QCloseEvent *e )
 	{
+		QString file = QDir::homePath();
+
+		QDir pref( file + "/.dms/settings" );
+		if( !pref.exists() )
+			pref.mkpath( file + "/.dms/settings" );
+
+		file.append ( "/.dms/settings/" + objectName() + ".xml" );
+
+		XMLPreferences widgetSettings( objectName() );
+		widgetSettings.setVersion( "1.0" );
+		widgetSettings.setRect( objectName(), this->rect() );
+		widgetSettings.save( file );
+
 		dmsworksheet = NULL;
 		e->accept();
 	}
