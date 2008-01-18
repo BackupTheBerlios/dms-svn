@@ -66,6 +66,7 @@ QRadioButton:hover, QCheckBox:hover, QComboBox:hover {
     background-color: wheat;
 }
 
+/*
 QHeaderView, QHeaderView::section {
     background-color: qlineargradient( x1:0, y1:0, x2:0, y2:1, stop:0 #616161, stop: 0.5 #505050, stop: 0.6 #434343, stop:1 #656565 );
     color: white;
@@ -75,17 +76,10 @@ QHeaderView, QHeaderView::section {
     border-radius: 5;
     border-width: 2px;
 }
+*/
 
 QPushButton {
-    /*background-color: palegoldenrod;
-    border-width: 2px;
-    border-color: darkkhaki;
-    border-style: solid;
-    border-radius: 5;
-    padding: 3px;*/
-    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                      stop:0 #616161, stop: 0.5 #505050,
-                                      stop: 0.6 #434343, stop:1 #656565);
+    background-color: qlineargradient( x1:0, y1:0, x2:0, y2:1, stop:0 #616161, stop: 0.5 #505050, stop: 0.6 #434343, stop:1 #656565 );
     color: white;
     padding-left: 4px;
     padding: 3px;
@@ -94,14 +88,4 @@ QPushButton {
     border-width: 2px;    
     min-width: 9ex;
     min-height: 2.5ex;
-}
-
-QPushButton:hover {
-   background-color: khaki;
-}
-
-QPushButton:pressed {
-    padding-left: 5px;
-    padding-top: 5px;
-    background-color: #d0d67c;
 }
