@@ -1,0 +1,107 @@
+.QWidget {
+   background-color: beige;
+}
+
+QLineEdit[echoMode="2"] {
+    lineedit-password-character: 9679;
+}
+
+QLabel, QAbstractButton {
+    font: bold;
+}
+
+.mandatory {
+    color: brown;
+}
+
+QStatusBar QLabel {
+   font: normal;
+}
+
+QStatusBar::item {
+    border-width: 1;
+    border-color: darkkhaki;
+    border-style: solid;
+    border-radius: 2;
+}
+
+QComboBox, QLineEdit, QSpinBox, QTextEdit, QListView, QTreeView, QAbstractView, QMenu {
+    background-color: cornsilk;
+    selection-color: #0a214c;
+    selection-background-color: wheat;
+}
+
+QComboBox {
+    border-color: darkkhaki;
+}
+
+QLineEdit, QFrame {
+    border-width: 1px;
+    padding: 1px;
+    border-style: solid;
+    border-color: darkkhaki;
+    border-radius: 3px;
+
+}
+
+QLineEdit:focus, QFrame:focus {
+    border-width: 1px;
+    padding: 0px;
+}
+
+QLabel {
+    border: none;
+    padding: 0;
+    background: none;
+}
+
+QToolTip {
+    border: 2px solid darkkhaki;
+    padding: 5px;
+    border-radius: 3px;
+    opacity: 100;
+}
+
+QRadioButton:hover, QCheckBox:hover, QComboBox:hover {
+    background-color: wheat;
+}
+
+QHeaderView, QHeaderView::section {
+    background-color: qlineargradient( x1:0, y1:0, x2:0, y2:1, stop:0 #616161, stop: 0.5 #505050, stop: 0.6 #434343, stop:1 #656565 );
+    color: white;
+    padding-left: 4px;
+    padding: 3px;
+    border: 1px solid #6c6c6c;
+    border-radius: 5;
+    border-width: 2px;
+}
+
+QPushButton {
+    /*background-color: palegoldenrod;
+    border-width: 2px;
+    border-color: darkkhaki;
+    border-style: solid;
+    border-radius: 5;
+    padding: 3px;*/
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #616161, stop: 0.5 #505050,
+                                      stop: 0.6 #434343, stop:1 #656565);
+    color: white;
+    padding-left: 4px;
+    padding: 3px;
+    border: 1px solid #6c6c6c;
+    border-radius: 5;
+    border-width: 2px;    
+    min-width: 9ex;
+    min-height: 2.5ex;
+}
+
+QPushButton:hover {
+   background-color: khaki;
+}
+
+QPushButton:pressed {
+    padding-left: 5px;
+    padding-top: 5px;
+    background-color: #d0d67c;
+}
