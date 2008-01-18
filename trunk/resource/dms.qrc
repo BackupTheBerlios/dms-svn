@@ -104,6 +104,8 @@
 
     <!-- Misc. files -->
     <qresource prefix="/misc" >
+        <file>misc/default.qss</file>
+        <file>misc/coffee.qss</file>
         <file>misc/COPYING</file>
         <file>misc/INSTALL</file>
         <file>misc/README</file>
