@@ -73,7 +73,7 @@ namespace asaal
 			void treeWidgetWorkSheetMenu( QPoint );
 			void showErrorMsg( const QString &error );
 
-			void addGroup( const QString &groupname );
+			QTreeWidgetItem *getGroupItem( const QString &groupname );
 
 			void closeWidget();
 

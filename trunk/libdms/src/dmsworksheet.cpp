@@ -18,10 +18,9 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <libdms.h>
-
 #include <dmsworksheet.h>
 
+#include <libdms.h>
 #include <XMLPreferences.h>
 
 #include <QtCore>
@@ -42,6 +41,7 @@ namespace asaal
 
 		createMenuAction();
 		loadDocuments();
+
 	}
 
 	DMSWorkSheet::~DMSWorkSheet()
@@ -61,7 +61,7 @@ namespace asaal
 
 		XMLPreferences widgetSettings( objectName() );
 		widgetSettings.setVersion( "1.0" );
-		widgetSettings.setRect( objectName(), this->rect() );
+		widgetSettings.setPoint( objectName(), this->pos() );
 		widgetSettings.save( file );
 
 		dmsworksheet = NULL;
@@ -84,14 +84,10 @@ namespace asaal
 			QString updated = docIt.value().split( "#" ).value(4);
 			QString checkedout = docIt.value().split( "#" ).value(5);
 
-			if( !isGroupAvailabel( gname ) )
-				addGroup( gname );
-
-			docItem = new QTreeWidgetItem( groupItem );
+			docItem = new QTreeWidgetItem( getGroupItem( gname ) );
 			docItem->setText(0, docname );
 			docItem->setText(1, docpath );
-			docItem->setText(2, updated );
-
+			docItem->setText(2, updated );		
 
 			if( checkedout == "0" )
 				docItem->setIcon(3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-closed_16.png" ) ) );
@@ -223,11 +219,15 @@ namespace asaal
 		QMessageBox::critical( this, tr( "DMS - Worksheet"), error );
 	}
 
-	void DMSWorkSheet::addGroup( const QString &groupname )
+	QTreeWidgetItem *DMSWorkSheet::getGroupItem( const QString &groupname )
 	{
-		if( groupname.isEmpty() || groupname.isNull() )
-			return;
-
+		for( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ ) {
+			QTreeWidgetItem *_item = treeWidgetWorkSheet->topLevelItem( a );
+			
+			if( _item->text(0) == groupname )
+				return _item;
+		}
+		
 		groupItem = new QTreeWidgetItem( treeWidgetWorkSheet );
 		groupItem->setText( 0, groupname );
 
@@ -235,11 +235,12 @@ namespace asaal
 		font.setBold( true );
 		font.setStyleHint( QFont::System );	
 		groupItem->setFont( 0, font );
-
 		groupItem->setBackgroundColor( 0, QColor( Qt::lightGray ) );
 		groupItem->setBackgroundColor( 1, QColor( Qt::lightGray ) );
 		groupItem->setBackgroundColor( 2, QColor( Qt::lightGray ) );
 		groupItem->setBackgroundColor( 3, QColor( Qt::lightGray ) );
+
+		return groupItem;
 	}
 
 	void DMSWorkSheet::closeWidget()
@@ -251,6 +252,7 @@ namespace asaal
 	{
 		for( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ ) {
 			QTreeWidgetItem *_item = treeWidgetWorkSheet->topLevelItem( a );
+			
 			if( _item->text(0) == groupname )
 				return true;
 			else
