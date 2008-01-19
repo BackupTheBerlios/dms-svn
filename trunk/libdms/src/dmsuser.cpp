@@ -19,7 +19,9 @@
  ***************************************************************************/
 
 #include <dmsuser.h>
+
 #include <libdms.h>
+#include <XMLPreferences.h>
 
 #include <base64.h>
 
@@ -57,6 +59,19 @@ namespace asaal
 
 	void DMSUser::closeEvent( QCloseEvent *e )
 	{
+		QString file = QDir::homePath();
+
+		QDir pref( file + "/.dms/settings" );
+		if( !pref.exists() )
+			pref.mkpath( file + "/.dms/settings" );
+
+		file.append ( "/.dms/settings/" + objectName() + ".xml" );
+
+		XMLPreferences widgetSettings( objectName() );
+		widgetSettings.setVersion( "1.0" );
+		widgetSettings.setRect( objectName(), this->rect() );
+		widgetSettings.save( file );
+
 		dmsuser = NULL;
 		e->accept();
 	}
