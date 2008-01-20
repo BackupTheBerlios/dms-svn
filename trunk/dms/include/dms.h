@@ -52,6 +52,7 @@ namespace asaal
 			void creatEditGroups();
 			void creatEditDocuments();
 			void createEditUsers();
+			void openPreference();
 			void openWorkSheet();
 
 			void createMenus();
@@ -75,6 +76,7 @@ namespace asaal
 
 			QAction *acLogout,
 					*acLogin,
+	 				*acPreference,
 					*acCreadEditGroups,
 					*acCreadEditDoucmnets,
 					*acCreadEditUsers,

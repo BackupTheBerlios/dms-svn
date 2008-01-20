@@ -185,6 +185,11 @@ LABEL_DISPLAY:
 		ldms->showDmsUser( ws );
 	}
 
+	void DMSystem::openPreference()
+	{
+
+	}
+
 	void DMSystem::openWorkSheet()
 	{
 		ldms->showDmsWorkSheet( ws );
@@ -226,6 +231,13 @@ LABEL_DISPLAY:
 		acCreadEditUsers->setIcon( QPixmap( ":/picture/16/images/16x16/user_16.png" ) );
 		acCreadEditUsers->setStatusTip( tr( "Create or edit users ..." ) );
 		connect( acCreadEditUsers, SIGNAL( triggered() ), this, SLOT( createEditUsers() ) );
+
+		mnuDatabase->addSeparator();
+
+		acPreference = mnuDatabase->addAction( tr( "&Preference" ) );
+		acPreference->setIcon( QPixmap( ":/picture/16/images/16x16/preference_16.png" ) );
+		acPreference->setStatusTip( tr( "Set preferences ..." ) );
+		connect( acPreference, SIGNAL( triggered() ), this, SLOT( openPreference() ) );
 
 
 		QMenu *mnuView = menuBar()->addMenu( tr( "&Views" ) );
