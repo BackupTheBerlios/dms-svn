@@ -25,6 +25,7 @@
 		<file>images/16x16/save_16.png</file>
 		<file>images/16x16/search_16.png</file>
 		<file>images/16x16/trash_16.png</file>
+		<file>images/16x16/skin_16.png</file>
 		<file>images/16x16/undo_16.png</file>
 		<file>images/16x16/user_16.png</file>
     </qresource>
@@ -53,6 +54,7 @@
 		<file>images/24x24/save_24.png</file>
 		<file>images/24x24/search_24.png</file>
 		<file>images/24x24/trash_24.png</file>
+		<file>images/24x24/skin_24.png</file>
 		<file>images/24x24/undo_24.png</file>
 		<file>images/24x24/user_24.png</file>
     </qresource>
@@ -81,6 +83,7 @@
 		<file>images/32x32/save_32.png</file>
 		<file>images/32x32/search_32.png</file>
 		<file>images/32x32/trash_32.png</file>
+		<file>images/32x32/skin_32.png</file>
 		<file>images/32x32/undo_32.png</file>
 		<file>images/32x32/user_32.png</file>
     </qresource>
@@ -109,8 +112,8 @@
         <file>misc/COPYING</file>
         <file>misc/INSTALL</file>
         <file>misc/README</file>
-		<file>misc/TODO</file>
-		<file>translation/dms_ger.qm</file>
-		<file>translation/libdms_ger.qm</file>
+	<file>misc/TODO</file>
+	<file>translation/dms_ger.qm</file>
+	<file>translation/libdms_ger.qm</file>
     </qresource>
 </RCC>
