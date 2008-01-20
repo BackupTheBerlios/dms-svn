@@ -1,4 +1,4 @@
-/***************************************************************************
+/**************************************************************************
 *   Copyright (C) 2007 by Alexander Saal                                  *
 *   alex.saal@gmx.de                                                      *
 *                                                                         *
@@ -79,7 +79,6 @@ namespace asaal
 				else
 				{
 					errorMessage = tr( "User password is not correct." );
-					logingSqlSession( userId, errorMessage, ERROR );
 					return false;
 				}
 			}
@@ -87,7 +86,6 @@ namespace asaal
 		else
 		{
 			errorMessage = queryLoginUser.lastError().text();
-			logingSqlSession( userId, errorMessage, ERROR );
 			return false;
 		}
 
@@ -376,7 +374,6 @@ namespace asaal
 		if( isUserAvailabel( userId, username ) )
 		{			
 			errorMessage = tr( "You can not insert the same user." );
-			logingSqlSession( userId, errorMessage, ERROR );
 			return;
 		}
 
@@ -401,7 +398,6 @@ namespace asaal
 		if( !queryInsertUser.isActive() )
 		{
 			errorMessage = queryInsertUser.lastError().text();
-			logingSqlSession( userId, errorMessage, ERROR );
 			sqlInsertUserQuery.clear();
 			return;
 		}
@@ -428,7 +424,6 @@ namespace asaal
 		if( !queryInsertUserData.isActive() )
 		{
 			errorMessage = queryInsertUserData.lastError().text();
-			logingSqlSession( userId, errorMessage, ERROR );
 			sqlInsertUserDataQuery.clear();
 			return;
 		}
@@ -453,7 +448,6 @@ namespace asaal
 			if( !queryUpdateUser.isActive() )
 			{
 				errorMessage = queryUpdateUser.lastError().text();
-				logingSqlSession( userId, errorMessage, ERROR );
 				sqlUpdateUserQuery.clear();
 				return;
 			}
@@ -470,7 +464,6 @@ namespace asaal
 			if( !queryUpdateUserData.isActive() )
 			{
 				errorMessage = queryUpdateUserData.lastError().text();
-				logingSqlSession( userId, errorMessage, ERROR );
 				sqlUpdateUserDataQuery.clear();
 				return;
 			}
@@ -478,7 +471,6 @@ namespace asaal
 		else
 		{
 			errorMessage = tr( "You can not update a user if he is not exists!" );
-			logingSqlSession( userId, errorMessage, ERROR );
 			return;
 		}
 	}
@@ -495,7 +487,6 @@ namespace asaal
 			if( !queryDeleteUserData.isActive() )
 			{
 				errorMessage = queryDeleteUserData.lastError().text();
-				logingSqlSession( userId, errorMessage, ERROR );
 				sqlDeleteUserDataQuery.clear();
 				return;			
 			}
@@ -508,7 +499,6 @@ namespace asaal
 			if( !queryDeleteUser.isActive() )
 			{
 				errorMessage = queryDeleteUser.lastError().text();
-				logingSqlSession( userId, errorMessage, ERROR );
 				sqlDeleteUserQuery.clear();
 				return;
 			}
@@ -517,7 +507,6 @@ namespace asaal
 		else
 		{
 			errorMessage = tr( "You can't delete a user if he not exists!" );
-			logingSqlSession( userId, errorMessage, ERROR );
 			return;
 		}
 	}
@@ -600,7 +589,7 @@ namespace asaal
 	void LibDMS::openDocument( const QString &docId )
 	{
 		QString sqlOpenDocument = QString( "" );
-		sqlOpenDocument = "SELECT DOCPATH FROM DOCUMENTS WHERE DID = '" + docId + "'";
+		sqlOpenDocument = "SELECT DOCPATH FROM DOCUMENTS WHERE DID = '" + docId + "'";		
 
 		QSqlQuery queryOpenDocument( m_qsqld );
 		queryOpenDocument.exec( sqlOpenDocument );
@@ -608,19 +597,26 @@ namespace asaal
 		{
 			while( queryOpenDocument.next() )
 			{
+				qApp->processEvents();
+
 				QFile openFile( queryOpenDocument.value( 0 ).toString() );
 				if( !openFile.open( QIODevice::Text | QIODevice::ReadWrite ) )
 				{
-					errorMessage = tr( "Can not open file %1" ).arg( queryOpenDocument.value( 0 ).toString() );
+					errorMessage = tr( "Can't open file: %1" ).arg( queryOpenDocument.value( 0 ).toString() );
 					sqlOpenDocument.clear();
 					return;
 				}
 
-				#ifdef Q_OS_WIN32
-					
-				#else
-				#endif
+				this->docId = docId;
 
+				QProcess *docProc = new QProcess( this );
+				docProc->setWorkingDirectory( QFileInfo( queryOpenDocument.value( 0 ).toString() ).absolutePath() );
+				docProc->start( "call ", QStringList() << queryOpenDocument.value( 0 ).toString() );
+				qDebug() << QFileInfo( queryOpenDocument.value( 0 ).toString() ).absolutePath();
+				qDebug() << queryOpenDocument.value( 0 ).toString();
+
+				connect( docProc, SIGNAL( finished( int, QProcess::ExitStatus ) ), this, SLOT( processFinish( int, QProcess::ExitStatus ) ) );
+				connect( docProc, SIGNAL( error( QProcess::ProcessError ) ), this, SLOT( processError( QProcess::ProcessError ) ) );
 			}
 		}
 		else
@@ -631,7 +627,6 @@ namespace asaal
 		}
 
 		sqlOpenDocument.clear();
-
 	}
 
 	void LibDMS::insertGroup( const QString &groupId, const QString &groupname, const QString &groupdescription )
@@ -687,7 +682,7 @@ namespace asaal
 	void LibDMS::deleteGroup( const QString &groupId )
 	{
 		QString sqlReferenceCheck = QString( "" );
-		sqlReferenceCheck += "SELECT COUNT(`GID`) AS GID FROM DOCUMENTS WHERE GID = '" + groupId + "'";
+		sqlReferenceCheck += "SELECT COUNT(GID) AS GID FROM DOCUMENTS WHERE GID = '" + groupId + "'";
 
 		QSqlQuery queryReferenceCheck( m_qsqld );
 		queryReferenceCheck.exec( sqlReferenceCheck );
@@ -990,45 +985,67 @@ namespace asaal
 		return false;
 	}
 
-	void LibDMS::logingSqlSession( const QString &userId, const QString &sessionMessage, LogInfo info )
+	void LibDMS::processFinish( int exitCode, QProcess::ExitStatus exitStatus )
 	{
-		QString file = QDir::homePath();
-		file.append( "/.dms/log_" + QDateTime::currentDateTime().toString( Qt::ISODate ).replace( ".", "" ) + ".xml" );
-
-		QFile logfile( file );
-		if( !logfile.open( QIODevice::Append | QIODevice::WriteOnly ) )
-		{
-			QMessageBox::critical( 0, tr( "DMS - Logging" ), tr( "Can't open file: \n\n %1" ).arg( file ) );
+		if( !docId.isNull() || !docId.isEmpty() )
 			return;
-		}
 
-		QTextStream log( &logfile );
-		log << "<session>\n";
-		log << "\t<user uid=\"" << userId << "\">\n";
-		
-		switch( info )
+		switch( exitStatus )
 		{
-			case ERROR:
-				log << "\t<message type=\"ERROR""\">\n";
-				log << "\t\t\t" << sessionMessage << "\n";
-				log << "\t</message>\n";
+			case QProcess::NormalExit:
+				errorMessage = tr( "Process exited normal ..." );
+				qDebug() << exitCode;
 				break;
-			case WARNING:
-				log << "\t<message type=\"WARNING""\">\n";
-				log << "\t\t\t" << sessionMessage << "\n";
-				log << "\t</message>\n";
-				break;
-			case INFO:
-				log << "\t<message type=\"INFO""\">\n";
-				log << "\t\t\t" << sessionMessage << "\n";
-				log << "\t</message>\n";
+			case QProcess::CrashExit:
+				errorMessage = tr( "Process crashed ..." );
+				qDebug() << exitCode;
 				break;
 		}
 
-		log << "\t</user>\n";
-		log << "</session>\n";
+		QString sqlCloseDocument = QString( "" );
+		sqlCloseDocument = "SELECT DOCPATH, CHECKEDOUT FROM DOCUMENTS WHERE DID = '" + docId + "'";		
 
-		log.flush();
-		logfile.close();		
+		QSqlQuery queryCloseDocument( m_qsqld );
+		queryCloseDocument.exec( sqlCloseDocument );
+		if( queryCloseDocument.isActive() )
+		{
+			while( queryCloseDocument.next() )
+			{
+				qApp->processEvents();
+
+				QString document = queryCloseDocument.value( 0 ).toString();
+
+				sqlCloseDocument = "";
+				sqlCloseDocument = "UPDATE DOCUMENTS SET CHECKEDOUT = 0 WHERE DID = '" + docId + "' AND CHECKEDOUT = 1";
+				queryCloseDocument.exec( sqlCloseDocument );
+				if( !queryCloseDocument.isActive() )
+					errorMessage += tr( "\nCan't check in the document: %1" ).arg( document );
+			}
+		}
+	}
+
+	void LibDMS::processError( QProcess::ProcessError error )
+	{
+		switch( error )
+		{
+			case QProcess::FailedToStart:
+				errorMessage = tr( "File not found, resource error ..." );
+				break;
+			case QProcess::Crashed:
+				errorMessage = tr( "A error has occured, process crashed ..." );
+				break;
+			case QProcess::Timedout:
+				errorMessage = tr( "A error has occured, process timeout ..." );
+				break;
+			case QProcess::ReadError:
+				errorMessage = tr( "A error has occured, process read error ..." );
+				break;
+			case QProcess::WriteError:
+				errorMessage = tr( "A error has occured, process write error ..." );
+				break;
+			case QProcess::UnknownError:
+				errorMessage = tr( "A error has occured, unkown process error ..." );
+				break;
+		}
 	}
 }

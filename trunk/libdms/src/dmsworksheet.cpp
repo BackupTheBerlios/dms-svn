@@ -130,11 +130,11 @@ namespace asaal
 		QFile docfile ( docItem->text( 1 ) );
 
 		QString question = QString( "" );
-		question += tr( "Would you like delete the link from database and document file from harddisk && list?\n" );
-		question += tr( "If you click 'Link && Document from database' only the link from database and\n" );
+		question += tr( "Would you like delete the document from database and harddisk?\n" );
+		question += tr( "If you click 'Document from database' only the link from database and\n" );
 		question += tr( "the document from list will removed." );
 
-		switch ( QMessageBox::information ( this, tr( "DMS" ), question, tr( "Link, List && Document from harddisk" ), tr( "Link && Document from database" ), tr( "Cancel" ), 0, 2 ) )
+		switch ( QMessageBox::information ( this, tr( "DMS" ), question, tr( "Document from database" ), tr( "Document from harddisk" ), tr( "Cancel" ), 0, 2 ) )
 		{
 			case 0:               // Link, List && Harddisk
 				if ( docfile.exists() )

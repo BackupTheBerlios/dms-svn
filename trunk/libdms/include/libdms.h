@@ -327,11 +327,14 @@ namespace asaal
 
 		private slots:
 			/*!
-			 * Log all operation for the actually session
-			 *
-			 * @param sessionMessage The message to log
+			 * Process was closed
 			 */
-			void logingSqlSession( const QString &userId, const QString &sessionMessage, LogInfo info );
+			void processFinish( int, QProcess::ExitStatus );
+			
+			/*!
+			 * Process called a error
+			 */
+			void processError( QProcess::ProcessError );
 
 		private:
 			// Check is user in database avalaibel
