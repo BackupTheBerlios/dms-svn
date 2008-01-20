@@ -41,7 +41,7 @@ namespace asaal
 		connect( btnAdd, SIGNAL( clicked() ), this, SLOT( addApplication() ) );
 		connect( btnUpdate, SIGNAL( clicked() ), this, SLOT( updateApplication() ) );
 		connect( btnRemove, SIGNAL( clicked() ), this, SLOT( removeApplication() ) );
-		connect( btnOk, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );		
+		connect( btnApply, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );		
 		connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
 	}
 
@@ -66,12 +66,12 @@ namespace asaal
 	{
 	}
 
-	void DMSUser::showErrorMsg( const QString &error )
+	void DMSPreference::showErrorMsg( const QString &error )
 	{
 		QMessageBox::critical( this, tr( "DMS - Preference"), error );
 	}
 
-	void DMSUser::closeWidget()
+	void DMSPreference::closeWidget()
 	{
 		close();
 	}
