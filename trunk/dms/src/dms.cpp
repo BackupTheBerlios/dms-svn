@@ -44,7 +44,12 @@ namespace asaal
 		const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
 		int left = ( rect.width() - width() ) / 2;
 		int top = ( rect.height() - height() ) / 2;
-		setGeometry( left, top, width(), height() );
+		
+		int height = this->height();
+		int width = this->width();
+		
+		setGeometry( left, top, width, height );
+
 		statusBar()->show();
 
 		ldms = new LibDMS();
@@ -187,7 +192,7 @@ LABEL_DISPLAY:
 
 	void DMSystem::openPreference()
 	{
-
+		ldms->showDmsPreference( ws );
 	}
 
 	void DMSystem::openWorkSheet()

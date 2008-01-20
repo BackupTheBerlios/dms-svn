@@ -271,6 +271,11 @@ namespace asaal
 			void deleteGroup( const QString &groupId );
 
 			/*!
+			 * Show the preference widget
+			 */
+			void showDmsPreference( QWorkspace *ws );
+			
+			/*!
 			* Show the database selection dialog
 			*/
 			void showDmsDatabaseSelection();

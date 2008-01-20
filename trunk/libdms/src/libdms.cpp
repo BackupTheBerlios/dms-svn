@@ -28,6 +28,7 @@
 #include <dmslogin.h>
 #include <dmsmssqlconnection.h>
 #include <dmsmysqlconnection.h>
+#include <dmspreference.h>
 #include <dmspreview.h>
 #include <dmsuser.h>
 #include <dmsworksheet.h>
@@ -714,6 +715,17 @@ namespace asaal
 		}
 
 		sqlDeleteGroupQuery.clear();
+	}
+
+	void LibDMS::showDmsPreference( QWorkspace *ws )
+	{
+		if( !dmspreference ) {
+			dmspreference = new DMSPreference( this );
+			ws->addWindow( dmspreference );
+			dmspreference->show();
+		} else {			
+			dmspreference->setFocus( Qt::ActiveWindowFocusReason );
+		}
 	}
 
 	void LibDMS::showDmsDatabaseSelection()

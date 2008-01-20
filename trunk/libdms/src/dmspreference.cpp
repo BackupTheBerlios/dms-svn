@@ -49,6 +49,12 @@ namespace asaal
 	{
 		dmspreference = NULL;
 	}
+	
+	void DMSPreference::closeEvent( QCloseEvent *e )
+	{
+		dmspreference = NULL;
+		e->accept();
+	}
 
 	void DMSPreference::addApplication()
 	{
