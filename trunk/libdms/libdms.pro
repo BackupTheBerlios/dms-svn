@@ -31,11 +31,11 @@ QT += sql xml
 TRANSLATIONS	+= ../resource/translation/libdms_ger.ts
 
 # Project Misc files
-DISTFILES += CHANGELOG
-DISTFILES += COPYING
-DISTFILES += INSTALL
-DISTFILES += README
-DISTFILES += TODO
+DISTFILES += ../resource/misc/CHANGELOG
+DISTFILES += ../resource/misc/COPYING
+DISTFILES += ../resource/misc/INSTALL
+DISTFILES += ../resource/misc/README
+DISTFILES += ../resource/misc/TODO
 
 # Project Ui files
 FORMS	+= ui/database.ui
@@ -44,8 +44,9 @@ FORMS	+= ui/group.ui
 FORMS	+= ui/login.ui
 FORMS	+= ui/mssqlconnection.ui
 FORMS	+= ui/mysqlconnection.ui
-FORMS	+= ui/user.ui
+FORMS	+= ui/preference.ui
 FORMS	+= ui/preview.ui
+FORMS	+= ui/user.ui
 FORMS	+= ui/worksheet.ui
 
 # Project Header
@@ -57,6 +58,7 @@ HEADERS	+= include/dmsgroup.h
 HEADERS	+= include/dmslogin.h
 HEADERS	+= include/dmsmssqlconnection.h
 HEADERS	+= include/dmsmysqlconnection.h
+HEADERS	+= include/dmspreference.h
 HEADERS	+= include/dmsuser.h
 HEADERS	+= include/dmspreview.h
 HEADERS	+= include/dmsprint.h
@@ -73,8 +75,9 @@ SOURCES	+= src/dmsgroup.cpp
 SOURCES	+= src/dmslogin.cpp
 SOURCES	+= src/dmsmssqlconnection.cpp
 SOURCES	+= src/dmsmysqlconnection.cpp
-SOURCES	+= src/dmsuser.cpp
+SOURCES	+= src/dmspreference.cpp
 SOURCES	+= src/dmspreview.cpp
+SOURCES	+= src/dmsuser.cpp
 SOURCES	+= src/dmsprint.cpp
 SOURCES	+= src/dmsworksheet.cpp
 SOURCES	+= src/libdms.cpp
