@@ -152,17 +152,361 @@
         </widget>
        </item>
        <item row="1" column="0" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
+        <widget class="QComboBox" name="comboBoxDatabaseSettings" >
+         <property name="currentIndex" >
+          <number>0</number>
          </property>
-         <property name="sizeHint" >
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
+         <item>
+          <property name="text" >
+           <string>Setup database</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>Manage connection</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QStackedWidget" name="stackedWidgetDatabaseSettings" >
+         <property name="currentIndex" >
+          <number>0</number>
          </property>
-        </spacer>
+         <widget class="QWidget" name="pageSetupDatabase" >
+          <layout class="QGridLayout" >
+           <item row="0" column="0" >
+            <layout class="QHBoxLayout" >
+             <item>
+              <widget class="QLabel" name="labelSqlScript" >
+               <property name="minimumSize" >
+                <size>
+                 <width>110</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>110</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text" >
+                <string>SQL Script:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBoxSqlScript" >
+               <item>
+                <property name="text" >
+                 <string>MySQL Server 5.1 Script</string>
+                </property>
+               </item>
+               <item>
+                <property name="text" >
+                 <string>MS SQL Server 2005 Script</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0" >
+            <widget class="QTextBrowser" name="textBrowserSqlScript" >
+             <property name="openLinks" >
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" >
+            <layout class="QHBoxLayout" >
+             <item>
+              <widget class="QPushButton" name="btnExecuteSqlScript" >
+               <property name="minimumSize" >
+                <size>
+                 <width>110</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>110</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="text" >
+                <string>&amp;Execute</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageManageConnection" >
+          <layout class="QGridLayout" >
+           <item row="0" column="0" >
+            <widget class="QLabel" name="labelMessage" >
+             <property name="minimumSize" >
+              <size>
+               <width>180</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize" >
+              <size>
+               <width>180</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>Connect to a MySQL database...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" >
+            <widget class="Line" name="line_2" >
+             <property name="orientation" >
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" >
+            <layout class="QHBoxLayout" >
+             <item>
+              <widget class="QLabel" name="labelHost" >
+               <property name="minimumSize" >
+                <size>
+                 <width>110</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>110</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text" >
+                <string>Host:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditHost" />
+             </item>
+             <item>
+              <widget class="QLabel" name="labelPort" >
+               <property name="minimumSize" >
+                <size>
+                 <width>110</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>110</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text" >
+                <string>Port:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="spinBoxPort" >
+               <property name="maximum" >
+                <number>65536</number>
+               </property>
+               <property name="value" >
+                <number>3306</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="0" >
+            <layout class="QHBoxLayout" >
+             <item>
+              <widget class="QLabel" name="labelUser" >
+               <property name="minimumSize" >
+                <size>
+                 <width>110</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>110</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text" >
+                <string>User:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditUser" />
+             </item>
+            </layout>
+           </item>
+           <item row="4" column="0" >
+            <layout class="QHBoxLayout" >
+             <item>
+              <widget class="QLabel" name="labelPassword" >
+               <property name="minimumSize" >
+                <size>
+                 <width>110</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>110</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text" >
+                <string>Password:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEditPassword" >
+               <property name="echoMode" >
+                <enum>QLineEdit::Password</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnCheckConnection" >
+               <property name="minimumSize" >
+                <size>
+                 <width>26</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>26</width>
+                 <height>26</height>
+                </size>
+               </property>
+               <property name="text" >
+                <string/>
+               </property>
+               <property name="icon" >
+                <iconset resource="../../resource/dms.qrc" >:/picture/16/images/16x16/reload_16.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="5" column="0" >
+            <layout class="QHBoxLayout" >
+             <item>
+              <widget class="QLabel" name="labelDatabase_2" >
+               <property name="minimumSize" >
+                <size>
+                 <width>110</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>110</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text" >
+                <string>Database:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBoxDatabase" />
+             </item>
+            </layout>
+           </item>
+           <item row="6" column="0" >
+            <spacer>
+             <property name="orientation" >
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" >
+              <size>
+               <width>551</width>
+               <height>73</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="7" column="0" >
+            <widget class="QLabel" name="labelManageConnectionInfo" >
+             <property name="palette" >
+              <palette>
+               <active>
+                <colorrole role="WindowText" >
+                 <brush brushstyle="SolidPattern" >
+                  <color alpha="255" >
+                   <red>255</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </active>
+               <inactive>
+                <colorrole role="WindowText" >
+                 <brush brushstyle="SolidPattern" >
+                  <color alpha="255" >
+                   <red>255</red>
+                   <green>0</green>
+                   <blue>0</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </inactive>
+               <disabled>
+                <colorrole role="WindowText" >
+                 <brush brushstyle="SolidPattern" >
+                  <color alpha="255" >
+                   <red>118</red>
+                   <green>116</green>
+                   <blue>108</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </disabled>
+              </palette>
+             </property>
+             <property name="text" >
+              <string>If you change this settings, you must restart the application for apply the settings.</string>
+             </property>
+             <property name="alignment" >
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -590,6 +934,22 @@
     <hint type="destinationlabel" >
      <x>172</x>
      <y>15</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBoxDatabaseSettings</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>stackedWidgetDatabaseSettings</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>164</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>164</x>
+     <y>77</y>
     </hint>
    </hints>
   </connection>

@@ -1,6 +1,6 @@
 <ui version="4.0" >
  <class>UiMSSqlConnectionBase</class>
- <widget class="QWidget" name="UiMSSqlConnectionBase" >
+ <widget class="QDialog" name="UiMSSqlConnectionBase" >
   <property name="geometry" >
    <rect>
     <x>0</x>
