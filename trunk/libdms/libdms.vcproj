@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8,00"
 	Name="libdms"
-	ProjectGUID="{28B2A859-84DC-3FF4-8E39-C2332156C12F}"
+	ProjectGUID="{C29D0C2F-15C2-3FC7-A853-192C930CF899}"
 	Keyword="Qt4VSv1.0">
 	<Platforms>
 		<Platform
@@ -139,6 +139,8 @@
 				RelativePath="src\dmsmssqlconnection.cpp"/>
 			<File
 				RelativePath="src\dmsmysqlconnection.cpp"/>
+			<File
+				RelativePath="src\dmspreference.cpp"/>
 			<File
 				RelativePath="src\dmspreview.cpp"/>
 			<File
@@ -301,6 +303,29 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="include\dmspreference.h">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;include\dmspreference.h"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DASAAL_MAKEDLL -DWINDOWS -DQT_DLL -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;ui&quot; -I&quot;base64&quot; -I&quot;xmlpref&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\build\libdms\win\moc&quot; -I&quot;..\build\libdms\win\ui&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmspreference.h -o ..\build\libdms\win\moc\moc_dmspreference.cpp"
+						Description="MOC include\dmspreference.h"
+						Outputs="..\build\libdms\win\moc\moc_dmspreference.cpp"
+						Path="$(QTDIR)\bin"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;include\dmspreference.h"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DASAAL_MAKEDLL -DWINDOWS -DQT_DLL -DQT_NO_DEBUG -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;ui&quot; -I&quot;base64&quot; -I&quot;xmlpref&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\build\libdms\win\moc&quot; -I&quot;..\build\libdms\win\ui&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmspreference.h -o ..\build\libdms\win\moc\moc_dmspreference.cpp"
+						Description="MOC include\dmspreference.h"
+						Outputs="..\build\libdms\win\moc\moc_dmspreference.cpp"
+						Path="$(QTDIR)\bin"/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="include\dmspreview.h">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -435,6 +460,8 @@
 			<File
 				RelativePath="..\build\libdms\win\moc\moc_dmsmysqlconnection.cpp"/>
 			<File
+				RelativePath="..\build\libdms\win\moc\moc_dmspreference.cpp"/>
+			<File
 				RelativePath="..\build\libdms\win\moc\moc_dmspreview.cpp"/>
 			<File
 				RelativePath="..\build\libdms\win\moc\moc_dmsprint.cpp"/>
@@ -458,6 +485,8 @@
 				RelativePath="..\build\libdms\win\ui\ui_mssqlconnection.h"/>
 			<File
 				RelativePath="..\build\libdms\win\ui\ui_mysqlconnection.h"/>
+			<File
+				RelativePath="..\build\libdms\win\ui\ui_preference.h"/>
 			<File
 				RelativePath="..\build\libdms\win\ui\ui_preview.h"/>
 			<File
@@ -613,6 +642,29 @@
 						CommandLine="$(QTDIR)\bin\uic.exe ui\mysqlconnection.ui -o ..\build\libdms\win\ui\ui_mysqlconnection.h"
 						Description="UIC ui\mysqlconnection.ui"
 						Outputs="..\build\libdms\win\ui\ui_mysqlconnection.h"
+						Path="$(QTDIR)\bin"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="ui\preference.ui">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe;ui\preference.ui"
+						CommandLine="$(QTDIR)\bin\uic.exe ui\preference.ui -o ..\build\libdms\win\ui\ui_preference.h"
+						Description="UIC ui\preference.ui"
+						Outputs="..\build\libdms\win\ui\ui_preference.h"
+						Path="$(QTDIR)\bin"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCustomBuildTool"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe;ui\preference.ui"
+						CommandLine="$(QTDIR)\bin\uic.exe ui\preference.ui -o ..\build\libdms\win\ui\ui_preference.h"
+						Description="UIC ui\preference.ui"
+						Outputs="..\build\libdms\win\ui\ui_preference.h"
 						Path="$(QTDIR)\bin"/>
 				</FileConfiguration>
 			</File>
@@ -777,7 +829,7 @@
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
-						AdditionalDependencies="..\resource\dms.qrc;..\resource\images\16x16\add_16.png;..\resource\images\16x16\applications_16.png;..\resource\images\16x16\arrow-back_16.png;..\resource\images\16x16\arrow-down_16.png;..\resource\images\16x16\arrow-forward_16.png;..\resource\images\16x16\arrow-up_16.png;..\resource\images\16x16\computer_16.png;..\resource\images\16x16\copy_16.png;..\resource\images\16x16\cut_16.png;..\resource\images\16x16\delete_16.png;..\resource\images\16x16\disc-media_16.png;..\resource\images\16x16\documents_16.png;..\resource\images\16x16\folder-closed_16.png;..\resource\images\16x16\folder-open_16.png;..\resource\images\16x16\group_16.png;..\resource\images\16x16\home_16.png;..\resource\images\16x16\mail_16.png;..\resource\images\16x16\paste_16.png;..\resource\images\16x16\print_16.png;..\resource\images\16x16\redo_16.png;..\resource\images\16x16\reload_16.png;..\resource\images\16x16\save_16.png;..\resource\images\16x16\search_16.png;..\resource\images\16x16\trash_16.png;..\resource\images\16x16\undo_16.png;..\resource\images\16x16\user_16.png;..\resource\images\24x24\add_24.png;..\resource\images\24x24\applications_24.png;..\resource\images\24x24\arrow-back_24.png;..\resource\images\24x24\arrow-down_24.png;..\resource\images\24x24\arrow-forward_24.png;..\resource\images\24x24\arrow-up_24.png;..\resource\images\24x24\computer_24.png;..\resource\images\24x24\copy_24.png;..\resource\images\24x24\cut_24.png;..\resource\images\24x24\delete_24.png;..\resource\images\24x24\disc-media_24.png;..\resource\images\24x24\documents_24.png;..\resource\images\24x24\folder-closed_24.png;..\resource\images\24x24\folder-open_24.png;..\resource\images\24x24\group_24.png;..\resource\images\24x24\home_24.png;..\resource\images\24x24\mail_24.png;..\resource\images\24x24\paste_24.png;..\resource\images\24x24\print_24.png;..\resource\images\24x24\redo_24.png;..\resource\images\24x24\reload_24.png;..\resource\images\24x24\save_24.png;..\resource\images\24x24\search_24.png;..\resource\images\24x24\trash_24.png;..\resource\images\24x24\undo_24.png;..\resource\images\24x24\user_24.png;..\resource\images\32x32\add_32.png;..\resource\images\32x32\applications_32.png;..\resource\images\32x32\arrow-back_32.png;..\resource\images\32x32\arrow-down_32.png;..\resource\images\32x32\arrow-forward_32.png;..\resource\images\32x32\arrow-up_32.png;..\resource\images\32x32\computer_32.png;..\resource\images\32x32\copy_32.png;..\resource\images\32x32\cut_32.png;..\resource\images\32x32\delete_32.png;..\resource\images\32x32\disc-media_32.png;..\resource\images\32x32\documents_32.png;..\resource\images\32x32\folder-closed_32.png;..\resource\images\32x32\folder-open_32.png;..\resource\images\32x32\group_32.png;..\resource\images\32x32\home_32.png;..\resource\images\32x32\mail_32.png;..\resource\images\32x32\paste_32.png;..\resource\images\32x32\print_32.png;..\resource\images\32x32\redo_32.png;..\resource\images\32x32\reload_32.png;..\resource\images\32x32\save_32.png;..\resource\images\32x32\search_32.png;..\resource\images\32x32\trash_32.png;..\resource\images\32x32\undo_32.png;..\resource\images\32x32\user_32.png;..\resource\images\mssql2005_banner.png;..\resource\misc\COPYING;..\resource\misc\INSTALL;..\resource\misc\README;..\resource\misc\TODO;..\resource\misc\coffee.qss;..\resource\misc\default.qss;..\resource\sql\dms.mdb;..\resource\sql\mssql.sql;..\resource\sql\mysql.sql;..\resource\translation\dms_ger.qm;..\resource\translation\libdms_ger.qm;$(QTDIR)\bin\rcc.exe"
+						AdditionalDependencies="..\resource\dms.qrc;..\resource\images\16x16\add_16.png;..\resource\images\16x16\applications_16.png;..\resource\images\16x16\arrow-back_16.png;..\resource\images\16x16\arrow-down_16.png;..\resource\images\16x16\arrow-forward_16.png;..\resource\images\16x16\arrow-up_16.png;..\resource\images\16x16\computer_16.png;..\resource\images\16x16\copy_16.png;..\resource\images\16x16\cut_16.png;..\resource\images\16x16\delete_16.png;..\resource\images\16x16\disc-media_16.png;..\resource\images\16x16\documents_16.png;..\resource\images\16x16\folder-closed_16.png;..\resource\images\16x16\folder-open_16.png;..\resource\images\16x16\group_16.png;..\resource\images\16x16\home_16.png;..\resource\images\16x16\mail_16.png;..\resource\images\16x16\paste_16.png;..\resource\images\16x16\preference_16.png;..\resource\images\16x16\print_16.png;..\resource\images\16x16\redo_16.png;..\resource\images\16x16\reload_16.png;..\resource\images\16x16\save_16.png;..\resource\images\16x16\search_16.png;..\resource\images\16x16\skin_16.png;..\resource\images\16x16\trash_16.png;..\resource\images\16x16\undo_16.png;..\resource\images\16x16\user_16.png;..\resource\images\24x24\add_24.png;..\resource\images\24x24\applications_24.png;..\resource\images\24x24\arrow-back_24.png;..\resource\images\24x24\arrow-down_24.png;..\resource\images\24x24\arrow-forward_24.png;..\resource\images\24x24\arrow-up_24.png;..\resource\images\24x24\computer_24.png;..\resource\images\24x24\copy_24.png;..\resource\images\24x24\cut_24.png;..\resource\images\24x24\delete_24.png;..\resource\images\24x24\disc-media_24.png;..\resource\images\24x24\documents_24.png;..\resource\images\24x24\folder-closed_24.png;..\resource\images\24x24\folder-open_24.png;..\resource\images\24x24\group_24.png;..\resource\images\24x24\home_24.png;..\resource\images\24x24\mail_24.png;..\resource\images\24x24\paste_24.png;..\resource\images\24x24\preference_24.png;..\resource\images\24x24\print_24.png;..\resource\images\24x24\redo_24.png;..\resource\images\24x24\reload_24.png;..\resource\images\24x24\save_24.png;..\resource\images\24x24\search_24.png;..\resource\images\24x24\skin_24.png;..\resource\images\24x24\trash_24.png;..\resource\images\24x24\undo_24.png;..\resource\images\24x24\user_24.png;..\resource\images\32x32\add_32.png;..\resource\images\32x32\applications_32.png;..\resource\images\32x32\arrow-back_32.png;..\resource\images\32x32\arrow-down_32.png;..\resource\images\32x32\arrow-forward_32.png;..\resource\images\32x32\arrow-up_32.png;..\resource\images\32x32\computer_32.png;..\resource\images\32x32\copy_32.png;..\resource\images\32x32\cut_32.png;..\resource\images\32x32\delete_32.png;..\resource\images\32x32\disc-media_32.png;..\resource\images\32x32\documents_32.png;..\resource\images\32x32\folder-closed_32.png;..\resource\images\32x32\folder-open_32.png;..\resource\images\32x32\group_32.png;..\resource\images\32x32\home_32.png;..\resource\images\32x32\mail_32.png;..\resource\images\32x32\paste_32.png;..\resource\images\32x32\preference_32.png;..\resource\images\32x32\print_32.png;..\resource\images\32x32\redo_32.png;..\resource\images\32x32\reload_32.png;..\resource\images\32x32\save_32.png;..\resource\images\32x32\search_32.png;..\resource\images\32x32\skin_32.png;..\resource\images\32x32\trash_32.png;..\resource\images\32x32\undo_32.png;..\resource\images\32x32\user_32.png;..\resource\images\mssql2005_banner.png;..\resource\misc\COPYING;..\resource\misc\INSTALL;..\resource\misc\README;..\resource\misc\TODO;..\resource\misc\coffee.qss;..\resource\misc\default.qss;..\resource\sql\dms.mdb;..\resource\sql\mssql.sql;..\resource\sql\mysql.sql;..\resource\translation\dms_ger.qm;..\resource\translation\libdms_ger.qm;$(QTDIR)\bin\rcc.exe"
 						CommandLine="$(QTDIR)\bin\rcc.exe -name dms ..\resource\dms.qrc -o ..\build\libdms\win\rcc\qrc_dms.cpp"
 						Description="RCC ..\resource\dms.qrc"
 						Outputs="..\build\libdms\win\rcc\qrc_dms.cpp"
@@ -787,7 +839,7 @@
 					Name="Release|Win32">
 					<Tool
 						Name="VCCustomBuildTool"
-						AdditionalDependencies="..\resource\dms.qrc;..\resource\images\16x16\add_16.png;..\resource\images\16x16\applications_16.png;..\resource\images\16x16\arrow-back_16.png;..\resource\images\16x16\arrow-down_16.png;..\resource\images\16x16\arrow-forward_16.png;..\resource\images\16x16\arrow-up_16.png;..\resource\images\16x16\computer_16.png;..\resource\images\16x16\copy_16.png;..\resource\images\16x16\cut_16.png;..\resource\images\16x16\delete_16.png;..\resource\images\16x16\disc-media_16.png;..\resource\images\16x16\documents_16.png;..\resource\images\16x16\folder-closed_16.png;..\resource\images\16x16\folder-open_16.png;..\resource\images\16x16\group_16.png;..\resource\images\16x16\home_16.png;..\resource\images\16x16\mail_16.png;..\resource\images\16x16\paste_16.png;..\resource\images\16x16\print_16.png;..\resource\images\16x16\redo_16.png;..\resource\images\16x16\reload_16.png;..\resource\images\16x16\save_16.png;..\resource\images\16x16\search_16.png;..\resource\images\16x16\trash_16.png;..\resource\images\16x16\undo_16.png;..\resource\images\16x16\user_16.png;..\resource\images\24x24\add_24.png;..\resource\images\24x24\applications_24.png;..\resource\images\24x24\arrow-back_24.png;..\resource\images\24x24\arrow-down_24.png;..\resource\images\24x24\arrow-forward_24.png;..\resource\images\24x24\arrow-up_24.png;..\resource\images\24x24\computer_24.png;..\resource\images\24x24\copy_24.png;..\resource\images\24x24\cut_24.png;..\resource\images\24x24\delete_24.png;..\resource\images\24x24\disc-media_24.png;..\resource\images\24x24\documents_24.png;..\resource\images\24x24\folder-closed_24.png;..\resource\images\24x24\folder-open_24.png;..\resource\images\24x24\group_24.png;..\resource\images\24x24\home_24.png;..\resource\images\24x24\mail_24.png;..\resource\images\24x24\paste_24.png;..\resource\images\24x24\print_24.png;..\resource\images\24x24\redo_24.png;..\resource\images\24x24\reload_24.png;..\resource\images\24x24\save_24.png;..\resource\images\24x24\search_24.png;..\resource\images\24x24\trash_24.png;..\resource\images\24x24\undo_24.png;..\resource\images\24x24\user_24.png;..\resource\images\32x32\add_32.png;..\resource\images\32x32\applications_32.png;..\resource\images\32x32\arrow-back_32.png;..\resource\images\32x32\arrow-down_32.png;..\resource\images\32x32\arrow-forward_32.png;..\resource\images\32x32\arrow-up_32.png;..\resource\images\32x32\computer_32.png;..\resource\images\32x32\copy_32.png;..\resource\images\32x32\cut_32.png;..\resource\images\32x32\delete_32.png;..\resource\images\32x32\disc-media_32.png;..\resource\images\32x32\documents_32.png;..\resource\images\32x32\folder-closed_32.png;..\resource\images\32x32\folder-open_32.png;..\resource\images\32x32\group_32.png;..\resource\images\32x32\home_32.png;..\resource\images\32x32\mail_32.png;..\resource\images\32x32\paste_32.png;..\resource\images\32x32\print_32.png;..\resource\images\32x32\redo_32.png;..\resource\images\32x32\reload_32.png;..\resource\images\32x32\save_32.png;..\resource\images\32x32\search_32.png;..\resource\images\32x32\trash_32.png;..\resource\images\32x32\undo_32.png;..\resource\images\32x32\user_32.png;..\resource\images\mssql2005_banner.png;..\resource\misc\COPYING;..\resource\misc\INSTALL;..\resource\misc\README;..\resource\misc\TODO;..\resource\misc\coffee.qss;..\resource\misc\default.qss;..\resource\sql\dms.mdb;..\resource\sql\mssql.sql;..\resource\sql\mysql.sql;..\resource\translation\dms_ger.qm;..\resource\translation\libdms_ger.qm;$(QTDIR)\bin\rcc.exe"
+						AdditionalDependencies="..\resource\dms.qrc;..\resource\images\16x16\add_16.png;..\resource\images\16x16\applications_16.png;..\resource\images\16x16\arrow-back_16.png;..\resource\images\16x16\arrow-down_16.png;..\resource\images\16x16\arrow-forward_16.png;..\resource\images\16x16\arrow-up_16.png;..\resource\images\16x16\computer_16.png;..\resource\images\16x16\copy_16.png;..\resource\images\16x16\cut_16.png;..\resource\images\16x16\delete_16.png;..\resource\images\16x16\disc-media_16.png;..\resource\images\16x16\documents_16.png;..\resource\images\16x16\folder-closed_16.png;..\resource\images\16x16\folder-open_16.png;..\resource\images\16x16\group_16.png;..\resource\images\16x16\home_16.png;..\resource\images\16x16\mail_16.png;..\resource\images\16x16\paste_16.png;..\resource\images\16x16\preference_16.png;..\resource\images\16x16\print_16.png;..\resource\images\16x16\redo_16.png;..\resource\images\16x16\reload_16.png;..\resource\images\16x16\save_16.png;..\resource\images\16x16\search_16.png;..\resource\images\16x16\skin_16.png;..\resource\images\16x16\trash_16.png;..\resource\images\16x16\undo_16.png;..\resource\images\16x16\user_16.png;..\resource\images\24x24\add_24.png;..\resource\images\24x24\applications_24.png;..\resource\images\24x24\arrow-back_24.png;..\resource\images\24x24\arrow-down_24.png;..\resource\images\24x24\arrow-forward_24.png;..\resource\images\24x24\arrow-up_24.png;..\resource\images\24x24\computer_24.png;..\resource\images\24x24\copy_24.png;..\resource\images\24x24\cut_24.png;..\resource\images\24x24\delete_24.png;..\resource\images\24x24\disc-media_24.png;..\resource\images\24x24\documents_24.png;..\resource\images\24x24\folder-closed_24.png;..\resource\images\24x24\folder-open_24.png;..\resource\images\24x24\group_24.png;..\resource\images\24x24\home_24.png;..\resource\images\24x24\mail_24.png;..\resource\images\24x24\paste_24.png;..\resource\images\24x24\preference_24.png;..\resource\images\24x24\print_24.png;..\resource\images\24x24\redo_24.png;..\resource\images\24x24\reload_24.png;..\resource\images\24x24\save_24.png;..\resource\images\24x24\search_24.png;..\resource\images\24x24\skin_24.png;..\resource\images\24x24\trash_24.png;..\resource\images\24x24\undo_24.png;..\resource\images\24x24\user_24.png;..\resource\images\32x32\add_32.png;..\resource\images\32x32\applications_32.png;..\resource\images\32x32\arrow-back_32.png;..\resource\images\32x32\arrow-down_32.png;..\resource\images\32x32\arrow-forward_32.png;..\resource\images\32x32\arrow-up_32.png;..\resource\images\32x32\computer_32.png;..\resource\images\32x32\copy_32.png;..\resource\images\32x32\cut_32.png;..\resource\images\32x32\delete_32.png;..\resource\images\32x32\disc-media_32.png;..\resource\images\32x32\documents_32.png;..\resource\images\32x32\folder-closed_32.png;..\resource\images\32x32\folder-open_32.png;..\resource\images\32x32\group_32.png;..\resource\images\32x32\home_32.png;..\resource\images\32x32\mail_32.png;..\resource\images\32x32\paste_32.png;..\resource\images\32x32\preference_32.png;..\resource\images\32x32\print_32.png;..\resource\images\32x32\redo_32.png;..\resource\images\32x32\reload_32.png;..\resource\images\32x32\save_32.png;..\resource\images\32x32\search_32.png;..\resource\images\32x32\skin_32.png;..\resource\images\32x32\trash_32.png;..\resource\images\32x32\undo_32.png;..\resource\images\32x32\user_32.png;..\resource\images\mssql2005_banner.png;..\resource\misc\COPYING;..\resource\misc\INSTALL;..\resource\misc\README;..\resource\misc\TODO;..\resource\misc\coffee.qss;..\resource\misc\default.qss;..\resource\sql\dms.mdb;..\resource\sql\mssql.sql;..\resource\sql\mysql.sql;..\resource\translation\dms_ger.qm;..\resource\translation\libdms_ger.qm;$(QTDIR)\bin\rcc.exe"
 						CommandLine="$(QTDIR)\bin\rcc.exe -name dms ..\resource\dms.qrc -o ..\build\libdms\win\rcc\qrc_dms.cpp"
 						Description="RCC ..\resource\dms.qrc"
 						Outputs="..\build\libdms\win\rcc\qrc_dms.cpp"
@@ -847,6 +899,12 @@
 			<File
 				RelativePath="..\resource\images\32x32\paste_32.png"/>
 			<File
+				RelativePath="..\resource\images\16x16\preference_16.png"/>
+			<File
+				RelativePath="..\resource\images\24x24\preference_24.png"/>
+			<File
+				RelativePath="..\resource\images\32x32\preference_32.png"/>
+			<File
 				RelativePath="..\resource\images\16x16\print_16.png"/>
 			<File
 				RelativePath="..\resource\images\24x24\print_24.png"/>
@@ -876,6 +934,12 @@
 				RelativePath="..\resource\images\24x24\search_24.png"/>
 			<File
 				RelativePath="..\resource\images\32x32\search_32.png"/>
+			<File
+				RelativePath="..\resource\images\16x16\skin_16.png"/>
+			<File
+				RelativePath="..\resource\images\24x24\skin_24.png"/>
+			<File
+				RelativePath="..\resource\images\32x32\skin_32.png"/>
 			<File
 				RelativePath="..\resource\images\16x16\trash_16.png"/>
 			<File
