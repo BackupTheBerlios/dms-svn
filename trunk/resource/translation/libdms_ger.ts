@@ -352,104 +352,169 @@
         <translation>Datenbank</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="199"/>
+        <location filename="../../libdms/ui/preference.ui" line="543"/>
         <source>File associations</source>
         <translation>Dateizuordnung</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="438"/>
+        <location filename="../../libdms/ui/preference.ui" line="782"/>
         <source>Plugins</source>
         <translation>Plugins</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="487"/>
+        <location filename="../../libdms/ui/preference.ui" line="831"/>
         <source>Skins</source>
         <translation>Theme</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="206"/>
+        <location filename="../../libdms/ui/preference.ui" line="550"/>
         <source>Documents</source>
         <translation>Dokument</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="226"/>
+        <location filename="../../libdms/ui/preference.ui" line="570"/>
         <source>Application:</source>
         <translation>Anwendung:</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="252"/>
+        <location filename="../../libdms/ui/preference.ui" line="596"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="275"/>
+        <location filename="../../libdms/ui/preference.ui" line="619"/>
         <source>Fileextansion:</source>
         <translation>Dateiendung:</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="295"/>
+        <location filename="../../libdms/ui/preference.ui" line="639"/>
         <source>Programm</source>
         <translation>Anwendung</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="300"/>
+        <location filename="../../libdms/ui/preference.ui" line="644"/>
         <source>Fileextansion</source>
         <translation>Dateiendung</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="305"/>
+        <location filename="../../libdms/ui/preference.ui" line="649"/>
         <source>/usr/bin/oowriter</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="308"/>
+        <location filename="../../libdms/ui/preference.ui" line="652"/>
         <source>odt;ott;sxw;stw;sdw;doc</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="313"/>
+        <location filename="../../libdms/ui/preference.ui" line="657"/>
         <source>/usr/bin/oocalc</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="316"/>
+        <location filename="../../libdms/ui/preference.ui" line="660"/>
         <source>ods;ots;sxc;stc;sdc;fods;xls;xlt;csv</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="321"/>
+        <location filename="../../libdms/ui/preference.ui" line="665"/>
         <source>/opt/kde3/bin/ark</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="324"/>
+        <location filename="../../libdms/ui/preference.ui" line="668"/>
         <source>7z;zip;tar;tar.gz;tar.bz2;gz;tgz;bzip;bzip2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="346"/>
+        <location filename="../../libdms/ui/preference.ui" line="690"/>
         <source>A&amp;dd</source>
         <translation>&amp;Hinzufügen</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="365"/>
+        <location filename="../../libdms/ui/preference.ui" line="709"/>
         <source>&amp;Update</source>
         <translation>Akt&amp;ualisieren</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="384"/>
+        <location filename="../../libdms/ui/preference.ui" line="728"/>
         <source>&amp;Remove</source>
         <translation>&amp;Löschen</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="525"/>
+        <location filename="../../libdms/ui/preference.ui" line="869"/>
         <source>A&amp;pply</source>
         <translation>&amp;Anwenden</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="557"/>
+        <location filename="../../libdms/ui/preference.ui" line="901"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Abbrechen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="161"/>
+        <source>Setup database</source>
+        <translation>Datenbankeinstellung</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="166"/>
+        <source>Manage connection</source>
+        <translation>Verbindungen verwalten</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="195"/>
+        <source>SQL Script:</source>
+        <translation>SQL Script:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="203"/>
+        <source>MySQL Server 5.1 Script</source>
+        <translation>MySQL Server 5.1 Script</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="208"/>
+        <source>MS SQL Server 2005 Script</source>
+        <translation>MS SQL Server 2005 Script</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="239"/>
+        <source>&amp;Execute</source>
+        <translation>Au&amp;sführen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="277"/>
+        <source>Connect to a MySQL database...</source>
+        <translation>Verbindung zur MySQL Datenbank...</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="305"/>
+        <source>Host:</source>
+        <translation>Server:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="327"/>
+        <source>Port:</source>
+        <translation>Port:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="360"/>
+        <source>User:</source>
+        <translation>Benutzer:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="386"/>
+        <source>Password:</source>
+        <translation>Passwort:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="438"/>
+        <source>Database:</source>
+        <translation>Datenbank:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="500"/>
+        <source>If you change this settings, you must restart the application for apply the settings.</source>
+        <translation>Wenn Sie diese Einstellung ändern müssen Sie die Anwendung erneut starten.</translation>
     </message>
 </context>
 <context>
@@ -679,7 +744,7 @@
 <context>
     <name>asaal::DMSPreference</name>
     <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="77"/>
+        <location filename="../../libdms/src/dmspreference.cpp" line="78"/>
         <source>DMS - Preference</source>
         <translation>DMS - Einstellungen</translation>
     </message>
