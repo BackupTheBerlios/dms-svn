@@ -38,12 +38,18 @@ namespace asaal
 		_dms = dms;
 
 		connect( treeWidgetApplicationPref, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetApplicationPrefItem( QTreeWidgetItem *, int ) ) );
+		connect( comboBoxSqlScript, SIGNAL( currentIndexChanged( int ) ), this, SLOT( comboBoxSqlScriptCurrentIndexChanged( int ) ) );
 
 		connect( btnAdd, SIGNAL( clicked() ), this, SLOT( addApplication() ) );
 		connect( btnUpdate, SIGNAL( clicked() ), this, SLOT( updateApplication() ) );
 		connect( btnRemove, SIGNAL( clicked() ), this, SLOT( removeApplication() ) );
-		connect( btnApply, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );		
+		connect( btnCheckMySQLConnection, SIGNAL( clicked() ), this, SLOT( checkMySqlConnection() ) );
+		connect( btnCheckMsSQLConnection, SIGNAL( clicked() ), this, SLOT( checkMsSqlConnection() ) );
+		connect( btnExecuteSqlScript, SIGNAL( clicked() ), this, SLOT( executeSqlScript() ) );
+		connect( btnApply, SIGNAL( clicked() ), this, SLOT( savePreferences() ) );	
 		connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
+
+		loadPreferences();
 	}
 
 	DMSPreference::~DMSPreference()
@@ -71,11 +77,66 @@ namespace asaal
 
 	void DMSPreference::treeWidgetApplicationPrefItem( QTreeWidgetItem *item, int column )
 	{
+		if( item == NULL )
+			return;
+	}
+	
+	void DMSPreference::comboBoxSqlScriptCurrentIndexChanged( int index )
+	{
 	}
 
 	void DMSPreference::showErrorMsg( const QString &error )
 	{
 		QMessageBox::critical( this, tr( "DMS - Preference"), error );
+	}
+
+	void DMSPreference::savePreferences()
+	{
+		// TODO Save database settings
+
+		// TODO Save application and this file-exstansion settings
+		QStringList appliations;
+		for( int i = 0; i < treeWidgetApplicationPref->topLevelItemCount(); i++ )
+		{
+			QTreeWidgetItem *it = treeWidgetApplicationPref->topLevelItem( i );
+
+			QString itemApp = it->text( 0 );
+			QString itemAppExt = it->text( 1 );
+			appliations = itemAppExt.split( ";" );
+
+			appliations.clear();
+		}
+
+		// TODO Save plugin settings
+
+		// TODO Save skin settings
+		
+		// TODO Save all generated settings into a single file
+	}
+
+	void DMSPreference::loadPreferences()
+	{		
+		// TODO Load database settings
+
+		// TODO Load application and this file-exstansion settings
+
+		// TODO Load plugin settings
+
+		// TODO Load skin settings
+		
+		// TODO Load all generated settings into a single file
+	}
+
+	void DMSPreference::checkMySqlConnection()
+	{
+	}
+
+	void DMSPreference::checkMsSqlConnection()
+	{
+	}
+
+	void DMSPreference::executeSqlScript()
+	{
 	}
 
 	void DMSPreference::closeWidget()

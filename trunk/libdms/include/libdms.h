@@ -169,6 +169,16 @@ namespace asaal
 			* @return Group id for the given group name
 			*/
 			QString getGroupId( const QString &groupname );
+			
+			/*!
+			 * Get the application settings
+			 *
+			 * @param widgetname The widget name
+			 * @param section The section for application settings
+			 * @param key The key for determine the value
+			 * @param defaultValue The default value of settings
+			 */
+			QVariant getApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QVariant &defaultValue = QVariant() );
 
 			/*!
 			* Get the error message, if exist.
@@ -269,6 +279,16 @@ namespace asaal
 			* @param groupId The group id
 			*/
 			void deleteGroup( const QString &groupId );
+			
+			/*!
+			 * Insert settings for the dms application
+			 *
+			 * @param widgetname The widgetname
+			 * @param section The section for application settings
+			 * @param key The key for determine the value
+			 * @param value  The <a href="http://doc.trolltech.com/4.3/qvariant.html#QVariant">QVariant</a> as value of application settings (optional)
+			 */
+			void insertApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QVariant &value = QVariant() );			
 
 			/*!
 			 * Show the preference widget

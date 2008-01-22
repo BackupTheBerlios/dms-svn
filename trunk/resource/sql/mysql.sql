@@ -1,5 +1,5 @@
-﻿/***************************************************************************
- *   Copyright (C) 2007 by Alexander Saal                                  *
+/***************************************************************************
+ *   Copyright (C) 2008 by Alexander Saal                                  *
  *   alex.saal@gmx.de                                                      *
  *                                                                         *
  *   This MySQL Script is part of DMS - Document Magament System           *
@@ -78,6 +78,19 @@ CREATE TABLE IF NOT EXISTS `USERSDATA`
   PRIMARY KEY `USERDATA_P_KEY`( `UDID` ),
   FOREIGN KEY `USERDATA_F_KEY`( `UID` ) REFERENCES `USERS`( `UID` ),
   INDEX `INDEX_UDID` ( `UDID` )
+);
+#
+CREATE TABLE IF NOT EXISTS `SETTINGS`
+(
+  `ID` INTEGER NOT NULL AUTO_INCREMENT,
+  `WIDGET_NAME` NVARCHAR(50) NOT NULL,
+  `SECTION` VARCHAR(256) NOT NULL,
+  `KEY` VARCHAR(256) NOT NULL,
+  `VALUE` VARCHAR(256),
+  `CREATED` DATETIME NOT NULL,
+  `UPDATED` DATETIME,
+  PRIMARY KEY `SETTINGS_P_KEY`( `UDID` ),
+  INDEX `INDEX_UDID` ( `ID` )
 );
 #
 LOCK TABLES `USERS` WRITE;

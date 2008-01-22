@@ -369,6 +369,11 @@ namespace asaal
 
 		return groupId;
 	}
+	
+	QVariant LibDMS::getApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QVariant &defaultValue )
+	{
+		return defaultValue;
+	}
 
 	void LibDMS::insertUser( const QString &userId, const QString &username, const QString &userpwd, const QString &vname, const QString &nname )
 	{
@@ -715,6 +720,10 @@ namespace asaal
 		}
 
 		sqlDeleteGroupQuery.clear();
+	}
+	
+	void LibDMS::insertApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QVariant &value )
+	{
 	}
 
 	void LibDMS::showDmsPreference( QWorkspace *ws )

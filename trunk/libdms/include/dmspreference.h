@@ -26,6 +26,7 @@
 #include <ui_preference.h>
 
 #include <libdms.h>
+#include <XMLPreferences.h>
 
 #include <QtCore>
 #include <QtGui>
@@ -70,8 +71,16 @@ namespace asaal
 			void removeApplication();
 
 			void treeWidgetApplicationPrefItem( QTreeWidgetItem *, int );
+			void comboBoxSqlScriptCurrentIndexChanged( int );
 			void showErrorMsg( const QString &error );
 
+			void savePreferences();
+			void loadPreferences();
+
+			void checkMySqlConnection();
+			void checkMsSqlConnection();
+			void executeSqlScript();
+			
 			void closeWidget();
 
 		private:
