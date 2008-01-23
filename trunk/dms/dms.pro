@@ -31,11 +31,11 @@ QT += sql xml
 TRANSLATIONS	+= ../resource/translation/dms_ger.ts
 
 # Project Misc files
-DISTFILES += CHANGELOG
-DISTFILES += COPYING
-DISTFILES += INSTALL
-DISTFILES += README
-DISTFILES += TODO
+DISTFILES += ../resource/misc/CHANGELOG
+DISTFILES += ../resource/misc/COPYING
+DISTFILES += ../resource/misc/INSTALL
+DISTFILES += ../resource/misc/README
+DISTFILES += ../resource/misc/TODO
 
 # Project Header
 HEADERS	+= include/dms.h
