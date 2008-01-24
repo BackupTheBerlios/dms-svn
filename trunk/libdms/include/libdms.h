@@ -1,4 +1,4 @@
-/***************************************************************************
+/**************************************************************************
 *   Copyright (C) 2007 by Alexander Saal                                  *
 *   alex.saal@gmx.de                                                      *
 *                                                                         *
@@ -288,7 +288,7 @@ namespace asaal
 			 * @param key The key for determine the value
 			 * @param value  The <a href="http://doc.trolltech.com/4.3/qvariant.html#QVariant">QVariant</a> as value of application settings (optional)
 			 */
-			void insertApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QVariant &value = QVariant() );			
+			void insertApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QString &value = QString() );
 
 			/*!
 			 * Show the preference widget

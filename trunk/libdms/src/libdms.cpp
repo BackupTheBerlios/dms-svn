@@ -654,7 +654,7 @@ namespace asaal
 
 		QSqlQuery queryInsertGroup( m_qsqld );
 		queryInsertGroup.exec( sqlInsertGroupQuery );
-		if( !queryInsertGroup.isActive() )
+		if( queryInsertGroup.isActive() )
 		{
 			errorMessage = queryInsertGroup.lastError().text();
 			sqlInsertGroupQuery.clear();
@@ -722,9 +722,72 @@ namespace asaal
 		sqlDeleteGroupQuery.clear();
 	}
 	
-	void LibDMS::insertApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QVariant &value )
+	void LibDMS::insertApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QString &value )
 	{
-	}
+		bool isAppSettingsAvailable = false;
+		qDebug() << value;
+
+		QString selectSettings = QString( "" );
+		selectSettings += "SELECT ID FROM SETTINGS WHERE SETT_WIDGET_NAME = '" + widgetname + "' AND SETT_SECTION = '" + section + "' AND SETT_KEY = '" + key + "'";
+
+		QSqlQuery queryInsertAppSettings( m_qsqld );
+		queryInsertAppSettings.exec( selectSettings );
+		if( queryInsertAppSettings.isActive() )
+			while( queryInsertAppSettings.next() )
+				if( !queryInsertAppSettings.value( 0 ).isNull() )
+					isAppSettingsAvailable = true;
+		else
+			isAppSettingsAvailable = false;
+
+		QString sqlInsertAppSettings = QString( "" );
+		if( !isAppSettingsAvailable )
+		{
+			// TODO insert statement for application settings			
+			sqlInsertAppSettings += "INSERT INTO SETTINGS (\n";
+			sqlInsertAppSettings += "\tSETT_WIDGET_NAME,\n";
+			sqlInsertAppSettings += "\tSETT_SECTION,\n";
+			sqlInsertAppSettings += "\tSETT_KEY,\n";
+			sqlInsertAppSettings += "\tSETT_VALUE,\n";
+			sqlInsertAppSettings += "\tCREATED,\n";
+			sqlInsertAppSettings += "\tUPDATED\n";
+			sqlInsertAppSettings += ") VALUES (\n";
+			sqlInsertAppSettings += "\t'" + widgetname +  "',\n";
+			sqlInsertAppSettings += "\t'" + section +  "',\n";
+			sqlInsertAppSettings += "\t'" + key +  "',\n";
+			sqlInsertAppSettings += "\t'" + value +  "',\n";
+			sqlInsertAppSettings += "\t'" + QDateTime::currentDateTime().toString( Qt::ISODate ) + "',\n";
+			sqlInsertAppSettings += "\t'" + QDateTime::currentDateTime().toString( Qt::ISODate ) + "'\n";
+			sqlInsertAppSettings += ")";
+			qDebug() << sqlInsertAppSettings;
+		}
+		else
+		{
+			// TODO update statement for application settings
+			sqlInsertAppSettings += "UPDATE SETTINGS\n";
+			sqlInsertAppSettings += "\tSET SETT_WIDGET_NAME = '" + widgetname + "',\n";
+			sqlInsertAppSettings += "\tSETT_SECTION = '" + section + "',\n";
+			sqlInsertAppSettings += "\tSETT_KEY = '" + key + "',\n";
+			sqlInsertAppSettings += "\tSETT_VALUE = '" + value +  "',\n";
+			sqlInsertAppSettings += "\tUPDATED = '" + QDateTime::currentDateTime().toString( Qt::ISODate ) + "'\n";
+			sqlInsertAppSettings += "WHERE\n";
+			sqlInsertAppSettings += "SETT_WIDGET_NAME = '" + widgetname + "' AND\n";
+			sqlInsertAppSettings += "SETT_SECTION = '" + section + "' AND\n";
+			sqlInsertAppSettings += "SETT_KEY = '" + key + "'";
+			qDebug() << sqlInsertAppSettings;
+		}
+
+		queryInsertAppSettings.exec( sqlInsertAppSettings );
+		if( !queryInsertAppSettings.isActive() )
+		{
+			errorMessage = queryInsertAppSettings.lastError().text();
+			qDebug() << errorMessage;
+			sqlInsertAppSettings.clear();
+			queryInsertAppSettings.clear();
+			return;
+		}
+
+		sqlInsertAppSettings.clear();
+	} 
 
 	void LibDMS::showDmsPreference( QWorkspace *ws )
 	{

@@ -147,6 +147,9 @@ namespace asaal
 
 	void DMSPreference::loadPreferences()
 	{
+		// TODO Load widget geometry (location on screen only)
+		move( geometry().center().x() / 2, geometry().center().y() / 2 );
+
 		// TODO Load database settings
 
 		// TODO Load application and this file-exstansion settings
