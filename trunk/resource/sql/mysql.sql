@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
  *   Copyright (C) 2008 by Alexander Saal                                  *
  *   alex.saal@gmx.de                                                      *
  *                                                                         *
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `SETTINGS`
   `VALUE` VARCHAR(256),
   `CREATED` DATETIME NOT NULL,
   `UPDATED` DATETIME,
-  PRIMARY KEY `SETTINGS_P_KEY`( `UDID` ),
+  PRIMARY KEY `SETTINGS_P_KEY`( `ID` ),
   INDEX `INDEX_UDID` ( `ID` )
 );
 #
