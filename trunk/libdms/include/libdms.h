@@ -100,9 +100,7 @@ namespace asaal
 			*
 			* @return true if connection closed
 			*/
-			bool closeConnection();
-
-			
+			bool closeConnection();			
 
 			/*!
 			* Get the qt4 sql driver

@@ -115,7 +115,7 @@
    <item row="0" column="1" >
     <widget class="QStackedWidget" name="stackedWidgetPreferences" >
      <property name="currentIndex" >
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="pageDatabase" >
       <layout class="QGridLayout" >
@@ -747,7 +747,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditProgram" >
+             <widget class="QLineEdit" name="lineEditApplication" >
               <property name="text" >
                <string/>
               </property>
@@ -796,7 +796,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEdit" >
+             <widget class="QLineEdit" name="lineEditFileExtensions" >
               <property name="text" >
                <string/>
               </property>
@@ -1060,13 +1060,13 @@
  <tabstops>
   <tabstop>listWidgetPreferences</tabstop>
   <tabstop>btnSelectApplication</tabstop>
-  <tabstop>lineEdit</tabstop>
+  <tabstop>lineEditFileExtensions</tabstop>
   <tabstop>treeWidgetApplicationPref</tabstop>
   <tabstop>btnAdd</tabstop>
   <tabstop>btnRemove</tabstop>
   <tabstop>btnApply</tabstop>
   <tabstop>btnCancel</tabstop>
-  <tabstop>lineEditProgram</tabstop>
+  <tabstop>lineEditApplication</tabstop>
  </tabstops>
  <resources>
   <include location="../../resource/dms.qrc" />

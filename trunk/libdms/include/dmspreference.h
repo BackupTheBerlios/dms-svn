@@ -66,6 +66,7 @@ namespace asaal
 			static DMSPreference *dmspreference_instance() { return dmspreference; }
 
 		private slots:
+			void chooseApplication();
 			void addApplication();
 			void updateApplication();
 			void removeApplication();

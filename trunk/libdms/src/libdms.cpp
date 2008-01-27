@@ -614,15 +614,33 @@ namespace asaal
 				}
 
 				this->docId = docId;
+				
+				// TODO Open document with the right application
+				QSqlQuery sqlSetting( m_qsqld );
+				sqlSetting.exec( "SELECT SETT_KEY, SETT_VALUE FROM SETTINGS WHERE SETT_WIDGET_NAME = 'UiPreferenceBase' AND SETT_SECTION = 'File associations'" );
+				if( sqlSetting.isActive() )
+				{
+					while( sqlSetting.next() )
+					{
+						qApp->processEvents();
 
-				QProcess *docProc = new QProcess( this );
-				docProc->setWorkingDirectory( QFileInfo( queryOpenDocument.value( 0 ).toString() ).absolutePath() );
-				docProc->start( "call ", QStringList() << queryOpenDocument.value( 0 ).toString() );
-				qDebug() << QFileInfo( queryOpenDocument.value( 0 ).toString() ).absolutePath();
-				qDebug() << queryOpenDocument.value( 0 ).toString();
+						QStringList suffix = sqlSetting.value( 1 ).toString().split( ";" );
+						for( int i = 0; i < suffix.size(); i ++ )					
+						{
+							qApp->processEvents();
 
-				connect( docProc, SIGNAL( finished( int, QProcess::ExitStatus ) ), this, SLOT( processFinish( int, QProcess::ExitStatus ) ) );
-				connect( docProc, SIGNAL( error( QProcess::ProcessError ) ), this, SLOT( processError( QProcess::ProcessError ) ) );
+							if( queryOpenDocument.value( 0 ).toString().endsWith( suffix.value( i ) ) )
+							{
+								QProcess *docProc = new QProcess( this );
+								docProc->setWorkingDirectory( QFileInfo( queryOpenDocument.value( 0 ).toString() ).absolutePath() );				
+								docProc->start( sqlSetting.value( 0 ).toString(), QStringList() << queryOpenDocument.value( 0 ).toString() );
+
+								connect( docProc, SIGNAL( finished( int, QProcess::ExitStatus ) ), this, SLOT( processFinish( int, QProcess::ExitStatus ) ) );
+								connect( docProc, SIGNAL( error( QProcess::ProcessError ) ), this, SLOT( processError( QProcess::ProcessError ) ) );
+							}
+						}
+					}
+				}
 			}
 		}
 		else

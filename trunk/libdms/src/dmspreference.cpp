@@ -40,12 +40,13 @@ namespace asaal
 		connect( treeWidgetApplicationPref, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetApplicationPrefItem( QTreeWidgetItem *, int ) ) );
 		connect( comboBoxSqlScript, SIGNAL( currentIndexChanged( int ) ), this, SLOT( comboBoxSqlScriptCurrentIndexChanged( int ) ) );
 
-		connect( btnAdd, SIGNAL( clicked() ), this, SLOT( addApplication() ) );
+		connect( btnAdd, SIGNAL( clicked() ), this, SLOT( addApplication() ) );		
 		connect( btnUpdate, SIGNAL( clicked() ), this, SLOT( updateApplication() ) );
-		connect( btnRemove, SIGNAL( clicked() ), this, SLOT( removeApplication() ) );
+		connect( btnRemove, SIGNAL( clicked() ), this, SLOT( removeApplication() ) );		
 		connect( btnCheckMySQLConnection, SIGNAL( clicked() ), this, SLOT( checkMySqlConnection() ) );
 		connect( btnCheckMsSQLConnection, SIGNAL( clicked() ), this, SLOT( checkMsSqlConnection() ) );
 		connect( btnExecuteSqlScript, SIGNAL( clicked() ), this, SLOT( executeSqlScript() ) );
+		connect( btnSelectApplication, SIGNAL( clicked() ), this, SLOT( chooseApplication() ) );
 		connect( btnApply, SIGNAL( clicked() ), this, SLOT( savePreferences() ) );
 		connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
 
@@ -63,8 +64,38 @@ namespace asaal
 		e->accept();
 	}
 
+	void DMSPreference::chooseApplication()
+	{
+		QString application = QFileDialog::getOpenFileName( this, tr ( "Open application" ), QDir::homePath(), tr( "All files (*.*)" ) );
+		if( application.isNull() || application.isEmpty() )
+			return;
+		
+		lineEditApplication->setText( application );	
+	}
+
 	void DMSPreference::addApplication()
 	{
+		QString appname = lineEditApplication->text();
+		QString appextensions = lineEditFileExtensions->text();
+		
+		if( appname.isNull() || appname.isEmpty() )
+		{
+			showErrorMsg( tr( "You must select a application!" ) );
+			return;
+		}
+		
+		if( appextensions.isNull() || appname.isEmpty() )
+		{
+			showErrorMsg( tr( "You must enter a application suffix!" ) );
+			return;
+		}
+		
+		appItem = new QTreeWidgetItem( treeWidgetApplicationPref );
+		appItem->setText( 0, appname );
+		appItem->setText( 1, appextensions );
+
+		lineEditApplication->setText( "" );
+		lineEditFileExtensions->setText( "" );
 	}
 
 	void DMSPreference::updateApplication()
@@ -129,10 +160,10 @@ namespace asaal
 
 		for ( int i = 0; i < treeWidgetApplicationPref->topLevelItemCount(); i++ )
 		{
-			QTreeWidgetItem *it = treeWidgetApplicationPref->topLevelItem( i );
+			appItem = treeWidgetApplicationPref->topLevelItem( i );
 
-			QString itemApp = it->text( 0 );
-			QString itemAppExt = it->text( 1 );
+			QString itemApp = appItem->text( 0 );
+			QString itemAppExt = appItem->text( 1 );
 			appliations = itemAppExt.split( ";" );
 
 			appliations.clear();
