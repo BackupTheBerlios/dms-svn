@@ -115,7 +115,7 @@
    <item row="0" column="1" >
     <widget class="QStackedWidget" name="stackedWidgetPreferences" >
      <property name="currentIndex" >
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="pageDatabase" >
       <layout class="QGridLayout" >
@@ -154,7 +154,7 @@
        <item row="1" column="0" >
         <widget class="QComboBox" name="comboBoxDatabaseSettings" >
          <property name="currentIndex" >
-          <number>0</number>
+          <number>1</number>
          </property>
          <item>
           <property name="text" >
@@ -166,17 +166,12 @@
            <string>Manage MySQL Server 5.1 connection</string>
           </property>
          </item>
-         <item>
-          <property name="text" >
-           <string>Manage MS SQL Server 2005 connection</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="2" column="0" >
         <widget class="QStackedWidget" name="stackedWidgetDatabaseSettings" >
          <property name="currentIndex" >
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="pageSetupDatabase" >
           <layout class="QGridLayout" >
@@ -184,6 +179,9 @@
             <layout class="QHBoxLayout" >
              <item>
               <widget class="QLabel" name="labelSqlScript" >
+               <property name="enabled" >
+                <bool>false</bool>
+               </property>
                <property name="minimumSize" >
                 <size>
                  <width>110</width>
@@ -203,6 +201,9 @@
              </item>
              <item>
               <widget class="QComboBox" name="comboBoxSqlScript" >
+               <property name="enabled" >
+                <bool>false</bool>
+               </property>
                <item>
                 <property name="text" >
                  <string>MySQL Server 5.1 Script</string>
@@ -224,6 +225,9 @@
            </item>
            <item row="1" column="0" >
             <widget class="QTextBrowser" name="textBrowserSqlScript" >
+             <property name="enabled" >
+              <bool>false</bool>
+             </property>
              <property name="openLinks" >
               <bool>false</bool>
              </property>
@@ -233,6 +237,9 @@
             <layout class="QHBoxLayout" >
              <item>
               <widget class="QPushButton" name="btnExecuteSqlScript" >
+               <property name="enabled" >
+                <bool>false</bool>
+               </property>
                <property name="minimumSize" >
                 <size>
                  <width>110</width>
@@ -725,7 +732,7 @@
           <string>Documents</string>
          </property>
          <layout class="QGridLayout" >
-          <item row="0" column="0" >
+          <item row="0" column="0" colspan="2" >
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QLabel" name="labelApplication" >
@@ -775,36 +782,52 @@
            </layout>
           </item>
           <item row="1" column="0" >
-           <layout class="QHBoxLayout" >
-            <item>
-             <widget class="QLabel" name="labelFileExtansion" >
-              <property name="minimumSize" >
-               <size>
-                <width>110</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>110</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text" >
-               <string>Fileextansion:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEditFileExtensions" >
-              <property name="text" >
-               <string/>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <widget class="QLabel" name="labelFileExtansion" >
+            <property name="minimumSize" >
+             <size>
+              <width>110</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>110</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Fileextansion:</string>
+            </property>
+           </widget>
           </item>
-          <item row="2" column="0" >
+          <item row="1" column="1" >
+           <widget class="QComboBox" name="comboBoxFileExtensions" >
+            <property name="editable" >
+             <bool>true</bool>
+            </property>
+            <item>
+             <property name="text" >
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>odt;ott;sxw;stw;sdw;doc</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>ods;ots;sxc;stc;sdc;fods;xls;xlt;csv</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>7z;zip;rar;tar;tar.gz;tar.bz2;gz;tgz;bzip;bzip2</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2" >
            <widget class="QTreeWidget" name="treeWidgetApplicationPref" >
             <property name="rootIsDecorated" >
              <bool>false</bool>
@@ -821,7 +844,7 @@
             </column>
            </widget>
           </item>
-          <item row="3" column="0" >
+          <item row="3" column="0" colspan="2" >
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QPushButton" name="btnAdd" >
@@ -1060,7 +1083,6 @@
  <tabstops>
   <tabstop>listWidgetPreferences</tabstop>
   <tabstop>btnSelectApplication</tabstop>
-  <tabstop>lineEditFileExtensions</tabstop>
   <tabstop>treeWidgetApplicationPref</tabstop>
   <tabstop>btnAdd</tabstop>
   <tabstop>btnRemove</tabstop>

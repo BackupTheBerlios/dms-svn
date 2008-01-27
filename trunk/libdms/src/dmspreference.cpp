@@ -66,7 +66,7 @@ namespace asaal
 
 	void DMSPreference::chooseApplication()
 	{
-		QString application = QFileDialog::getOpenFileName( this, tr ( "Open application" ), QDir::homePath(), tr( "All files (*.*)" ) );
+		QString application = QFileDialog::getOpenFileName( this, tr ( "Open application" ), QDir::rootPath(), tr( "All files (*)" ) );
 		if( application.isNull() || application.isEmpty() )
 			return;
 		
@@ -76,7 +76,7 @@ namespace asaal
 	void DMSPreference::addApplication()
 	{
 		QString appname = lineEditApplication->text();
-		QString appextensions = lineEditFileExtensions->text();
+		QString appextensions = comboBoxFileExtensions->currentText();
 		
 		if( appname.isNull() || appname.isEmpty() )
 		{
@@ -84,7 +84,7 @@ namespace asaal
 			return;
 		}
 		
-		if( appextensions.isNull() || appname.isEmpty() )
+		if( appextensions.isNull() || appextensions.isEmpty() )
 		{
 			showErrorMsg( tr( "You must enter a application suffix!" ) );
 			return;
@@ -95,21 +95,65 @@ namespace asaal
 		appItem->setText( 1, appextensions );
 
 		lineEditApplication->setText( "" );
-		lineEditFileExtensions->setText( "" );
+		comboBoxFileExtensions->setCurrentIndex( 0 );
 	}
 
 	void DMSPreference::updateApplication()
 	{
+		appItem = treeWidgetApplicationPref->currentItem();
+		if( appItem == NULL )
+		{
+			showErrorMsg( tr( "No item was selected!" ) );
+			return;
+		}
+		
+		if( lineEditApplication->text().isNull() || lineEditApplication->text().isEmpty() )
+		{
+			showErrorMsg( tr( "You must select a application!" ) );
+			return;
+		}
+		
+		if( comboBoxFileExtensions->currentText().isNull() || comboBoxFileExtensions->currentText().isEmpty() )
+		{
+			showErrorMsg( tr( "You must enter a application suffix!" ) );
+			return;
+		}
+		
+		appItem->setText( 0, lineEditApplication->text() );
+		appItem->setText( 1, comboBoxFileExtensions->currentText() );
 	}
 
 	void DMSPreference::removeApplication()
 	{
+		appItem = treeWidgetApplicationPref->currentItem();
+
+		if( appItem == NULL )
+		{
+			showErrorMsg( tr( "No item was selected!" ) );
+			return;
+		}
+		
+		switch( QMessageBox::question( this, tr( "DMS - Preference" ), tr( "Would you delete this item?" ), QMessageBox::Yes | QMessageBox::No ) )
+		{
+			case QMessageBox::Yes:
+				delete appItem;
+				break;
+			case QMessageBox::No:
+				return;
+			default:
+				return;
+		}
 	}
 
 	void DMSPreference::treeWidgetApplicationPrefItem( QTreeWidgetItem *item, int column )
 	{
 		if ( item == NULL )
 			return;
+		
+		lineEditApplication->setText( item->text( 0 ) );
+
+		int idx = comboBoxFileExtensions->findText( item->text( 1 ), Qt::MatchExactly );
+		comboBoxFileExtensions->setCurrentIndex( idx );
 	}
 
 	void DMSPreference::comboBoxSqlScriptCurrentIndexChanged( int index )
@@ -153,32 +197,26 @@ namespace asaal
 
 	void DMSPreference::savePreferences()
 	{
-		// TODO Save database settings
-
 		// TODO Save application and this file-exstansion settings
-		QStringList appliations;
-
 		for ( int i = 0; i < treeWidgetApplicationPref->topLevelItemCount(); i++ )
 		{
 			appItem = treeWidgetApplicationPref->topLevelItem( i );
 
 			QString itemApp = appItem->text( 0 );
 			QString itemAppExt = appItem->text( 1 );
-			appliations = itemAppExt.split( ";" );
-
-			appliations.clear();
+			_dms->insertApplicationSettings( objectName(), "File associations", itemApp, itemAppExt );
 		}
 
 		// TODO Save plugin settings
 
 		// TODO Save skin settings
 
-		// TODO Save all generated settings into a single file
+		// TODO Save database settings
 	}
 
 	void DMSPreference::loadPreferences()
 	{
-		// TODO Load widget geometry (location on screen only)
+		// TODO Load widget geometry (location on screen only (center))
 		move( geometry().center().x() / 2, geometry().center().y() / 2 );
 
 		// TODO Load database settings
@@ -188,8 +226,6 @@ namespace asaal
 		// TODO Load plugin settings
 
 		// TODO Load skin settings
-
-		// TODO Load all generated settings into a single file
 	}
 
 	void DMSPreference::checkMySqlConnection()

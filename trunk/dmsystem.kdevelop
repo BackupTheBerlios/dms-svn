@@ -150,15 +150,15 @@
   </kdevfilecreate>
   <kdevtrollproject>
     <general>
-      <activedir>dms</activedir>
+      <activedir>libdms</activedir>
     </general>
     <run>
       <directoryradio>executable</directoryradio>
-      <mainprogram>/home/asaal/projekte/dmsystem</mainprogram>
+      <mainprogram>bin/dms</mainprogram>
       <programargs/>
       <globaldebugarguments/>
-      <globalcwd>/home/asaal/projekte/dmsystem</globalcwd>
-      <useglobalprogram>false</useglobalprogram>
+      <globalcwd>.</globalcwd>
+      <useglobalprogram>true</useglobalprogram>
       <terminal>false</terminal>
       <autocompile>true</autocompile>
       <autoinstall>false</autoinstall>
@@ -196,7 +196,7 @@
   </kdevdocumentation>
   <ctagspart>
     <customArguments/>
-    <customTagfilePath>/home/asaal/projekte/dmsystem/tags</customTagfilePath>
+    <customTagfilePath>tags</customTagfilePath>
     <activeTagsFiles/>
   </ctagspart>
 </kdevelop>

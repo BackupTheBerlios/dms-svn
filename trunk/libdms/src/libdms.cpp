@@ -605,14 +605,6 @@ namespace asaal
 			{
 				qApp->processEvents();
 
-				QFile openFile( queryOpenDocument.value( 0 ).toString() );
-				if( !openFile.open( QIODevice::Text | QIODevice::ReadWrite ) )
-				{
-					errorMessage = tr( "Can't open file: %1" ).arg( queryOpenDocument.value( 0 ).toString() );
-					sqlOpenDocument.clear();
-					return;
-				}
-
 				this->docId = docId;
 				
 				// TODO Open document with the right application
@@ -637,6 +629,9 @@ namespace asaal
 
 								connect( docProc, SIGNAL( finished( int, QProcess::ExitStatus ) ), this, SLOT( processFinish( int, QProcess::ExitStatus ) ) );
 								connect( docProc, SIGNAL( error( QProcess::ProcessError ) ), this, SLOT( processError( QProcess::ProcessError ) ) );
+								
+								sqlOpenDocument.clear();
+								return;
 							}
 						}
 					}
@@ -743,7 +738,6 @@ namespace asaal
 	void LibDMS::insertApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QString &value )
 	{
 		bool isAppSettingsAvailable = false;
-		qDebug() << value;
 
 		QString selectSettings = QString( "" );
 		selectSettings += "SELECT ID FROM SETTINGS WHERE SETT_WIDGET_NAME = '" + widgetname + "' AND SETT_SECTION = '" + section + "' AND SETT_KEY = '" + key + "'";
@@ -776,7 +770,6 @@ namespace asaal
 			sqlInsertAppSettings += "\t'" + QDateTime::currentDateTime().toString( Qt::ISODate ) + "',\n";
 			sqlInsertAppSettings += "\t'" + QDateTime::currentDateTime().toString( Qt::ISODate ) + "'\n";
 			sqlInsertAppSettings += ")";
-			qDebug() << sqlInsertAppSettings;
 		}
 		else
 		{
@@ -791,19 +784,18 @@ namespace asaal
 			sqlInsertAppSettings += "SETT_WIDGET_NAME = '" + widgetname + "' AND\n";
 			sqlInsertAppSettings += "SETT_SECTION = '" + section + "' AND\n";
 			sqlInsertAppSettings += "SETT_KEY = '" + key + "'";
-			qDebug() << sqlInsertAppSettings;
 		}
 
 		queryInsertAppSettings.exec( sqlInsertAppSettings );
 		if( !queryInsertAppSettings.isActive() )
 		{
 			errorMessage = queryInsertAppSettings.lastError().text();
-			qDebug() << errorMessage;
+			selectSettings.clear();
 			sqlInsertAppSettings.clear();
-			queryInsertAppSettings.clear();
 			return;
 		}
 
+		selectSettings.clear();
 		sqlInsertAppSettings.clear();
 	} 
 

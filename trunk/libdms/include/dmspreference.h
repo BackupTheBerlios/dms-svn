@@ -26,7 +26,6 @@
 #include <ui_preference.h>
 
 #include <libdms.h>
-#include <XMLPreferences.h>
 
 #include <QtCore>
 #include <QtGui>

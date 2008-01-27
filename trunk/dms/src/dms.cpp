@@ -1,4 +1,4 @@
-/***************************************************************************
+/**************************************************************************
 *   Copyright (C) 2007 by Alexander Saal                                  *
 *   alex.saal@gmx.de                                                      *
 *                                                                         *
@@ -296,8 +296,8 @@ LABEL_DISPLAY:
 		actionList.clear();
 
 		QDir pluginsDir = QDir( QDir::homePath() );
-		pluginsDir.cd ( ".dms" );
-		pluginsDir.cd ( "plugins" );
+		pluginsDir.cd( ".dms" );
+		pluginsDir.cd( "plugins" );
 
 		if( pluginsDir.entryList( QDir::Files ).size() >= 1 )
 			mnuPlugin = menuBar()->addMenu( tr( "&Plugin" ) );
