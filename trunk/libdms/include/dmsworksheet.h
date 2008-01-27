@@ -56,13 +56,14 @@ namespace asaal
 		Q_CLASSINFO("URL", "http://chmaster.freeforge.net")
 
 		public:
-			DMSWorkSheet( LibDMS *dms, QWidget *parent = 0L );
+			DMSWorkSheet( LibDMS *dms, QWorkspace *ws, QWidget *parent = 0L );
 			~DMSWorkSheet();
 
 			static DMSWorkSheet *dmsworksheet_instance() { return dmsworksheet; }
 
 		private slots:
 			void loadDocuments();
+			void newDocument();
 			void openDocument();
 			void deleteDocument();
 			void printDocument();
@@ -81,15 +82,17 @@ namespace asaal
 			bool isGroupAvailabel( const QString &groupname );
 
 			LibDMS *_dms;
+			QWorkspace *_ws;
 			
 			QMap<QString, QString> documents;
 
 			QTreeWidgetItem *docItem;
 			QTreeWidgetItem *groupItem;
 
+			QAction *acNewDoc;
+			QAction *acOpenDoc;
 			QAction *acDeleteDoc;
 			QAction *acPrintDoc;
-			QAction *acOpenDoc;
 
 		protected:
 			void closeEvent( QCloseEvent *e );

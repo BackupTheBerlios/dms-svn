@@ -29,12 +29,13 @@
 namespace asaal
 {
 	DMSWorkSheet *dmsworksheet = NULL;
-	DMSWorkSheet::DMSWorkSheet( LibDMS *dms, QWidget *parent ) : QWidget( parent )
+	DMSWorkSheet::DMSWorkSheet( LibDMS *dms, QWorkspace *ws, QWidget *parent ) : QWidget( parent )
 	{
 		setupUi( this );
 		dmsworksheet = this;
 
 		_dms = dms;
+		_ws = ws;
 
 		connect( treeWidgetWorkSheet, SIGNAL( customContextMenuRequested( QPoint ) ), this, SLOT( treeWidgetWorkSheetMenu( QPoint ) ) );
 		connect( treeWidgetWorkSheet, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetWorkSheetItem( QTreeWidgetItem *, int ) ) );		
@@ -99,6 +100,11 @@ namespace asaal
 		}
 	}
 
+	void DMSWorkSheet::newDocument()
+	{
+		_dms->showDmsDocument( _ws );
+	}
+
 	void DMSWorkSheet::openDocument()
 	{
 		docItem = treeWidgetWorkSheet->currentItem();
@@ -130,7 +136,7 @@ namespace asaal
 		QFile docfile ( docItem->text( 1 ) );
 
 		QString question = QString( "" );
-		question += tr( "Would you like delete the document from database and harddisk?\n" );
+		question += tr( "Would you like delete the document from database and/or harddisk?\n" );
 		question += tr( "If you click 'Document from database' only the link from database and\n" );
 		question += tr( "the document from list will removed." );
 
@@ -164,10 +170,13 @@ namespace asaal
 
 		QPrinter printer( QPrinter::HighResolution );
 		printer.setOutputFormat( QPrinter::NativeFormat );
-		printer.setPageSize( QPrinter::A4 );		
+		printer.setPageSize( QPrinter::A4 );
+		printer.setFullPage( true );
+		printer.setDocName( docItem->text(0) );
 		
 
 		QPrintDialog *qpd = new QPrintDialog( &printer, this );
+		qpd->setWindowTitle( tr( "Print: " ) + docItem->text(0) );
 		if( qpd->exec() == QDialog::Accepted )
 		{
 			// code here for print document
@@ -175,16 +184,20 @@ namespace asaal
 	}
 
 	void DMSWorkSheet::createMenuAction()
-	{		
-		acOpenDoc = new QAction ( tr ( "Open document" ), this );
+	{
+		acNewDoc = new QAction( tr( "New document" ), this );
+		acNewDoc->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/documents_16.png" ) ) );
+		connect( acNewDoc, SIGNAL( triggered() ), this, SLOT( newDocument() ) );
+
+		acOpenDoc = new QAction( tr( "Open document" ), this );
 		acOpenDoc->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/folder-open_16.png" ) ) );
 		connect( acOpenDoc, SIGNAL( triggered() ), this, SLOT( openDocument() ) );
 
-		acDeleteDoc = new QAction ( tr ( "Delete document" ), this );
+		acDeleteDoc = new QAction( tr( "Delete document" ), this );
 		acDeleteDoc->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/trash_16.png" ) ) );
 		connect( acDeleteDoc, SIGNAL( triggered() ), this, SLOT( deleteDocument() ) );
 
-		acPrintDoc = new QAction ( tr ( "Print document" ), this );
+		acPrintDoc = new QAction( tr( "Print document" ), this );
 		acPrintDoc->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/print_16.png" ) ) );
 		connect( acPrintDoc, SIGNAL( triggered() ), this, SLOT( printDocument() ) );
 	}
@@ -196,20 +209,23 @@ namespace asaal
 	void DMSWorkSheet::treeWidgetWorkSheetMenu( QPoint point )
 	{		
 		docItem = treeWidgetWorkSheet->currentItem();
-		if( docItem == NULL )
-		{
-			showErrorMsg( tr( "No document was selected." ) );
-			return;
-		}
 
 		QMenu menu( this );
 		QMouseEvent *mevent = new QMouseEvent( QEvent::MouseButtonPress, point, Qt::RightButton, Qt::RightButton, Qt::NoModifier );
 
 		menu.clear();
 
-		menu.addAction( acOpenDoc );
-		menu.addAction( acDeleteDoc );
-		menu.addAction( acPrintDoc );
+		if( docItem == NULL )
+		{
+			menu.addAction( acNewDoc );
+		}
+		else
+		{
+			menu.addAction( acNewDoc );
+			menu.addAction( acOpenDoc );
+			menu.addAction( acDeleteDoc );
+			menu.addAction( acPrintDoc );
+		}
 
 		menu.exec( mevent->globalPos() );
 	}

@@ -1053,7 +1053,7 @@ namespace asaal
 	void LibDMS::showDmsWorkSheet( QWorkspace *ws )
 	{
 		if( !dmsworksheet ) {
-			dmsworksheet = new DMSWorkSheet( this );
+			dmsworksheet = new DMSWorkSheet( this, ws );
 			ws->addWindow( dmsworksheet );
 			dmsworksheet->show();
 		} else {			
