@@ -22,10 +22,12 @@
 #include <dmspreference.h>
 
 #include <libdms.h>
+#include <base64.h>
 #include <XMLPreferences.h>
 
 #include <QtCore>
 #include <QtGui>
+#include <QtSql>
 
 namespace asaal
 {
@@ -38,14 +40,11 @@ namespace asaal
 		_dms = dms;
 
 		connect( treeWidgetApplicationPref, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetApplicationPrefItem( QTreeWidgetItem *, int ) ) );
-		connect( comboBoxSqlScript, SIGNAL( currentIndexChanged( int ) ), this, SLOT( comboBoxSqlScriptCurrentIndexChanged( int ) ) );
 
 		connect( btnAdd, SIGNAL( clicked() ), this, SLOT( addApplication() ) );		
 		connect( btnUpdate, SIGNAL( clicked() ), this, SLOT( updateApplication() ) );
 		connect( btnRemove, SIGNAL( clicked() ), this, SLOT( removeApplication() ) );		
-		connect( btnCheckMySQLConnection, SIGNAL( clicked() ), this, SLOT( checkMySqlConnection() ) );
-		connect( btnCheckMsSQLConnection, SIGNAL( clicked() ), this, SLOT( checkMsSqlConnection() ) );
-		connect( btnExecuteSqlScript, SIGNAL( clicked() ), this, SLOT( executeSqlScript() ) );
+		connect( btnCheck, SIGNAL( clicked() ), this, SLOT( checkConnection() ) );
 		connect( btnSelectApplication, SIGNAL( clicked() ), this, SLOT( chooseApplication() ) );
 		connect( btnApply, SIGNAL( clicked() ), this, SLOT( savePreferences() ) );
 		connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
@@ -156,40 +155,6 @@ namespace asaal
 		comboBoxFileExtensions->setCurrentIndex( idx );
 	}
 
-	void DMSPreference::comboBoxSqlScriptCurrentIndexChanged( int index )
-	{
-		QString sqlScript = QString( "" );
-
-		switch ( index )
-		{
-
-			case 0: // My SQL Server 5.1 Script
-				sqlScript = QString( ":/database/sql/mysql.sql" );
-				break;
-
-			case 1: // MS SQL Server 2005 Script
-				sqlScript = QString( ":/database/sql/mssql.sql" );
-				break;
-
-			case 2: // SQLite Script
-				sqlScript = QString( ":/" );
-				break;
-		}
-
-		QFile sqlFile( sqlScript );
-
-		if ( !sqlFile.open( QIODevice::ReadOnly | QIODevice::Text ) )
-		{
-			textBrowserSqlScript->setText( tr( "<center><b>Can not read sql script.</b></center>" ) );
-			return;
-		}
-		
-		QString sql = sqlFile.readAll();
-		textBrowserSqlScript->setText( sql );
-
-		sqlFile.close();
-	}
-
 	void DMSPreference::showErrorMsg( const QString &error )
 	{
 		QMessageBox::critical( this, tr( "DMS - Preference" ), error );
@@ -200,18 +165,65 @@ namespace asaal
 		// TODO Save application and this file-exstansion settings
 		for ( int i = 0; i < treeWidgetApplicationPref->topLevelItemCount(); i++ )
 		{
+			qApp->processEvents();
+
 			appItem = treeWidgetApplicationPref->topLevelItem( i );
 
 			QString itemApp = appItem->text( 0 );
 			QString itemAppExt = appItem->text( 1 );
 			_dms->insertApplicationSettings( objectName(), "File associations", itemApp, itemAppExt );
 		}
+		
+		// TODO Save database settings		
+		if( lineEditHost->text().isEmpty() )
+		{
+			showErrorMsg( tr( "You must enter a valid host or ip address!" ) );
+			return;
+		}
+
+		if( spinBoxPort->value() <= 0 )
+		{
+			showErrorMsg( tr( "You must enter a valid port number!" ) );
+			return;
+		}
+
+		if( lineEditUser->text().isEmpty() )
+		{
+			showErrorMsg( tr( "You must enter a valid user name!" ) );
+			return;
+		}
+
+		if( comboBoxDatabase->currentText().isEmpty() || comboBoxDatabase->currentIndex() == -1 )
+		{
+			showErrorMsg( tr( "You must select a valid database!" ) );
+			return;
+		}
+		
+		QString file = QDir::homePath();
+
+		QDir pref( file + "/.dms/connection" );
+		if( !pref.exists() )
+			pref.mkpath( file + "/.dms/connection" );
+
+		file.append ( "/.dms/connection/mysql.xml" );
+
+		XMLPreferences dbsettings( "DMSMySqlConnection", "" );
+		dbsettings.setVersion( "0.1.0.0" );
+		dbsettings.setString( "MySqlConnection", "UserName", lineEditUser->text() );
+		dbsettings.setString( "MySqlConnection", "Password", Base64::encode( QVariant( lineEditPassword->text() ).toByteArray() ) );
+		dbsettings.setString( "MySqlConnection", "Database", comboBoxDatabase->currentText() );
+		dbsettings.setString( "MySqlConnection", "HostName", lineEditHost->text() );
+		dbsettings.setInt( "MySqlConnection", "Port", spinBoxPort->value() );
+		dbsettings.save( file );
 
 		// TODO Save plugin settings
+		// nothing to do at this time ...
 
 		// TODO Save skin settings
-
-		// TODO Save database settings
+		// nothing to do at this time ...
+		
+		// at the end, we are close the widget
+		closeWidget();
 	}
 
 	void DMSPreference::loadPreferences()
@@ -219,25 +231,74 @@ namespace asaal
 		// TODO Load widget geometry (location on screen only (center))
 		move( geometry().center().x() / 2, geometry().center().y() / 2 );
 
-		// TODO Load database settings
-
 		// TODO Load application and this file-exstansion settings
+		QMap< QString, QString> appFiles = _dms->getApplicationSettings( objectName(), "File associations" );
+		QMap< QString, QString>::const_iterator appIt = appFiles.begin();
+
+		while( appIt != appFiles.end() )
+		{
+			qApp->processEvents();
+
+			appItem = new QTreeWidgetItem( treeWidgetApplicationPref );
+			appItem->setText( 0, appIt.key() );
+			appItem->setText( 1, appIt.value() );
+			
+			++appIt;
+		}
+		
+		// TODO Load database settings
+		QString file = QDir::homePath();
+		file.append ( "/.dms/connection/mysql.xml" );
+
+		XMLPreferences dbsettings( "DMSMySqlConnection", "" );
+		dbsettings.setVersion( "0.1.0.0" );
+		dbsettings.load( file );
+
+		QString user = dbsettings.getString( "MySqlConnection", "UserName" );
+		QString upwd = QVariant( Base64::decode( dbsettings.getString( "MySqlConnection", "Password" ) ) ).toString();
+		QString host = dbsettings.getString( "MySqlConnection", "HostName" );
+		QString db = dbsettings.getString( "MySqlConnection", "Database" );
+		int port =  dbsettings.getInt( "MySqlConnection", "Port" );
+		
+	
+		lineEditUser->setText( user );
+		lineEditPassword->setText( upwd );
+		lineEditHost->setText( host );
+		spinBoxPort->setValue( port );
+		comboBoxDatabase->addItem( db );
+
+		upwd.clear();
+		user.clear();
+		host.clear();
+		port = 0;
 
 		// TODO Load plugin settings
+		// nothing to do at this time ...
 
 		// TODO Load skin settings
+		// nothing to do at this time ...
 	}
 
-	void DMSPreference::checkMySqlConnection()
+	void DMSPreference::checkConnection()
 	{
-	}
+		comboBoxDatabase->clear();
 
-	void DMSPreference::checkMsSqlConnection()
-	{
-	}
-
-	void DMSPreference::executeSqlScript()
-	{
+		QSqlQuery queryDatabases( "SHOW DATABASES;" );
+		if(queryDatabases.isActive())
+		{
+			while(queryDatabases.next())
+			{					
+				QSqlQuery queryDms( "SELECT USERNAME FROM " + queryDatabases.value( 0 ).toString() + ".USERS" );
+					
+				if( queryDms.isActive() )
+				{
+					comboBoxDatabase->addItem( queryDatabases.value( 0 ).toString() );
+						
+					QSqlDatabase::removeDatabase ( "available_db" );
+					return;
+				}
+			}	
+		}
 	}
 
 	void DMSPreference::closeWidget()

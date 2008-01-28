@@ -177,6 +177,16 @@ namespace asaal
 			 * @param defaultValue The default value of settings
 			 */
 			QVariant getApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QVariant &defaultValue = QVariant() );
+			
+			/*!
+			 * Get the application settings
+			 *
+			 * @param widgetname The widget name
+			 * @param section The section for application settings
+			 *
+			 * @return <a href="http://doc.trolltech.com/4.3/qmap.html#QMap">QMap</a><App, AppExt> with all application settings
+			 */
+			QMap<QString, QString> getApplicationSettings( const QString &widgetname, const QString &section );
 
 			/*!
 			* Get the error message, if exist.
@@ -378,6 +388,7 @@ namespace asaal
 			QMap<QString, QString> userList;
 			QMap<QString, QString> groupList;
 			QMap<QString, QString> documentList;
+			QMap<QString, QString> appSettList;
 
 	};
 

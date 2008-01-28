@@ -71,16 +71,12 @@ namespace asaal
 			void removeApplication();
 
 			void treeWidgetApplicationPrefItem( QTreeWidgetItem *, int );
-			void comboBoxSqlScriptCurrentIndexChanged( int );
 			void showErrorMsg( const QString &error );
 
 			void savePreferences();
 			void loadPreferences();
 
-			void checkMySqlConnection();
-			void checkMsSqlConnection();
-			void executeSqlScript();
-			
+			void checkConnection();
 			void closeWidget();
 
 		private:

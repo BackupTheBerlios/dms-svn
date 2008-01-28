@@ -72,9 +72,6 @@
      <property name="viewMode" >
       <enum>QListView::IconMode</enum>
      </property>
-     <property name="wordWrap" >
-      <bool>true</bool>
-     </property>
      <property name="currentRow" >
       <number>0</number>
      </property>
@@ -154,13 +151,8 @@
        <item row="1" column="0" >
         <widget class="QComboBox" name="comboBoxDatabaseSettings" >
          <property name="currentIndex" >
-          <number>1</number>
+          <number>0</number>
          </property>
-         <item>
-          <property name="text" >
-           <string>Setup database</string>
-          </property>
-         </item>
          <item>
           <property name="text" >
            <string>Manage MySQL Server 5.1 connection</string>
@@ -168,112 +160,58 @@
          </item>
         </widget>
        </item>
+       <item row="3" column="0" >
+        <widget class="QLabel" name="labelManageConnectionInfo" >
+         <property name="palette" >
+          <palette>
+           <active>
+            <colorrole role="WindowText" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>255</red>
+               <green>0</green>
+               <blue>0</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </active>
+           <inactive>
+            <colorrole role="WindowText" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>255</red>
+               <green>0</green>
+               <blue>0</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </inactive>
+           <disabled>
+            <colorrole role="WindowText" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>118</red>
+               <green>116</green>
+               <blue>108</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </disabled>
+          </palette>
+         </property>
+         <property name="text" >
+          <string>If you change this settings, you must restart the application for apply the settings.</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="0" >
         <widget class="QStackedWidget" name="stackedWidgetDatabaseSettings" >
          <property name="currentIndex" >
-          <number>1</number>
+          <number>0</number>
          </property>
-         <widget class="QWidget" name="pageSetupDatabase" >
-          <layout class="QGridLayout" >
-           <item row="0" column="0" >
-            <layout class="QHBoxLayout" >
-             <item>
-              <widget class="QLabel" name="labelSqlScript" >
-               <property name="enabled" >
-                <bool>false</bool>
-               </property>
-               <property name="minimumSize" >
-                <size>
-                 <width>110</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>110</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>SQL Script:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QComboBox" name="comboBoxSqlScript" >
-               <property name="enabled" >
-                <bool>false</bool>
-               </property>
-               <item>
-                <property name="text" >
-                 <string>MySQL Server 5.1 Script</string>
-                </property>
-               </item>
-               <item>
-                <property name="text" >
-                 <string>MS SQL Server 2005 Script</string>
-                </property>
-               </item>
-               <item>
-                <property name="text" >
-                 <string>SQLite Script</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="1" column="0" >
-            <widget class="QTextBrowser" name="textBrowserSqlScript" >
-             <property name="enabled" >
-              <bool>false</bool>
-             </property>
-             <property name="openLinks" >
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0" >
-            <layout class="QHBoxLayout" >
-             <item>
-              <widget class="QPushButton" name="btnExecuteSqlScript" >
-               <property name="enabled" >
-                <bool>false</bool>
-               </property>
-               <property name="minimumSize" >
-                <size>
-                 <width>110</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="maximumSize" >
-                <size>
-                 <width>110</width>
-                 <height>26</height>
-                </size>
-               </property>
-               <property name="text" >
-                <string>&amp;Execute</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer>
-               <property name="orientation" >
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" >
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
          <widget class="QWidget" name="pageManageMySqlConnection" >
           <layout class="QGridLayout" >
            <item row="0" column="0" >
@@ -324,7 +262,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditMySQLHost" />
+              <widget class="QLineEdit" name="lineEditHost" />
              </item>
              <item>
               <widget class="QLabel" name="labelMySQLPort" >
@@ -379,7 +317,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditMySQLUser" />
+              <widget class="QLineEdit" name="lineEditUser" />
              </item>
             </layout>
            </item>
@@ -405,14 +343,14 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditMySQLPassword" >
+              <widget class="QLineEdit" name="lineEditPassword" >
                <property name="echoMode" >
                 <enum>QLineEdit::Password</enum>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="btnCheckMySQLConnection" >
+              <widget class="QPushButton" name="btnCheck" >
                <property name="minimumSize" >
                 <size>
                  <width>26</width>
@@ -457,7 +395,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBoxMySQLDatabase" />
+              <widget class="QComboBox" name="comboBoxDatabase" />
              </item>
             </layout>
            </item>
@@ -476,218 +414,6 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="pageManageMsSqlConnection" >
-          <layout class="QGridLayout" >
-           <item row="0" column="0" >
-            <widget class="QLabel" name="labelMsSqlMessage" >
-             <property name="text" >
-              <string>Connect to a MS SQL Server 2005  database...</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" >
-            <widget class="Line" name="lineMsSQL" >
-             <property name="orientation" >
-              <enum>Qt::Horizontal</enum>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0" >
-            <layout class="QGridLayout" >
-             <item row="0" column="0" >
-              <layout class="QHBoxLayout" >
-               <item>
-                <widget class="QLabel" name="labelMsSQLHost" >
-                 <property name="minimumSize" >
-                  <size>
-                   <width>110</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize" >
-                  <size>
-                   <width>110</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text" >
-                  <string>Server:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEditMsSQLHost" />
-               </item>
-              </layout>
-             </item>
-             <item row="1" column="0" >
-              <layout class="QHBoxLayout" >
-               <item>
-                <widget class="QLabel" name="labelMsSQLUser" >
-                 <property name="minimumSize" >
-                  <size>
-                   <width>110</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize" >
-                  <size>
-                   <width>110</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text" >
-                  <string>Username:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEditMsSQLUser" />
-               </item>
-              </layout>
-             </item>
-             <item row="2" column="0" >
-              <layout class="QHBoxLayout" >
-               <item>
-                <widget class="QLabel" name="labelMsSQLPassword" >
-                 <property name="minimumSize" >
-                  <size>
-                   <width>110</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize" >
-                  <size>
-                   <width>110</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text" >
-                  <string>Password:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEditMsSQLPassword" >
-                 <property name="echoMode" >
-                  <enum>QLineEdit::Password</enum>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="btnCheckMsSQLConnection" >
-                 <property name="minimumSize" >
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize" >
-                  <size>
-                   <width>26</width>
-                   <height>26</height>
-                  </size>
-                 </property>
-                 <property name="text" >
-                  <string/>
-                 </property>
-                 <property name="icon" >
-                  <iconset resource="../../resource/dms.qrc" >:/picture/16/images/16x16/reload_16.png</iconset>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="3" column="0" >
-              <layout class="QHBoxLayout" >
-               <item>
-                <widget class="QLabel" name="labelMsSQLDatabase" >
-                 <property name="minimumSize" >
-                  <size>
-                   <width>110</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize" >
-                  <size>
-                   <width>110</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text" >
-                  <string>Database:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBoxMsSQLDatabase" />
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </item>
-           <item row="3" column="0" >
-            <spacer>
-             <property name="orientation" >
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" >
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-       <item row="3" column="0" >
-        <widget class="QLabel" name="labelManageConnectionInfo" >
-         <property name="palette" >
-          <palette>
-           <active>
-            <colorrole role="WindowText" >
-             <brush brushstyle="SolidPattern" >
-              <color alpha="255" >
-               <red>255</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </active>
-           <inactive>
-            <colorrole role="WindowText" >
-             <brush brushstyle="SolidPattern" >
-              <color alpha="255" >
-               <red>255</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </inactive>
-           <disabled>
-            <colorrole role="WindowText" >
-             <brush brushstyle="SolidPattern" >
-              <color alpha="255" >
-               <red>118</red>
-               <green>116</green>
-               <blue>108</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </disabled>
-          </palette>
-         </property>
-         <property name="text" >
-          <string>If you change this settings, you must restart the application for apply the settings.</string>
-         </property>
-         <property name="alignment" >
-          <set>Qt::AlignCenter</set>
-         </property>
         </widget>
        </item>
       </layout>

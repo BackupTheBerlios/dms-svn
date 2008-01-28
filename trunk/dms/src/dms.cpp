@@ -76,62 +76,9 @@ namespace asaal
 
 	void DMSystem::login()
 	{
-#ifdef Q_OS_WIN32
-		
-		QSettings *msSqlServerSettings = new QSettings( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Microsoft SQL Server\\90\\Machines", QSettings::NativeFormat );
-		QString origMachineName = msSqlServerSettings->value( "OriginalMachineName", QString( "" ) ).toString();
-		delete msSqlServerSettings;
-
-		QSettings *mySqlServerSettings = new QSettings( "HKEY_LOCAL_MACHINE\\SOFTWARE\\MySQL AB\\MySQL Server 5.1", QSettings::NativeFormat );
-		QString mySqlVersion = mySqlServerSettings->value( "Version", QString( "" ) ).toString();
-		delete mySqlServerSettings;
-
-		QSettings *accessSqlServerSettings = new QSettings( "HKEY_CURRENT_USER\\Software\\Microsoft\\Office\\11.0\\Access", QSettings::NativeFormat );
-		QString accessName = accessSqlServerSettings->value( "AccessName", QString( "" ) ).toString();
-		delete accessSqlServerSettings;
-
-		QString file = QDir::homePath();
-		file.append ( "/.dms/connection/mysql.xml" );
-		if( QFile::exists( file ) )
-		{
-			ldms->showDmsMySqlConnection();
-			goto LABEL_DISPLAY;
-		}
-
-		file.clear();
-		file = QDir::homePath();
-		file.append( "/.dms/connection/mssql.xml" );
-		if( QFile::exists( file ) )
-		{
-			ldms->showDmsMsSqlConnection();
-			goto LABEL_DISPLAY;
-		}
-			
-		if( !origMachineName.isEmpty() && !mySqlVersion.isEmpty() && !accessName.isEmpty() )
-		{
-			ldms->showDmsDatabaseSelection();
-		}
-		else if( !origMachineName.isEmpty() && mySqlVersion.isEmpty() && accessName.isEmpty() )
-		{
-			ldms->showDmsMsSqlConnection();
-		}
-		else if( origMachineName.isEmpty() && !mySqlVersion.isEmpty() && accessName.isEmpty() )
-		{
-			ldms->showDmsMySqlConnection();
-		}
-		else if( origMachineName.isEmpty() && mySqlVersion.isEmpty() && !accessName.isEmpty() )
-		{
-			//code here to connect to the access database
-		}
-		else if( origMachineName.isEmpty() && mySqlVersion.isEmpty() && accessName.isEmpty() )
-		{
-			// code here to display a message (database not found) or use sqlite
-		}
-#else
-		// TODO code her for using MySQL and SQLite3
+		// TODO code her for using MySQL or SQLite3
 		ldms->showDmsMySqlConnection();
-#endif
-LABEL_DISPLAY:
+
 		if ( ldms->isConnectionAvailabel( ldms->getUserId( ldms->loggedUser ) ) )
 		{
 			deactivateMenus( true );

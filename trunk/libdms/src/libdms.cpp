@@ -353,7 +353,7 @@ namespace asaal
 	}
 	
 	QString LibDMS::getGroupId( const QString &groupname )
-	{		
+	{
 		QString sqlGroupIdQuery = QString( "" );
 		sqlGroupIdQuery = "SELECT GID FROM GROUPS WHERE GROUPNAME = '" + groupname + "'";
 
@@ -371,7 +371,58 @@ namespace asaal
 	
 	QVariant LibDMS::getApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QVariant &defaultValue )
 	{
+		QString sqlAppSettingQuery = QString( "" );
+		sqlAppSettingQuery += "SELECT SETT_VALUE\n";
+		sqlAppSettingQuery += "FROM SETTINGS\n";
+		sqlAppSettingQuery += "WHERE\n";
+		sqlAppSettingQuery += "SETT_WIDGET_NAME = '" + widgetname + "' AND\n";
+		sqlAppSettingQuery += "SETT_SECTION = '" + section + "' AND\n";
+		sqlAppSettingQuery += "SETT_KEY = '" + key + "'";
+
+		QSqlQuery queryAppSettings( m_qsqld );
+		queryAppSettings.exec( sqlAppSettingQuery );
+		if( queryAppSettings.isActive() )
+		{
+			while( queryAppSettings.next() )
+			{
+				qApp->processEvents();
+
+				if( !queryAppSettings.value( 0 ).isNull() )
+					return queryAppSettings.value( 0 );
+			}
+		}
+		else
+			errorMessage = queryAppSettings.lastError().text();
+
 		return defaultValue;
+	}
+	
+	QMap<QString, QString> LibDMS::getApplicationSettings( const QString &widgetname, const QString &section )
+	{
+		appSettList.clear();
+
+		QString sqlAppSettingQuery = QString( "" );
+		sqlAppSettingQuery = "SELECT SETT_KEY, SETT_VALUE FROM SETTINGS WHERE SETT_WIDGET_NAME = '" + widgetname + "' AND SETT_SECTION = '" + section + "'";
+
+		QSqlQuery queryAppSettings( m_qsqld );
+		queryAppSettings.exec( sqlAppSettingQuery );
+
+		if( queryAppSettings.isActive() )
+		{
+			while( queryAppSettings.next() )
+			{
+				qApp->processEvents();
+
+				QString app = queryAppSettings.value( 0 ).toString();
+ 				QString appExt = queryAppSettings.value( 1 ).toString();
+
+				appSettList.insert( app, appExt );
+			}
+		}
+		else
+			errorMessage = queryAppSettings.lastError().text();
+
+		return appSettList;
 	}
 
 	void LibDMS::insertUser( const QString &userId, const QString &username, const QString &userpwd, const QString &vname, const QString &nname )
