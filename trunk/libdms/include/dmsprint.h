@@ -48,7 +48,11 @@ namespace asaal
 		public:
 			DMSPrint( LibDMS *dms, const QString &document, QObject *parent = 0L );
 			inline virtual ~DMSPrint() {}
-
+			
+		public slots:
+			void printDocument();
+			void printDocument( const QString &document );
+		
 		private:
 			LibDMS *_dms;
 			QObject *p_obj;

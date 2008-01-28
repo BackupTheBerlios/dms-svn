@@ -167,20 +167,6 @@ namespace asaal
 			showErrorMsg( tr( "No document was selected." ) );
 			return;
 		}
-
-		QPrinter printer( QPrinter::HighResolution );
-		printer.setOutputFormat( QPrinter::NativeFormat );
-		printer.setPageSize( QPrinter::A4 );
-		printer.setFullPage( true );
-		printer.setDocName( docItem->text(0) );
-		
-
-		QPrintDialog *qpd = new QPrintDialog( &printer, this );
-		qpd->setWindowTitle( tr( "Print: " ) + docItem->text(0) );
-		if( qpd->exec() == QDialog::Accepted )
-		{
-			// code here for print document
-		}
 	}
 
 	void DMSWorkSheet::createMenuAction()
