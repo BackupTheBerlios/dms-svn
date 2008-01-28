@@ -26,7 +26,6 @@
 #include <ui_preference.h>
 
 #include <libdms.h>
-#include <XMLPreferences.h>
 
 #include <QtCore>
 #include <QtGui>
@@ -66,6 +65,7 @@ namespace asaal
 			static DMSPreference *dmspreference_instance() { return dmspreference; }
 
 		private slots:
+			void chooseApplication();
 			void addApplication();
 			void updateApplication();
 			void removeApplication();
