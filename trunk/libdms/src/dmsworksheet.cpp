@@ -167,6 +167,12 @@ namespace asaal
 			showErrorMsg( tr( "No document was selected." ) );
 			return;
 		}
+
+#ifdef Q_OS_WIN32
+		;
+#else
+		;
+#endif
 	}
 
 	void DMSWorkSheet::createMenuAction()
