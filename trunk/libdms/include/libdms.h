@@ -306,13 +306,6 @@ namespace asaal
 			void showDmsDocument( QWorkspace *ws );
 
 			/*!
-			* Show the document preview widget
-			*
-			* @param ws The Workspace to add this widget
-			*/
-			void showDmsDocumentPreview( QWorkspace *ws );
-
-			/*!
 			* Show MySQL Server Connection Assistant
 			*/
 			void showDmsMySqlConnection();

@@ -29,7 +29,6 @@
 #include <dmsmssqlconnection.h>
 #include <dmsmysqlconnection.h>
 #include <dmspreference.h>
-#include <dmspreview.h>
 #include <dmsuser.h>
 #include <dmsworksheet.h>
 
@@ -841,17 +840,6 @@ namespace asaal
 			dmsdocument->show();
 		} else {			
 			dmsdocument->setFocus( Qt::ActiveWindowFocusReason );
-		}
-	}
-
-	void LibDMS::showDmsDocumentPreview( QWorkspace *ws )
-	{
-		if( !dmspreview ) {
-			dmspreview = new DMSPreview( this );
-			ws->addWindow( dmspreview );
-			dmspreview->show();
-		} else {			
-			dmspreview->setFocus( Qt::ActiveWindowFocusReason );
 		}
 	}
 
