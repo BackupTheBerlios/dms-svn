@@ -47,6 +47,8 @@ namespace asaal
 
 		loadGroups();
 		newGroupId();
+
+		_dms->clearErrorMessage();
 	}
 
 	DMSGroup::~DMSGroup()

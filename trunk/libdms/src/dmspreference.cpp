@@ -50,6 +50,8 @@ namespace asaal
 		connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
 
 		loadPreferences();
+
+		_dms->clearErrorMessage();
 	}
 
 	DMSPreference::~DMSPreference()

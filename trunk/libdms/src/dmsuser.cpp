@@ -50,6 +50,8 @@ namespace asaal
 		lineEditUserId->setText( QUuid::createUuid().toString().replace( "-", "" ).replace( "{", "" ).replace( "}", "" ) );
 
 		loadUser();
+
+		_dms->clearErrorMessage();
 	}
 
 	DMSUser::~DMSUser()

@@ -52,6 +52,7 @@ namespace asaal
 		docId = QString( "" );
 
 		sqlDriver.clear();
+		clearErrorMessage();
 	}
 
 	bool LibDMS::login( const QString &userId, const QString &userPwd )

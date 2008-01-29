@@ -51,6 +51,8 @@ namespace asaal
 		loadDocuments();
 
 		newDocumentId();
+
+		_dms->clearErrorMessage();
 	}
 
 	DMSDocument::~DMSDocument()

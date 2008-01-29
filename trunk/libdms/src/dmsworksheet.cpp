@@ -43,6 +43,7 @@ namespace asaal
 		createMenuAction();
 		loadDocuments();
 
+		_dms->clearErrorMessage();
 	}
 
 	DMSWorkSheet::~DMSWorkSheet()

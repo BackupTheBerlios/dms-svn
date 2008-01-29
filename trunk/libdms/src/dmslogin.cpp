@@ -45,6 +45,8 @@ namespace asaal
 		int top = ( rect.height() - height() ) / 2;
 		setGeometry( left, top, width(), height() );
 		setModal( true );
+
+		_dms->clearErrorMessage();
 	}
 
 	DMSLogin::~DMSLogin()
