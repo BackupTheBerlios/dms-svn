@@ -1,4 +1,68 @@
 ------------------------------------------------------------------------
+r55 | chmaster | 2008-01-29 17:38:16 +0100 (Di, 29 Jan 2008) | 2 lines
+
+* fixed problem with display the error message again
+   * if you call a new widget the error message is cleared
+------------------------------------------------------------------------
+r54 | chmaster | 2008-01-29 16:05:37 +0100 (Di, 29 Jan 2008) | 1 line
+
+* update vc++ project files
+------------------------------------------------------------------------
+r53 | chmaster | 2008-01-28 22:53:27 +0100 (Mo, 28 Jan 2008) | 2 lines
+
+* update german language file
+* update worksheet (print document is not complete...)
+------------------------------------------------------------------------
+r52 | chmaster | 2008-01-28 22:35:07 +0100 (Mo, 28 Jan 2008) | 3 lines
+
+* removed unused code (ec.: MS SQL 2005 support, ....) from preferenc.ui
+* preferences are saved and loaded
+* add new funktion to libdms.h/cpp (get the app settings as QMap<QString, QString> or QVariant)
+------------------------------------------------------------------------
+r51 | chmaster | 2008-01-28 20:41:10 +0100 (Mo, 28 Jan 2008) | 1 line
+
+* fixed problem (i removed a wrong file, sorry)
+------------------------------------------------------------------------
+r50 | chmaster | 2008-01-28 20:29:57 +0100 (Mo, 28 Jan 2008) | 1 line
+
+
+------------------------------------------------------------------------
+r49 | chmaster | 2008-01-28 20:29:43 +0100 (Mo, 28 Jan 2008) | 1 line
+
+
+------------------------------------------------------------------------
+r48 | chmaster | 2008-01-28 20:15:10 +0100 (Mo, 28 Jan 2008) | 1 line
+
+* removed unused class
+------------------------------------------------------------------------
+r47 | chmaster | 2008-01-28 20:13:19 +0100 (Mo, 28 Jan 2008) | 1 line
+
+* not needed :)
+------------------------------------------------------------------------
+r46 | chmaster | 2008-01-28 20:12:43 +0100 (Mo, 28 Jan 2008) | 1 line
+
+* not needed :)
+------------------------------------------------------------------------
+r45 | chmaster | 2008-01-28 20:11:52 +0100 (Mo, 28 Jan 2008) | 1 line
+
+
+------------------------------------------------------------------------
+r44 | chmaster | 2008-01-27 22:11:37 +0100 (So, 27 Jan 2008) | 1 line
+
+
+------------------------------------------------------------------------
+r43 | chmaster | 2008-01-27 19:18:18 +0100 (So, 27 Jan 2008) | 5 lines
+
+* you can now add your favorite application to open the document in the setting widget
+* you can now open the document in the worksheet
+* disable mssql 2005 server support in the future
+* add sqlite support in the future
+* update kdevelop project file
+------------------------------------------------------------------------
+r42 | chmaster | 2008-01-27 01:22:42 +0100 (So, 27 Jan 2008) | 1 line
+
+* update changelog file
+------------------------------------------------------------------------
 r41 | chmaster | 2008-01-27 01:21:24 +0100 (So, 27 Jan 2008) | 3 lines
 
 * add functionality to open a document with your favorite application (not testet - it comming soon)
