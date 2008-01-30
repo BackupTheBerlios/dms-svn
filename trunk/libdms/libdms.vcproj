@@ -229,6 +229,10 @@
 				>
 			</File>
 			<File
+				RelativePath="src\dmsmailaction.cpp"
+				>
+			</File>
+			<File
 				RelativePath="src\dmsmssqlconnection.cpp"
 				>
 			</File>
@@ -375,6 +379,32 @@
 						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DASAAL_MAKEDLL -DWINDOWS -DQT_DLL -DQT_NO_DEBUG -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;ui&quot; -I&quot;base64&quot; -I&quot;xmlpref&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\build\libdms\win\moc&quot; -I&quot;..\build\libdms\win\ui&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmslogin.h -o ..\build\libdms\win\moc\moc_dmslogin.cpp&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;include\dmslogin.h"
 						Outputs="..\build\libdms\win\moc\moc_dmslogin.cpp"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="include\dmsmailaction.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC include\dmsmailaction.h"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DASAAL_MAKEDLL -DWINDOWS -DQT_DLL -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;ui&quot; -I&quot;base64&quot; -I&quot;xmlpref&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\build\libdms\win\moc&quot; -I&quot;..\build\libdms\win\ui&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmsmailaction.h -o ..\build\libdms\win\moc\moc_dmsmailaction.cpp&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;include\dmsmailaction.h"
+						Outputs="..\build\libdms\win\moc\moc_dmsmailaction.cpp"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC include\dmsmailaction.h"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DASAAL_MAKEDLL -DWINDOWS -DQT_DLL -DQT_NO_DEBUG -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;ui&quot; -I&quot;base64&quot; -I&quot;xmlpref&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\build\libdms\win\moc&quot; -I&quot;..\build\libdms\win\ui&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmsmailaction.h -o ..\build\libdms\win\moc\moc_dmsmailaction.cpp&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;include\dmsmailaction.h"
+						Outputs="..\build\libdms\win\moc\moc_dmsmailaction.cpp"
 					/>
 				</FileConfiguration>
 			</File>
@@ -566,6 +596,10 @@
 			</File>
 			<File
 				RelativePath="..\build\libdms\win\moc\moc_dmslogin.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\build\libdms\win\moc\moc_dmsmailaction.cpp"
 				>
 			</File>
 			<File
