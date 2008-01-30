@@ -32,11 +32,9 @@ namespace asaal
 		_attachment = QString( "" );
 	}
 
-	DMSMailAction::~DMSMailAction()	{}
-
-	QString DMSMailAction::getSubject() { return _subject; )
-	QString DMSMailAction::getMessage() { return _message; )
-	QString DMSMailAction::getAttachment() { return _attachment; )
+	QString DMSMailAction::getSubject() { return _subject; }
+	QString DMSMailAction::getMessage() { return _message; }
+	QString DMSMailAction::getAttachment() { return _attachment; }
 
 	void DMSMailAction::setSubject( const QString &subject ) { _subject = subject; }
 	void DMSMailAction::setMessage( const QString &message ) { _message = message; }

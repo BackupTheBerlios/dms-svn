@@ -55,17 +55,6 @@ namespace asaal
 	{
 		QString file = QDir::homePath();
 
-		QDir pref( file + "/.dms/settings" );
-		if( !pref.exists() )
-			pref.mkpath( file + "/.dms/settings" );
-
-		file.append ( "/.dms/settings/" + objectName() + ".xml" );
-
-		XMLPreferences widgetSettings( objectName() );
-		widgetSettings.setVersion( "1.0" );
-		widgetSettings.setPoint( objectName(), this->pos() );
-		widgetSettings.save( file );
-
 		dmsworksheet = NULL;
 		e->accept();
 	}
