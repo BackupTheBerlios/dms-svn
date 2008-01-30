@@ -1101,6 +1101,24 @@ namespace asaal
 		}
 	}
 
+	void LibDMS::sendMail( const QString &email, const QString &subject, const QString &attachment, const QString &message )
+	{
+		if( email.isEmpty() || email.isNull() )
+		{
+			errorMessage = tr( "" );
+			return;
+		}
+
+		QUrl url("mailto:" + email + "?subject=" + subject + "&body=" + message + "&attachment=" + attachment );
+		QDesktopServices::setUrlHandler("mailto:", this, "sendMail");
+
+		if( !QDesktopServices::openUrl( url ) )
+			errorMessage = tr( "No e-Mail client on your system was found!" );
+
+		QDesktopServices::unsetUrlHandler("mailto:");
+		
+	}
+
 	bool LibDMS::isUserAvailabel( const QString &userId, const QString &username )
 	{
 		QString sqlIsUserAvailableQuery = QString( "" );

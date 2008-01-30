@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2007 by Alexander Saal                                  *
+ *   Copyright (C) 2008 by Alexander Saal                                  *
  *   alex.saal@gmx.de                                                      *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -18,37 +18,24 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#ifndef DMSWORKSHEET_H
-#define DMSWORKSHEET_H
+#ifndef DMSMAILACTION_H
+#define DMSMAILACTION_H
 
 #include <dllexport.h>
-
-#include <ui_worksheet.h>
-
-#include <libdms.h>
-#include <dmsmailaction.h>
 
 #include <QtCore>
 #include <QtGui>
 
 namespace asaal
 {
-	class EXPORT_ASAAL DMSWorkSheet;
-
-	#ifdef Q_OS_WIN32
-		extern EXPORT_ASAAL DMSWorkSheet *dmsworksheet;
-	#else
-		extern DMSWorkSheet *dmsworksheet;
-	#endif
-
 	/*!
 	* @author Alexander Saal <alex.saal@gmx.de>
 	* @sa http://chmaster.freeforge.net
-	* @date 2007/12/04
+	* @date 2008/01/30
 	* @version 0.1.0.0
 	* @since 0.1.0.0
 	*/
-	class EXPORT_ASAAL DMSWorkSheet : public QWidget, public Ui::UiWorkSheetBase {
+	class EXPORT_ASAAL DMSMailAction : public QAction {
 
 		Q_OBJECT
 
@@ -57,52 +44,53 @@ namespace asaal
 		Q_CLASSINFO("URL", "http://chmaster.freeforge.net")
 
 		public:
-			DMSWorkSheet( LibDMS *dms, QWorkspace *ws, QWidget *parent = 0L );
-			~DMSWorkSheet();
+			DMSMailAction( const QString &acText, QObject *parent );
+			inline virtual ~DMSMailAction() {}
 
-			static DMSWorkSheet *dmsworksheet_instance() { return dmsworksheet; }
+			/*!
+			 * Get the subject for this eMail
+			 */
+			QString getSubject();
 
-		private slots:
-			void loadDocuments();
-			void newDocument();
-			void openDocument();
-			void deleteDocument();
-			void printDocument();
-			void sendMail();
+			/*!
+			 * Get the message for this eMail
+			 */
+			QString getMessage();
 
-			void createMenuAction();
+			/*!
+			 * Get the attachment for this eMail
+			 */
+			QString getAttachment();
 
-			void treeWidgetWorkSheetItem( QTreeWidgetItem *, int );
-			void treeWidgetWorkSheetMenu( QPoint );
-			void showErrorMsg( const QString &error );
+		public slots:
 
-			QTreeWidgetItem *getGroupItem( const QString &groupname );
-
-			void closeWidget();
+			/*!
+			 * Set the subject for this eMail
+			 *
+			 * @param subject The subject
+			 */
+			void setSubject( const QString &subject );
+			
+			/*!
+			 * Set the message for this eMail
+			 *
+			 * @param message The message
+			 */
+			void setMessage( const QString &message );
+			
+			/*!
+			 * Set the attachment for this eMail
+			 *
+			 * @param attachment The attachment
+			 */
+			void setAttachment( const QString &attachment = QString( "" ) );
 
 		private:
-			bool isGroupAvailabel( const QString &groupname );
-
-			LibDMS *_dms;
-			QWorkspace *_ws;
-			
-			QMap<QString, QString> documents;
-
-			QTreeWidgetItem *docItem;
-			QTreeWidgetItem *groupItem;
-
-			QMenu *mnuMail;
-
-			QAction *acNewDoc;
-			QAction *acOpenDoc;
-			DMSMailAction *acSendMail;
-			QAction *acDeleteDoc;
-			QAction *acPrintDoc;
-
-		protected:
-			void closeEvent( QCloseEvent *e );
+			QString _subject;
+			QString _message;
+			QString _attachment;
 
 	};
 }
 
-#endif // DMSWORKSHEET_H
+#endif // DMSMAILACTION_H

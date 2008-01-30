@@ -66,7 +66,7 @@
      <property name="gridSize" >
       <size>
        <width>128</width>
-       <height>100</height>
+       <height>80</height>
       </size>
      </property>
      <property name="viewMode" >
@@ -89,6 +89,14 @@
       </property>
       <property name="icon" >
        <iconset resource="../../resource/dms.qrc" >:/picture/32/images/32x32/documents_32.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text" >
+       <string>e-Mail</string>
+      </property>
+      <property name="icon" >
+       <iconset resource="../../resource/dms.qrc" >:/picture/32/images/32x32/mail_32.png</iconset>
       </property>
      </item>
      <item>
@@ -573,7 +581,7 @@
           <item row="3" column="0" colspan="2" >
            <layout class="QHBoxLayout" >
             <item>
-             <widget class="QPushButton" name="btnAdd" >
+             <widget class="QPushButton" name="btnAddApplication" >
               <property name="minimumSize" >
                <size>
                 <width>110</width>
@@ -592,7 +600,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btnUpdate" >
+             <widget class="QPushButton" name="btnUpdateApplication" >
               <property name="minimumSize" >
                <size>
                 <width>110</width>
@@ -611,7 +619,168 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="btnRemove" >
+             <widget class="QPushButton" name="btnRemoveApplication" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>&amp;Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" >
+               <size>
+                <width>91</width>
+                <height>26</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="pageEMail" >
+      <layout class="QGridLayout" >
+       <item row="0" column="0" >
+        <widget class="QLabel" name="labelPlugins_2" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>16777215</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="font" >
+          <font>
+           <pointsize>13</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::Panel</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="text" >
+          <string>e-Mail</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QGroupBox" name="groupBoxMailAddress" >
+         <property name="title" >
+          <string>Addresses</string>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="labelMailAddress" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Address:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditMailAddress" >
+              <property name="text" >
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QTreeWidget" name="treeWidgetMailAddress" >
+            <property name="rootIsDecorated" >
+             <bool>false</bool>
+            </property>
+            <column>
+             <property name="text" >
+              <string>e-Mail</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item row="2" column="0" >
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QPushButton" name="btnAddMailAddress" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>A&amp;dd</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnUpdateMailAddress" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>&amp;Update</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnRemoveMailAddress" >
               <property name="minimumSize" >
                <size>
                 <width>110</width>
@@ -810,8 +979,8 @@
   <tabstop>listWidgetPreferences</tabstop>
   <tabstop>btnSelectApplication</tabstop>
   <tabstop>treeWidgetApplicationPref</tabstop>
-  <tabstop>btnAdd</tabstop>
-  <tabstop>btnRemove</tabstop>
+  <tabstop>btnAddApplication</tabstop>
+  <tabstop>btnRemoveApplication</tabstop>
   <tabstop>btnApply</tabstop>
   <tabstop>btnCancel</tabstop>
   <tabstop>lineEditApplication</tabstop>

@@ -347,6 +347,17 @@ namespace asaal
 			void showDmsWorkSheet( QWorkspace *ws );
 
 			/*!
+			* Send email (a simple solution, not the best but is enough)
+			* We are use your mail client on you system.
+			*
+			* @param email The e-Mail address
+			* @param subject The subject for this e-Mail (optional)
+			* @param attachment The attachment for this e-Mail (optional)
+			* @param message The message for this e-Mail (optional)
+			*/
+			void sendMail( const QString &email, const QString &subject = QString(""), const QString &attachment = QString(""), const QString &message = QString("") );
+
+			/*!
 			* Clear error message ...
 			*/
 			void clearErrorMessage() { errorMessage = QString( "" ); }

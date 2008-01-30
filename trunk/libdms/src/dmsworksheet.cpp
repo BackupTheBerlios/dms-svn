@@ -21,7 +21,7 @@
 #include <dmsworksheet.h>
 
 #include <libdms.h>
-#include <XMLPreferences.h>
+#include <dmsmailaction.h>
 
 #include <QtCore>
 #include <QtGui>
@@ -178,6 +178,8 @@ namespace asaal
 
 	void DMSWorkSheet::createMenuAction()
 	{
+		mnuMail = new QMenu( tr( "Send document via eMail" ), this );
+
 		acNewDoc = new QAction( tr( "New document" ), this );
 		acNewDoc->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/documents_16.png" ) ) );
 		connect( acNewDoc, SIGNAL( triggered() ), this, SLOT( newDocument() ) );
@@ -195,6 +197,12 @@ namespace asaal
 		connect( acPrintDoc, SIGNAL( triggered() ), this, SLOT( printDocument() ) );
 	}
 
+	void DMSWorkSheet::sendMail()
+	{
+		DMSMailAction *mail = qobject_cast<DMSMailAction*>( sender() );
+		_dms->sendMail( mail->text(), mail->getSubject(), mail->getAttachment(), mail->getMessage() );
+	}
+
 	void DMSWorkSheet::treeWidgetWorkSheetItem( QTreeWidgetItem *item, int column )
 	{
 	}
@@ -208,6 +216,9 @@ namespace asaal
 
 		menu.clear();
 
+		if( acSendMail )
+			delete acSendMail;
+		
 		if( docItem == NULL )
 		{
 			menu.addAction( acNewDoc );
@@ -216,6 +227,30 @@ namespace asaal
 		{
 			menu.addAction( acNewDoc );
 			menu.addAction( acOpenDoc );
+
+			QMap<QString, QString> mails = _dms->getApplicationSettings( "UiPreferenceBase", "Mails" );
+			if( mails.size() >= 1 )
+			{
+				QMap<QString, QString>::const_iterator mailIt = mails.begin();
+				while( mailIt != mails.end() )
+				{
+					qApp->processEvents();
+
+					acSendMail = new DMSMailAction( mailIt.key(), this );					
+					acSendMail->setSubject( docItem->text( 0 ) );
+					acSendMail->setMessage( mailIt.value() );
+					acSendMail->setAttachment( docItem->text( 1 ) );
+					acSendMail->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/mail_16.png" ) ) );
+					connect( acSendMail, SIGNAL( triggered() ), this, SLOT( sendMail() ) );
+
+					mnuMail->addAction( acSendMail );
+
+					++mailIt;
+				}
+
+				menu.addMenu( mnuMail );
+			}
+
 			menu.addAction( acDeleteDoc );
 			menu.addAction( acPrintDoc );
 		}
