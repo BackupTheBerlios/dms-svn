@@ -41,9 +41,14 @@ namespace asaal
 
 		connect( treeWidgetApplicationPref, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetApplicationPrefItem( QTreeWidgetItem *, int ) ) );
 
-		connect( btnAdd, SIGNAL( clicked() ), this, SLOT( addApplication() ) );		
-		connect( btnUpdate, SIGNAL( clicked() ), this, SLOT( updateApplication() ) );
-		connect( btnRemove, SIGNAL( clicked() ), this, SLOT( removeApplication() ) );		
+		connect( btnAddApplication, SIGNAL( clicked() ), this, SLOT( addApplication() ) );		
+		connect( btnUpdateApplication, SIGNAL( clicked() ), this, SLOT( updateApplication() ) );
+		connect( btnRemoveApplication, SIGNAL( clicked() ), this, SLOT( removeApplication() ) );
+
+		connect( btnAddMailAddress, SIGNAL( clicked() ), this, SLOT( addMailAddress() ) );		
+		connect( btnUpdateMailAddress, SIGNAL( clicked() ), this, SLOT( updateMailAddress() ) );
+		connect( btnRemoveMailAddress, SIGNAL( clicked() ), this, SLOT( removeMailAddress() ) );	
+
 		connect( btnCheck, SIGNAL( clicked() ), this, SLOT( checkConnection() ) );
 		connect( btnSelectApplication, SIGNAL( clicked() ), this, SLOT( chooseApplication() ) );
 		connect( btnApply, SIGNAL( clicked() ), this, SLOT( savePreferences() ) );
@@ -145,6 +150,15 @@ namespace asaal
 				return;
 		}
 	}
+
+	void DMSPreference::addMailAddress()
+	{}
+
+	void DMSPreference::updateMailAddress()
+	{}
+
+	void DMSPreference::removeMailAddress()
+	{}
 
 	void DMSPreference::treeWidgetApplicationPrefItem( QTreeWidgetItem *item, int column )
 	{

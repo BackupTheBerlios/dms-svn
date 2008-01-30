@@ -70,6 +70,10 @@ namespace asaal
 			void updateApplication();
 			void removeApplication();
 
+			void addMailAddress();
+			void updateMailAddress();
+			void removeMailAddress();
+
 			void treeWidgetApplicationPrefItem( QTreeWidgetItem *, int );
 			void showErrorMsg( const QString &error );
 
