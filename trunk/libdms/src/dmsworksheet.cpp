@@ -37,6 +37,8 @@ namespace asaal
 		_dms = dms;
 		_ws = ws;
 
+		acSendMail = NULL;
+
 		connect( treeWidgetWorkSheet, SIGNAL( customContextMenuRequested( QPoint ) ), this, SLOT( treeWidgetWorkSheetMenu( QPoint ) ) );
 		connect( treeWidgetWorkSheet, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetWorkSheetItem( QTreeWidgetItem *, int ) ) );		
 
@@ -168,6 +170,7 @@ namespace asaal
 	void DMSWorkSheet::createMenuAction()
 	{
 		mnuMail = new QMenu( tr( "Send document via eMail" ), this );
+		mnuMail->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/mail_16.png" ) ) );
 
 		acNewDoc = new QAction( tr( "New document" ), this );
 		acNewDoc->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/documents_16.png" ) ) );
@@ -203,11 +206,12 @@ namespace asaal
 		QMenu menu( this );
 		QMouseEvent *mevent = new QMouseEvent( QEvent::MouseButtonPress, point, Qt::RightButton, Qt::RightButton, Qt::NoModifier );
 
-		menu.clear();
-
-		if( acSendMail )
+		if( acSendMail != NULL )
 			delete acSendMail;
-		
+
+		menu.clear();
+		mnuMail->clear();
+
 		if( docItem == NULL )
 		{
 			menu.addAction( acNewDoc );

@@ -66,6 +66,7 @@ namespace asaal
 
 		private slots:
 			void chooseApplication();
+
 			void addApplication();
 			void updateApplication();
 			void removeApplication();
@@ -75,6 +76,8 @@ namespace asaal
 			void removeMailAddress();
 
 			void treeWidgetApplicationPrefItem( QTreeWidgetItem *, int );
+			void treeWidgetMailAddressPrefItem( QTreeWidgetItem *, int );
+
 			void showErrorMsg( const QString &error );
 
 			void savePreferences();

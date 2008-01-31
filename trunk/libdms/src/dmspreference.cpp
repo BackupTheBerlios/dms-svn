@@ -40,6 +40,8 @@ namespace asaal
 		_dms = dms;
 
 		connect( treeWidgetApplicationPref, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetApplicationPrefItem( QTreeWidgetItem *, int ) ) );
+		connect( treeWidgetMailAddressPref, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetMailAddressPrefItem( QTreeWidgetItem *, int ) ) );
+		
 
 		connect( btnAddApplication, SIGNAL( clicked() ), this, SLOT( addApplication() ) );		
 		connect( btnUpdateApplication, SIGNAL( clicked() ), this, SLOT( updateApplication() ) );
@@ -152,13 +154,61 @@ namespace asaal
 	}
 
 	void DMSPreference::addMailAddress()
-	{}
+	{
+		QString mailaddress = lineEditMailAddress->text();
+		
+		if( mailaddress.isNull() || mailaddress.isEmpty() )
+		{
+			showErrorMsg( tr( "You must enter a email address!" ) );
+			return;
+		}
+		
+		appItem = new QTreeWidgetItem( treeWidgetMailAddressPref );
+		appItem->setText( 0, mailaddress );
+
+		lineEditMailAddress->setText( "" );
+	}
 
 	void DMSPreference::updateMailAddress()
-	{}
+	{
+		appItem = treeWidgetMailAddressPref->currentItem();
+		if( appItem == NULL )
+		{
+			showErrorMsg( tr( "No item was selected!" ) );
+			return;
+		}
+		
+		if( lineEditMailAddress->text().isNull() || lineEditMailAddress->text().isEmpty() )
+		{
+			showErrorMsg( tr( "You must enter a email address!" ) );
+			return;
+		}
+		
+		appItem->setText( 0, lineEditMailAddress->text() );
+	}
 
 	void DMSPreference::removeMailAddress()
-	{}
+	{
+
+		appItem = treeWidgetMailAddressPref->currentItem();
+
+		if( appItem == NULL )
+		{
+			showErrorMsg( tr( "No item was selected!" ) );
+			return;
+		}
+		
+		switch( QMessageBox::question( this, tr( "DMS - Preference" ), tr( "Would you delete this item?" ), QMessageBox::Yes | QMessageBox::No ) )
+		{
+			case QMessageBox::Yes:
+				delete appItem;
+				break;
+			case QMessageBox::No:
+				return;
+			default:
+				return;
+		}
+	}
 
 	void DMSPreference::treeWidgetApplicationPrefItem( QTreeWidgetItem *item, int column )
 	{
@@ -169,6 +219,14 @@ namespace asaal
 
 		int idx = comboBoxFileExtensions->findText( item->text( 1 ), Qt::MatchExactly );
 		comboBoxFileExtensions->setCurrentIndex( idx );
+	}
+
+	void DMSPreference::treeWidgetMailAddressPrefItem( QTreeWidgetItem *item, int column )
+	{
+		if ( item == NULL )
+			return;
+		
+		lineEditMailAddress->setText( item->text( 0 ) );
 	}
 
 	void DMSPreference::showErrorMsg( const QString &error )
@@ -214,7 +272,7 @@ namespace asaal
 			showErrorMsg( tr( "You must select a valid database!" ) );
 			return;
 		}
-		
+
 		QString file = QDir::homePath();
 
 		QDir pref( file + "/.dms/connection" );
@@ -231,6 +289,17 @@ namespace asaal
 		dbsettings.setString( "MySqlConnection", "HostName", lineEditHost->text() );
 		dbsettings.setInt( "MySqlConnection", "Port", spinBoxPort->value() );
 		dbsettings.save( file );
+
+		// TODO Save eMail settings
+		for ( int i = 0; i < treeWidgetMailAddressPref->topLevelItemCount(); i++ )
+		{
+			qApp->processEvents();
+
+			appItem = treeWidgetMailAddressPref->topLevelItem( i );
+
+			QString itemMail = appItem->text( 0 );
+			_dms->insertApplicationSettings( objectName(), "Mails", itemMail );
+		}
 
 		// TODO Save plugin settings
 		// nothing to do at this time ...
