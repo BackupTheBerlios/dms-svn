@@ -331,6 +331,20 @@ namespace asaal
 			++appIt;
 		}
 		
+		// TODO Load email settings
+		QMap<QString, QString> mails = _dms->getApplicationSettings( objectName(), "Mails" );
+		QMap<QString, QString>::const_iterator mailIt = mails.begin();
+		while( mailIt != mails.end() )
+		{
+			qApp->processEvents();
+
+			appItem = new QTreeWidgetItem( treeWidgetMailAddressPref );
+			appItem->setText( 0, mailIt.key() );
+
+			++mailIt;
+		}
+
+
 		// TODO Load database settings
 		QString file = QDir::homePath();
 		file.append ( "/.dms/connection/mysql.xml" );
