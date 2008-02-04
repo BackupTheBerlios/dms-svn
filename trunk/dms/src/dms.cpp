@@ -72,7 +72,6 @@ namespace asaal
 		logout();
 		ldms->closeConnection();
 		e->accept();
-
 	}
 
 	void DMSystem::login()
