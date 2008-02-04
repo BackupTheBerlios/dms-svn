@@ -319,11 +319,6 @@ namespace asaal
 			* Show MySQL Server Connection Assistant
 			*/
 			void showDmsMySqlConnection();
-			
-			/*!
-			* Show MS SQL Server 2005 / MS Access Connection Assistant
-			*/
-			void showDmsMsSqlConnection();
 
 			/*!
 			* Show the group widget

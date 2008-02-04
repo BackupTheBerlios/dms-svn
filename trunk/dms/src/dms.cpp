@@ -77,7 +77,13 @@ namespace asaal
 	void DMSystem::login()
 	{
 		// TODO code her for using MySQL or SQLite3
-		ldms->showDmsMySqlConnection();
+		QString mysqlFile = QDir::homePath();
+		mysqlFile.append ( "/.dms/connection/mysql.xml" );
+
+		if( QFile::exists( mysqlFile )  )
+			ldms->showDmsMySqlConnection();
+		else
+			ldms->showDmsDatabaseSelection();
 
 		if ( ldms->isConnectionAvailabel( ldms->getUserId( ldms->loggedUser ) ) )
 		{

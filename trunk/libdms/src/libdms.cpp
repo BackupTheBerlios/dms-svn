@@ -865,16 +865,11 @@ namespace asaal
 	{
 		if( !dmsdatabase ) {
 			dmsdatabase = new DMSDatabase();
-			dmsdatabase->rbtnMSSqlServer->setEnabled( true );
 			dmsdatabase->rbtnMySqlServer->setEnabled( true );
 
 			if( dmsdatabase->exec() == QDialog::Accepted )
 			{
-				if( dmsdatabase->rbtnMSSqlServer->isChecked() )
-				{
-					showDmsMsSqlConnection();
-				}
-				else if( dmsdatabase->rbtnMySqlServer->isChecked() )
+				if( dmsdatabase->rbtnMySqlServer->isChecked() )
 				{
 					showDmsMySqlConnection();
 				}
@@ -982,90 +977,6 @@ namespace asaal
 				dmsmysqlconnection->setFocus( Qt::ActiveWindowFocusReason );
 			}
 		}
-	}
-
-	void LibDMS::showDmsMsSqlConnection()
-	{
-		QString file = QDir::homePath();
-		file.append ( "/.dms/connection/mssql.xml" );
-		
-		if( QFile::exists( file ) )
-		{
-			if( !m_qsqld.isOpen() )
-			{
-				XMLPreferences dbsettings( "DMSMSSqlConnection", "" );
-				dbsettings.setVersion( "0.1.0.0" );
-				dbsettings.load( file );
-
-				QString user = dbsettings.getString( "MSSqlConnection", "UserName" );
-				QString upwd = QVariant( Base64::decode( dbsettings.getString( "MSSqlConnection", "Password" ) ) ).toString();
-				QString host = dbsettings.getString( "MSSqlConnection", "HostName" );
-				QString database = dbsettings.getString( "MSSqlConnection", "Database" );
-
-				m_qsqld = QSqlDatabase::addDatabase( "QODBC" );
-				m_qsqld.setDatabaseName("DRIVER={SQL Native Client};Server=" + host + ";Trusted_Connection=no;Integrated Security=True;Database=" + database + ";Uid=" + user + ";Pwd=" + upwd + ";");
-				m_qsqld.setUserName(user);
-				m_qsqld.setPassword(upwd);
-				m_qsqld.setHostName(host);
-
-				upwd.clear();
-
-
-				if( m_qsqld.open() )
-				{
-					if( !dmslogin ) {
-						dmslogin = new DMSLogin( this );
-						dmslogin->exec();
-					} else {			
-						dmslogin->setFocus( Qt::ActiveWindowFocusReason );
-					}
-				}
-			}
-			else
-			{
-				if( !dmslogin ) {
-					dmslogin = new DMSLogin( this );
-					dmslogin->exec();
-
-				} else {			
-					dmslogin->setFocus( Qt::ActiveWindowFocusReason );
-				}
-			}
-		}
-		else
-		{
-			if( !dmsmssqlconnection ) {
-				dmsmssqlconnection = new DMSMSSqlConnection();
-				if( dmsmssqlconnection->exec() == QDialog::Accepted )
-				{
-					XMLPreferences dbsettings( "DMSMySqlConnection", "" );
-					dbsettings.setVersion( "0.1.0.0" );
-					dbsettings.load( file );
-
-					QString user = dbsettings.getString( "DMSMSSqlConnection", "UserName" );
-					QString upwd = QVariant( Base64::decode( dbsettings.getString( "DMSMSSqlConnection", "Password" ) ) ).toString();
-					QString host = dbsettings.getString( "DMSMSSqlConnection", "HostName" );
-					QString database = dbsettings.getString( "DMSMSSqlConnection", "Database" );
-
-					m_qsqld = QSqlDatabase::addDatabase( "QODBC" );
-
-					upwd.clear();
-
-					if( m_qsqld.open() )
-					{
-						if( !dmslogin ) {
-							dmslogin = new DMSLogin( this );
-							dmslogin->exec();
-						} else {			
-							dmslogin->setFocus( Qt::ActiveWindowFocusReason );
-						}
-					}
-				}
-			} else {			
-				dmsmssqlconnection->setFocus( Qt::ActiveWindowFocusReason );
-			}
-		}
-		
 	}
 
 	void LibDMS::showGroup( QWorkspace *ws )
