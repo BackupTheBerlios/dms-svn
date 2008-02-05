@@ -81,7 +81,7 @@ namespace asaal
 			void closeWidget();
 
 		private:
-			bool isGroupAvailabel( const QString &groupname );
+			bool isDocumentAvailabel( const QString &docname );
 
 			LibDMS *_dms;
 			QWorkspace *_ws;
@@ -93,6 +93,7 @@ namespace asaal
 
 			QMenu *mnuMail;
 
+			QTimer *docTimer;
 			QAction *acNewDoc;
 			QAction *acOpenDoc;
 			DMSMailAction *acSendMail;

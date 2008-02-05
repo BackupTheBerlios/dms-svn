@@ -154,11 +154,11 @@
     </general>
     <run>
       <directoryradio>executable</directoryradio>
-      <mainprogram></mainprogram>
+      <mainprogram>/home/alex/projekte/cpp/dmsystem/bin/dms</mainprogram>
       <programargs></programargs>
       <globaldebugarguments></globaldebugarguments>
       <globalcwd>.</globalcwd>
-      <useglobalprogram>true</useglobalprogram>
+      <useglobalprogram>false</useglobalprogram>
       <terminal>false</terminal>
       <autocompile>true</autocompile>
       <autoinstall>false</autoinstall>

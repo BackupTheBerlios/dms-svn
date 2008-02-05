@@ -46,6 +46,10 @@ namespace asaal
 		loadDocuments();
 
 		_dms->clearErrorMessage();
+
+		docTimer = new QTimer( this );
+		connect( docTimer, SIGNAL( timeout() ), this, SLOT( loadDocuments() ) );
+		docTimer->start( 5000 );
 	}
 
 	DMSWorkSheet::~DMSWorkSheet()
@@ -77,17 +81,19 @@ namespace asaal
 			QString updated = docIt.value().split( "#" ).value(4);
 			QString checkedout = docIt.value().split( "#" ).value(5);
 
-			docItem = new QTreeWidgetItem( getGroupItem( gname ) );
-			docItem->setText(0, docname );
-			docItem->setText(1, docpath );
-			docItem->setText(2, updated );		
+			if( !isDocumentAvailabel( docname ) )
+			{
+				docItem = new QTreeWidgetItem( getGroupItem( gname ) );
+				docItem->setText(0, docname );
+				docItem->setText(1, docpath );
+				docItem->setText(2, updated );		
 
-			if( checkedout == "0" )
-				docItem->setIcon(3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-closed_16.png" ) ) );
-			else if( checkedout == "1" )
-				docItem->setIcon(3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-open_16.png" ) ) );
+				if( checkedout == "0" )
+					docItem->setIcon(3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-closed_16.png" ) ) );
+				else if( checkedout == "1" )
+					docItem->setIcon(3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-open_16.png" ) ) );					
+			}
 			
-
 			++docIt;
 		}
 	}
@@ -200,7 +206,7 @@ namespace asaal
 	}
 
 	void DMSWorkSheet::treeWidgetWorkSheetMenu( QPoint point )
-	{		
+	{	
 		docItem = treeWidgetWorkSheet->currentItem();
 
 		QMenu menu( this );
@@ -258,9 +264,11 @@ namespace asaal
 
 	QTreeWidgetItem *DMSWorkSheet::getGroupItem( const QString &groupname )
 	{
-		for( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ ) {
-			QTreeWidgetItem *_item = treeWidgetWorkSheet->topLevelItem( a );
-			
+		for( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ )
+		{
+			qApp->processEvents();
+
+			QTreeWidgetItem *_item = treeWidgetWorkSheet->topLevelItem( a );			
 			if( _item->text(0) == groupname )
 				return _item;
 		}
@@ -285,15 +293,28 @@ namespace asaal
 		close();
 	}
 
-	bool DMSWorkSheet::isGroupAvailabel( const QString &groupname )
+	bool DMSWorkSheet::isDocumentAvailabel( const QString &docname )
 	{
-		for( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ ) {
-			QTreeWidgetItem *_item = treeWidgetWorkSheet->topLevelItem( a );
+		for( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ )
+		{
+			qApp->processEvents();
 			
-			if( _item->text(0) == groupname )
-				return true;
-			else
-				return false;
+			QTreeWidgetItem *_item = treeWidgetWorkSheet->topLevelItem( a );
+			if( _item->childCount() >= 1 )
+			{	
+				for( int b = 0; _item->childCount(); b++ )
+				{
+					qApp->processEvents();
+					
+					if( _item->child( b ) != NULL )
+					{
+						if( _item->child( b )->text( 0 ) == docname )
+							return true;
+					}
+					else
+						return false;
+				}
+			}
 		}
 
 		return false;
