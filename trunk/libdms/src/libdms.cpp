@@ -26,7 +26,6 @@
 #include <dmsdocument.h>
 #include <dmsgroup.h>
 #include <dmslogin.h>
-#include <dmsmssqlconnection.h>
 #include <dmsmysqlconnection.h>
 #include <dmspreference.h>
 #include <dmsuser.h>

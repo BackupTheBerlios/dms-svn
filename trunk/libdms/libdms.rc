@@ -7,8 +7,8 @@
 #endif
 
 VS_VERSION_INFO VERSIONINFO
-	FILEVERSION 0,1,0,0
-	PRODUCTVERSION 0,1,0,0
+	FILEVERSION 0,1,0,1
+	PRODUCTVERSION 0,1,0,1
 	FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
 	FILEFLAGS VS_FF_DEBUG
@@ -24,9 +24,9 @@ VS_VERSION_INFO VERSIONINFO
 			BLOCK "040904B0"
 			BEGIN
 				VALUE "CompanyName", "Alexander Saal\0"
-				VALUE "FileDescription", "Library for DMS - Document Management System.\0"
-				VALUE "FileVersion", "0.1.0.0\0"
-				VALUE "LegalCopyright", "Copyright (C) 2007 Alexander Saal\0"
+				VALUE "FileDescription", "Lib for DMS.\0"
+				VALUE "FileVersion", "0.1.0.1\0"
+				VALUE "LegalCopyright", "Copyright (C) 2007-2008 Alexander Saal\0"
 				VALUE "OriginalFilename", "libdms.dll\0"
 				VALUE "ProductName", "LibDMS\0"
 			END
