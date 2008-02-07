@@ -1,6 +1,11 @@
 /***************************************************************************
- *   Copyright (C) 2008 by Alexander Saal                                  *
+ *   Copyright (C) 2007-2008 by Alexander Saal                             *
  *   alex.saal@gmx.de                                                      *
+ *                                                                         *
+ *   File: ${filename}.${extension}                                        *
+ *   Desc: ${description}                                                  *
+ *                                                                         *
+ *   This file is part of DMS - Documnet Management System                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -49,9 +54,7 @@ namespace asaal
 
 	class EXPORT_ASAAL DMSDatabase : public QDialog, public Ui::UiSelectDatabase
 	{
-
 			Q_OBJECT
-
 			Q_CLASSINFO( "Author", "Alexander Saal" )
 			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
 			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )

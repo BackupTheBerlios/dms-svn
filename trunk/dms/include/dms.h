@@ -2,8 +2,8 @@
  *   Copyright (C) 2007 by Alexander Saal                                  *
  *   alex.saal@gmx.de                                                      *
  *                                                                         *
- *   File: dllexport.h                                                     *
- *   Desc: export/import function for external call                        *
+ *   File: dms.h                                                           *
+ *   Desc: Main function to call all other windows                         *
  *                                                                         *
  *   This file is part of DMS - Documnet Management System                 *
  *                                                                         *

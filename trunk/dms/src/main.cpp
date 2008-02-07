@@ -1,9 +1,9 @@
-/***************************************************************************
-*   Copyright (C) 2007 by Alexander Saal                                  *
+/**************************************************************************
+*   Copyright (C) 2007-2008 by Alexander Saal                             *
 *   alex.saal@gmx.de                                                      *
 *                                                                         *
-*   File: dllexport.h                                                     *
-*   Desc: export/import function for external call                        *
+*   File: main.cpp                                                        *
+*   Desc: Main class to call DMS                                          *
 *                                                                         *
 *   This file is part of DMS - Documnet Management System                 *
 *                                                                         *
