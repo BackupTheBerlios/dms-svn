@@ -81,7 +81,7 @@ namespace asaal
 
 			QString uname = docIt.value().split( "#" ).value(0);
 			QString gname = docIt.value().split( "#" ).value(1);
-			QString docname = docIt.value().split( "#" ).value(2);			
+			QString docname = docIt.value().split( "#" ).value(2);
 			QString docpath = docIt.value().split( "#" ).value(3);
 			QString updated = docIt.value().split( "#" ).value(4);
 			QString checkedout = docIt.value().split( "#" ).value(5);
