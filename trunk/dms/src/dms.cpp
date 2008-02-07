@@ -44,10 +44,10 @@ namespace asaal
 		const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
 		int left = ( rect.width() - width() ) / 2;
 		int top = ( rect.height() - height() ) / 2;
-		
+
 		int height = this->height();
 		int width = this->width();
-		
+
 		setGeometry( left, top, width, height );
 
 		statusBar()->show();
@@ -58,10 +58,10 @@ namespace asaal
 		acLogout->setEnabled( false );
 
 		login();
-		
+
 		actionCount = 0;
 
-		createPluginMenu();		
+		createPluginMenu();
 	}
 
 	DMSystem::~DMSystem()
@@ -78,9 +78,9 @@ namespace asaal
 	{
 		// TODO code her for using MySQL or SQLite3
 		QString mysqlFile = QDir::homePath();
-		mysqlFile.append ( "/.dms/connection/mysql.xml" );
+		mysqlFile.append( "/.dms/connection/mysql.xml" );
 
-		if( QFile::exists( mysqlFile )  )
+		if ( QFile::exists( mysqlFile ) )
 			ldms->showDmsMySqlConnection();
 		else
 			ldms->showDmsDatabaseSelection();
@@ -252,31 +252,32 @@ namespace asaal
 		pluginsDir.cd( ".dms" );
 		pluginsDir.cd( "plugins" );
 
-		if( pluginsDir.entryList( QDir::Files ).size() >= 1 )
+		if ( pluginsDir.entryList( QDir::Files ).size() >= 1 )
 			mnuPlugin = menuBar()->addMenu( tr( "&Plugin" ) );
 		else
 			return;
 
 		foreach( QString fileName, pluginsDir.entryList( QDir::Files ) )
 		{
-			if ( fileName.split ( "." ).value ( 1 ).toLower()  == "dll" || fileName.split ( "." ).value ( 1 ).toLower() == "so" )
+			if ( fileName.split( "." ).value( 1 ).toLower()  == "dll" || fileName.split( "." ).value( 1 ).toLower() == "so" )
 			{
-				QPluginLoader loader( pluginsDir.absoluteFilePath ( fileName ) );
+				QPluginLoader loader( pluginsDir.absoluteFilePath( fileName ) );
 				QObject *plug = loader.instance();
 
 				if ( plug != NULL )
 				{
 					DMSPluginInterface *dpi = qobject_cast<DMSPluginInterface *> ( plug );
+
 					if ( dpi )
 					{
 						actionList.insert( actionCount, dpi->action() );
 						actionCount += 1;
-					}					
+					}
 				}
 			}
 		}
 
-		if( actionList.size() >= 1 )
+		if ( actionList.size() >= 1 )
 			mnuPlugin->addActions( actionList );
 	}
 

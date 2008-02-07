@@ -28,7 +28,7 @@ CONFIG += debug thread warn_on qt
 QT += sql xml
 
 # Project Translation
-TRANSLATIONS	+= ../resource/translation/dms_ger.ts
+TRANSLATIONS += ../resource/translation/dms_ger.ts
 
 # Project Misc files
 DISTFILES += ../resource/misc/CHANGELOG
@@ -38,33 +38,34 @@ DISTFILES += ../resource/misc/README
 DISTFILES += ../resource/misc/TODO
 
 # Project Header
-HEADERS	+= include/dms.h
-HEADERS	+= include/dmsplugininterface.h
+HEADERS += include/dms.h
+HEADERS += include/dmsplugininterface.h
 
 # Project Source
-SOURCES	+= src/dms.cpp
-SOURCES	+= src/main.cpp
+SOURCES += src/dms.cpp
+SOURCES += src/main.cpp
 
-# Unix/Linux settings
+# Linux settings
 unix {
-	TARGET	= dms
-	#QMAKE_POST_LINK = strip -s ../bin/dms
-	LIBS += ../bin/libdms.a
-	RCC_DIR	= ../build/dms/unix/rcc
-	MOC_DIR	+= ../build/dms/unix/moc
-	OBJECTS_DIR += ../build/dms/unix/obj
+    TARGET = dms
+    #QMAKE_POST_LINK = strip -s ../bin/dms
+    TARGETDEPS += ../bin/libdms.a
+    LIBS += ../bin/libdms.a
+    RCC_DIR = ../build/dms/unix/rcc
+    MOC_DIR += ../build/dms/unix/moc
+    OBJECTS_DIR += ../build/dms/unix/obj
 }
 
 # Windows settings
 win32 {
+    TARGET = dms
+    CONFIG += debug thread warn_on qt embed_manifest_exe
+    LIBS += -llibdms -L../bin
+    RC_FILE = dms.rc
 
-	TARGET	= dms
-	CONFIG	+= debug thread warn_on qt embed_manifest_exe
-	LIBS += -llibdms -L../bin
-	RC_FILE	= dms.rc
-
-	RCC_DIR	= ../build/dms/win/rcc
-	MOC_DIR	+= ../build/dms/win/moc
-	OBJECTS_DIR += ../build/dms/win/obj
-	UI_DIR	+= ../build/dms/win/ui
+    RCC_DIR = ../build/dms/win/rcc
+    MOC_DIR += ../build/dms/win/moc
+    OBJECTS_DIR += ../build/dms/win/obj
+    UI_DIR += ../build/dms/win/ui
 }
+

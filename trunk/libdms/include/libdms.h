@@ -100,8 +100,8 @@ namespace asaal
 			*
 			* @return true if connection closed
 			*/
-			bool closeConnection();	
-			
+			bool closeConnection();
+
 			/*!
 			* Get the qt4 sql driver
 			*
@@ -167,7 +167,7 @@ namespace asaal
 			* @return Group id for the given group name
 			*/
 			QString getGroupId( const QString &groupname );
-			
+
 			/*!
 			 * Get the application settings
 			 *
@@ -177,7 +177,7 @@ namespace asaal
 			 * @param defaultValue The default value of settings
 			 */
 			QVariant getApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QVariant &defaultValue = QVariant() );
-			
+
 			/*!
 			 * Get the application settings
 			 *
@@ -193,7 +193,10 @@ namespace asaal
 			*
 			* @return <a href="http://doc.trolltech.com/4.3/qstring.html#QString">QString</a> with error message
 			*/
-			QString getErrorMessage() { return errorMessage; }
+			QString getErrorMessage()
+			{
+				return errorMessage;
+			}
 
 		public slots:
 			/*!
@@ -287,7 +290,7 @@ namespace asaal
 			* @param groupId The group id
 			*/
 			void deleteGroup( const QString &groupId );
-			
+
 			/*!
 			 * Insert settings for the dms application
 			 *
@@ -302,7 +305,7 @@ namespace asaal
 			 * Show the preference widget
 			 */
 			void showDmsPreference( QWorkspace *ws );
-			
+
 			/*!
 			* Show the database selection dialog
 			*/
@@ -350,19 +353,22 @@ namespace asaal
 			* @param attachment The attachment for this e-Mail (optional)
 			* @param message The message for this e-Mail (optional)
 			*/
-			void sendMail( const QString &email, const QString &subject = QString(""), const QString &attachment = QString(""), const QString &message = QString("") );
+			void sendMail( const QString &email, const QString &subject = QString( "" ), const QString &attachment = QString( "" ), const QString &message = QString( "" ) );
 
 			/*!
 			* Clear error message ...
 			*/
-			void clearErrorMessage() { errorMessage = QString( "" ); }
+			void clearErrorMessage()
+			{
+				errorMessage = QString( "" );
+			}
 
 		private slots:
 			/*!
 			 * Process was closed
 			 */
 			void processFinish( int, QProcess::ExitStatus );
-			
+
 			/*!
 			 * Process called a error
 			 */

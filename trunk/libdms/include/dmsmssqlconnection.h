@@ -30,13 +30,14 @@
 
 namespace asaal
 {
+
 	class EXPORT_ASAAL DMSMSSqlConnection;
 
-	#ifdef Q_OS_WIN32
-		extern EXPORT_ASAAL DMSMSSqlConnection *dmsmssqlconnection;
-	#else
-		extern DMSMSSqlConnection *dmsmssqlconnection;
-	#endif
+#ifdef Q_OS_WIN32
+	extern EXPORT_ASAAL DMSMSSqlConnection *dmsmssqlconnection;
+#else
+	extern DMSMSSqlConnection *dmsmssqlconnection;
+#endif
 
 	/*!
 	* @author Alexander Saal <alex.saal@gmx.de>
@@ -45,13 +46,15 @@ namespace asaal
 	* @version 0.1.0.0
 	* @since 0.1.0.0
 	*/
-	class EXPORT_ASAAL DMSMSSqlConnection : public QDialog, public Ui::UiMSSqlConnectionBase {
 
-		Q_OBJECT
+	class EXPORT_ASAAL DMSMSSqlConnection : public QDialog, public Ui::UiMSSqlConnectionBase
+	{
 
-		Q_CLASSINFO("Author", "Alexander Saal")
-		Q_CLASSINFO("EMAIL", "alex.saal@gmx.de")
-		Q_CLASSINFO("URL", "http://chmaster.freeforge.net")
+			Q_OBJECT
+
+			Q_CLASSINFO( "Author", "Alexander Saal" )
+			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 		public:
 			DMSMSSqlConnection( QDialog *parent = 0L );
@@ -60,7 +63,10 @@ namespace asaal
 			/*!
 			 * Get the external instance of @sa DMSMSSqlConnection
 			 */
-			static DMSMSSqlConnection *dmsmssqlconnection_instance() { return dmsmssqlconnection; }
+			static DMSMSSqlConnection *dmsmssqlconnection_instance()
+			{
+				return dmsmssqlconnection;
+			}
 
 		private slots:
 			void check();

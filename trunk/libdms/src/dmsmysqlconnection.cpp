@@ -75,61 +75,65 @@ namespace asaal
 		qsqld.setHostName( host );
 		qsqld.setPort( port );
 
-		if( qsqld.open() )
+		if ( qsqld.open() )
 		{
 			QSqlQuery queryDatabases( "SHOW DATABASES;", qsqld );
-			if(queryDatabases.isActive())
+
+			if ( queryDatabases.isActive() )
 			{
-				while(queryDatabases.next())
-				{					
+				while ( queryDatabases.next() )
+				{
 					QSqlQuery queryDms( "SELECT USERNAME FROM " + queryDatabases.value( 0 ).toString() + ".USERS", qsqld );
-					
-					if( queryDms.isActive() )
+
+					if ( queryDms.isActive() )
 					{
 						comboBoxDatabase->addItem( queryDatabases.value( 0 ).toString() );
 					}
-				}	
+				}
 			}
 		}
 		else
 		{
-			QSqlError qsqlErr = qsqld.lastError();			
-			QMessageBox::critical( this, tr( "Error..."), tr("Unable to connect to server!") + "\n\n" + qsqlErr.text() );
+			QSqlError qsqlErr = qsqld.lastError();
+			QMessageBox::critical( this, tr( "Error..." ), tr( "Unable to connect to server!" ) + "\n\n" + qsqlErr.text() );
 
 			qsqld.close();
-			QSqlDatabase::removeDatabase ( "available_db" );
+			QSqlDatabase::removeDatabase( "available_db" );
 
 			connected = false;
 
 			return;
 		}
 
-		QSqlDatabase::removeDatabase ( "available_db" );
+		QSqlDatabase::removeDatabase( "available_db" );
 
 		connected = true;
-		
+
 		btnOk->setEnabled( true );
 	}
 
 	void DMSMySqlConnection::closeWidget()
 	{
-		if( connected )
+		if ( connected )
 		{
 			QString file = QDir::homePath();
 
 			QDir pref( file + "/.dms/connection" );
-			if( !pref.exists() )
+
+			if ( !pref.exists() )
 				pref.mkpath( file + "/.dms/connection" );
 
-			file.append ( "/.dms/connection/mysql.xml" );
+			file.append( "/.dms/connection/mysql.xml" );
 
 			XMLPreferences dbsettings( "DMSMySqlConnection", "" );
+
 			dbsettings.setVersion( "0.1.0.0" );
 			dbsettings.setString( "MySqlConnection", "UserName", lineEditUser->text() );
 			dbsettings.setString( "MySqlConnection", "Password", Base64::encode( QVariant( lineEditPassword->text() ).toByteArray() ) );
 			dbsettings.setString( "MySqlConnection", "Database", comboBoxDatabase->currentText() );
 			dbsettings.setString( "MySqlConnection", "HostName", lineEditoHost->text() );
 			dbsettings.setInt( "MySqlConnection", "Port", spinBoxPort->value() );
+
 			dbsettings.save( file );
 
 			QDialog::accept();

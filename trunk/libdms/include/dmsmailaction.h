@@ -35,13 +35,15 @@ namespace asaal
 	* @version 0.1.0.0
 	* @since 0.1.0.0
 	*/
-	class EXPORT_ASAAL DMSMailAction : public QAction {
 
-		Q_OBJECT
+	class EXPORT_ASAAL DMSMailAction : public QAction
+	{
 
-		Q_CLASSINFO("Author", "Alexander Saal")
-		Q_CLASSINFO("EMAIL", "alex.saal@gmx.de")
-		Q_CLASSINFO("URL", "http://chmaster.freeforge.net")
+			Q_OBJECT
+
+			Q_CLASSINFO( "Author", "Alexander Saal" )
+			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 		public:
 			DMSMailAction( const QString &acText, QObject *parent );
@@ -70,14 +72,14 @@ namespace asaal
 			 * @param subject The subject
 			 */
 			void setSubject( const QString &subject );
-			
+
 			/*!
 			 * Set the message for this eMail
 			 *
 			 * @param message The message
 			 */
 			void setMessage( const QString &message );
-			
+
 			/*!
 			 * Set the attachment for this eMail
 			 *

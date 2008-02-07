@@ -32,13 +32,14 @@
 
 namespace asaal
 {
+
 	class EXPORT_ASAAL DMSPreference;
 
-	#ifdef Q_OS_WIN32
-		extern EXPORT_ASAAL DMSPreference *dmspreference;
-	#else
-		extern DMSPreference *dmspreference;
-	#endif
+#ifdef Q_OS_WIN32
+	extern EXPORT_ASAAL DMSPreference *dmspreference;
+#else
+	extern DMSPreference *dmspreference;
+#endif
 
 	/*!
 	* @author Alexander Saal <alex.saal@gmx.de>
@@ -47,13 +48,15 @@ namespace asaal
 	* @version 0.1.0.0
 	* @since 0.1.0.0
 	*/
-	class EXPORT_ASAAL DMSPreference : public QWidget, public Ui::UiPreferenceBase {
 
-		Q_OBJECT
+	class EXPORT_ASAAL DMSPreference : public QWidget, public Ui::UiPreferenceBase
+	{
 
-		Q_CLASSINFO("Author", "Alexander Saal")
-		Q_CLASSINFO("EMAIL", "alex.saal@gmx.de")
-		Q_CLASSINFO("URL", "http://chmaster.freeforge.net")
+			Q_OBJECT
+
+			Q_CLASSINFO( "Author", "Alexander Saal" )
+			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 		public:
 			DMSPreference( LibDMS *dms, QWidget *parent = 0L );
@@ -62,7 +65,10 @@ namespace asaal
 			/*!
 			 * Get the external instance of @sa DMSPreference
 			 */
-			static DMSPreference *dmspreference_instance() { return dmspreference; }
+			static DMSPreference *dmspreference_instance()
+			{
+				return dmspreference;
+			}
 
 		private slots:
 			void chooseApplication();

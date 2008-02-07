@@ -64,14 +64,15 @@ namespace asaal
 
 		sqlLoginUserQuery.clear();
 
-		if( queryLoginUser.isActive() )
+		if ( queryLoginUser.isActive() )
 		{
-			while( queryLoginUser.next() )
+			while ( queryLoginUser.next() )
 			{
-				if( queryLoginUser.value( 0 ).toString() == userPwd )
+				if ( queryLoginUser.value( 0 ).toString() == userPwd )
 				{
 					queryLoginUserUpdate.exec( "UPDATE USERS SET LOGGEDIN = 1 WHERE UID = '" + userId + "'" );
-					if( queryLoginUserUpdate.isActive() )
+
+					if ( queryLoginUserUpdate.isActive() )
 						return true;
 
 					return true;
@@ -98,14 +99,16 @@ namespace asaal
 		QSqlQuery queryUserLoggedOut( m_qsqld );
 		QString sqlUserLoggedOnQuery = QString( "" );
 		sqlUserLoggedOnQuery = "SELECT LOGGEDIN FROM USERS WHERE UID = '" + userId + "'";
-		
+
 		queryUserLoggedOn.exec( sqlUserLoggedOnQuery );
-		if( queryUserLoggedOn.isActive() )
-			while( queryUserLoggedOn.next() )
-				if( queryUserLoggedOn.value( 0 ).toString() == "1" )
+
+		if ( queryUserLoggedOn.isActive() )
+			while ( queryUserLoggedOn.next() )
+				if ( queryUserLoggedOn.value( 0 ).toString() == "1" )
 				{
 					queryUserLoggedOut.exec( "UPDATE USERS SET LOGGEDIN = 0 WHERE UID = '" + userId + "'" );
-					if( queryUserLoggedOut.isActive() )
+
+					if ( queryUserLoggedOut.isActive() )
 						return true;
 
 					return true;
@@ -119,21 +122,22 @@ namespace asaal
 		QSqlQuery queryUserLoggedOn( m_qsqld );
 		QString sqlUserLoggedOnQuery = QString( "" );
 		sqlUserLoggedOnQuery = "SELECT LOGGEDIN FROM USERS WHERE UID = '" + userId + "'";
-		
+
 		queryUserLoggedOn.exec( sqlUserLoggedOnQuery );
-		if( queryUserLoggedOn.isActive() )
+
+		if ( queryUserLoggedOn.isActive() )
 		{
-			while( queryUserLoggedOn.next() )
-				if( queryUserLoggedOn.value( 0 ).toString() == "1" )
+			while ( queryUserLoggedOn.next() )
+				if ( queryUserLoggedOn.value( 0 ).toString() == "1" )
 					return true;
 		}
-		
+
 		return false;
 	}
 
 	bool LibDMS::closeConnection()
 	{
-		if( m_qsqld.isOpen() )
+		if ( m_qsqld.isOpen() )
 		{
 			m_qsqld.close();
 			return true;
@@ -147,15 +151,16 @@ namespace asaal
 		sqlDriver = QSqlDatabase::drivers();
 
 		// we are use only QMYSQL at this time
-		for( int i = 0; i < sqlDriver.size(); i++ )
+
+		for ( int i = 0; i < sqlDriver.size(); i++ )
 		{
-			if( sqlDriver.value( i ) == "QMYSQL3" )
+			if ( sqlDriver.value( i ) == "QMYSQL3" )
 				sqlDriver.removeAt( i );
-			else if( sqlDriver.value( i ) == "QODBC" )
+			else if ( sqlDriver.value( i ) == "QODBC" )
 				sqlDriver.removeAt( i );
-			else if( sqlDriver.value( i ) == "QODBC3" )
+			else if ( sqlDriver.value( i ) == "QODBC3" )
 				sqlDriver.removeAt( i );
-			else if( sqlDriver.value( i ) == "QSQLITE" )
+			else if ( sqlDriver.value( i ) == "QSQLITE" )
 				sqlDriver.removeAt( i );
 		}
 
@@ -171,8 +176,8 @@ namespace asaal
 
 		sqlDatabases.clear();
 
-		if( queryDatabaseList.isActive() )
-			while( queryDatabaseList.next() )
+		if ( queryDatabaseList.isActive() )
+			while ( queryDatabaseList.next() )
 				sqlDatabases.append( queryDatabaseList.value( 0 ).toString() );
 		else
 		{
@@ -189,13 +194,14 @@ namespace asaal
 
 		QSqlQuery queryUserList( m_qsqld );
 
-		QString sqlUserListQuery = QString( "" );		
+		QString sqlUserListQuery = QString( "" );
 		sqlUserListQuery = "SELECT U.UID, U.USERNAME, U.USERPASSWD, UD.FNAME, UD.LNAME FROM USERS U INNER JOIN USERSDATA UD ON U.UID = UD.UID;";
 
 		queryUserList.exec( sqlUserListQuery );
-		if( queryUserList.isActive() )
+
+		if ( queryUserList.isActive() )
 		{
-			while( queryUserList.next() )
+			while ( queryUserList.next() )
 			{
 				// sql query information about the user data
 				QString uid = queryUserList.value( 0 ).toString();
@@ -203,7 +209,7 @@ namespace asaal
 				QString upwd = queryUserList.value( 2 ).toString();
 				QString fname = queryUserList.value( 3 ).toString();
 				QString lname = queryUserList.value( 4 ).toString();
-				
+
 				QString udata = uname + "#" + upwd + "#" + fname + "#" + lname;
 
 				userList.insert( uid, udata );
@@ -220,19 +226,20 @@ namespace asaal
 
 	QString LibDMS::getUserId( const QString &user )
 	{
-		if( user.isNull() || user.isEmpty() )
+		if ( user.isNull() || user.isEmpty() )
 		{
 			errorMessage = tr( "Please enter valid user name." );
 			return userId;
 		}
 
 		QSqlQuery queryUserId( m_qsqld );
+
 		QString sqlUserIdQuery = QString( "" );
 		sqlUserIdQuery = "SELECT UID FROM USERS WHERE USERNAME = '" + user + "'";
 		queryUserId.exec( sqlUserIdQuery );
 
-		if( queryUserId.isActive() )
-			while( queryUserId.next() )
+		if ( queryUserId.isActive() )
+			while ( queryUserId.next() )
 				userId = queryUserId.value( 0 ).toString();
 		else
 		{
@@ -260,15 +267,16 @@ namespace asaal
 		sqlDocQuery = "SELECT DID, UID, GID, DOCNAME, DOCPATH, UPDATED, CHECKEDOUT FROM DOCUMENTS WHERE UID = '" + userId + "'";
 		queryDocList.exec( sqlDocQuery );
 
-		if( queryDocList.isActive() )
+		if ( queryDocList.isActive() )
 		{
-			while( queryDocList.next() )
+			while ( queryDocList.next() )
 			{
 				// sql statement for get user name
 				sqlGroupQuery = "SELECT LNAME, FNAME FROM USERSDATA WHERE UID = '" + userId + "'";
 				queryUser.exec( sqlGroupQuery );
-				if( queryUser.isActive() )
-					while( queryUser.next() )
+
+				if ( queryUser.isActive() )
+					while ( queryUser.next() )
 						uname = queryUser.value( 0 ).toString() + ", " + queryUser.value( 1 ).toString();
 				else
 				{
@@ -278,9 +286,11 @@ namespace asaal
 
 				// sql statement for get group name
 				sqlGroupQuery = "SELECT GROUPNAME FROM GROUPS WHERE GID = '" + queryDocList.value( 2 ).toString() + "'";
+
 				queryGroup.exec( sqlGroupQuery );
-				if( queryGroup.isActive() )
-					while( queryGroup.next() )
+
+				if ( queryGroup.isActive() )
+					while ( queryGroup.next() )
 						gname = queryGroup.value( 0 ).toString();
 				else
 				{
@@ -291,11 +301,17 @@ namespace asaal
 
 				// sql query information about the document
 				QString did = queryDocList.value( 0 ).toString();
+
 				QString uid = uname;
+
 				QString gid = gname;
+
 				QString docname = queryDocList.value( 3 ).toString();
+
 				QString docpath = queryDocList.value( 4 ).toString();
+
 				QString updated = queryDocList.value( 5 ).toString();
+
 				QString checkedout = queryDocList.value( 6 ).toString();
 
 				QString document = uid + "#" + gid + "#" + docname + "#"  + docpath + "#"  + updated + "#" + checkedout;
@@ -309,15 +325,15 @@ namespace asaal
 		return documentList;
 	}
 
-	QString LibDMS::getDocId( const QString &userId, const QString &docname  )
+	QString LibDMS::getDocId( const QString &userId, const QString &docname )
 	{
 		QSqlQuery queryDocId( m_qsqld );
 		QString sqlDocIdQuery = QString( "" );
 		sqlDocIdQuery = "SELECT DID FROM DOCUMENTS WHERE UID = '" + userId + "' AND DOCNAME = '" + docname + "'";
 		queryDocId.exec( sqlDocIdQuery );
 
-		if( queryDocId.isActive() )
-			while( queryDocId.next() )
+		if ( queryDocId.isActive() )
+			while ( queryDocId.next() )
 				docId = queryDocId.value( 0 ).toString();
 		else
 			errorMessage = queryDocId.lastError().text();
@@ -336,8 +352,8 @@ namespace asaal
 		QSqlQuery queryGroup( m_qsqld );
 		queryGroup.exec( sqlGroupQuery );
 
-		if( queryGroup.isActive() )
-			while( queryGroup.next() )
+		if ( queryGroup.isActive() )
+			while ( queryGroup.next() )
 			{
 				groupId = queryGroup.value( 0 ).toString();
 				QString gname = queryGroup.value( 1 ).toString();
@@ -351,7 +367,7 @@ namespace asaal
 
 		return groupList;
 	}
-	
+
 	QString LibDMS::getGroupId( const QString &groupname )
 	{
 		QString sqlGroupIdQuery = QString( "" );
@@ -360,15 +376,15 @@ namespace asaal
 		QSqlQuery queryGroupId( m_qsqld );
 		queryGroupId.exec( sqlGroupIdQuery );
 
-		if( queryGroupId.isActive() )
-			while( queryGroupId.next() )
+		if ( queryGroupId.isActive() )
+			while ( queryGroupId.next() )
 				groupId = queryGroupId.value( 0 ).toString();
 		else
 			errorMessage = queryGroupId.lastError().text();
 
 		return groupId;
 	}
-	
+
 	QVariant LibDMS::getApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QVariant &defaultValue )
 	{
 		QString sqlAppSettingQuery = QString( "" );
@@ -381,13 +397,14 @@ namespace asaal
 
 		QSqlQuery queryAppSettings( m_qsqld );
 		queryAppSettings.exec( sqlAppSettingQuery );
-		if( queryAppSettings.isActive() )
+
+		if ( queryAppSettings.isActive() )
 		{
-			while( queryAppSettings.next() )
+			while ( queryAppSettings.next() )
 			{
 				qApp->processEvents();
 
-				if( !queryAppSettings.value( 0 ).isNull() )
+				if ( !queryAppSettings.value( 0 ).isNull() )
 					return queryAppSettings.value( 0 );
 			}
 		}
@@ -396,7 +413,7 @@ namespace asaal
 
 		return defaultValue;
 	}
-	
+
 	QMap<QString, QString> LibDMS::getApplicationSettings( const QString &widgetname, const QString &section )
 	{
 		appSettList.clear();
@@ -407,14 +424,14 @@ namespace asaal
 		QSqlQuery queryAppSettings( m_qsqld );
 		queryAppSettings.exec( sqlAppSettingQuery );
 
-		if( queryAppSettings.isActive() )
+		if ( queryAppSettings.isActive() )
 		{
-			while( queryAppSettings.next() )
+			while ( queryAppSettings.next() )
 			{
 				qApp->processEvents();
 
 				QString app = queryAppSettings.value( 0 ).toString();
- 				QString appExt = queryAppSettings.value( 1 ).toString();
+				QString appExt = queryAppSettings.value( 1 ).toString();
 
 				appSettList.insert( app, appExt );
 			}
@@ -427,13 +444,14 @@ namespace asaal
 
 	void LibDMS::insertUser( const QString &userId, const QString &username, const QString &userpwd, const QString &vname, const QString &nname )
 	{
-		if( isUserAvailabel( userId, username ) )
-		{			
+		if ( isUserAvailabel( userId, username ) )
+		{
 			errorMessage = tr( "You can not insert the same user." );
 			return;
 		}
 
 		QString sqlInsertUserQuery = QString( "" );
+
 		sqlInsertUserQuery += "INSERT INTO USERS (\n";
 		sqlInsertUserQuery += "\tUID,\n";
 		sqlInsertUserQuery += "\tUSERNAME,\n";
@@ -451,7 +469,7 @@ namespace asaal
 		QSqlQuery queryInsertUser( m_qsqld );
 		queryInsertUser.exec( sqlInsertUserQuery );
 
-		if( !queryInsertUser.isActive() )
+		if ( !queryInsertUser.isActive() )
 		{
 			errorMessage = queryInsertUser.lastError().text();
 			sqlInsertUserQuery.clear();
@@ -459,6 +477,7 @@ namespace asaal
 		}
 
 		QString sqlInsertUserDataQuery = QString( "" );
+
 		sqlInsertUserDataQuery += "INSERT INTO USERSDATA (\n";
 		sqlInsertUserDataQuery += "\tUDID,\n";
 		sqlInsertUserDataQuery += "\tUID,\n";
@@ -477,7 +496,8 @@ namespace asaal
 
 		QSqlQuery queryInsertUserData( m_qsqld );
 		queryInsertUserData.exec( sqlInsertUserDataQuery );
-		if( !queryInsertUserData.isActive() )
+
+		if ( !queryInsertUserData.isActive() )
 		{
 			errorMessage = queryInsertUserData.lastError().text();
 			sqlInsertUserDataQuery.clear();
@@ -485,12 +505,13 @@ namespace asaal
 		}
 
 		sqlInsertUserQuery.clear();
+
 		sqlInsertUserDataQuery.clear();
 	}
 
 	void LibDMS::updateUser( const QString &userId, const QString &username, const QString &userpwd, const QString &vname, const QString &nname )
 	{
-		if( isUserAvailabel( userId, username ) )
+		if ( isUserAvailabel( userId, username ) )
 		{
 			QString sqlUpdateUserQuery = QString( "" );
 			sqlUpdateUserQuery += "UPDATE USERS\n";
@@ -501,7 +522,8 @@ namespace asaal
 
 			QSqlQuery queryUpdateUser( m_qsqld );
 			queryUpdateUser.exec( sqlUpdateUserQuery );
-			if( !queryUpdateUser.isActive() )
+
+			if ( !queryUpdateUser.isActive() )
 			{
 				errorMessage = queryUpdateUser.lastError().text();
 				sqlUpdateUserQuery.clear();
@@ -509,6 +531,7 @@ namespace asaal
 			}
 
 			QString sqlUpdateUserDataQuery = QString( "" );
+
 			sqlUpdateUserDataQuery += "UPDATE USERSDATA\n";
 			sqlUpdateUserDataQuery += "\tSET FNAME = '" + vname + "',\n";
 			sqlUpdateUserDataQuery += "\tLNAME = '" + nname + "',\n";
@@ -517,7 +540,8 @@ namespace asaal
 
 			QSqlQuery queryUpdateUserData( m_qsqld );
 			queryUpdateUserData.exec( sqlUpdateUserDataQuery );
-			if( !queryUpdateUserData.isActive() )
+
+			if ( !queryUpdateUserData.isActive() )
 			{
 				errorMessage = queryUpdateUserData.lastError().text();
 				sqlUpdateUserDataQuery.clear();
@@ -531,28 +555,31 @@ namespace asaal
 		}
 	}
 
-	void LibDMS::deleteUser( const QString &userId, const QString &username  )
+	void LibDMS::deleteUser( const QString &userId, const QString &username )
 	{
-		if( isUserAvailabel( userId, username ) )
+		if ( isUserAvailabel( userId, username ) )
 		{
 			QString sqlDeleteUserDataQuery = QString( "" );
 			sqlDeleteUserDataQuery += "DELETE FROM USERSDATA WHERE UID = '" + userId + "'";
 
 			QSqlQuery queryDeleteUserData( m_qsqld );
 			queryDeleteUserData.exec( sqlDeleteUserDataQuery );
-			if( !queryDeleteUserData.isActive() )
+
+			if ( !queryDeleteUserData.isActive() )
 			{
 				errorMessage = queryDeleteUserData.lastError().text();
 				sqlDeleteUserDataQuery.clear();
-				return;			
+				return;
 			}
 
 			QString sqlDeleteUserQuery = QString( "" );
+
 			sqlDeleteUserQuery += "DELETE FROM USERS WHERE UID = '" + userId + "'";
 
 			QSqlQuery queryDeleteUser( m_qsqld );
 			queryDeleteUser.exec( sqlDeleteUserQuery );
-			if( !queryDeleteUser.isActive() )
+
+			if ( !queryDeleteUser.isActive() )
 			{
 				errorMessage = queryDeleteUser.lastError().text();
 				sqlDeleteUserQuery.clear();
@@ -592,7 +619,8 @@ namespace asaal
 
 		QSqlQuery queryInsertDocument( m_qsqld );
 		queryInsertDocument.exec( sqlInsertDocument );
-		if( !queryInsertDocument.isActive() )
+
+		if ( !queryInsertDocument.isActive() )
 		{
 			errorMessage = queryInsertDocument.lastError().text();
 			sqlInsertDocument.clear();
@@ -608,14 +636,15 @@ namespace asaal
 		sqlUpdateDocumentQuery += "UPDATE DOCUMENTS\n";
 		sqlUpdateDocumentQuery += "\tSET UID = '" + userId + "',\n";
 		sqlUpdateDocumentQuery += "\tGID = '" + groupId + "',\n";
-		sqlUpdateDocumentQuery += "\tDOCNAME = '" + docname + "',\n";		
+		sqlUpdateDocumentQuery += "\tDOCNAME = '" + docname + "',\n";
 		sqlUpdateDocumentQuery += "\tDOCPATH = '" + docpath + "',\n";
 		sqlUpdateDocumentQuery += "\tUPDATED = '" + QDateTime::currentDateTime().toString( Qt::ISODate ) + "'\n";
 		sqlUpdateDocumentQuery += "WHERE DID = '" + docId + "'";
 
 		QSqlQuery queryUpdateDocument( m_qsqld );
 		queryUpdateDocument.exec( sqlUpdateDocumentQuery );
-		if( !queryUpdateDocument.isActive() )
+
+		if ( !queryUpdateDocument.isActive() )
 		{
 			errorMessage = queryUpdateDocument.lastError().text();
 			sqlUpdateDocumentQuery.clear();
@@ -632,11 +661,12 @@ namespace asaal
 
 		QSqlQuery queryDeleteDocumentQuery( m_qsqld );
 		queryDeleteDocumentQuery.exec( sqlDeleteDocumentQuery );
-		if( !queryDeleteDocumentQuery.isActive() )
+
+		if ( !queryDeleteDocumentQuery.isActive() )
 		{
 			errorMessage = queryDeleteDocumentQuery.lastError().text();
 			sqlDeleteDocumentQuery.clear();
-			return;			
+			return;
 		}
 
 		sqlDeleteDocumentQuery.clear();
@@ -645,41 +675,44 @@ namespace asaal
 	void LibDMS::openDocument( const QString &docId )
 	{
 		QString sqlOpenDocument = QString( "" );
-		sqlOpenDocument = "SELECT DOCPATH FROM DOCUMENTS WHERE DID = '" + docId + "'";		
+		sqlOpenDocument = "SELECT DOCPATH FROM DOCUMENTS WHERE DID = '" + docId + "'";
 
 		QSqlQuery queryOpenDocument( m_qsqld );
 		queryOpenDocument.exec( sqlOpenDocument );
-		if( queryOpenDocument.isActive() )
+
+		if ( queryOpenDocument.isActive() )
 		{
-			while( queryOpenDocument.next() )
+			while ( queryOpenDocument.next() )
 			{
 				qApp->processEvents();
 
 				this->docId = docId;
-				
+
 				// TODO Open document with the right application
 				QSqlQuery sqlSetting( m_qsqld );
 				sqlSetting.exec( "SELECT SETT_KEY, SETT_VALUE FROM SETTINGS WHERE SETT_WIDGET_NAME = 'UiPreferenceBase' AND SETT_SECTION = 'File associations'" );
-				if( sqlSetting.isActive() )
+
+				if ( sqlSetting.isActive() )
 				{
-					while( sqlSetting.next() )
+					while ( sqlSetting.next() )
 					{
 						qApp->processEvents();
 
 						QStringList suffix = sqlSetting.value( 1 ).toString().split( ";" );
-						for( int i = 0; i < suffix.size(); i ++ )					
+
+						for ( int i = 0; i < suffix.size(); i ++ )
 						{
 							qApp->processEvents();
 
-							if( queryOpenDocument.value( 0 ).toString().endsWith( suffix.value( i ) ) )
+							if ( queryOpenDocument.value( 0 ).toString().endsWith( suffix.value( i ) ) )
 							{
 								QProcess *docProc = new QProcess( this );
-								docProc->setWorkingDirectory( QFileInfo( queryOpenDocument.value( 0 ).toString() ).absolutePath() );				
+								docProc->setWorkingDirectory( QFileInfo( queryOpenDocument.value( 0 ).toString() ).absolutePath() );
 								docProc->start( sqlSetting.value( 0 ).toString(), QStringList() << queryOpenDocument.value( 0 ).toString() );
 
 								connect( docProc, SIGNAL( finished( int, QProcess::ExitStatus ) ), this, SLOT( processFinish( int, QProcess::ExitStatus ) ) );
 								connect( docProc, SIGNAL( error( QProcess::ProcessError ) ), this, SLOT( processError( QProcess::ProcessError ) ) );
-								
+
 								sqlOpenDocument.clear();
 								return;
 							}
@@ -717,7 +750,8 @@ namespace asaal
 
 		QSqlQuery queryInsertGroup( m_qsqld );
 		queryInsertGroup.exec( sqlInsertGroupQuery );
-		if( queryInsertGroup.isActive() )
+
+		if ( queryInsertGroup.isActive() )
 		{
 			errorMessage = queryInsertGroup.lastError().text();
 			sqlInsertGroupQuery.clear();
@@ -738,7 +772,8 @@ namespace asaal
 
 		QSqlQuery queryUpdateGroup( m_qsqld );
 		queryUpdateGroup.exec( sqlUpdateGroupQuery );
-		if( !queryUpdateGroup.isActive() )
+
+		if ( !queryUpdateGroup.isActive() )
 		{
 			errorMessage = queryUpdateGroup.lastError().text();
 			sqlUpdateGroupQuery.clear();
@@ -755,11 +790,12 @@ namespace asaal
 
 		QSqlQuery queryReferenceCheck( m_qsqld );
 		queryReferenceCheck.exec( sqlReferenceCheck );
-		if( queryReferenceCheck.isActive() )
+
+		if ( queryReferenceCheck.isActive() )
 		{
-			while( queryReferenceCheck.next() )
+			while ( queryReferenceCheck.next() )
 			{
-				if( queryReferenceCheck.value( 0 ).toInt() >= 1 )
+				if ( queryReferenceCheck.value( 0 ).toInt() >= 1 )
 				{
 					errorMessage = tr( "You can not delete this group. This group is in use." );
 					sqlReferenceCheck.clear();
@@ -767,7 +803,7 @@ namespace asaal
 				}
 			}
 		}
-		
+
 		sqlReferenceCheck.clear();
 
 		QString sqlDeleteGroupQuery = QString( "" );
@@ -775,16 +811,17 @@ namespace asaal
 
 		QSqlQuery queryDeleteGroupQuery( m_qsqld );
 		queryDeleteGroupQuery.exec( sqlDeleteGroupQuery );
-		if( !queryDeleteGroupQuery.isActive() )
+
+		if ( !queryDeleteGroupQuery.isActive() )
 		{
 			errorMessage = queryDeleteGroupQuery.lastError().text();
 			sqlDeleteGroupQuery.clear();
-			return;			
+			return;
 		}
 
 		sqlDeleteGroupQuery.clear();
 	}
-	
+
 	void LibDMS::insertApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QString &value )
 	{
 		bool isAppSettingsAvailable = false;
@@ -794,17 +831,19 @@ namespace asaal
 
 		QSqlQuery queryInsertAppSettings( m_qsqld );
 		queryInsertAppSettings.exec( selectSettings );
-		if( queryInsertAppSettings.isActive() )
-			while( queryInsertAppSettings.next() )
-				if( !queryInsertAppSettings.value( 0 ).isNull() )
+
+		if ( queryInsertAppSettings.isActive() )
+			while ( queryInsertAppSettings.next() )
+				if ( !queryInsertAppSettings.value( 0 ).isNull() )
 					isAppSettingsAvailable = true;
-		else
-			isAppSettingsAvailable = false;
+				else
+					isAppSettingsAvailable = false;
 
 		QString sqlInsertAppSettings = QString( "" );
-		if( !isAppSettingsAvailable )
+
+		if ( !isAppSettingsAvailable )
 		{
-			// TODO insert statement for application settings			
+			// TODO insert statement for application settings
 			sqlInsertAppSettings += "INSERT INTO SETTINGS (\n";
 			sqlInsertAppSettings += "\tSETT_WIDGET_NAME,\n";
 			sqlInsertAppSettings += "\tSETT_SECTION,\n";
@@ -837,7 +876,8 @@ namespace asaal
 		}
 
 		queryInsertAppSettings.exec( sqlInsertAppSettings );
-		if( !queryInsertAppSettings.isActive() )
+
+		if ( !queryInsertAppSettings.isActive() )
 		{
 			errorMessage = queryInsertAppSettings.lastError().text();
 			selectSettings.clear();
@@ -846,45 +886,55 @@ namespace asaal
 		}
 
 		selectSettings.clear();
+
 		sqlInsertAppSettings.clear();
-	} 
+	}
 
 	void LibDMS::showDmsPreference( QWorkspace *ws )
 	{
-		if( !dmspreference ) {
+		if ( !dmspreference )
+		{
 			dmspreference = new DMSPreference( this );
 			ws->addWindow( dmspreference );
 			dmspreference->show();
-		} else {			
+		}
+		else
+		{
 			dmspreference->setFocus( Qt::ActiveWindowFocusReason );
 		}
 	}
 
 	void LibDMS::showDmsDatabaseSelection()
 	{
-		if( !dmsdatabase ) {
+		if ( !dmsdatabase )
+		{
 			dmsdatabase = new DMSDatabase();
 			dmsdatabase->rbtnMySqlServer->setEnabled( true );
 
-			if( dmsdatabase->exec() == QDialog::Accepted )
+			if ( dmsdatabase->exec() == QDialog::Accepted )
 			{
-				if( dmsdatabase->rbtnMySqlServer->isChecked() )
+				if ( dmsdatabase->rbtnMySqlServer->isChecked() )
 				{
 					showDmsMySqlConnection();
 				}
 			}
-		} else {			
+		}
+		else
+		{
 			dmsdatabase->setFocus( Qt::ActiveWindowFocusReason );
 		}
 	}
 
 	void LibDMS::showDmsDocument( QWorkspace *ws )
 	{
-		if( !dmsdocument ) {
+		if ( !dmsdocument )
+		{
 			dmsdocument = new DMSDocument( this );
 			ws->addWindow( dmsdocument );
 			dmsdocument->show();
-		} else {			
+		}
+		else
+		{
 			dmsdocument->setFocus( Qt::ActiveWindowFocusReason );
 		}
 	}
@@ -892,11 +942,11 @@ namespace asaal
 	void LibDMS::showDmsMySqlConnection()
 	{
 		QString file = QDir::homePath();
-		file.append ( "/.dms/connection/mysql.xml" );
+		file.append( "/.dms/connection/mysql.xml" );
 
-		if( QFile::exists( file ) )
+		if ( QFile::exists( file ) )
 		{
-			if( !m_qsqld.isOpen() )
+			if ( !m_qsqld.isOpen() )
 			{
 				XMLPreferences dbsettings( "DMSMySqlConnection", "" );
 				dbsettings.setVersion( "0.1.0.0" );
@@ -916,32 +966,41 @@ namespace asaal
 				m_qsqld.setPort( port );
 
 				upwd.clear();
-				if( m_qsqld.open() )
+
+				if ( m_qsqld.open() )
 				{
-					if( !dmslogin ) {
+					if ( !dmslogin )
+					{
 						dmslogin = new DMSLogin( this );
 						dmslogin->exec();
-					} else {			
+					}
+					else
+					{
 						dmslogin->setFocus( Qt::ActiveWindowFocusReason );
 					}
 				}
 			}
 			else
 			{
-				if( !dmslogin ) {
+				if ( !dmslogin )
+				{
 					dmslogin = new DMSLogin( this );
 					dmslogin->exec();
 
-				} else {			
+				}
+				else
+				{
 					dmslogin->setFocus( Qt::ActiveWindowFocusReason );
 				}
 			}
 		}
 		else
 		{
-			if( !dmsmysqlconnection ) {
+			if ( !dmsmysqlconnection )
+			{
 				dmsmysqlconnection = new DMSMySqlConnection();
-				if( dmsmysqlconnection->exec() == QDialog::Accepted )
+
+				if ( dmsmysqlconnection->exec() == QDialog::Accepted )
 				{
 					XMLPreferences dbsettings( "DMSMySqlConnection", "" );
 					dbsettings.setVersion( "0.1.0.0" );
@@ -962,17 +1021,22 @@ namespace asaal
 
 					upwd.clear();
 
-					if( m_qsqld.open() )
+					if ( m_qsqld.open() )
 					{
-						if( !dmslogin ) {
+						if ( !dmslogin )
+						{
 							dmslogin = new DMSLogin( this );
 							dmslogin->exec();
-						} else {			
+						}
+						else
+						{
 							dmslogin->setFocus( Qt::ActiveWindowFocusReason );
 						}
 					}
 				}
-			} else {			
+			}
+			else
+			{
 				dmsmysqlconnection->setFocus( Qt::ActiveWindowFocusReason );
 			}
 		}
@@ -980,53 +1044,63 @@ namespace asaal
 
 	void LibDMS::showGroup( QWorkspace *ws )
 	{
-		if( !dmsgroup ) {
+		if ( !dmsgroup )
+		{
 			dmsgroup = new DMSGroup( this );
 			ws->addWindow( dmsgroup );
 			dmsgroup->show();
-		} else {			
+		}
+		else
+		{
 			dmsgroup->setFocus( Qt::ActiveWindowFocusReason );
 		}
 	}
 
 	void LibDMS::showDmsUser( QWorkspace *ws )
 	{
-		if( !dmsuser ) {
+		if ( !dmsuser )
+		{
 			dmsuser = new DMSUser( this, ws );
 			ws->addWindow( dmsuser );
 			dmsuser->show();
-		} else {			
+		}
+		else
+		{
 			dmsuser->setFocus( Qt::ActiveWindowFocusReason );
 		}
 	}
 
 	void LibDMS::showDmsWorkSheet( QWorkspace *ws )
 	{
-		if( !dmsworksheet ) {
+		if ( !dmsworksheet )
+		{
 			dmsworksheet = new DMSWorkSheet( this, ws );
 			ws->addWindow( dmsworksheet );
 			dmsworksheet->show();
-		} else {			
+		}
+		else
+		{
 			dmsworksheet->setFocus( Qt::ActiveWindowFocusReason );
 		}
 	}
 
 	void LibDMS::sendMail( const QString &email, const QString &subject, const QString &attachment, const QString &message )
 	{
-		if( email.isEmpty() || email.isNull() )
+		if ( email.isEmpty() || email.isNull() )
 		{
 			errorMessage = tr( "" );
 			return;
 		}
 
-		QUrl url("mailto:" + email + "?subject=" + subject + "&body=" + message + "&attachment=" + attachment );
-		QDesktopServices::setUrlHandler("mailto:", this, "sendMail");
+		QUrl url( "mailto:" + email + "?subject=" + subject + "&body=" + message + "&attachment=" + attachment );
 
-		if( !QDesktopServices::openUrl( url ) )
+		QDesktopServices::setUrlHandler( "mailto:", this, "sendMail" );
+
+		if ( !QDesktopServices::openUrl( url ) )
 			errorMessage = tr( "No e-Mail client on your system was found!" );
 
-		QDesktopServices::unsetUrlHandler("mailto:");
-		
+		QDesktopServices::unsetUrlHandler( "mailto:" );
+
 	}
 
 	bool LibDMS::isUserAvailabel( const QString &userId, const QString &username )
@@ -1037,9 +1111,9 @@ namespace asaal
 		QSqlQuery queryIsUserAvailabel( m_qsqld );
 		queryIsUserAvailabel.exec( sqlIsUserAvailableQuery );
 
-		if( queryIsUserAvailabel.isActive() )
-			while( queryIsUserAvailabel.next() )
-				if( !queryIsUserAvailabel.value( 0 ).toString().isNull() || !queryIsUserAvailabel.value( 0 ).toString().isEmpty() )
+		if ( queryIsUserAvailabel.isActive() )
+			while ( queryIsUserAvailabel.next() )
+				if ( !queryIsUserAvailabel.value( 0 ).toString().isNull() || !queryIsUserAvailabel.value( 0 ).toString().isEmpty() )
 					return true;
 
 		sqlIsUserAvailableQuery.clear();
@@ -1049,15 +1123,17 @@ namespace asaal
 
 	void LibDMS::processFinish( int exitCode, QProcess::ExitStatus exitStatus )
 	{
-		if( !docId.isNull() || !docId.isEmpty() )
+		if ( !docId.isNull() || !docId.isEmpty() )
 			return;
 
-		switch( exitStatus )
+		switch ( exitStatus )
 		{
+
 			case QProcess::NormalExit:
 				errorMessage = tr( "Process exited normal ..." );
 				qDebug() << exitCode;
 				break;
+
 			case QProcess::CrashExit:
 				errorMessage = tr( "Process crashed ..." );
 				qDebug() << exitCode;
@@ -1065,13 +1141,15 @@ namespace asaal
 		}
 
 		QString sqlCloseDocument = QString( "" );
-		sqlCloseDocument = "SELECT DOCPATH, CHECKEDOUT FROM DOCUMENTS WHERE DID = '" + docId + "'";		
+
+		sqlCloseDocument = "SELECT DOCPATH, CHECKEDOUT FROM DOCUMENTS WHERE DID = '" + docId + "'";
 
 		QSqlQuery queryCloseDocument( m_qsqld );
 		queryCloseDocument.exec( sqlCloseDocument );
-		if( queryCloseDocument.isActive() )
+
+		if ( queryCloseDocument.isActive() )
 		{
-			while( queryCloseDocument.next() )
+			while ( queryCloseDocument.next() )
 			{
 				qApp->processEvents();
 
@@ -1080,7 +1158,8 @@ namespace asaal
 				sqlCloseDocument = "";
 				sqlCloseDocument = "UPDATE DOCUMENTS SET CHECKEDOUT = 0 WHERE DID = '" + docId + "' AND CHECKEDOUT = 1";
 				queryCloseDocument.exec( sqlCloseDocument );
-				if( !queryCloseDocument.isActive() )
+
+				if ( !queryCloseDocument.isActive() )
 					errorMessage += tr( "\nCan't check in the document: %1" ).arg( document );
 			}
 		}
@@ -1088,23 +1167,29 @@ namespace asaal
 
 	void LibDMS::processError( QProcess::ProcessError error )
 	{
-		switch( error )
+		switch ( error )
 		{
+
 			case QProcess::FailedToStart:
 				errorMessage = tr( "File not found, resource error ..." );
 				break;
+
 			case QProcess::Crashed:
 				errorMessage = tr( "A error has occured, process crashed ..." );
 				break;
+
 			case QProcess::Timedout:
 				errorMessage = tr( "A error has occured, process timeout ..." );
 				break;
+
 			case QProcess::ReadError:
 				errorMessage = tr( "A error has occured, process read error ..." );
 				break;
+
 			case QProcess::WriteError:
 				errorMessage = tr( "A error has occured, process write error ..." );
 				break;
+
 			case QProcess::UnknownError:
 				errorMessage = tr( "A error has occured, unkown process error ..." );
 				break;

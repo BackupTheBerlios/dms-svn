@@ -32,13 +32,14 @@
 
 namespace asaal
 {
+
 	class EXPORT_ASAAL DMSGroup;
 
-	#ifdef Q_OS_WIN32
-		extern EXPORT_ASAAL DMSGroup *dmsgroup;
-	#else
-		extern DMSGroup *dmsgroup;
-	#endif
+#ifdef Q_OS_WIN32
+	extern EXPORT_ASAAL DMSGroup *dmsgroup;
+#else
+	extern DMSGroup *dmsgroup;
+#endif
 
 	/*!
 	* @author Alexander Saal <alex.saal@gmx.de>
@@ -47,13 +48,15 @@ namespace asaal
 	* @version 0.1.0.0
 	* @since 0.1.0.0
 	*/
-	class EXPORT_ASAAL DMSGroup : public QWidget, public Ui::UiNewEditGroupBase {
 
-		Q_OBJECT
+	class EXPORT_ASAAL DMSGroup : public QWidget, public Ui::UiNewEditGroupBase
+	{
 
-		Q_CLASSINFO("Author", "Alexander Saal")
-		Q_CLASSINFO("EMAIL", "alex.saal@gmx.de")
-		Q_CLASSINFO("URL", "http://chmaster.freeforge.net")
+			Q_OBJECT
+
+			Q_CLASSINFO( "Author", "Alexander Saal" )
+			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 		public:
 			DMSGroup( LibDMS *dms, QWidget *parent = 0L );
@@ -62,7 +65,10 @@ namespace asaal
 			/*!
 			 * Get the external instance of @sa DMSGroup
 			 */
-			static DMSGroup *dmsgroup_instance() { return dmsgroup; }
+			static DMSGroup *dmsgroup_instance()
+			{
+				return dmsgroup;
+			}
 
 		private slots:
 			void addGroup();
@@ -79,7 +85,7 @@ namespace asaal
 
 		private:
 			LibDMS *_dms;
-			
+
 			QMap<QString, QString> documents;
 			QTreeWidgetItem *groupItem;
 
