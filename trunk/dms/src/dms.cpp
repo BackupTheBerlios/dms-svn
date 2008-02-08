@@ -197,7 +197,7 @@ namespace asaal
 
 		mnuDatabase->addSeparator();
 		
-		acSearch = mnuDatabase->addAction( tr( "Search documents" ) );
+		acSearch = mnuDatabase->addAction( tr( "&Search documents" ) );
 		acSearch->setIcon( QPixmap( ":/picture/16/images/16x16/search_16.png" ) );
 		acSearch->setStatusTip( tr( "Search documents ..." ) );
 		connect( acSearch, SIGNAL( triggered() ), this, SLOT( openSearch() ) );
@@ -240,7 +240,7 @@ namespace asaal
 		acToolBarCreadEditDoucmnets->setStatusTip( tr( "Create or edit documnets ..." ) );
 		connect( acToolBarCreadEditDoucmnets, SIGNAL( triggered() ), this, SLOT( creatEditDocuments() ) );
 
-		acToolBarSearch = mnuDatabase->addAction( tr( "Search documents" ) );
+		acToolBarSearch = mnuToolBar->addAction( tr( "&Search documents" ) );
 		acToolBarSearch->setIcon( QPixmap( ":/picture/16/images/16x16/search_16.png" ) );
 		acToolBarSearch->setStatusTip( tr( "Search documents ..." ) );
 		connect( acToolBarSearch, SIGNAL( triggered() ), this, SLOT( openSearch() ) );
@@ -300,11 +300,13 @@ namespace asaal
 	{
 		acCreadEditGroups->setEnabled( deactivate );
 		acCreadEditDoucmnets->setEnabled( deactivate );
+		acSearch->setEnabled( deactivate );
 		acCreadEditUsers->setEnabled( deactivate );
 		acWorkSheet->setEnabled( deactivate );
 
 		acToolBarCreadEditGroups->setEnabled( deactivate );
 		acToolBarCreadEditDoucmnets->setEnabled( deactivate );
+		acToolBarSearch->setEnabled( deactivate );
 		acToolBarCreadEditUsers->setEnabled( deactivate );
 		acToolBarWorkSheet->setEnabled( deactivate );
 	}

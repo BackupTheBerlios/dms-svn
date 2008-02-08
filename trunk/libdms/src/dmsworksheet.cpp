@@ -1,27 +1,27 @@
 /***************************************************************************
- *   Copyright (C) 2007-2008 by Alexander Saal                             *
- *   alex.saal@gmx.de                                                      *
- *                                                                         *
- *   File: ${filename}.${extension}                                        *
- *   Desc: ${description}                                                  *
- *                                                                         *
- *   This file is part of DMS - Documnet Management System                 *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************/
+*   Copyright (C) 2007-2008 by Alexander Saal                             *
+*   alex.saal@gmx.de                                                      *
+*                                                                         *
+*   File: ${filename}.${extension}                                        *
+*   Desc: ${description}                                                  *
+*                                                                         *
+*   This file is part of DMS - Documnet Management System                 *
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+*   This program is distributed in the hope that it will be useful,       *
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+*   GNU General Public License for more details.                          *
+*                                                                         *
+*   You should have received a copy of the GNU General Public License     *
+*   along with this program; if not, write to the                         *
+*   Free Software Foundation, Inc.,                                       *
+*   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+***************************************************************************/
 
 #include <dmsworksheet.h>
 
@@ -52,9 +52,10 @@ namespace asaal
 
 		_dms->clearErrorMessage();
 
-		docTimer = new QTimer( this );
-		connect( docTimer, SIGNAL( timeout() ), this, SLOT( loadDocuments() ) );
-		docTimer->start( 5000 );
+		//docTimer = new QTimer( this );
+		//connect( docTimer, SIGNAL( timeout() ), this, SLOT( loadDocuments() ) );
+		//docTimer->start( 5000 );
+		loadDocuments();
 	}
 
 	DMSWorkSheet::~DMSWorkSheet()
@@ -98,7 +99,7 @@ namespace asaal
 				else if( checkedout == "1" )
 					docItem->setIcon(3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-open_16.png" ) ) );					
 			}
-			
+
 			++docIt;
 		}
 	}
@@ -145,19 +146,19 @@ namespace asaal
 
 		switch ( QMessageBox::information ( this, tr( "DMS" ), question, tr( "Document from database" ), tr( "Document from harddisk" ), tr( "Cancel" ), 0, 2 ) )
 		{
-			case 0:               // Link, List && Harddisk
-				if ( docfile.exists() )
-					docfile.remove();
+		case 0:               // Link, List && Harddisk
+			if ( docfile.exists() )
+				docfile.remove();
 
-				_dms->deleteDocument( docid, userid );
-				delete docItem;
-				break;
-			case 1:               // Link, List && Document from harddisk
-				_dms->deleteDocument( docid, userid );
-				delete docItem;
-				break;
-			case 2:               // Cancel clicked or Escape pressed
-				return;
+			_dms->deleteDocument( docid, userid );
+			delete docItem;
+			break;
+		case 1:               // Link, List && Document from harddisk
+			_dms->deleteDocument( docid, userid );
+			delete docItem;
+			break;
+		case 2:               // Cancel clicked or Escape pressed
+			return;
 		}
 	}
 
@@ -277,7 +278,7 @@ namespace asaal
 			if( _item->text(0) == groupname )
 				return _item;
 		}
-		
+
 		groupItem = new QTreeWidgetItem( treeWidgetWorkSheet );
 		groupItem->setText( 0, groupname );
 
@@ -303,14 +304,14 @@ namespace asaal
 		for( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ )
 		{
 			qApp->processEvents();
-			
+
 			QTreeWidgetItem *_item = treeWidgetWorkSheet->topLevelItem( a );
 			if( _item->childCount() >= 1 )
 			{	
 				for( int b = 0; _item->childCount(); b++ )
 				{
 					qApp->processEvents();
-					
+
 					if( _item->child( b ) != NULL )
 					{
 						if( _item->child( b )->text( 0 ) == docname )

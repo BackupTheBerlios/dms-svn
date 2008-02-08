@@ -1128,16 +1128,8 @@ namespace asaal
 			}
 			else
 			{
-				if ( !dmslogin )
-				{
-					dmslogin = new DMSLogin( this );
-					dmslogin->exec();
-
-				}
-				else
-				{
-					dmslogin->setFocus( Qt::ActiveWindowFocusReason );
-				}
+				dmslogin = new DMSLogin( this );
+				dmslogin->exec();
 			}
 		}
 		else
