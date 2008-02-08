@@ -28,7 +28,7 @@
 
 #include <dllexport.h>
 
-#include <ui_user.h>
+#include <ui_search.h>
 
 #include <libdms.h>
 
@@ -74,6 +74,7 @@ namespace asaal
 
 		private slots:
 			void search();
+			void loadSearchPreferences();
 
 			void showErrorMsg( const QString &error );
 
@@ -81,6 +82,11 @@ namespace asaal
 
 		private:
 			LibDMS *_dms;
+			QMap<QString, QString> documents;
+			QMap<QString, QString> users;
+			QMap<QString, QString> groups;
+			QMap<QString, QStringList> tabelColumns;			
+			QStringList columns;
 
 		protected:
 			void closeEvent( QCloseEvent *e );

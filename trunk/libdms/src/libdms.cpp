@@ -33,6 +33,7 @@
 #include <dmslogin.h>
 #include <dmsmysqlconnection.h>
 #include <dmspreference.h>
+#include <dmssearch.h>
 #include <dmsuser.h>
 #include <dmsworksheet.h>
 
@@ -193,6 +194,65 @@ namespace asaal
 		return sqlDatabases;
 	}
 
+	QMap<QString, QStringList> LibDMS::getTabelColumns( TableColumns tablecolumns )
+	{
+		tableColumnList.clear();
+		sqlColumns.clear();
+
+		QString tablename = QString( "" );		
+		QSqlQuery queryDatabaseTableColumnList( m_qsqld );
+		QString sqlDatabaseTableColumnListQuery = QString( "" );
+		
+		switch( tablecolumns )
+		{
+			case ALL:
+				sqlDatabaseTableColumnListQuery = "SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'DMS'";
+				tablename = "ALL";
+				break;
+			case DOCUMENTS:
+				sqlDatabaseTableColumnListQuery = "SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'DMS' AND TABLE_NAME = 'DOCUMENTS'";
+				tablename = "DOCUMENTS";
+				break;
+			case GROUPS:
+				sqlDatabaseTableColumnListQuery = "SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'DMS' AND TABLE_NAME = 'GROUPS'";
+				tablename = "GROUPS";
+				break;
+			case SETTINGS:
+				sqlDatabaseTableColumnListQuery = "SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'DMS' AND TABLE_NAME = 'SETTINGS'";
+				tablename = "SETTINGS";
+				break;
+			case USERS:
+				sqlDatabaseTableColumnListQuery = "SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'DMS' AND TABLE_NAME = 'USERS'";
+				tablename = "USERS";
+				break;
+			case USERSDATA:
+				sqlDatabaseTableColumnListQuery = "SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'DMS' AND TABLE_NAME = 'USERSDATA'";
+				tablename = "USERSDATA";
+				break;
+		}
+			
+		queryDatabaseTableColumnList.exec( sqlDatabaseTableColumnListQuery );
+		if ( queryDatabaseTableColumnList.isActive() )
+		{
+			while ( queryDatabaseTableColumnList.next() )
+			{
+				qApp->processEvents();
+
+				QString column = queryDatabaseTableColumnList.value( 2 ).toString();
+				sqlColumns.append( column );
+			}
+
+			tableColumnList.insert( tablename, sqlColumns );
+		}
+		else
+		{
+			errorMessage = queryDatabaseTableColumnList.lastError().text();
+			return tableColumnList;
+		}
+
+		return tableColumnList;
+	}
+
 	QMap<QString, QString> LibDMS::geUsers()
 	{
 		userList.clear();
@@ -208,6 +268,8 @@ namespace asaal
 		{
 			while ( queryUserList.next() )
 			{
+				qApp->processEvents();
+
 				// sql query information about the user data
 				QString uid = queryUserList.value( 0 ).toString();
 				QString uname = queryUserList.value( 1 ).toString();
@@ -253,6 +315,77 @@ namespace asaal
 		}
 
 		return userId;
+	}
+
+	QMap<QString, QString> LibDMS::geDocuments()
+	{
+		documentList.clear();
+
+		QSqlQuery queryGroup( m_qsqld );
+		QString sqlGroupQuery = QString( "" );
+		QString gname = QString( "" );
+
+		QSqlQuery queryUser( m_qsqld );
+		QString sqlUserQuery = QString( "" );
+		QString uname = QString( "" );		
+
+		QSqlQuery queryDocList( m_qsqld );
+		QString sqlDocQuery = QString( "" );
+		sqlDocQuery = "SELECT DID, UID, GID, DOCNAME, DOCPATH, UPDATED, CHECKEDOUT FROM DOCUMENTS";
+		queryDocList.exec( sqlDocQuery );
+
+		if ( queryDocList.isActive() )
+		{
+			while ( queryDocList.next() )
+			{
+				qApp->processEvents();
+
+				// sql statement for get user name
+				sqlGroupQuery = "SELECT LNAME, FNAME FROM USERSDATA WHERE UDID = '" + queryDocList.value( 1 ).toString() + "'";
+				queryUser.exec( sqlGroupQuery );
+
+				if ( queryUser.isActive() )
+					while ( queryUser.next() )
+						uname = queryUser.value( 1 ).toString() + ", " + queryUser.value( 2 ).toString();
+				else
+				{
+					errorMessage = queryGroup.lastError().text();
+					return documentList;
+				}
+
+				// sql statement for get group name
+				sqlGroupQuery = "SELECT GROUPNAME FROM GROUPS WHERE GID = '" + queryDocList.value( 2 ).toString() + "'";
+
+				queryGroup.exec( sqlGroupQuery );
+
+				if ( queryGroup.isActive() )
+					while ( queryGroup.next() )
+						gname = queryGroup.value( 0 ).toString();
+				else
+				{
+					errorMessage = queryGroup.lastError().text();
+					return documentList;
+				}
+
+
+				// sql query information about the document
+				QString did = queryDocList.value( 0 ).toString();
+				QString uid = uname;
+				QString gid = gname;
+				QString docname = queryDocList.value( 3 ).toString();
+				QString docpath = queryDocList.value( 4 ).toString();
+				QString updated = queryDocList.value( 5 ).toString();
+				QString checkedout = queryDocList.value( 6 ).toString();
+
+				QString document = uid + "#" + gid + "#" + docname + "#"  + docpath + "#"  + updated + "#" + checkedout;
+
+				documentList.insert( did, document );
+			}
+		}
+		else
+			errorMessage = queryDocList.lastError().text();
+
+		return documentList;
 	}
 
 	QMap<QString, QString> LibDMS::geDocuments( const QString &userId )
@@ -306,17 +439,11 @@ namespace asaal
 
 				// sql query information about the document
 				QString did = queryDocList.value( 0 ).toString();
-
 				QString uid = uname;
-
 				QString gid = gname;
-
 				QString docname = queryDocList.value( 3 ).toString();
-
 				QString docpath = queryDocList.value( 4 ).toString();
-
 				QString updated = queryDocList.value( 5 ).toString();
-
 				QString checkedout = queryDocList.value( 6 ).toString();
 
 				QString document = uid + "#" + gid + "#" + docname + "#"  + docpath + "#"  + updated + "#" + checkedout;
@@ -944,6 +1071,20 @@ namespace asaal
 		}
 	}
 
+	void LibDMS::showDmsSearch( QWorkspace *ws )
+	{
+		if ( !dmssearch )
+		{
+			dmssearch = new DMSSearch( this );
+			ws->addWindow( dmssearch );
+			dmssearch->show();
+		}
+		else
+		{
+			dmssearch->setFocus( Qt::ActiveWindowFocusReason );
+		}
+	}
+
 	void LibDMS::showDmsMySqlConnection()
 	{
 		QString file = QDir::homePath();
@@ -1047,7 +1188,7 @@ namespace asaal
 		}
 	}
 
-	void LibDMS::showGroup( QWorkspace *ws )
+	void LibDMS::showDmsGroup( QWorkspace *ws )
 	{
 		if ( !dmsgroup )
 		{

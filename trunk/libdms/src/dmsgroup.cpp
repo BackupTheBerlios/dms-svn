@@ -106,11 +106,6 @@ namespace asaal
 
 			_dms->insertGroup( lineEditGroupId->text(), gname, gdescription );
 
-			if( !_dms->getErrorMessage().isEmpty() )
-				showErrorMsg( _dms->getErrorMessage() );
-
-			_dms->clearErrorMessage();
-
 			groupItem->setSelected( false );
 
 			lineEditGroupName->setText( "" );
@@ -149,11 +144,6 @@ namespace asaal
 
 		_dms->updateGroup( lineEditGroupId->text(), lineEditGroupName->text(), lineEditGroupDescription->text() );
 
-		if( !_dms->getErrorMessage().isEmpty() )
-			showErrorMsg( _dms->getErrorMessage() );
-
-		_dms->clearErrorMessage();
-
 		groupItem->setSelected( false );
 
 		lineEditGroupName->setText( "" );
@@ -174,12 +164,7 @@ namespace asaal
 		QString groupId = _dms->getGroupId( groupItem->text( 0 ) );
 		_dms->deleteGroup( groupId );
 
-		if( !_dms->getErrorMessage().isEmpty() )
-			showErrorMsg( _dms->getErrorMessage() );
-		else
-			delete groupItem;
-
-		_dms->clearErrorMessage();
+		delete groupItem;
 
 		lineEditGroupName->setText( "" );
 		lineEditGroupDescription->setText( "" );

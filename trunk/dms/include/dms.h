@@ -51,6 +51,7 @@ namespace asaal
 
 			void creatEditGroups();
 			void creatEditDocuments();
+			void openSearch();
 			void createEditUsers();
 			void openPreference();
 			void openWorkSheet();
@@ -71,6 +72,7 @@ namespace asaal
 					*acToolBarLogin,
 					*acToolBarCreadEditGroups,
 					*acToolBarCreadEditDoucmnets,
+					*acToolBarSearch,
 					*acToolBarCreadEditUsers,
 					*acToolBarWorkSheet;
 
@@ -79,6 +81,7 @@ namespace asaal
 	 				*acPreference,
 					*acCreadEditGroups,
 					*acCreadEditDoucmnets,
+					*acSearch,
 					*acCreadEditUsers,
 					*acWorkSheet,
 					*acClose;

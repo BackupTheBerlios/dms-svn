@@ -130,12 +130,17 @@ namespace asaal
 
 	void DMSystem::creatEditGroups()
 	{
-		ldms->showGroup( ws );
+		ldms->showDmsGroup( ws );
 	}
 
 	void DMSystem::creatEditDocuments()
 	{
 		ldms->showDmsDocument( ws );
+	}
+
+	void DMSystem::openSearch()
+	{
+		ldms->showDmsSearch( ws );
 	}
 
 	void DMSystem::createEditUsers()
@@ -191,7 +196,12 @@ namespace asaal
 		connect( acCreadEditUsers, SIGNAL( triggered() ), this, SLOT( createEditUsers() ) );
 
 		mnuDatabase->addSeparator();
-
+		
+		acSearch = mnuDatabase->addAction( tr( "Search documents" ) );
+		acSearch->setIcon( QPixmap( ":/picture/16/images/16x16/search_16.png" ) );
+		acSearch->setStatusTip( tr( "Search documents ..." ) );
+		connect( acSearch, SIGNAL( triggered() ), this, SLOT( openSearch() ) );
+		
 		acPreference = mnuDatabase->addAction( tr( "&Preference" ) );
 		acPreference->setIcon( QPixmap( ":/picture/16/images/16x16/preference_16.png" ) );
 		acPreference->setStatusTip( tr( "Set preferences ..." ) );
@@ -229,6 +239,11 @@ namespace asaal
 		acToolBarCreadEditDoucmnets->setIcon( QPixmap( ":/picture/16/images/16x16/documents_16.png" ) );
 		acToolBarCreadEditDoucmnets->setStatusTip( tr( "Create or edit documnets ..." ) );
 		connect( acToolBarCreadEditDoucmnets, SIGNAL( triggered() ), this, SLOT( creatEditDocuments() ) );
+
+		acToolBarSearch = mnuDatabase->addAction( tr( "Search documents" ) );
+		acToolBarSearch->setIcon( QPixmap( ":/picture/16/images/16x16/search_16.png" ) );
+		acToolBarSearch->setStatusTip( tr( "Search documents ..." ) );
+		connect( acToolBarSearch, SIGNAL( triggered() ), this, SLOT( openSearch() ) );
 
 		acToolBarCreadEditUsers = mnuToolBar->addAction( tr( "New / Edit &Users" ) );
 		acToolBarCreadEditUsers->setIcon( QPixmap( ":/picture/16/images/16x16/user_16.png" ) );

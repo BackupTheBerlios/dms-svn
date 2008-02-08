@@ -51,20 +51,27 @@ namespace asaal
 			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 		public:
+
 			/*!
-			* For internal use enumaration
+			* Columns in the database
 			*
-			* @param ERROR
-			* @param WARNING
-			* @param INFO
+			* @param ALL
+			* @param DOCUMENTS
+			* @param GROUPS
+			* @param SETTINGS
+			* @param USERS
+			* @param USERSDATA
 			*/
-			enum logInfo
+			enum tableColumns
 			{
-				ERROR = 1,
-				WARNING = 2,
-				INFO = 3
+				ALL = 0,
+				DOCUMENTS = 1,
+				GROUPS = 2,
+				SETTINGS = 3,
+				USERS = 4,
+				USERSDATA = 5				
 			};
-			Q_DECLARE_FLAGS( LogInfo, logInfo )
+			Q_DECLARE_FLAGS( TableColumns, tableColumns )
 
 			/*!
 			* Default constructor
@@ -122,6 +129,13 @@ namespace asaal
 			QStringList getSqlDatabases();
 
 			/*!
+			* Get the table columns from database
+			*
+			* @return <a href="http://doc.trolltech.com/4.3/qmap.html#QMap">QMap</a><TableName, Columns>
+			*/
+			QMap<QString, QStringList> getTabelColumns( TableColumns tablecolumns );
+
+			/*!
 			* The logged user
 			*
 			*/
@@ -144,9 +158,17 @@ namespace asaal
 			/*!
 			* Get all documents from database
 			*
-			* @param userId The user id
 			*
 			* @return <a href="http://doc.trolltech.com/4.3/qmap.html#QMap">QMap</a><DocId, Documents> with all users
+			*/
+			QMap<QString, QString> geDocuments();
+
+			/*!
+			* Get documents from database
+			*
+			* @param userId The user id
+			*
+			* @return <a href="http://doc.trolltech.com/4.3/qmap.html#QMap">QMap</a><DocId, Documents>
 			*/
 			QMap<QString, QString> geDocuments( const QString &userId );
 
@@ -324,6 +346,13 @@ namespace asaal
 			void showDmsDocument( QWorkspace *ws );
 
 			/*!
+			* Show the search widget
+			*
+			* @param ws The Workspace to add this widget
+			*/
+			void showDmsSearch( QWorkspace *ws );
+
+			/*!
 			* Show MySQL Server Connection Assistant
 			*/
 			void showDmsMySqlConnection();
@@ -333,7 +362,7 @@ namespace asaal
 			*
 			* @param ws The Workspace to add this widget
 			*/
-			void showGroup( QWorkspace *ws );
+			void showDmsGroup( QWorkspace *ws );
 
 			/*!
 			* Show the user widget
@@ -395,6 +424,7 @@ namespace asaal
 
 			QStringList sqlDriver;
 			QStringList sqlDatabases;
+			QStringList sqlColumns;
 
 			QObject *p_obj;
 
@@ -406,10 +436,11 @@ namespace asaal
 			QMap<QString, QString> groupList;
 			QMap<QString, QString> documentList;
 			QMap<QString, QString> appSettList;
+			QMap<QString, QStringList> tableColumnList;
 
 	};
 
-	Q_DECLARE_OPERATORS_FOR_FLAGS( LibDMS::LogInfo )
+	Q_DECLARE_OPERATORS_FOR_FLAGS( LibDMS::TableColumns )
 }
 
 #endif // LIBDMS_H
