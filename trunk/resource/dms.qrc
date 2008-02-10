@@ -10,6 +10,7 @@
 		<file>images/16x16/computer_16.png</file>
 		<file>images/16x16/copy_16.png</file>
 		<file>images/16x16/cut_16.png</file>
+		<file>images/16x16/database_16.png</file>
 		<file>images/16x16/delete_16.png</file>
 		<file>images/16x16/disc-media_16.png</file>
 		<file>images/16x16/documents_16.png</file>
@@ -41,6 +42,7 @@
 		<file>images/24x24/computer_24.png</file>
 		<file>images/24x24/copy_24.png</file>
 		<file>images/24x24/cut_24.png</file>
+		<file>images/24x24/database_24.png</file>
 		<file>images/24x24/delete_24.png</file>
 		<file>images/24x24/disc-media_24.png</file>
 		<file>images/24x24/documents_24.png</file>
@@ -49,7 +51,7 @@
 		<file>images/24x24/group_24.png</file>
 		<file>images/24x24/home_24.png</file>
 		<file>images/24x24/mail_24.png</file>
-		<file>images/16x16/mail_letter_24.png</file>
+		<file>images/24x24/mail_letter_24.png</file>
 		<file>images/24x24/paste_24.png</file>
 		<file>images/24x24/preference_24.png</file>
 		<file>images/24x24/print_24.png</file>
@@ -72,6 +74,7 @@
 		<file>images/32x32/computer_32.png</file>
 		<file>images/32x32/copy_32.png</file>
 		<file>images/32x32/cut_32.png</file>
+		<file>images/32x32/database_32.png</file>
 		<file>images/32x32/delete_32.png</file>
 		<file>images/32x32/disc-media_32.png</file>
 		<file>images/32x32/documents_32.png</file>
@@ -80,7 +83,7 @@
 		<file>images/32x32/group_32.png</file>
 		<file>images/32x32/home_32.png</file>
 		<file>images/32x32/mail_32.png</file>
-		<file>images/16x16/mail_letter_32.png</file>
+		<file>images/32x32/mail_letter_32.png</file>
 		<file>images/32x32/paste_32.png</file>
 		<file>images/32x32/preference_32.png</file>
 		<file>images/32x32/print_32.png</file>

@@ -250,7 +250,7 @@ namespace asaal
 					acSendMail->setSubject( docItem->text( 0 ) );
 					acSendMail->setMessage( mailIt.value() );
 					acSendMail->setAttachment( docItem->text( 1 ) );
-					acSendMail->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/mail_16.png" ) ) );
+					acSendMail->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/mail_letter_16.png" ) ) );
 					connect( acSendMail, SIGNAL( triggered() ), this, SLOT( sendMail() ) );
 
 					mnuMail->addAction( acSendMail );
