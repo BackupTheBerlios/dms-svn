@@ -73,14 +73,14 @@
       <enum>QListView::IconMode</enum>
      </property>
      <property name="currentRow" >
-      <number>0</number>
+      <number>-1</number>
      </property>
      <item>
       <property name="text" >
        <string>Database</string>
       </property>
       <property name="icon" >
-       <iconset resource="../../resource/dms.qrc" >:/picture/32/images/32x32/add_32.png</iconset>
+       <iconset resource="../../resource/dms.qrc" >:/picture/32/images/32x32/database_32.png</iconset>
       </property>
      </item>
      <item>
