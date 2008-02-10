@@ -70,18 +70,21 @@ namespace asaal
 
 		int progress = 0;
 		QMap<QString, QString>::const_iterator docIt = documents.begin();
-		while( docIt != documents.end() )
+
+		while ( docIt != documents.end() )
 		{
 			qApp->processEvents();
 
-			QString uname = docIt.value().split( "#" ).value(0);
-			QString gname = docIt.value().split( "#" ).value(1);
-			QString docname = docIt.value().split( "#" ).value(2);
-			QString docpath = docIt.value().split( "#" ).value(3);
-			QString updated = docIt.value().split( "#" ).value(4);
-			QString checkedout = docIt.value().split( "#" ).value(5);
+			QString uname = docIt.value().split( "#" ).value( 0 );
+			QString gname = docIt.value().split( "#" ).value( 1 );
+			QString docname = docIt.value().split( "#" ).value( 2 );
+			QString docpath = docIt.value().split( "#" ).value( 3 );
+			QString updated = docIt.value().split( "#" ).value( 4 );
+			QString checkedout = docIt.value().split( "#" ).value( 5 );
 
 			// TODO add code here for search documents in the list and display it in the QTreeWidget
+			
+			
 
 			progress++;
 			progressBarSearch->setValue( progress );
@@ -91,12 +94,13 @@ namespace asaal
 
 
 		searchword = QString( "" );
+
 		searchgroup = QString( "" );
 		searchcolumn = QString( "" );
 		searchuser = QString( "" );
 		exactMatch = false;
 	}
-	
+
 	void DMSSearch::loadSearchPreferences()
 	{
 		tabelColumns.clear();
@@ -109,9 +113,9 @@ namespace asaal
 		groups = _dms->getGroups();
 		tabelColumns = _dms->getTabelColumns( LibDMS::DOCUMENTS );
 
-		if( tabelColumns.size() <= 0 )
+		if ( tabelColumns.size() <= 0 )
 		{
-			if( !_dms->getErrorMessage().isNull() || !_dms->getErrorMessage().isEmpty() )
+			if ( !_dms->getErrorMessage().isNull() || !_dms->getErrorMessage().isEmpty() )
 			{
 				showErrorMsg( _dms->getErrorMessage() );
 				_dms->clearErrorMessage();
@@ -119,39 +123,44 @@ namespace asaal
 			}
 
 			showErrorMsg( tr( "No columns was found!" ) );
+
 			return;
 		}
 
 		QMap<QString, QString>::const_iterator userIt = users.begin();
-		while( userIt != users.end() )
+
+		while ( userIt != users.end() )
 		{
 			qApp->processEvents();
 
-			QString uname = userIt.value().split( "#" ).value(2);
-			uname += ", " + userIt.value().split( "#" ).value(3);
+			QString uname = userIt.value().split( "#" ).value( 2 );
+			uname += ", " + userIt.value().split( "#" ).value( 3 );
 			comboBoxSearchUser->addItem( uname );
 
 			++userIt;
 		}
 
 		QMap<QString, QString>::const_iterator groupIt = groups.begin();
-		while( groupIt != groups.end() )
+
+		while ( groupIt != groups.end() )
 		{
 			qApp->processEvents();
 
-			QString gname = groupIt.value().split( "#" ).value(0);
+			QString gname = groupIt.value().split( "#" ).value( 0 );
 			comboBoxSearchGroup->addItem( gname );
 
 			++groupIt;
 		}
 
 		QMap<QString, QStringList>::const_iterator colIt = tabelColumns.begin();
-		while( colIt != tabelColumns.end() )
+
+		while ( colIt != tabelColumns.end() )
 		{
 			qApp->processEvents();
-			
+
 			columns = QStringList( colIt.value() );
-			for( int i = 0; i < columns.size(); i++ )
+
+			for ( int i = 0; i < columns.size(); i++ )
 			{
 				qApp->processEvents();
 
@@ -165,7 +174,7 @@ namespace asaal
 
 	void DMSSearch::showErrorMsg( const QString &error )
 	{
-		QMessageBox::critical( this, tr( "DMS - User"), error );
+		QMessageBox::critical( this, tr( "DMS - User" ), error );
 	}
 
 	void DMSSearch::closeWidget()

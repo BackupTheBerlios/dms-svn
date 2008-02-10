@@ -70,7 +70,10 @@ namespace asaal
 			/*!
 			 * Get the external instance of @sa DMSSearch
 			 */
-			static DMSSearch *dmsserach_instance() { return dmssearch; }
+			static DMSSearch *dmsserach_instance()
+			{
+				return dmssearch;
+			}
 
 		private slots:
 			void search();
@@ -82,10 +85,11 @@ namespace asaal
 
 		private:
 			LibDMS *_dms;
+
 			QMap<QString, QString> documents;
 			QMap<QString, QString> users;
 			QMap<QString, QString> groups;
-			QMap<QString, QStringList> tabelColumns;			
+			QMap<QString, QStringList> tabelColumns;
 			QStringList columns;
 
 		protected:

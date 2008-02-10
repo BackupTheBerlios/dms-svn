@@ -55,6 +55,11 @@ namespace asaal
 			inline virtual ~DMSMailAction() {}
 
 			/*!
+			 * Get the mail address
+			 */
+			QString getMailAddress();
+
+			/*!
 			 * Get the subject for this eMail
 			 */
 			QString getSubject();
@@ -71,6 +76,13 @@ namespace asaal
 
 		public slots:
 
+			/*!
+		 	 * Set the mail address
+		 	 *
+		 	 * @param subject The mail address
+			 */
+			void setMailAdress( const QString &mailaddress );
+			
 			/*!
 			 * Set the subject for this eMail
 			 *
@@ -93,6 +105,7 @@ namespace asaal
 			void setAttachment( const QString &attachment = QString( "" ) );
 
 		private:
+			QString _mailaddress;
 			QString _subject;
 			QString _message;
 			QString _attachment;

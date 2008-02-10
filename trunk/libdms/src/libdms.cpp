@@ -341,12 +341,12 @@ namespace asaal
 				qApp->processEvents();
 
 				// sql statement for get user name
-				sqlGroupQuery = "SELECT LNAME, FNAME FROM USERSDATA WHERE UDID = '" + queryDocList.value( 1 ).toString() + "'";
+				sqlGroupQuery = "SELECT LNAME, FNAME FROM USERSDATA WHERE UID = '" + queryDocList.value( 1 ).toString() + "'";
 				queryUser.exec( sqlGroupQuery );
 
 				if ( queryUser.isActive() )
 					while ( queryUser.next() )
-						uname = queryUser.value( 1 ).toString() + ", " + queryUser.value( 2 ).toString();
+						uname = queryUser.value( 0 ).toString() + ", " + queryUser.value( 1 ).toString();
 				else
 				{
 					errorMessage = queryGroup.lastError().text();
@@ -355,7 +355,6 @@ namespace asaal
 
 				// sql statement for get group name
 				sqlGroupQuery = "SELECT GROUPNAME FROM GROUPS WHERE GID = '" + queryDocList.value( 2 ).toString() + "'";
-
 				queryGroup.exec( sqlGroupQuery );
 
 				if ( queryGroup.isActive() )

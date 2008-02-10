@@ -697,62 +697,7 @@
           <string>Addresses</string>
          </property>
          <layout class="QGridLayout" >
-          <item row="0" column="0" colspan="2" >
-           <layout class="QHBoxLayout" >
-            <item>
-             <widget class="QLabel" name="labelMailClient" >
-              <property name="minimumSize" >
-               <size>
-                <width>110</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>110</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text" >
-               <string>E-Mail client:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEditMailClient" >
-              <property name="enabled" >
-               <bool>true</bool>
-              </property>
-              <property name="text" >
-               <string/>
-              </property>
-              <property name="readOnly" >
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btnSelectMailClient" >
-              <property name="minimumSize" >
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="maximumSize" >
-               <size>
-                <width>26</width>
-                <height>26</height>
-               </size>
-              </property>
-              <property name="text" >
-               <string>...</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="1" column="0" >
+          <item row="0" column="0" >
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QLabel" name="labelMailAddressDescription" >
@@ -782,7 +727,7 @@
             </item>
            </layout>
           </item>
-          <item row="1" column="1" >
+          <item row="0" column="1" >
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QLabel" name="labelMailAddress" >
@@ -812,7 +757,7 @@
             </item>
            </layout>
           </item>
-          <item row="2" column="0" colspan="2" >
+          <item row="1" column="0" colspan="2" >
            <widget class="QTreeWidget" name="treeWidgetMailAddressPref" >
             <property name="rootIsDecorated" >
              <bool>false</bool>
@@ -829,7 +774,7 @@
             </column>
            </widget>
           </item>
-          <item row="3" column="0" colspan="2" >
+          <item row="2" column="0" colspan="2" >
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QPushButton" name="btnAddMailAddress" >

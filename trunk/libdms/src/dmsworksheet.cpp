@@ -204,7 +204,7 @@ namespace asaal
 	void DMSWorkSheet::sendMail()
 	{
 		DMSMailAction *mail = qobject_cast<DMSMailAction*>( sender() );
-		_dms->sendMail( mail->text(), mail->getSubject(), mail->getAttachment(), mail->getMessage() );
+		_dms->sendMail( mail->getMailAddress(), mail->getSubject(), mail->getAttachment(), mail->getMessage() );
 	}
 
 	void DMSWorkSheet::treeWidgetWorkSheetItem( QTreeWidgetItem *item, int column )
@@ -241,7 +241,12 @@ namespace asaal
 				{
 					qApp->processEvents();
 
-					acSendMail = new DMSMailAction( mailIt.key(), this );					
+					if( mailIt.value().isNull() || mailIt.value().isEmpty() )
+						acSendMail = new DMSMailAction( mailIt.key(), this );
+					else
+						acSendMail = new DMSMailAction( mailIt.value(), this );					
+
+					acSendMail->setMailAdress( mailIt.key() );
 					acSendMail->setSubject( docItem->text( 0 ) );
 					acSendMail->setMessage( mailIt.value() );
 					acSendMail->setAttachment( docItem->text( 1 ) );

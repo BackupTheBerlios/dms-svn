@@ -160,7 +160,8 @@ namespace asaal
 
 	void DMSPreference::addMailAddress()
 	{
-		QString mailaddress = lineEditMailAddress->text();
+		QString maildescription = lineEditMailAddressDescription->text();
+		QString mailaddress = lineEditMailAddress->text();		
 		
 		if( mailaddress.isNull() || mailaddress.isEmpty() )
 		{
@@ -169,9 +170,11 @@ namespace asaal
 		}
 		
 		appItem = new QTreeWidgetItem( treeWidgetMailAddressPref );
-		appItem->setText( 0, mailaddress );
+		appItem->setText( 0, maildescription );
+		appItem->setText( 1, mailaddress );
 
 		lineEditMailAddress->setText( "" );
+		lineEditMailAddressDescription->setText( "" );
 	}
 
 	void DMSPreference::updateMailAddress()
@@ -189,7 +192,8 @@ namespace asaal
 			return;
 		}
 		
-		appItem->setText( 0, lineEditMailAddress->text() );
+		appItem->setText( 0, lineEditMailAddressDescription->text() );
+		appItem->setText( 1, lineEditMailAddress->text() );
 	}
 
 	void DMSPreference::removeMailAddress()
@@ -302,8 +306,10 @@ namespace asaal
 
 			appItem = treeWidgetMailAddressPref->topLevelItem( i );
 
-			QString itemMail = appItem->text( 0 );
-			_dms->insertApplicationSettings( objectName(), "Mails", itemMail );
+			QString itemMailDescription = appItem->text( 0 );
+			QString itemMail = appItem->text( 1 );
+
+			_dms->insertApplicationSettings( objectName(), "Mails", itemMail, itemMailDescription );
 		}
 
 		// TODO Save plugin settings
@@ -344,7 +350,8 @@ namespace asaal
 			qApp->processEvents();
 
 			appItem = new QTreeWidgetItem( treeWidgetMailAddressPref );
-			appItem->setText( 0, mailIt.key() );
+			appItem->setText( 0, mailIt.value() );
+			appItem->setText( 1, mailIt.key() );			
 
 			++mailIt;
 		}
