@@ -18,6 +18,7 @@
 		<file>images/16x16/group_16.png</file>
 		<file>images/16x16/home_16.png</file>
 		<file>images/16x16/mail_16.png</file>
+		<file>images/16x16/mail_letter_16.png</file>
 		<file>images/16x16/paste_16.png</file>
 		<file>images/16x16/preference_16.png</file>
 		<file>images/16x16/print_16.png</file>
@@ -48,6 +49,7 @@
 		<file>images/24x24/group_24.png</file>
 		<file>images/24x24/home_24.png</file>
 		<file>images/24x24/mail_24.png</file>
+		<file>images/16x16/mail_letter_24.png</file>
 		<file>images/24x24/paste_24.png</file>
 		<file>images/24x24/preference_24.png</file>
 		<file>images/24x24/print_24.png</file>
@@ -78,6 +80,7 @@
 		<file>images/32x32/group_32.png</file>
 		<file>images/32x32/home_32.png</file>
 		<file>images/32x32/mail_32.png</file>
+		<file>images/16x16/mail_letter_32.png</file>
 		<file>images/32x32/paste_32.png</file>
 		<file>images/32x32/preference_32.png</file>
 		<file>images/32x32/print_32.png</file>
