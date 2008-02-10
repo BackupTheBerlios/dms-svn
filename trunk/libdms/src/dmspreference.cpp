@@ -235,7 +235,8 @@ namespace asaal
 		if ( item == NULL )
 			return;
 		
-		lineEditMailAddress->setText( item->text( 0 ) );
+		lineEditMailAddressDescription->setText( item->text( 0 ) );
+		lineEditMailAddress->setText( item->text( 1 ) );
 	}
 
 	void DMSPreference::showErrorMsg( const QString &error )
