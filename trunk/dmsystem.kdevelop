@@ -11,11 +11,10 @@
     </keywords>
     <projectname>dmsystem</projectname>
     <ignoreparts>
+      <part>kdevfileselector</part>
       <part>kdevfileview</part>
       <part>kdevfilegroups</part>
       <part>kdevfilelist</part>
-      <part>kdevfileselector</part>
-      <part>kdevdocumentation</part>
       <part>kdevsnippet</part>
       <part>kdevregexptest</part>
       <part>kdevquickopen</part>
@@ -165,7 +164,7 @@
     </general>
     <run>
       <directoryradio>executable</directoryradio>
-      <mainprogram>/home/asaal/projekte/dmsystem/bin/dms</mainprogram>
+      <mainprogram>bin/dms</mainprogram>
       <programargs/>
       <globaldebugarguments/>
       <globalcwd>.</globalcwd>

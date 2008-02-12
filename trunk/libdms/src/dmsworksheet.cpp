@@ -28,6 +28,10 @@
 #include <libdms.h>
 #include <dmsmailaction.h>
 
+#ifdef HAVE_KDE
+
+#endif
+
 #include <QtCore>
 #include <QtGui>
 
