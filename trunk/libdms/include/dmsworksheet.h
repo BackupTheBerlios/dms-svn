@@ -58,11 +58,11 @@ namespace asaal
 	class EXPORT_ASAAL DMSWorkSheet : public QWidget, public Ui::UiWorkSheetBase
 	{
 
-			Q_OBJECT
+		Q_OBJECT
 
-			Q_CLASSINFO( "Author", "Alexander Saal" )
-			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
-			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
+		Q_CLASSINFO( "Author", "Alexander Saal" )
+		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 		public:
 			DMSWorkSheet( LibDMS *dms, QWorkspace *ws, QWidget *parent = 0L );

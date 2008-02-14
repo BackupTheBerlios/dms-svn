@@ -28,10 +28,6 @@
 #include <libdms.h>
 #include <dmsmailaction.h>
 
-#ifdef HAVE_KDE
-
-#endif
-
 #include <QtCore>
 #include <QtGui>
 
@@ -49,7 +45,7 @@ namespace asaal
 		acSendMail = NULL;
 
 		connect( treeWidgetWorkSheet, SIGNAL( customContextMenuRequested( QPoint ) ), this, SLOT( treeWidgetWorkSheetMenu( QPoint ) ) );
-		connect( treeWidgetWorkSheet, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetWorkSheetItem( QTreeWidgetItem *, int ) ) );		
+		connect( treeWidgetWorkSheet, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetWorkSheetItem( QTreeWidgetItem *, int ) ) );
 
 		createMenuAction();
 		loadDocuments();
@@ -80,28 +76,30 @@ namespace asaal
 		documents = _dms->geDocuments( _dms->getUserId( _dms->loggedUser ) );
 
 		QMap< QString, QString>::const_iterator docIt = documents.begin();
-		while( docIt != documents.end() )
+
+		while ( docIt != documents.end() )
 		{
 			qApp->processEvents();
 
-			QString uname = docIt.value().split( "#" ).value(0);
-			QString gname = docIt.value().split( "#" ).value(1);
-			QString docname = docIt.value().split( "#" ).value(2);
-			QString docpath = docIt.value().split( "#" ).value(3);
-			QString updated = docIt.value().split( "#" ).value(4);
-			QString checkedout = docIt.value().split( "#" ).value(5);
+			QString uname = docIt.value().split( "#" ).value( 0 );
+			QString gname = docIt.value().split( "#" ).value( 1 );
+			QString docname = docIt.value().split( "#" ).value( 2 );
+			QString docpath = docIt.value().split( "#" ).value( 3 );
+			QString updated = docIt.value().split( "#" ).value( 4 );
+			QString checkedout = docIt.value().split( "#" ).value( 5 );
 
-			if( !isDocumentAvailabel( docname ) )
+			if ( !isDocumentAvailabel( docname ) )
 			{
 				docItem = new QTreeWidgetItem( getGroupItem( gname ) );
-				docItem->setText(0, docname );
-				docItem->setText(1, docpath );
-				docItem->setText(2, updated );		
+				docItem->setText( 0, docname );
+				docItem->setText( 1, docpath );
+				docItem->setText( 2, updated );
 
-				if( checkedout == "0" )
-					docItem->setIcon(3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-closed_16.png" ) ) );
-				else if( checkedout == "1" )
-					docItem->setIcon(3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-open_16.png" ) ) );					
+				if ( checkedout == "0" )
+					docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-closed_16.png" ) ) );
+				else
+					if ( checkedout == "1" )
+						docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-open_16.png" ) ) );
 			}
 
 			++docIt;
@@ -117,13 +115,14 @@ namespace asaal
 	{
 		docItem = treeWidgetWorkSheet->currentItem();
 
-		if( docItem == NULL )
+		if ( docItem == NULL )
 		{
 			showErrorMsg( tr( "No document was selected." ) );
 			return;
 		}
 
 		QString userid = _dms->getUserId( _dms->getUserId( _dms->loggedUser ) );
+
 		QString docid = _dms->getDocId( userid, docItem->text( 0 ) );
 		_dms->openDocument( docid );
 	}
@@ -132,13 +131,14 @@ namespace asaal
 	{
 		docItem = treeWidgetWorkSheet->currentItem();
 
-		if( docItem == NULL )
+		if ( docItem == NULL )
 		{
 			showErrorMsg( tr( "No document was selected." ) );
 			return;
 		}
 
 		QString userid = _dms->getUserId( _dms->getUserId( _dms->loggedUser ) );
+
 		QString docid = _dms->getDocId( userid, docItem->text( 0 ) );
 
 		QFile docfile ( docItem->text( 1 ) );
@@ -150,19 +150,27 @@ namespace asaal
 
 		switch ( QMessageBox::information ( this, tr( "DMS" ), question, tr( "Document from database" ), tr( "Document from harddisk" ), tr( "Cancel" ), 0, 2 ) )
 		{
-		case 0:               // Link, List && Harddisk
-			if ( docfile.exists() )
-				docfile.remove();
 
-			_dms->deleteDocument( docid, userid );
-			delete docItem;
-			break;
-		case 1:               // Link, List && Document from harddisk
-			_dms->deleteDocument( docid, userid );
-			delete docItem;
-			break;
-		case 2:               // Cancel clicked or Escape pressed
-			return;
+			case 0:               // Link, List && Harddisk
+
+				if ( docfile.exists() )
+					docfile.remove();
+
+				_dms->deleteDocument( docid, userid );
+
+				delete docItem;
+
+				break;
+
+			case 1:               // Link, List && Document from harddisk
+				_dms->deleteDocument( docid, userid );
+
+				delete docItem;
+
+				break;
+
+			case 2:               // Cancel clicked or Escape pressed
+				return;
 		}
 	}
 
@@ -170,7 +178,7 @@ namespace asaal
 	{
 		docItem = treeWidgetWorkSheet->currentItem();
 
-		if( docItem == NULL )
+		if ( docItem == NULL )
 		{
 			showErrorMsg( tr( "No document was selected." ) );
 			return;
@@ -178,8 +186,10 @@ namespace asaal
 
 #ifdef Q_OS_WIN32
 		;
+
 #else
 		;
+
 #endif
 	}
 
@@ -216,19 +226,20 @@ namespace asaal
 	}
 
 	void DMSWorkSheet::treeWidgetWorkSheetMenu( QPoint point )
-	{	
+	{
 		docItem = treeWidgetWorkSheet->currentItem();
 
 		QMenu menu( this );
 		QMouseEvent *mevent = new QMouseEvent( QEvent::MouseButtonPress, point, Qt::RightButton, Qt::RightButton, Qt::NoModifier );
 
-		if( acSendMail != NULL )
+		if ( acSendMail != NULL )
 			delete acSendMail;
 
 		menu.clear();
+
 		mnuMail->clear();
 
-		if( docItem == NULL )
+		if ( docItem == NULL )
 		{
 			menu.addAction( acNewDoc );
 		}
@@ -238,23 +249,26 @@ namespace asaal
 			menu.addAction( acOpenDoc );
 
 			QMap<QString, QString> mails = _dms->getApplicationSettings( "UiPreferenceBase", "Mails" );
-			if( mails.size() >= 1 )
+
+			if ( mails.size() >= 1 )
 			{
 				QMap<QString, QString>::const_iterator mailIt = mails.begin();
-				while( mailIt != mails.end() )
+
+				while ( mailIt != mails.end() )
 				{
 					qApp->processEvents();
 
-					if( mailIt.value().isNull() || mailIt.value().isEmpty() )
+					if ( mailIt.value().isNull() || mailIt.value().isEmpty() )
 						acSendMail = new DMSMailAction( mailIt.key(), this );
 					else
-						acSendMail = new DMSMailAction( mailIt.value(), this );					
+						acSendMail = new DMSMailAction( mailIt.value(), this );
 
 					acSendMail->setMailAdress( mailIt.key() );
 					acSendMail->setSubject( docItem->text( 0 ) );
 					acSendMail->setMessage( mailIt.value() );
 					acSendMail->setAttachment( docItem->text( 1 ) );
 					acSendMail->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/mail_letter_16.png" ) ) );
+
 					connect( acSendMail, SIGNAL( triggered() ), this, SLOT( sendMail() ) );
 
 					mnuMail->addAction( acSendMail );
@@ -274,26 +288,29 @@ namespace asaal
 
 	void DMSWorkSheet::showErrorMsg( const QString &error )
 	{
-		QMessageBox::critical( this, tr( "DMS - Worksheet"), error );
+		QMessageBox::critical( this, tr( "DMS - Worksheet" ), error );
 	}
 
 	QTreeWidgetItem *DMSWorkSheet::getGroupItem( const QString &groupname )
 	{
-		for( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ )
+		for ( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ )
 		{
 			qApp->processEvents();
 
-			QTreeWidgetItem *_item = treeWidgetWorkSheet->topLevelItem( a );			
-			if( _item->text(0) == groupname )
+			QTreeWidgetItem *_item = treeWidgetWorkSheet->topLevelItem( a );
+
+			if ( _item->text( 0 ) == groupname )
 				return _item;
 		}
 
 		groupItem = new QTreeWidgetItem( treeWidgetWorkSheet );
+
 		groupItem->setText( 0, groupname );
 
 		QFont font;
 		font.setBold( true );
-		font.setStyleHint( QFont::System );	
+		font.setStyleHint( QFont::System );
+
 		groupItem->setFont( 0, font );
 		groupItem->setBackgroundColor( 0, QColor( Qt::lightGray ) );
 		groupItem->setBackgroundColor( 1, QColor( Qt::lightGray ) );
@@ -310,20 +327,21 @@ namespace asaal
 
 	bool DMSWorkSheet::isDocumentAvailabel( const QString &docname )
 	{
-		for( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ )
+		for ( int a = 0; a < treeWidgetWorkSheet->topLevelItemCount(); a++ )
 		{
 			qApp->processEvents();
 
 			QTreeWidgetItem *_item = treeWidgetWorkSheet->topLevelItem( a );
-			if( _item->childCount() >= 1 )
-			{	
-				for( int b = 0; _item->childCount(); b++ )
+
+			if ( _item->childCount() >= 1 )
+			{
+				for ( int b = 0; _item->childCount(); b++ )
 				{
 					qApp->processEvents();
 
-					if( _item->child( b ) != NULL )
+					if ( _item->child( b ) != NULL )
 					{
-						if( _item->child( b )->text( 0 ) == docname )
+						if ( _item->child( b )->text( 0 ) == docname )
 							return true;
 					}
 					else

@@ -120,16 +120,16 @@
       <completionBoxItemOrder>0</completionBoxItemOrder>
       <howEvaluationContextMenu>true</howEvaluationContextMenu>
       <showCommentWithArgumentHint>true</showCommentWithArgumentHint>
-      <statusBarTypeEvaluation>false</statusBarTypeEvaluation>
+      <statusBarTypeEvaluation>true</statusBarTypeEvaluation>
       <namespaceAliases>std=_GLIBCXX_STD;__gnu_cxx=std</namespaceAliases>
       <processPrimaryTypes>true</processPrimaryTypes>
       <processFunctionArguments>false</processFunctionArguments>
-      <preProcessAllHeaders>false</preProcessAllHeaders>
+      <preProcessAllHeaders>true</preProcessAllHeaders>
       <parseMissingHeadersExperimental>false</parseMissingHeadersExperimental>
       <resolveIncludePathsUsingMakeExperimental>false</resolveIncludePathsUsingMakeExperimental>
       <alwaysParseInBackground>true</alwaysParseInBackground>
       <usePermanentCaching>true</usePermanentCaching>
-      <alwaysIncludeNamespaces>false</alwaysIncludeNamespaces>
+      <alwaysIncludeNamespaces>true</alwaysIncludeNamespaces>
       <includePaths>.;</includePaths>
     </codecompletion>
     <creategettersetter>
@@ -160,7 +160,7 @@
   </kdevfilecreate>
   <kdevtrollproject>
     <general>
-      <activedir>libdms</activedir>
+      <activedir>dms</activedir>
     </general>
     <run>
       <directoryradio>executable</directoryradio>

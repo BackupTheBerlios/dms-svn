@@ -26,6 +26,8 @@
 #include "dms.h"
 
 #include <QApplication>
+#include <QDir>
+#include <QString>
 #include <QDebug>
 #include <QTranslator>
 
@@ -49,6 +51,29 @@ int main( int argc, char **argv )
 
 	libDmsTranslator.load ( libDmsTrFile );
 	app.installTranslator ( &libDmsTranslator );
+	
+	QString homeDir = QDir::homePath();
+	homeDir.append( "/.dms" );
+	
+	QDir prefDir( homeDir );
+	if( !prefDir.exists( homeDir ) )
+		prefDir.mkpath( homeDir );
+	
+	homeDir.clear();
+	homeDir = QDir::homePath();
+	homeDir.append( "/.dms/connection" );
+	
+	QDir conDir( homeDir );
+	if( !conDir.exists( homeDir ) )
+		conDir.mkpath( homeDir );
+
+	homeDir.clear();
+	homeDir = QDir::homePath();
+	homeDir.append( "/.dms/plugins" );
+
+	QDir pluginDir( homeDir );
+	if( !pluginDir.exists( homeDir ) )
+		pluginDir.mkpath( homeDir );
 
 	DMSystem *dms = new DMSystem( app );
 	dms->show();
