@@ -82,6 +82,30 @@ namespace asaal
 
 		if ( qsqld.open() )
 		{
+
+			// TODO [ START ] create database and tables ...
+			bool useDb = true;
+			QFile sqlScript( QString::fromUtf8( ":/database/sql/mysql.sql" ) );
+
+			if ( !sqlScript.open( QIODevice::ReadOnly | QIODevice::Text ) )
+			{
+				qDebug() << "Can't read sql script ... " << sqlScript.fileName();
+			}
+			else
+			{
+				QTextStream in( &sqlScript );
+				QString line;
+
+				while ( !in.atEnd() )
+				{
+					line = in.readLine();
+					QSqlQuery queryDatabases( line, qsqld );					
+				}
+			}
+
+			// TODO [ END ] create database and tables ...
+
+
 			QSqlQuery queryDatabases( "SHOW DATABASES;", qsqld );
 
 			if ( queryDatabases.isActive() )
@@ -133,10 +157,15 @@ namespace asaal
 			XMLPreferences dbsettings( "DMSMySqlConnection", "" );
 
 			dbsettings.setVersion( "0.1.0.0" );
+
 			dbsettings.setString( "MySqlConnection", "UserName", lineEditUser->text() );
+
 			dbsettings.setString( "MySqlConnection", "Password", Base64::encode( QVariant( lineEditPassword->text() ).toByteArray() ) );
+
 			dbsettings.setString( "MySqlConnection", "Database", comboBoxDatabase->currentText() );
+
 			dbsettings.setString( "MySqlConnection", "HostName", lineEditoHost->text() );
+
 			dbsettings.setInt( "MySqlConnection", "Port", spinBoxPort->value() );
 
 			dbsettings.save( file );
