@@ -82,9 +82,7 @@ namespace asaal
 
 		if ( qsqld.open() )
 		{
-
 			// TODO [ START ] create database and tables ...
-			bool useDb = true;
 			QFile sqlScript( QString::fromUtf8( ":/database/sql/mysql.sql" ) );
 
 			if ( !sqlScript.open( QIODevice::ReadOnly | QIODevice::Text ) )
@@ -99,12 +97,33 @@ namespace asaal
 				while ( !in.atEnd() )
 				{
 					line = in.readLine();
-					QSqlQuery queryDatabases( line, qsqld );					
+
+					QSqlQuery queryCreateDatabase( line, qsqld );
+
+					if ( !queryCreateDatabase.isActive() )
+					{
+						qDebug() << "An error has occoured:\t" << queryCreateDatabase.lastError().text();
+						break;
+					}
+
+					if ( line.split( " " ).count() >= 5 )
+					{
+						if ( line.split( " " ).contains( "DATABASE" ) )
+						{
+							qDebug() << "Create database:\t" << line.split( " " ).value( 5 ).replace( "`", "" );
+						}
+						else if ( line.split( " " ).contains( "TABLE" ) )
+						{
+							qDebug() << "Create table:\t" << line.split( " " ).value( 5 ).replace( "`", "" );
+						}
+						else if( line.split( " " ).count() <= 3 )
+						{
+							qDebug() << "Create table:\t" << line.split( " " ).value( 2 ).replace( "`", "" );
+						}
+					}
 				}
 			}
-
 			// TODO [ END ] create database and tables ...
-
 
 			QSqlQuery queryDatabases( "SHOW DATABASES;", qsqld );
 
@@ -157,15 +176,10 @@ namespace asaal
 			XMLPreferences dbsettings( "DMSMySqlConnection", "" );
 
 			dbsettings.setVersion( "0.1.0.0" );
-
 			dbsettings.setString( "MySqlConnection", "UserName", lineEditUser->text() );
-
 			dbsettings.setString( "MySqlConnection", "Password", Base64::encode( QVariant( lineEditPassword->text() ).toByteArray() ) );
-
 			dbsettings.setString( "MySqlConnection", "Database", comboBoxDatabase->currentText() );
-
 			dbsettings.setString( "MySqlConnection", "HostName", lineEditoHost->text() );
-
 			dbsettings.setInt( "MySqlConnection", "Port", spinBoxPort->value() );
 
 			dbsettings.save( file );

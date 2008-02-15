@@ -86,7 +86,7 @@ namespace asaal
 
 			if( !_dms->login( uid, upwd ) )
 			{
-				QMessageBox::critical( this, tr( "DMS" ), _dms->getErrorMessage() );
+				QMessageBox::critical( this, tr( "DMS" ), tr( "No user was found." ) );
 				upwd.clear();
 				return;
 			}

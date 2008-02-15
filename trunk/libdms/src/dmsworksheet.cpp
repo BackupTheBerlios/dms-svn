@@ -159,14 +159,12 @@ namespace asaal
 				_dms->deleteDocument( docid, userid );
 
 				delete docItem;
-
 				break;
 
 			case 1:               // Link, List && Document from harddisk
 				_dms->deleteDocument( docid, userid );
 
 				delete docItem;
-
 				break;
 
 			case 2:               // Cancel clicked or Escape pressed
@@ -185,11 +183,10 @@ namespace asaal
 		}
 
 #ifdef Q_OS_WIN32
-		;
+		QMessageBox::information( this, tr( "DMS - Worksheet" ), tr( "Print document is not implemented yet!" ) );
 
 #else
-		;
-
+		QMessageBox::information( this, tr( "DMS - Worksheet" ), tr( "Print document is not implemented yet!" ) );
 #endif
 	}
 

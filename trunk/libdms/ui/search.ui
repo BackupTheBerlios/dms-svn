@@ -77,32 +77,6 @@
       <item row="1" column="0" >
        <layout class="QHBoxLayout" >
         <item>
-         <widget class="QLabel" name="labelSearchColumn" >
-          <property name="minimumSize" >
-           <size>
-            <width>110</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize" >
-           <size>
-            <width>110</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text" >
-           <string>Column:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBoxSearchColumn" />
-        </item>
-       </layout>
-      </item>
-      <item row="2" column="0" >
-       <layout class="QHBoxLayout" >
-        <item>
          <widget class="QLabel" name="labelSearchGroup" >
           <property name="minimumSize" >
            <size>
@@ -126,7 +100,7 @@
         </item>
        </layout>
       </item>
-      <item row="3" column="0" >
+      <item row="2" column="0" >
        <layout class="QHBoxLayout" >
         <item>
          <widget class="QLabel" name="labelSearchUser" >

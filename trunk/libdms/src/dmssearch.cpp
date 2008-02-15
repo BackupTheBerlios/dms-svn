@@ -60,10 +60,12 @@ namespace asaal
 
 	void DMSSearch::search()
 	{
+		treeWidgetSearchDocument->clear();
+		
 		QString searchword = lineEditSearchWord->text();
 		QString searchgroup = comboBoxSearchGroup->currentText();
-		QString searchcolumn = comboBoxSearchColumn->currentText();
 		QString searchuser = comboBoxSearchUser->currentText();
+		searchuser = searchuser.split( "," ).value( 1 ).trimmed() + ", " + searchuser.split( "," ).value( 0 ).trimmed();
 		bool exactMatch = checkBoxSearchExactly->isChecked();
 
 		progressBarSearch->setMaximum( documents.size() );
@@ -82,11 +84,64 @@ namespace asaal
 			QString updated = docIt.value().split( "#" ).value( 4 );
 			QString checkedout = docIt.value().split( "#" ).value( 5 );
 
-			// TODO add code here for search documents in the list and display it in the QTreeWidget
-			
-			
+			if ( uname == searchuser && gname == searchgroup )
+			{
+				if ( !exactMatch )
+				{
+					if ( docname.toLower().contains( searchword.toLower() ) ||
+					        docpath.toLower().contains( searchword.toLower() ) ||
+					        docpath.toLower().contains( searchword.toLower() ) ||
+					        updated.toLower().contains( searchword.toLower() ) ||
+					        checkedout.toLower().contains( searchword.toLower() ) )
+					{
+						docItem = new QTreeWidgetItem( treeWidgetSearchDocument );
+						docItem->setText( 0, docname );
+						docItem->setText( 1, updated );
+					}
+				}
+				else
+				{
+					if ( docname.toLower() == searchword.toLower() ||
+					        docpath.toLower() == searchword.toLower() ||
+					        docpath.toLower() == searchword.toLower() ||
+					        updated.toLower() == searchword.toLower() ||
+					        checkedout.toLower() == searchword.toLower() )
+					{
+						docItem = new QTreeWidgetItem( treeWidgetSearchDocument );
+						docItem->setText( 0, docname );
+						docItem->setText( 1, updated );
+					}
+				}
+			}
+
+			if ( uname == searchuser && searchgroup == "*" )
+			{
+
+			}
+
+			if ( gname == searchgroup && searchuser == "*" )
+			{
+
+			}
+
+			if ( searchuser == "*" && searchgroup == "*" )
+			{
+
+			}
+
+			if ( searchuser == "*" )
+			{
+
+			}
+
+			if ( searchgroup == "*" )
+			{
+
+			}
+
 
 			progress++;
+
 			progressBarSearch->setValue( progress );
 
 			++docIt;
@@ -96,14 +151,13 @@ namespace asaal
 		searchword = QString( "" );
 
 		searchgroup = QString( "" );
-		searchcolumn = QString( "" );
 		searchuser = QString( "" );
 		exactMatch = false;
+		progressBarSearch->setValue( 0 );
 	}
 
 	void DMSSearch::loadSearchPreferences()
 	{
-		tabelColumns.clear();
 		documents.clear();
 		columns.clear();
 		groups.clear();
@@ -111,23 +165,10 @@ namespace asaal
 		documents = _dms->geDocuments();
 		users = _dms->geUsers();
 		groups = _dms->getGroups();
-		tabelColumns = _dms->getTabelColumns( LibDMS::DOCUMENTS );
-
-		if ( tabelColumns.size() <= 0 )
-		{
-			if ( !_dms->getErrorMessage().isNull() || !_dms->getErrorMessage().isEmpty() )
-			{
-				showErrorMsg( _dms->getErrorMessage() );
-				_dms->clearErrorMessage();
-				return;
-			}
-
-			showErrorMsg( tr( "No columns was found!" ) );
-
-			return;
-		}
 
 		QMap<QString, QString>::const_iterator userIt = users.begin();
+		comboBoxSearchUser->clear();
+		comboBoxSearchUser->addItem( "*" );
 
 		while ( userIt != users.end() )
 		{
@@ -142,6 +183,9 @@ namespace asaal
 
 		QMap<QString, QString>::const_iterator groupIt = groups.begin();
 
+		comboBoxSearchGroup->clear();
+		comboBoxSearchGroup->addItem( "*" );
+
 		while ( groupIt != groups.end() )
 		{
 			qApp->processEvents();
@@ -150,25 +194,6 @@ namespace asaal
 			comboBoxSearchGroup->addItem( gname );
 
 			++groupIt;
-		}
-
-		QMap<QString, QStringList>::const_iterator colIt = tabelColumns.begin();
-
-		while ( colIt != tabelColumns.end() )
-		{
-			qApp->processEvents();
-
-			columns = QStringList( colIt.value() );
-
-			for ( int i = 0; i < columns.size(); i++ )
-			{
-				qApp->processEvents();
-
-				QString column = columns.value( i );
-				comboBoxSearchColumn->addItem( column );
-			}
-
-			++colIt;
 		}
 	}
 

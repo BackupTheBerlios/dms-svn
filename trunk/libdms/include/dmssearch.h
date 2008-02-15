@@ -89,8 +89,9 @@ namespace asaal
 			QMap<QString, QString> documents;
 			QMap<QString, QString> users;
 			QMap<QString, QString> groups;
-			QMap<QString, QStringList> tabelColumns;
 			QStringList columns;
+
+			QTreeWidgetItem *docItem;
 
 		protected:
 			void closeEvent( QCloseEvent *e );
