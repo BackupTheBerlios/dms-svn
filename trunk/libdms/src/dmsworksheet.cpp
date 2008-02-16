@@ -56,6 +56,9 @@ namespace asaal
 		_dms->clearErrorMessage();
 
 		loadDocuments();
+		
+		QVariant geo = _dms->getApplicationSettings( objectName(), "Geometry", "Position" );
+		qDebug() << geo;
 	}
 
 	DMSWorkSheet::~DMSWorkSheet()
@@ -115,7 +118,20 @@ namespace asaal
 
 	void DMSWorkSheet::closeEvent( QCloseEvent *e )
 	{
-		QString file = QDir::homePath();
+		
+		QList<QWidget *> it( _ws->findChildren<QWidget *>( this->objectName() ) );
+		for ( int a = 0; a < it.size(); ++a )
+		{
+			QWidget *widget = it.value ( a );
+			qDebug() << widget->pos();
+		}
+		
+		int _x = this->x();
+		int _y = this->y();
+		int _width = this->width();
+		int _height = this->height();
+
+		_dms->insertApplicationSettings( objectName(), "Geometry", "Position", QString( "%1" ).arg( _x ) + ";" + QString( "%1" ).arg( _y ) );
 
 		dmsworksheet = NULL;
 		e->accept();
@@ -123,6 +139,8 @@ namespace asaal
 
 	void DMSWorkSheet::loadDocuments()
 	{
+		treeWidgetWorkSheet->clear();
+
 		documents = _dms->geDocuments( _dms->getUserId( _dms->loggedUser ) );
 
 		QMap< QString, QString>::const_iterator docIt = documents.begin();
@@ -292,6 +310,13 @@ namespace asaal
 		else
 		{
 			menu.addAction( acNewDoc );
+			
+			QMap< QString, QString> appFiles = _dms->getApplicationSettings( "UiPreferenceBase", "File associations" );
+			if( appFiles.size() >= 1 )
+				acOpenDoc->setEnabled( true );
+			else
+				acOpenDoc->setEnabled( false );
+			
 			menu.addAction( acOpenDoc );
 
 			QMap<QString, QString> mails = _dms->getApplicationSettings( "UiPreferenceBase", "Mails" );
@@ -310,13 +335,9 @@ namespace asaal
 						acSendMail = new DMSMailAction( mailIt.value(), this );
 
 					acSendMail->setMailAdress( mailIt.key() );
-
 					acSendMail->setSubject( docItem->text( 0 ) );
-
 					acSendMail->setMessage( mailIt.value() );
-
 					acSendMail->setAttachment( docItem->text( 1 ) );
-
 					acSendMail->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/mail_letter_16.png" ) ) );
 
 					connect( acSendMail, SIGNAL( triggered() ), this, SLOT( sendMail() ) );
@@ -330,7 +351,6 @@ namespace asaal
 			}
 
 			menu.addAction( acDeleteDoc );
-
 			menu.addAction( acPrintDoc );
 		}
 

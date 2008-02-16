@@ -36,6 +36,7 @@ namespace asaal
 	DMSystem::DMSystem( const QApplication &app, QMainWindow *parent ) : QMainWindow( parent )
 	{
 		setWindowTitle( tr( "DMS - Doucmnet Management System" ) );
+		setWindowIcon( QPixmap( ":/picture/32/images/32x32/dms_32.png" ) );
 
 		ws = new QWorkspace( this );
 		setCentralWidget( ws );
@@ -61,9 +62,7 @@ namespace asaal
 
 		actionCount = 0;
 
-		createPluginMenu();
-		
-		setWindowIcon( QIcon( "" ) );
+		createPluginMenu();		
 	}
 
 	DMSystem::~DMSystem()

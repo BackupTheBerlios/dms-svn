@@ -326,7 +326,7 @@ namespace asaal
 	void DMSPreference::loadPreferences()
 	{
 		// TODO Load widget geometry (location on screen only (center))
-		move( geometry().center().x() / 2, geometry().center().y() / 2 );
+		
 
 		// TODO Load application and this file-exstansion settings
 		QMap< QString, QString> appFiles = _dms->getApplicationSettings( objectName(), "File associations" );
