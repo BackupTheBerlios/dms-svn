@@ -62,6 +62,8 @@ namespace asaal
 		actionCount = 0;
 
 		createPluginMenu();
+		
+		setWindowIcon( QIcon( "" ) );
 	}
 
 	DMSystem::~DMSystem()

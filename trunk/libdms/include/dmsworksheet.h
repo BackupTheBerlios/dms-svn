@@ -36,6 +36,9 @@
 #include <QtCore>
 #include <QtGui>
 
+class QDragEnterEvent;
+class QDropEvent;
+	
 namespace asaal
 {
 
@@ -73,8 +76,10 @@ namespace asaal
 				return dmsworksheet;
 			}
 
-		private slots:
+		public slots:			
 			void loadDocuments();
+			
+		private slots:
 			void newDocument();
 			void openDocument();
 			void deleteDocument();
@@ -104,7 +109,6 @@ namespace asaal
 
 			QMenu *mnuMail;
 
-			QTimer *docTimer;
 			QAction *acNewDoc;
 			QAction *acOpenDoc;
 			DMSMailAction *acSendMail;
@@ -112,6 +116,11 @@ namespace asaal
 			QAction *acPrintDoc;
 
 		protected:
+			void dragEnterEvent(QDragEnterEvent *event);
+			void dragMoveEvent(QDragMoveEvent *event);
+			void dropEvent(QDropEvent *event);
+			void mousePressEvent(QMouseEvent *event);
+
 			void closeEvent( QCloseEvent *e );
 
 	};

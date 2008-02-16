@@ -124,9 +124,11 @@ namespace asaal
 
 			}
 
-			if ( searchuser == "*" && searchgroup == "*" )
+			if ( searchuser == "*" && searchgroup == "*" && (searchword == "*" || searchword.isEmpty() || searchword.isNull()) )
 			{
-
+				docItem = new QTreeWidgetItem( treeWidgetSearchDocument );
+				docItem->setText( 0, docname );
+				docItem->setText( 1, updated );
 			}
 
 			if ( searchuser == "*" )

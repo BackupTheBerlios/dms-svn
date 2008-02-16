@@ -27,6 +27,7 @@
 
 #include <libdms.h>
 #include <dmsmailaction.h>
+#include <dmsdocument.h>
 
 #include <QtCore>
 #include <QtGui>
@@ -47,20 +48,69 @@ namespace asaal
 		connect( treeWidgetWorkSheet, SIGNAL( customContextMenuRequested( QPoint ) ), this, SLOT( treeWidgetWorkSheetMenu( QPoint ) ) );
 		connect( treeWidgetWorkSheet, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetWorkSheetItem( QTreeWidgetItem *, int ) ) );
 
+		setAcceptDrops( true );
+		treeWidgetWorkSheet->setAcceptDrops( true );
+
 		createMenuAction();
-		loadDocuments();
 
 		_dms->clearErrorMessage();
 
-		//docTimer = new QTimer( this );
-		//connect( docTimer, SIGNAL( timeout() ), this, SLOT( loadDocuments() ) );
-		//docTimer->start( 5000 );
 		loadDocuments();
 	}
 
 	DMSWorkSheet::~DMSWorkSheet()
 	{
 		dmsworksheet = NULL;
+	}
+
+
+	void DMSWorkSheet::dragEnterEvent( QDragEnterEvent *event )
+	{
+		event->acceptProposedAction();
+	}
+
+	void DMSWorkSheet::dragMoveEvent( QDragMoveEvent *event )
+	{
+		event->acceptProposedAction();
+	}
+
+	void DMSWorkSheet::dropEvent( QDropEvent *event )
+	{
+		QString filePath = event->mimeData()->text();
+
+		if ( filePath.startsWith( "file://" ) )
+		{
+			filePath = filePath.replace( "file://", "" );
+		}
+
+		QFile f( filePath );
+		if ( !f.open( QIODevice::ReadOnly ) )
+		{
+			showErrorMsg( tr( "This is not a file, only files would supported!" ) );
+			return;
+		}
+
+		if ( !dmsdocument )
+		{
+			dmsdocument = new DMSDocument( _dms );
+			QFileInfo fileName( filePath );
+			dmsdocument->lineEditDocumentName->setText( fileName.fileName().split( "." ).value( 0 ) );
+			dmsdocument->lineEditDocumentPath->setText( filePath );
+			_ws->addWindow( dmsdocument );
+			dmsdocument->show();
+		}
+		else
+		{
+			QFileInfo fileName( filePath );
+			dmsdocument->lineEditDocumentName->setText( fileName.fileName().split( "." ).value( 0 ) );
+			dmsdocument->lineEditDocumentPath->setText( filePath );
+			dmsdocument->setFocus( Qt::ActiveWindowFocusReason );
+		}
+	}
+
+	void DMSWorkSheet::mousePressEvent( QMouseEvent *event )
+	{
+		event->ignore();
 	}
 
 	void DMSWorkSheet::closeEvent( QCloseEvent *e )
@@ -88,20 +138,16 @@ namespace asaal
 			QString updated = docIt.value().split( "#" ).value( 4 );
 			QString checkedout = docIt.value().split( "#" ).value( 5 );
 
-			if ( !isDocumentAvailabel( docname ) )
-			{
-				docItem = new QTreeWidgetItem( getGroupItem( gname ) );
-				docItem->setText( 0, docname );
-				docItem->setText( 1, docpath );
-				docItem->setText( 2, updated );
-
-				if ( checkedout == "0" )
-					docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-closed_16.png" ) ) );
-				else
-					if ( checkedout == "1" )
-						docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-open_16.png" ) ) );
-			}
-
+			docItem = new QTreeWidgetItem( getGroupItem( gname ) );
+			docItem->setText( 0, docname );
+			docItem->setText( 1, docpath );
+			docItem->setText( 2, updated );
+			
+			if ( checkedout == "0" )
+				docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-closed_16.png" ) ) );
+			else if ( checkedout == "1" )
+				docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-open_16.png" ) ) );
+			
 			++docIt;
 		}
 	}
@@ -159,12 +205,14 @@ namespace asaal
 				_dms->deleteDocument( docid, userid );
 
 				delete docItem;
+
 				break;
 
 			case 1:               // Link, List && Document from harddisk
 				_dms->deleteDocument( docid, userid );
 
 				delete docItem;
+
 				break;
 
 			case 2:               // Cancel clicked or Escape pressed
@@ -187,6 +235,7 @@ namespace asaal
 
 #else
 		QMessageBox::information( this, tr( "DMS - Worksheet" ), tr( "Print document is not implemented yet!" ) );
+
 #endif
 	}
 
@@ -261,9 +310,13 @@ namespace asaal
 						acSendMail = new DMSMailAction( mailIt.value(), this );
 
 					acSendMail->setMailAdress( mailIt.key() );
+
 					acSendMail->setSubject( docItem->text( 0 ) );
+
 					acSendMail->setMessage( mailIt.value() );
+
 					acSendMail->setAttachment( docItem->text( 1 ) );
+
 					acSendMail->setIcon( QIcon ( QString::fromUtf8 ( ":/picture/16/images/16x16/mail_letter_16.png" ) ) );
 
 					connect( acSendMail, SIGNAL( triggered() ), this, SLOT( sendMail() ) );
@@ -277,6 +330,7 @@ namespace asaal
 			}
 
 			menu.addAction( acDeleteDoc );
+
 			menu.addAction( acPrintDoc );
 		}
 

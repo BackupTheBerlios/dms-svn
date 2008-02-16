@@ -26,6 +26,8 @@
 #include <dmsdocument.h>
 
 #include <libdms.h>
+#include <dmsworksheet.h>
+
 #include <XMLPreferences.h>
 
 #include <QtCore>
@@ -156,6 +158,9 @@ namespace asaal
 		lineEditDocumentPath->setText( "" );
 
 		newDocumentId();
+		
+		if( dmsworksheet )
+			dmsworksheet->loadDocuments();
 	}
 
 	void DMSDocument::updateDocument()
@@ -217,6 +222,9 @@ namespace asaal
 		lineEditDocumentPath->setText( "" );
 
 		newDocumentId();
+
+		if( dmsworksheet )
+			dmsworksheet->loadDocuments();
 	}
 
 	void DMSDocument::deleteDocument()
@@ -244,6 +252,9 @@ namespace asaal
 		lineEditDocumentPath->setText( "" );
 
 		newDocumentId();
+
+		if( dmsworksheet )
+			dmsworksheet->loadDocuments();
 	}
 
 	void DMSDocument::selectDocument()
