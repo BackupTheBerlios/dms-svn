@@ -26,18 +26,21 @@
 #ifndef DMSDOCUMENT_H
 #define DMSDOCUMENT_H
 
-#include <dllexport.h>
-
 #include <ui_document.h>
 
+#include <dllexport.h>
 #include <libdms.h>
+
+#ifdef Q_OS_WIN32
+#else
+	#include <sane_widget.h>
+#endif
 
 #include <QtCore>
 #include <QtGui>
 
 namespace asaal
 {
-
 	class EXPORT_ASAAL DMSDocument;
 
 #ifdef Q_OS_WIN32
@@ -64,16 +67,17 @@ namespace asaal
 			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 		public:
-			DMSDocument( LibDMS *dms, QWidget *parent = 0L );
+			DMSDocument( LibDMS *dms, QWorkspace *ws, QWidget *parent = 0L );
 			~DMSDocument();
 
 			/*!
 			 * Get the external instance of @sa DMSDocument
 			 */
-			static DMSDocument *dmsdocument_instance()
-			{
-				return dmsdocument;
-			}
+			static DMSDocument *dmsdocument_instance() { return dmsdocument; }
+
+		public slots:
+			void loadUser();
+			void loadGroups();
 
 		private slots:
 			void addDocument();
@@ -81,9 +85,16 @@ namespace asaal
 			void deleteDocument();
 			void selectDocument();
 			void newDocumentId();
+			
+			void newUser();
+			void newGroup();
+			
+			void scanDocuument();
+			void scanStart();
+			void scanEnd();
+			void scanFailed();
+			void imageReady();	
 
-			void loadUser();
-			void loadGroups();
 			void loadDocuments();
 
 			void treeWidgetDocumentItem( QTreeWidgetItem *, int );
@@ -93,6 +104,7 @@ namespace asaal
 
 		private:
 			LibDMS *_dms;
+			QWorkspace *_ws;
 
 			QMap<QString, QString> users;
 			QMap<QString, QString> groups;
@@ -100,6 +112,18 @@ namespace asaal
 
 			QTreeWidgetItem *docItem;
 
+#ifdef Q_OS_WIN32
+
+#else
+			SaneWidget *m_sanew;
+			QProgressDialog *m_progressDialog;
+			QWidget *m_scanWidget;
+
+			QRect scanRect;
+			int scanLeft;
+			int scanTop;
+#endif
+			
 		protected:
 			void closeEvent( QCloseEvent *e );
 

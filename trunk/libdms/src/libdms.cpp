@@ -1060,7 +1060,7 @@ namespace asaal
 	{
 		if ( !dmsdocument )
 		{
-			dmsdocument = new DMSDocument( this );
+			dmsdocument = new DMSDocument( this, ws );
 			ws->addWindow( dmsdocument );
 			dmsdocument->show();
 		}

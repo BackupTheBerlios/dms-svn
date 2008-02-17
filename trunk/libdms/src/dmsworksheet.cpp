@@ -102,7 +102,7 @@ namespace asaal
 
 		if ( !dmsdocument )
 		{
-			dmsdocument = new DMSDocument( _dms );
+			dmsdocument = new DMSDocument( _dms, _ws );
 			dmsdocument->lineEditDocumentName->setText( fi.fileName().split( "." ).value( 0 ) );
 			dmsdocument->lineEditDocumentPath->setText( fi.filePath() );
 			_ws->addWindow( dmsdocument );

@@ -2,7 +2,7 @@
  *   Copyright (C) 2007-2008 by Alexander Saal                             *
  *   alex.saal@gmx.de                                                      *
  *                                                                         *
- *   File: ${filename}.${extension}                                        *
+ *   File: dmsdocument.h                                                   *
  *   Desc: ${description}                                                  *
  *                                                                         *
  *   This file is part of DMS - Documnet Management System                 *
@@ -24,11 +24,16 @@
  ***************************************************************************/
 
 #include <dmsdocument.h>
-
-#include <libdms.h>
+#include <dmsgroup.h>
+#include <dmsuser.h>
 #include <dmsworksheet.h>
 
-#include <XMLPreferences.h>
+#include <libdms.h>
+
+#ifdef Q_OS_WIN32
+#else
+#include <sane_widget.h>
+#endif
 
 #include <QtCore>
 #include <QtGui>
@@ -36,20 +41,24 @@
 namespace asaal
 {
 	DMSDocument *dmsdocument = NULL;
-	DMSDocument::DMSDocument( LibDMS *dms, QWidget *parent ) : QWidget( parent )
+	DMSDocument::DMSDocument( LibDMS *dms, QWorkspace *ws, QWidget *parent ) : QWidget( parent )
 	{
 		setupUi( this );
 		dmsdocument = this;
 
 		_dms = dms;
+		_ws = ws;
 
 		connect( treeWidgetDocument, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetDocumentItem( QTreeWidgetItem *, int ) ) );
 
+		connect( btnUser, SIGNAL( clicked() ), this, SLOT( newUser() ) );
+		connect( btnGroup, SIGNAL( clicked() ), this, SLOT( newGroup() ) );
+		connect( btnScan, SIGNAL( clicked() ), this, SLOT( scanDocuument() ) );
 		connect( btnDocId, SIGNAL( clicked() ), this, SLOT( newDocumentId() ) );
 		connect( btnAddDocument, SIGNAL( clicked() ), this, SLOT( addDocument() ) );
 		connect( btnUpdateDocument, SIGNAL( clicked() ), this, SLOT( updateDocument() ) );
 		connect( btnDeleteDocument, SIGNAL( clicked() ), this, SLOT( deleteDocument() ) );
-		connect( btnSelectDocument, SIGNAL( clicked() ), this, SLOT( selectDocument() ) );		
+		connect( btnSelectDocument, SIGNAL( clicked() ), this, SLOT( selectDocument() ) );
 		connect( btnOk, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
 		connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
 
@@ -60,6 +69,12 @@ namespace asaal
 		newDocumentId();
 
 		_dms->clearErrorMessage();
+
+#ifdef Q_OS_WIN32
+		btnScan->setEnabled( false ); // FIXME disable at this time ....
+#else
+		btnScan->setEnabled( true );
+#endif
 	}
 
 	DMSDocument::~DMSDocument()
@@ -69,161 +84,164 @@ namespace asaal
 
 	void DMSDocument::closeEvent( QCloseEvent *e )
 	{
-		QString file = QDir::homePath();
-
-		QDir pref( file + "/.dms/settings" );
-		if( !pref.exists() )
-			pref.mkpath( file + "/.dms/settings" );
-
-		file.append ( "/.dms/settings/" + objectName() + ".xml" );
-
-		XMLPreferences widgetSettings( objectName() );
-		widgetSettings.setVersion( "1.0" );
-		widgetSettings.setRect( objectName(), this->rect() );
-		widgetSettings.save( file );
-
 		dmsdocument = NULL;
-		comboBoxUser->clear();
 		e->accept();
 	}
 
 	void DMSDocument::addDocument()
 	{
-		if( comboBoxUser->currentText().isNull() || comboBoxUser->currentText().isEmpty() )
+		if ( comboBoxUser->currentText().isNull() || comboBoxUser->currentText().isEmpty() )
 		{
 			showErrorMsg( tr( "Please select a user." ) );
 			return;
 		}
 
-		if( comboBoxGroup->currentText().isNull() || comboBoxGroup->currentText().isEmpty() )
+		if ( comboBoxGroup->currentText().isNull() || comboBoxGroup->currentText().isEmpty() )
 		{
 			showErrorMsg( tr( "Please select a group." ) );
 			return;
 		}
 
 		QString userid = QString( "" );
+
 		QMap< QString, QString>::const_iterator userIt = users.begin();
-		while( userIt != users.end() )
+
+		while ( userIt != users.end() )
 		{
 			qApp->processEvents();
-			QString fname = userIt.value().split( "#" ).value(2);
-			QString nname = userIt.value().split( "#" ).value(3);
+			QString fname = userIt.value().split( "#" ).value( 2 );
+			QString nname = userIt.value().split( "#" ).value( 3 );
 
 			QString completename = nname + ", " +  fname;
 
-			if( completename == comboBoxUser->currentText() )
+			if ( completename == comboBoxUser->currentText() )
 			{
 				userid = userIt.key();
 				break;
 			}
-			
+
 			++userIt;
 		}
 
 		QString docid = lineEditDocumentId->text();
+
 		QString docname = lineEditDocumentName->text();
 		QString docpath = lineEditDocumentPath->text();
-		
-		if( docname.isNull() || docname.isEmpty() )
+
+		if ( docname.isNull() || docname.isEmpty() )
 		{
 			showErrorMsg( tr( "Please enter document name." ) );
 			lineEditDocumentName->setFocus();
 			lineEditDocumentName->setSelection( 0, lineEditDocumentName->text().length() );
 			return;
 		}
-		else if( docpath.isNull() || docpath.isEmpty() )
-		{
-			showErrorMsg( tr( "Please select a document." ) );
-			lineEditDocumentPath->setFocus();
-			lineEditDocumentPath->setSelection( 0, lineEditDocumentPath->text().length() );
-			return;
-		}
+		else
+			if ( docpath.isNull() || docpath.isEmpty() )
+			{
+				showErrorMsg( tr( "Please select a document." ) );
+				lineEditDocumentPath->setFocus();
+				lineEditDocumentPath->setSelection( 0, lineEditDocumentPath->text().length() );
+				return;
+			}
 
 		// add document to the list
 		docItem = new QTreeWidgetItem( treeWidgetDocument );
+
 		docItem->setText( 0, comboBoxUser->currentText() );
+
 		docItem->setText( 1, docname );
+
 		docItem->setText( 2, comboBoxGroup->currentText() );
+
 		docItem->setText( 3, docpath );
 
 		QString groupid = _dms->getGroupId( comboBoxGroup->currentText() );
+
 		_dms->insertDocument( docid, userid, groupid, docname, docpath );
 
-		if( !_dms->getErrorMessage().isEmpty() )
+		if ( !_dms->getErrorMessage().isEmpty() )
 			showErrorMsg( _dms->getErrorMessage() );
 
 		_dms->clearErrorMessage();
 
 		lineEditDocumentName->setText( "" );
+
 		lineEditDocumentPath->setText( "" );
 
 		newDocumentId();
-		
-		if( dmsworksheet )
+
+		if ( dmsworksheet )
 			dmsworksheet->loadDocuments();
 	}
 
 	void DMSDocument::updateDocument()
 	{
 		docItem = treeWidgetDocument->currentItem();
-		if( docItem == NULL )
+
+		if ( docItem == NULL )
 		{
 			showErrorMsg( tr( "No document was selected." ) );
 			return;
 		}
 
 		QString username = comboBoxUser->currentText();
+
 		QString docname = lineEditDocumentName->text();
 		QString groupname = comboBoxGroup->currentText();
 		QString docpath = lineEditDocumentPath->text();
-		
-		if( username.isNull() || username.isEmpty() )
+
+		if ( username.isNull() || username.isEmpty() )
 		{
 			showErrorMsg( tr( "Please select a user." ) );
 			comboBoxUser->setFocus();
 			return;
 		}
-		if( docname.isNull() || docname.isEmpty() )
+
+		if ( docname.isNull() || docname.isEmpty() )
 		{
 			showErrorMsg( tr( "Please enter document name." ) );
 			lineEditDocumentName->setFocus();
 			lineEditDocumentName->setSelection( 0, lineEditDocumentName->text().length() );
 			return;
 		}
-		else if( groupname.isNull() || groupname.isEmpty() )
-		{
-			showErrorMsg( tr( "Please select a group." ) );
-			comboBoxGroup->setFocus();
-			return;
-		}
-		else if( docpath.isNull() || docpath.isEmpty() )
-		{
-			showErrorMsg( tr( "Please select a document path." ) );
-			lineEditDocumentPath->setFocus();
-			lineEditDocumentPath->setSelection( 0, lineEditDocumentPath->text().length() );
-			return;
-		}
+		else
+			if ( groupname.isNull() || groupname.isEmpty() )
+			{
+				showErrorMsg( tr( "Please select a group." ) );
+				comboBoxGroup->setFocus();
+				return;
+			}
+			else
+				if ( docpath.isNull() || docpath.isEmpty() )
+				{
+					showErrorMsg( tr( "Please select a document path." ) );
+					lineEditDocumentPath->setFocus();
+					lineEditDocumentPath->setSelection( 0, lineEditDocumentPath->text().length() );
+					return;
+				}
 
 		docItem->setText( 0, username );
+
 		docItem->setText( 1, docname );
 		docItem->setText( 2, groupname );
-		docItem->setText( 3, docpath );	
+		docItem->setText( 3, docpath );
 
 		QString groupid = _dms->getGroupId( groupname );
 		QString userid = _dms->getUserId( username );
 		_dms->updateDocument( lineEditDocumentId->text(), userid, groupid, docname, docpath );
 
-		if( !_dms->getErrorMessage().isEmpty() )
+		if ( !_dms->getErrorMessage().isEmpty() )
 			showErrorMsg( _dms->getErrorMessage() );
 
 		_dms->clearErrorMessage();
 
 		lineEditDocumentName->setText( "" );
+
 		lineEditDocumentPath->setText( "" );
 
 		newDocumentId();
 
-		if( dmsworksheet )
+		if ( dmsworksheet )
 			dmsworksheet->loadDocuments();
 	}
 
@@ -231,17 +249,18 @@ namespace asaal
 	{
 		docItem = treeWidgetDocument->currentItem();
 
-		if( docItem == NULL )
+		if ( docItem == NULL )
 		{
 			showErrorMsg( tr( "No document was selected." ) );
 			return;
 		}
 
 		QString userid = _dms->getUserId( docItem->text( 0 ) );
+
 		QString docid = _dms->getDocId( userid, docItem->text( 1 ) );
 		_dms->deleteDocument( docid, userid );
 
-		if( !_dms->getErrorMessage().isEmpty() )
+		if ( !_dms->getErrorMessage().isEmpty() )
 			showErrorMsg( _dms->getErrorMessage() );
 		else
 			delete docItem;
@@ -249,23 +268,25 @@ namespace asaal
 		_dms->clearErrorMessage();
 
 		lineEditDocumentName->setText( "" );
+
 		lineEditDocumentPath->setText( "" );
 
 		newDocumentId();
 
-		if( dmsworksheet )
+		if ( dmsworksheet )
 			dmsworksheet->loadDocuments();
 	}
 
 	void DMSDocument::selectDocument()
 	{
 		QString document = QFileDialog::getOpenFileName ( this, tr ( "Open document file" ), QDir::homePath(), tr ( "All files (*.*)" ) );
+
 		if ( document.isEmpty() )
 			return ;
 
 		lineEditDocumentPath->setText( document );
 
-		if( lineEditDocumentName->text().isNull() || lineEditDocumentName->text().isEmpty() || lineEditDocumentName->text().length() <= 0 )
+		if ( lineEditDocumentName->text().isNull() || lineEditDocumentName->text().isEmpty() || lineEditDocumentName->text().length() <= 0 )
 		{
 			QFileInfo docInfo( document );
 			lineEditDocumentName->setText( docInfo.fileName() );
@@ -276,6 +297,209 @@ namespace asaal
 	{
 		lineEditDocumentId->setText( QUuid::createUuid().toString().replace( "-", "" ).replace( "{", "" ).replace( "}", "" ) );
 	}
+
+	void DMSDocument::newUser()
+	{
+		if ( !dmsuser )
+		{
+			dmsuser = new DMSUser( _dms );
+			_ws->addWindow( dmsuser );
+			dmsuser->show();
+		}
+		else
+		{
+			dmsuser->setFocus( Qt::ActiveWindowFocusReason );
+		}
+	}
+
+	void DMSDocument::newGroup()
+	{
+		if ( !dmsgroup )
+		{
+			dmsgroup = new DMSGroup( _dms );
+			_ws->addWindow( dmsgroup );
+			dmsgroup->show();
+		}
+		else
+		{
+			dmsgroup->setFocus( Qt::ActiveWindowFocusReason );
+		}
+	}
+
+	void DMSDocument::scanDocuument()
+	{
+#ifdef Q_OS_WIN32
+		// FIXME add code here to scan under windows ....
+#else
+		QApplication::setOverrideCursor( Qt::WaitCursor );
+		qApp->processEvents();
+
+		m_progressDialog = NULL;
+		QString device( "" );
+
+		// Scanning dialog
+		m_scanWidget = new QWidget( 0 );
+
+		QVBoxLayout *wlayout = new QVBoxLayout( m_scanWidget );
+		QHBoxLayout *btn_layout = new QHBoxLayout;
+
+		QFrame *separator = new QFrame( m_scanWidget );
+		separator->setFrameShape( QFrame::HLine );
+		separator->setFrameShadow( QFrame::Sunken );
+
+		m_sanew = new SaneWidget( m_scanWidget );
+
+		if ( m_sanew->openDevice( device ) == FALSE )
+		{
+			QString dev = m_sanew->selectDevice( NULL );
+
+			if ( m_sanew->openDevice( dev ) == FALSE )
+			{
+				QErrorMessage *err = new QErrorMessage( this );
+				err->showMessage( QString( "Opening the selected scanner failed!" ) );
+
+				if ( m_scanWidget != NULL )
+				{
+					delete( m_scanWidget );
+					m_scanWidget = NULL;
+				}
+
+				if ( m_sanew != NULL )
+				{
+					delete( m_sanew );
+					m_sanew = NULL;
+				}
+
+				return;
+			}
+
+			m_scanWidget->setWindowTitle( tr( "Scanwidget ... " ) + dev );
+		}
+
+
+		connect( m_sanew, SIGNAL( scanStart() ), this, SLOT( scanStart() ) );
+
+		connect( m_sanew, SIGNAL( scanFaild() ), this, SLOT( scanFailed() ) );
+		connect( m_sanew, SIGNAL( scanDone() ), this, SLOT( scanEnd() ) );
+		connect( m_sanew, SIGNAL( imageReady() ), this, SLOT( imageReady() ) );
+
+		m_sanew->setIconColorMode( QIcon( ":/scanimages/images/scanimages/color.png" ) );
+		m_sanew->setIconGrayMode( QIcon( ":/scanimages/images/scanimages/gray.png" ) );
+		m_sanew->setIconBWMode( QIcon( ":/scanimages/images/scanimages/black_white.png" ) );
+		m_sanew->setIconPreview( QIcon( ":/scanimages/images/scanimages/eye.png" ) );
+		m_sanew->setIconFinal( QIcon( ":/scanimages/images/scanimages/filesave.png" ) );
+		m_sanew->setIconZoomIn( QIcon( ":/scanimages/images/scanimages/viewmag+.png" ) );
+		m_sanew->setIconZoomOut( QIcon( ":/scanimages/images/scanimages/viewmag-.png" ) );
+		m_sanew->setIconZoomSel( QIcon( ":/scanimages/images/scanimages/viewmagfit.png" ) );
+		m_sanew->setIconZoomFit( QIcon( ":/scanimages/images/scanimages/view_fit_window.png" ) );
+
+		wlayout->setMargin( 2 );
+		wlayout->setSpacing( 2 );
+		wlayout->addWidget( m_sanew );
+		wlayout->addWidget( separator );
+		wlayout->addLayout( btn_layout );
+
+		// center scan widget on screen
+		QDesktopWidget *desktop = qApp->desktop();
+		const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
+		int left = ( rect.width() - width() ) / 2;
+		int top = ( rect.height() - height() ) / 2;
+	
+		scanRect = rect;
+		scanLeft = left;
+		scanTop = top;
+		
+		m_scanWidget->setGeometry( scanLeft + 100, scanTop + 100, width(), height() );
+		m_scanWidget->show();
+		QApplication::restoreOverrideCursor();
+#endif
+	}
+
+	void DMSDocument::scanStart()
+	{
+#ifdef Q_OS_WIN32
+		// FIXME add code here to scan under windows ....
+#else
+		QApplication::setOverrideCursor( Qt::WaitCursor );
+
+		if ( m_progressDialog == NULL )
+		{
+			m_progressDialog = new QProgressDialog( NULL );
+		}
+
+		m_progressDialog->setWindowTitle( tr( "Scanning document ..." ) );
+
+		m_progressDialog->setCancelButtonText( tr( "Cancel" ) );
+		m_progressDialog->setMaximum( PROGRESS_MAX );
+		m_progressDialog->setMinimum( PROGRESS_MIN );
+
+		if ( m_sanew )
+		{
+			connect( m_progressDialog, SIGNAL( canceled() ), m_sanew, SLOT( scanCancel() ) );
+			connect( m_sanew, SIGNAL( scanProgress( int ) ), m_progressDialog, SLOT( setValue( int ) ) );
+		}
+
+		m_progressDialog->show();
+
+		QApplication::restoreOverrideCursor();
+#endif
+	}
+
+	void DMSDocument::scanEnd()
+	{
+#ifdef Q_OS_WIN32
+		// FIXME add code here to scan under windows ....
+#else
+
+		if ( m_progressDialog != NULL )
+		{
+			delete( m_progressDialog );
+			m_progressDialog = NULL;
+		}
+
+#endif
+	}
+
+	void DMSDocument::scanFailed()
+	{
+#ifdef Q_OS_WIN32
+		// FIXME add code here to scan under windows ....
+#else
+
+		if ( m_progressDialog != NULL )
+		{
+			delete( m_progressDialog );
+			m_progressDialog = NULL;
+		}
+
+		QMessageBox mb( "SaneWidget",
+
+		                "Scanning failed!\n",
+		                QMessageBox::Critical,
+		                QMessageBox::Ok | QMessageBox::Default,
+		                QMessageBox::NoButton,
+		                QMessageBox::NoButton );
+		mb.exec();
+#endif
+	}
+
+	void DMSDocument::imageReady()
+	{
+#ifdef Q_OS_WIN32
+		// FIXME add code here to scan under windows ....
+#else
+		QPixmap pix = QPixmap::fromImage( *( m_sanew->getFinalImage() ) );
+
+		if ( !pix.isNull() )
+		{
+			// Close scanwidget
+			m_scanWidget->close();
+
+			// Work with object "pix"
+		}
+#endif
+	}
+
 
 	void DMSDocument::treeWidgetDocumentItem( QTreeWidgetItem *item, int column )
 	{
@@ -292,25 +516,28 @@ namespace asaal
 
 		int groupIndex = comboBoxGroup->findText( item->text( 2 ), Qt::MatchExactly );
 
-		if( groupIndex >= 0 )
+		if ( groupIndex >= 0 )
 			comboBoxGroup->setCurrentIndex( groupIndex );
 	}
 
 	void DMSDocument::showErrorMsg( const QString &error )
 	{
-		QMessageBox::critical( this, tr( "DMS - Document"), error );
+		QMessageBox::critical( this, tr( "DMS - Document" ), error );
 	}
 
 	void DMSDocument::loadUser()
 	{
+		comboBoxUser->clear();
+
 		users = _dms->geUsers();
 
 		QMap< QString, QString>::const_iterator userIt = users.begin();
-		while( userIt != users.end() )
+
+		while ( userIt != users.end() )
 		{
 			qApp->processEvents();
-			QString fname = userIt.value().split( "#" ).value(2);
-			QString nname = userIt.value().split( "#" ).value(3);
+			QString fname = userIt.value().split( "#" ).value( 2 );
+			QString nname = userIt.value().split( "#" ).value( 3 );
 
 			comboBoxUser->addItem( nname + ", " +  fname );
 			++userIt;
@@ -319,13 +546,16 @@ namespace asaal
 
 	void DMSDocument::loadGroups()
 	{
+		comboBoxGroup->clear();
+
 		groups = _dms->getGroups();
 
 		QMap< QString, QString>::const_iterator groupIt = groups.begin();
-		while( groupIt != groups.end() )
+
+		while ( groupIt != groups.end() )
 		{
 			qApp->processEvents();
-			QString gname = groupIt.value().split( "#" ).value(0);
+			QString gname = groupIt.value().split( "#" ).value( 0 );
 
 			comboBoxGroup->addItem( gname );
 			++groupIt;
@@ -334,17 +564,20 @@ namespace asaal
 
 	void DMSDocument::loadDocuments()
 	{
+		treeWidgetDocument->clear();
+
 		documents = _dms->geDocuments( _dms->getUserId( _dms->loggedUser ) );
 
 		QMap< QString, QString>::const_iterator docIt = documents.begin();
-		while( docIt != documents.end() )
+
+		while ( docIt != documents.end() )
 		{
 			qApp->processEvents();
 
-			QString uname = docIt.value().split( "#" ).value(0);
-			QString docname = docIt.value().split( "#" ).value(2);
-			QString gname = docIt.value().split( "#" ).value(1);
-			QString docpath = docIt.value().split( "#" ).value(3);
+			QString uname = docIt.value().split( "#" ).value( 0 );
+			QString docname = docIt.value().split( "#" ).value( 2 );
+			QString gname = docIt.value().split( "#" ).value( 1 );
+			QString docpath = docIt.value().split( "#" ).value( 3 );
 
 			docItem = new QTreeWidgetItem( treeWidgetDocument );
 			docItem->setText( 0, uname );

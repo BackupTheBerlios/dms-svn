@@ -90,6 +90,7 @@ unix {
 	MOC_DIR	+= ../build/libdms/unix/moc
 	OBJECTS_DIR += ../build/libdms/unix/obj
 	UI_DIR	+= ../build/libdms/unix/ui
+	LIBS += -L/usr/lib -lsanewidget
 }
 
 # Windows settings
