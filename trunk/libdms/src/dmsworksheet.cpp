@@ -85,11 +85,13 @@ namespace asaal
 		if( filePath.isNull() || filePath.isEmpty() )
 			filePath = QString( fileName.data() ).trimmed();
 
+#ifdef Q_OS_WIN32
 		if ( filePath.startsWith( "file:///" ) )
 			filePath = filePath.replace( "file:///", "" ).trimmed();
-
+#else
 		if ( filePath.startsWith( "file://" ) )
 			filePath = filePath.replace( "file://", "" ).trimmed();
+#endif
 
 		QFileInfo fi( filePath.trimmed() );
 		if( fi.isDir() )
