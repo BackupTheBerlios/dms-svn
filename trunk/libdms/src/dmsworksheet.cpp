@@ -56,7 +56,7 @@ namespace asaal
 		_dms->clearErrorMessage();
 
 		loadDocuments();
-		
+
 		QVariant geo = _dms->getApplicationSettings( objectName(), "Geometry", "Position" );
 		qDebug() << geo;
 	}
@@ -80,33 +80,36 @@ namespace asaal
 	void DMSWorkSheet::dropEvent( QDropEvent *event )
 	{
 		QString filePath = event->mimeData()->text();
+		QByteArray fileName = event->mimeData()->data( "text/uri-list" );
+
+		if( filePath.isNull() || filePath.isEmpty() )
+			filePath = QString( fileName.data() ).trimmed();
+
+		if ( filePath.startsWith( "file:///" ) )
+			filePath = filePath.replace( "file:///", "" ).trimmed();
 
 		if ( filePath.startsWith( "file://" ) )
-		{
-			filePath = filePath.replace( "file://", "" );
-		}
+			filePath = filePath.replace( "file://", "" ).trimmed();
 
-		QFile f( filePath );
-		if ( !f.open( QIODevice::ReadOnly ) )
+		QFileInfo fi( filePath.trimmed() );
+		if( fi.isDir() )
 		{
-			showErrorMsg( tr( "This is not a file, only files would supported!" ) );
+			QMessageBox::critical( this, tr( "DMS - Worksheet" ), tr( "Directory is not supported by drag & drop action." ) );
 			return;
 		}
 
 		if ( !dmsdocument )
 		{
 			dmsdocument = new DMSDocument( _dms );
-			QFileInfo fileName( filePath );
-			dmsdocument->lineEditDocumentName->setText( fileName.fileName().split( "." ).value( 0 ) );
-			dmsdocument->lineEditDocumentPath->setText( filePath );
+			dmsdocument->lineEditDocumentName->setText( fi.fileName().split( "." ).value( 0 ) );
+			dmsdocument->lineEditDocumentPath->setText( fi.filePath() );
 			_ws->addWindow( dmsdocument );
 			dmsdocument->show();
 		}
 		else
 		{
-			QFileInfo fileName( filePath );
-			dmsdocument->lineEditDocumentName->setText( fileName.fileName().split( "." ).value( 0 ) );
-			dmsdocument->lineEditDocumentPath->setText( filePath );
+			dmsdocument->lineEditDocumentName->setText( fi.fileName().split( "." ).value( 0 ) );
+			dmsdocument->lineEditDocumentPath->setText( fi.filePath() );
 			dmsdocument->setFocus( Qt::ActiveWindowFocusReason );
 		}
 	}
@@ -118,14 +121,14 @@ namespace asaal
 
 	void DMSWorkSheet::closeEvent( QCloseEvent *e )
 	{
-		
+
 		QList<QWidget *> it( _ws->findChildren<QWidget *>( this->objectName() ) );
 		for ( int a = 0; a < it.size(); ++a )
 		{
 			QWidget *widget = it.value ( a );
 			qDebug() << widget->pos();
 		}
-		
+
 		int _x = this->x();
 		int _y = this->y();
 		int _width = this->width();
@@ -160,12 +163,12 @@ namespace asaal
 			docItem->setText( 0, docname );
 			docItem->setText( 1, docpath );
 			docItem->setText( 2, updated );
-			
+
 			if ( checkedout == "0" )
 				docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-closed_16.png" ) ) );
 			else if ( checkedout == "1" )
 				docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-open_16.png" ) ) );
-			
+
 			++docIt;
 		}
 	}
@@ -215,26 +218,26 @@ namespace asaal
 		switch ( QMessageBox::information ( this, tr( "DMS" ), question, tr( "Document from database" ), tr( "Document from harddisk" ), tr( "Cancel" ), 0, 2 ) )
 		{
 
-			case 0:               // Link, List && Harddisk
+		case 0:               // Link, List && Harddisk
 
-				if ( docfile.exists() )
-					docfile.remove();
+			if ( docfile.exists() )
+				docfile.remove();
 
-				_dms->deleteDocument( docid, userid );
+			_dms->deleteDocument( docid, userid );
 
-				delete docItem;
+			delete docItem;
 
-				break;
+			break;
 
-			case 1:               // Link, List && Document from harddisk
-				_dms->deleteDocument( docid, userid );
+		case 1:               // Link, List && Document from harddisk
+			_dms->deleteDocument( docid, userid );
 
-				delete docItem;
+			delete docItem;
 
-				break;
+			break;
 
-			case 2:               // Cancel clicked or Escape pressed
-				return;
+		case 2:               // Cancel clicked or Escape pressed
+			return;
 		}
 	}
 
@@ -310,13 +313,13 @@ namespace asaal
 		else
 		{
 			menu.addAction( acNewDoc );
-			
+
 			QMap< QString, QString> appFiles = _dms->getApplicationSettings( "UiPreferenceBase", "File associations" );
 			if( appFiles.size() >= 1 )
 				acOpenDoc->setEnabled( true );
 			else
 				acOpenDoc->setEnabled( false );
-			
+
 			menu.addAction( acOpenDoc );
 
 			QMap<QString, QString> mails = _dms->getApplicationSettings( "UiPreferenceBase", "Mails" );
