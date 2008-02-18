@@ -119,7 +119,6 @@ unix {
 	HEADERS	+= sanewidget/radio_select.h
 	HEADERS	+= sanewidget/sane_option.h
 	HEADERS	+= sanewidget/sane_widget.h
-
 }
 
 # Windows settings
