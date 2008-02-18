@@ -30,6 +30,11 @@
 
 #include <libdms.h>
 
+#ifdef Q_OS_WIN32
+#else
+#include "sane_widget.h"
+#endif
+
 #include <QtCore>
 #include <QtGui>
 
@@ -45,6 +50,8 @@ namespace asaal
 		_ws = ws;
 
 		connect( treeWidgetDocument, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetDocumentItem( QTreeWidgetItem *, int ) ) );
+
+		connect( btnScan, SIGNAL( clicked() ), this, SLOT( scanDocument() ) );
 
 		connect( btnUser, SIGNAL( clicked() ), this, SLOT( newUser() ) );
 		connect( btnGroup, SIGNAL( clicked() ), this, SLOT( newGroup() ) );
@@ -63,6 +70,12 @@ namespace asaal
 		newDocumentId();
 
 		_dms->clearErrorMessage();
+
+#ifdef Q_OS_WIN32
+		btnScan->setEnabled( false );
+#else
+		btnScan->setEnabled( true );
+#endif
 	}
 
 	DMSDocument::~DMSDocument()
@@ -284,6 +297,167 @@ namespace asaal
 	void DMSDocument::newDocumentId()
 	{
 		lineEditDocumentId->setText( QUuid::createUuid().toString().replace( "-", "" ).replace( "{", "" ).replace( "}", "" ) );
+	}
+
+
+	void DMSDocument::scanDocument()
+	{
+#ifdef Q_OS_WIN32
+#else
+		QApplication::setOverrideCursor( Qt::WaitCursor );
+		qApp->processEvents();
+
+		m_progressDialog = NULL;
+		QString device( "" );
+
+		// Scanning dialog
+		m_scanWidget = new QWidget();		
+
+		QVBoxLayout *wlayout = new QVBoxLayout( m_scanWidget );
+		QHBoxLayout *btn_layout = new QHBoxLayout;
+
+		QFrame *separator = new QFrame( m_scanWidget );
+		separator->setFrameShape( QFrame::HLine );
+		separator->setFrameShadow( QFrame::Sunken );
+
+		m_sanew = new SaneWidget( m_scanWidget );
+
+		if ( m_sanew->openDevice( device ) == false )
+		{
+			QApplication::restoreOverrideCursor();
+
+			QString dev = m_sanew->selectDevice( NULL );
+
+			if ( m_sanew->openDevice( dev ) == false )
+			{
+				QErrorMessage *err = new QErrorMessage( this );
+				err->showMessage( QString( "Opening the selected scanner failed!" ) );
+
+				if ( m_scanWidget != NULL )
+				{
+					delete( m_scanWidget );
+					m_scanWidget = NULL;
+				}
+
+				if ( m_sanew != NULL )
+				{
+					delete( m_sanew );
+					m_sanew = NULL;
+				}
+
+				return;
+			}
+
+			m_scanWidget->setWindowTitle( tr( "Scan document on [ %1 ]" ).arg( dev ) );
+		}
+
+
+		connect( m_sanew, SIGNAL( scanStart() ), this, SLOT( scanStart() ) );
+		connect( m_sanew, SIGNAL( scanFaild() ), this, SLOT( scanFailed() ) );
+		connect( m_sanew, SIGNAL( scanDone() ), this, SLOT( scanEnd() ) );
+		connect( m_sanew, SIGNAL( imageReady() ), this, SLOT( imageReady() ) );
+
+		m_sanew->setIconColorMode( QIcon( ":/scanimages/images/scanimages/color.png" ) );
+		m_sanew->setIconGrayMode( QIcon( ":/scanimages/images/scanimages/gray.png" ) );
+		m_sanew->setIconBWMode( QIcon( ":/scanimages/images/scanimages/black_white.png" ) );
+		m_sanew->setIconPreview( QIcon( ":/scanimages/images/scanimages/eye.png" ) );
+		m_sanew->setIconFinal( QIcon( ":/scanimages/images/scanimages/filesave.png" ) );
+		m_sanew->setIconZoomIn( QIcon( ":/scanimages/images/scanimages/viewmag+.png" ) );
+		m_sanew->setIconZoomOut( QIcon( ":/scanimages/images/scanimages/viewmag-.png" ) );
+		m_sanew->setIconZoomSel( QIcon( ":/scanimages/images/scanimages/viewmagfit.png" ) );
+		m_sanew->setIconZoomFit( QIcon( ":/scanimages/images/scanimages/view_fit_window.png" ) );
+
+		wlayout->setMargin( 2 );
+		wlayout->setSpacing( 2 );
+		wlayout->addWidget( m_sanew );
+		wlayout->addWidget( separator );
+		wlayout->addLayout( btn_layout );
+
+		_ws->addWindow( m_scanWidget );
+		m_scanWidget->show();
+
+		QApplication::restoreOverrideCursor();
+#endif
+	}
+
+	void DMSDocument::scanStart()
+	{
+#ifdef Q_OS_WIN32
+#else
+		QApplication::setOverrideCursor( Qt::WaitCursor );
+
+		if ( m_progressDialog == NULL )
+		{
+			m_progressDialog = new QProgressDialog( NULL );
+		}
+
+		m_progressDialog->setWindowTitle( tr( "Scanning document ..." ) );
+
+		m_progressDialog->setCancelButtonText( tr( "Cancel" ) );
+		m_progressDialog->setMaximum( PROGRESS_MAX );
+		m_progressDialog->setMinimum( PROGRESS_MIN );
+
+		if ( m_sanew )
+		{
+			connect( m_progressDialog, SIGNAL( canceled() ), m_sanew, SLOT( scanCancel() ) );
+			connect( m_sanew, SIGNAL( scanProgress( int ) ), m_progressDialog, SLOT( setValue( int ) ) );
+		}
+
+		m_progressDialog->show();
+
+		QApplication::restoreOverrideCursor();
+#endif
+	}
+
+	void DMSDocument::scanEnd()
+	{
+#ifdef Q_OS_WIN32
+#else
+
+		if ( m_progressDialog != NULL )
+		{
+			delete( m_progressDialog );
+			m_progressDialog = NULL;
+		}
+
+#endif
+	}
+
+	void DMSDocument::scanFailed()
+	{
+#ifdef Q_OS_WIN32
+#else
+
+		if ( m_progressDialog != NULL )
+		{
+			delete( m_progressDialog );
+			m_progressDialog = NULL;
+		}
+
+		QMessageBox mb( "SaneWidget",
+
+		                "Scanning failed!\n",
+		                QMessageBox::Critical,
+		                QMessageBox::Ok | QMessageBox::Default,
+		                QMessageBox::NoButton,
+		                QMessageBox::NoButton );
+		mb.exec();
+#endif
+	}
+
+	void DMSDocument::imageReady()
+	{
+#ifdef Q_OS_WIN32
+#else
+		QPixmap pix = QPixmap::fromImage( *( m_sanew->getFinalImage() ) );
+
+		if ( !pix.isNull() )
+		{
+			// Close scanwidget
+			m_scanWidget->close();
+		}
+
+#endif
 	}
 
 	void DMSDocument::newUser()
