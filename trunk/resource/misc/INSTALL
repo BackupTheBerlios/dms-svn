@@ -1,0 +1,82 @@
+Compile under LUNIX
+===================
+
+For compilation under LUNIX you need the following software packages:
+
+- Qt 4.3.3 or higher
+- SANE 1.0.19 (backends)
+
+Compile SANE 1.0.19
+-------------------
+
+SANE 1.0.19 is needed for scanner support, because DMS link this package statical and Qt4.3.3 or higher is only shared linked.
+I make a configure script to disbaled sane if it not installed.
+
+- Got to homepage of SANE and download the package.
+	- http://alioth.debian.org/frs/download.php/2318/sane-backends-1.0.19.tar.gz
+	- it is recommed you install the libusb devel packages for access your usb scanner
+- Extract the sane-backends-1.0.19.tar.gz into your favorite directory
+- Change in this directory and enter the following commands
+
+	./configure --prefix=/usr --sysconfdir=/etc --enable-static --enable-pnm-backend --enable-scsi-directio --enable-parport-directio
+	make
+	su -c "make install" or use sudo
+	su -c "ldconfig && depmode -aq" or use sudo
+
+
+Compile DMS - Document Management System
+----------------------------------------
+
+- After compiling and installing the SANE 1.0.19 backend
+	- Get the svn package from http://developer.berlios.de/projects/dms/
+		- svn checkout http://svn.berlios.de/svnroot/repos/dms/trunk dmsystem
+	- Change after download into this directory and enter the following commands
+
+		qmake
+		make
+		make install is not needed
+
+
+Compile under Windows
+=====================
+
+Scansupport under Windows is at this time disabled, because i search for better solution for Twain.
+
+For compilation under Windows you need the following software packages:
+
+- Microsoft Visual Studio Express 2005 (optional)
+    - Microsoft Platform SDK 2003 R2
+	- Qt4 compiled for use with MSVC++
+      - Download the latest Qt4 Source Package for Windows (http://www.trolltech.com).
+	  - compile it and set the path enviroment QTDIR=/your/qt/direcory without spaces
+
+- MinGW
+	- Download the page http://downloads.sourceforge.net/mingw/MinGW-5.1.3.exe?modtime=1168811236&big_mirror=1
+	- Qt4 compiled for use with MinGW
+      - Download the latest Qt4 Source Package for Windows (http://www.trolltech.com).
+	  - compile it and set the path enviroment QTDIR=/your/qt/direcory without spaces
+
+
+Compile DMS - Document Management System
+----------------------------------------
+
+You need the svn binary for Windows.
+
+- MSVC++ 2005
+	- Get the svn package from http://developer.berlios.de/projects/dms/
+		- svn checkout http://svn.berlios.de/svnroot/repos/dms/trunk dmsystem
+	- Change after download into this directory
+	- Open the solution file (dms.sln) in the dmsystem directory and compile it
+
+- MinGW
+	- Change after download into this directory
+	- Open the commandline from Windows (Start->Run->cmd / Start->Ausführen->cmd)
+		- The MinGW path enviroment must set.
+
+	qmake
+	mingw32-make
+
+
+
+
+
