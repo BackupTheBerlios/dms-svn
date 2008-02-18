@@ -5,17 +5,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>688</width>
-    <height>434</height>
+    <width>716</width>
+    <height>421</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>New / Edit Document</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../../resource/dms.qrc" >:/picture/16/images/16x16/documents_16.png</iconset>
+   <iconset resource="../../resource/dms.qrc" >
+    <normaloff>:/picture/16/images/16x16/documents_16.png</normaloff>:/picture/16/images/16x16/documents_16.png</iconset>
   </property>
-  <layout class="QGridLayout" >
+  <layout class="QGridLayout" name="gridLayout" >
    <item row="0" column="0" colspan="2" >
     <widget class="QTreeWidget" name="treeWidgetDocument" >
      <property name="rootIsDecorated" >
@@ -101,7 +102,8 @@
         <string/>
        </property>
        <property name="icon" >
-        <iconset resource="../../resource/dms.qrc" >:/picture/16/images/16x16/reload_16.png</iconset>
+        <iconset resource="../../resource/dms.qrc" >
+         <normaloff>:/picture/16/images/16x16/reload_16.png</normaloff>:/picture/16/images/16x16/reload_16.png</iconset>
        </property>
       </widget>
      </item>
@@ -219,7 +221,7 @@
        <property name="orientation" >
         <enum>Qt::Vertical</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>20</width>
          <height>20</height>
@@ -370,7 +372,7 @@
     </widget>
    </item>
    <item row="7" column="0" colspan="2" >
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout" name="horizontalLayout" >
      <item>
       <widget class="QPushButton" name="btnOk" >
        <property name="minimumSize" >
@@ -395,42 +397,10 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
-         <width>71</width>
-         <height>26</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnScan" >
-       <property name="minimumSize" >
-        <size>
-         <width>110</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>110</width>
-         <height>26</height>
-        </size>
-       </property>
-       <property name="text" >
-        <string>&amp;Scan</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer>
-       <property name="orientation" >
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" >
-        <size>
-         <width>71</width>
-         <height>26</height>
+         <width>428</width>
+         <height>23</height>
         </size>
        </property>
       </spacer>

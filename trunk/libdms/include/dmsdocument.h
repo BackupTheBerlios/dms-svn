@@ -31,11 +31,6 @@
 #include <dllexport.h>
 #include <libdms.h>
 
-#ifdef Q_OS_WIN32
-#else
-	#include <sane_widget.h>
-#endif
-
 #include <QtCore>
 #include <QtGui>
 
@@ -89,12 +84,6 @@ namespace asaal
 			void newUser();
 			void newGroup();
 			
-			void scanDocuument();
-			void scanStart();
-			void scanEnd();
-			void scanFailed();
-			void imageReady();	
-
 			void loadDocuments();
 
 			void treeWidgetDocumentItem( QTreeWidgetItem *, int );
@@ -111,18 +100,6 @@ namespace asaal
 			QMap<QString, QString> documents;
 
 			QTreeWidgetItem *docItem;
-
-#ifdef Q_OS_WIN32
-
-#else
-			SaneWidget *m_sanew;
-			QProgressDialog *m_progressDialog;
-			QWidget *m_scanWidget;
-
-			QRect scanRect;
-			int scanLeft;
-			int scanTop;
-#endif
 			
 		protected:
 			void closeEvent( QCloseEvent *e );

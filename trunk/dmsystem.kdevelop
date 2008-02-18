@@ -160,7 +160,7 @@
   </kdevfilecreate>
   <kdevtrollproject>
     <general>
-      <activedir>dms</activedir>
+      <activedir>libdms</activedir>
     </general>
     <run>
       <directoryradio>executable</directoryradio>
