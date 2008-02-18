@@ -32,7 +32,7 @@
 
 #ifdef Q_OS_WIN32
 #else
-#include "sane_widget.h"
+	#include <sane_widget.h>
 #endif
 
 #include <QtCore>

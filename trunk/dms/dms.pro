@@ -49,10 +49,8 @@ SOURCES += src/main.cpp
 unix {
     TARGET = dms
     #QMAKE_POST_LINK = strip -s ../bin/dms
-    TARGETDEPS += ../bin/libdms.a
-	TARGETDEPS += /usr/lib/libsane.a
-    LIBS += ../bin/libdms.a
-	LIBS += /usr/lib/libsane.a
+    #TARGETDEPS += -ldms -L../bin
+    LIBS += -L../bin -ldms
     RCC_DIR = ../build/dms/unix/rcc
     MOC_DIR += ../build/dms/unix/moc
     OBJECTS_DIR += ../build/dms/unix/obj
