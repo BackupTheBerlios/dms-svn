@@ -18,7 +18,7 @@ I make a configure script to disbaled sane if it not installed.
 - Extract the sane-backends-1.0.19.tar.gz into your favorite directory
 - Change in this directory and enter the following commands
 
-	./configure --prefix=/usr --sysconfdir=/etc --enable-static --enable-pnm-backend --enable-scsi-directio --enable-parport-directio
+	./configure --prefix=/usr --sysconfdir=/etc --enable-pnm-backend --enable-parport-directio=yes --enable-scsi-directio=yes --enable-static
 	make
 	su -c "make install" or use sudo
 	su -c "ldconfig && depmode -aq" or use sudo
