@@ -2,7 +2,7 @@
  *   Copyright (C) 2007-2008 by Alexander Saal                             *
  *   alex.saal@gmx.de                                                      *
  *                                                                         *
- *   File: ${filename}.${extension}                                        *
+ *   File: dmspreferences.h                                                *
  *   Desc: ${description}                                                  *
  *                                                                         *
  *   This file is part of DMS - Documnet Management System                 *
@@ -77,6 +77,7 @@ namespace asaal
 
 		private slots:
 			void chooseApplication();
+			void chooseDocumentArchive();
 
 			void addApplication();
 			void updateApplication();

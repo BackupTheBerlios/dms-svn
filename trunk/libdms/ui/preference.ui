@@ -5,20 +5,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>760</width>
-    <height>435</height>
+    <width>761</width>
+    <height>433</height>
    </rect>
   </property>
   <property name="minimumSize" >
    <size>
-    <width>760</width>
-    <height>435</height>
+    <width>761</width>
+    <height>433</height>
    </size>
   </property>
   <property name="maximumSize" >
    <size>
-    <width>760</width>
-    <height>435</height>
+    <width>761</width>
+    <height>433</height>
    </size>
   </property>
   <property name="windowTitle" >
@@ -32,13 +32,13 @@
     <widget class="QListWidget" name="listWidgetPreferences" >
      <property name="minimumSize" >
       <size>
-       <width>140</width>
+       <width>150</width>
        <height>0</height>
       </size>
      </property>
      <property name="maximumSize" >
       <size>
-       <width>140</width>
+       <width>150</width>
        <height>16777215</height>
       </size>
      </property>
@@ -73,8 +73,16 @@
       <enum>QListView::IconMode</enum>
      </property>
      <property name="currentRow" >
-      <number>-1</number>
+      <number>0</number>
      </property>
+     <item>
+      <property name="text" >
+       <string>General</string>
+      </property>
+      <property name="icon" >
+       <iconset resource="../../resource/dms.qrc" >:/picture/32/images/32x32/preference_32.png</iconset>
+      </property>
+     </item>
      <item>
       <property name="text" >
        <string>Database</string>
@@ -122,6 +130,243 @@
      <property name="currentIndex" >
       <number>0</number>
      </property>
+     <widget class="QWidget" name="pageGeneral" >
+      <layout class="QGridLayout" >
+       <item row="0" column="0" >
+        <widget class="QLabel" name="labelGeneral" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>16777215</width>
+           <height>26</height>
+          </size>
+         </property>
+         <property name="font" >
+          <font>
+           <pointsize>13</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::Panel</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="text" >
+          <string>General</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QGroupBox" name="groupBoxArchiveOption" >
+         <property name="title" >
+          <string>Archiveoption</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="labelDocumentArchive" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Documentarchive:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditDocumentArchive" >
+              <property name="text" >
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnSelectDocumentArchive" >
+              <property name="minimumSize" >
+               <size>
+                <width>28</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>28</width>
+                <height>26</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QGroupBox" name="groupBoxLanguageOption" >
+         <property name="title" >
+          <string>Languageoption</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="labelLanguage" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Language:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxLanguage" >
+              <property name="currentIndex" >
+               <number>0</number>
+              </property>
+              <item>
+               <property name="text" >
+                <string>German</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>English</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QGroupBox" name="groupBoxScanOption" >
+         <property name="title" >
+          <string>Scanoption</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" >
+          <item row="0" column="0" >
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="labelImageAsBlob" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Image as Blob:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbtnImageAsBlob" >
+              <property name="text" >
+               <string/>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0" >
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="labelImageAsFile" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Image as file:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="rbtnImageAsFile" >
+              <property name="text" >
+               <string/>
+              </property>
+              <property name="checked" >
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="4" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>569</width>
+           <height>21</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="pageDatabase" >
       <layout class="QGridLayout" >
        <item row="0" column="0" >

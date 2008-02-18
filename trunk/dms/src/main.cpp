@@ -74,6 +74,14 @@ int main( int argc, char **argv )
 	QDir pluginDir( homeDir );
 	if( !pluginDir.exists( homeDir ) )
 		pluginDir.mkpath( homeDir );
+	
+	homeDir.clear();
+	homeDir = QDir::homePath();
+	homeDir.append( "/.dms/documents" );
+
+	QDir documentDir( homeDir );
+	if( !documentDir.exists( homeDir ) )
+		documentDir.mkpath( homeDir );
 
 	DMSystem *dms = new DMSystem( app );
 	dms->show();

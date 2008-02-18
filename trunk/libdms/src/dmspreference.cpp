@@ -2,7 +2,7 @@
  *   Copyright (C) 2007-2008 by Alexander Saal                             *
  *   alex.saal@gmx.de                                                      *
  *                                                                         *
- *   File: ${filename}.${extension}                                        *
+ *   File: dmspreferences.cpp                                              *
  *   Desc: ${description}                                                  *
  *                                                                         *
  *   This file is part of DMS - Documnet Management System                 *
@@ -46,16 +46,16 @@ namespace asaal
 
 		connect( treeWidgetApplicationPref, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetApplicationPrefItem( QTreeWidgetItem *, int ) ) );
 		connect( treeWidgetMailAddressPref, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetMailAddressPrefItem( QTreeWidgetItem *, int ) ) );
-		
 
-		connect( btnAddApplication, SIGNAL( clicked() ), this, SLOT( addApplication() ) );		
+		connect( btnAddApplication, SIGNAL( clicked() ), this, SLOT( addApplication() ) );
 		connect( btnUpdateApplication, SIGNAL( clicked() ), this, SLOT( updateApplication() ) );
 		connect( btnRemoveApplication, SIGNAL( clicked() ), this, SLOT( removeApplication() ) );
 
-		connect( btnAddMailAddress, SIGNAL( clicked() ), this, SLOT( addMailAddress() ) );		
+		connect( btnAddMailAddress, SIGNAL( clicked() ), this, SLOT( addMailAddress() ) );
 		connect( btnUpdateMailAddress, SIGNAL( clicked() ), this, SLOT( updateMailAddress() ) );
-		connect( btnRemoveMailAddress, SIGNAL( clicked() ), this, SLOT( removeMailAddress() ) );	
+		connect( btnRemoveMailAddress, SIGNAL( clicked() ), this, SLOT( removeMailAddress() ) );
 
+		connect( btnSelectDocumentArchive, SIGNAL( clicked() ), this, SLOT( chooseDocumentArchive() ) );
 		connect( btnCheck, SIGNAL( clicked() ), this, SLOT( checkConnection() ) );
 		connect( btnSelectApplication, SIGNAL( clicked() ), this, SLOT( chooseApplication() ) );
 		connect( btnApply, SIGNAL( clicked() ), this, SLOT( savePreferences() ) );
@@ -80,30 +80,42 @@ namespace asaal
 	void DMSPreference::chooseApplication()
 	{
 		QString application = QFileDialog::getOpenFileName( this, tr ( "Open application" ), QDir::rootPath(), tr( "All files (*)" ) );
-		if( application.isNull() || application.isEmpty() )
+
+		if ( application.isNull() || application.isEmpty() )
 			return;
-		
-		lineEditApplication->setText( application );	
+
+		lineEditApplication->setText( application );
+	}
+
+	void DMSPreference::chooseDocumentArchive()
+	{
+		QString documentarchive = QFileDialog::getExistingDirectory( this, tr ( "Open document archive" ), QDir::homePath(), QFileDialog::DontUseNativeDialog | QFileDialog::ShowDirsOnly );
+
+		if ( documentarchive.isNull() || documentarchive.isEmpty() )
+			return;
+
+		lineEditDocumentArchive->setText( documentarchive );
 	}
 
 	void DMSPreference::addApplication()
 	{
 		QString appname = lineEditApplication->text();
 		QString appextensions = comboBoxFileExtensions->currentText();
-		
-		if( appname.isNull() || appname.isEmpty() )
+
+		if ( appname.isNull() || appname.isEmpty() )
 		{
 			showErrorMsg( tr( "You must select a application!" ) );
 			return;
 		}
-		
-		if( appextensions.isNull() || appextensions.isEmpty() )
+
+		if ( appextensions.isNull() || appextensions.isEmpty() )
 		{
 			showErrorMsg( tr( "You must enter a application suffix!" ) );
 			return;
 		}
-		
+
 		appItem = new QTreeWidgetItem( treeWidgetApplicationPref );
+
 		appItem->setText( 0, appname );
 		appItem->setText( 1, appextensions );
 
@@ -114,25 +126,27 @@ namespace asaal
 	void DMSPreference::updateApplication()
 	{
 		appItem = treeWidgetApplicationPref->currentItem();
-		if( appItem == NULL )
+
+		if ( appItem == NULL )
 		{
 			showErrorMsg( tr( "No item was selected!" ) );
 			return;
 		}
-		
-		if( lineEditApplication->text().isNull() || lineEditApplication->text().isEmpty() )
+
+		if ( lineEditApplication->text().isNull() || lineEditApplication->text().isEmpty() )
 		{
 			showErrorMsg( tr( "You must select a application!" ) );
 			return;
 		}
-		
-		if( comboBoxFileExtensions->currentText().isNull() || comboBoxFileExtensions->currentText().isEmpty() )
+
+		if ( comboBoxFileExtensions->currentText().isNull() || comboBoxFileExtensions->currentText().isEmpty() )
 		{
 			showErrorMsg( tr( "You must enter a application suffix!" ) );
 			return;
 		}
-		
+
 		appItem->setText( 0, lineEditApplication->text() );
+
 		appItem->setText( 1, comboBoxFileExtensions->currentText() );
 	}
 
@@ -140,19 +154,22 @@ namespace asaal
 	{
 		appItem = treeWidgetApplicationPref->currentItem();
 
-		if( appItem == NULL )
+		if ( appItem == NULL )
 		{
 			showErrorMsg( tr( "No item was selected!" ) );
 			return;
 		}
-		
-		switch( QMessageBox::question( this, tr( "DMS - Preference" ), tr( "Would you delete this item?" ), QMessageBox::Yes | QMessageBox::No ) )
+
+		switch ( QMessageBox::question( this, tr( "DMS - Preference" ), tr( "Would you delete this item?" ), QMessageBox::Yes | QMessageBox::No ) )
 		{
+
 			case QMessageBox::Yes:
 				delete appItem;
 				break;
+
 			case QMessageBox::No:
 				return;
+
 			default:
 				return;
 		}
@@ -161,15 +178,16 @@ namespace asaal
 	void DMSPreference::addMailAddress()
 	{
 		QString maildescription = lineEditMailAddressDescription->text();
-		QString mailaddress = lineEditMailAddress->text();		
-		
-		if( mailaddress.isNull() || mailaddress.isEmpty() )
+		QString mailaddress = lineEditMailAddress->text();
+
+		if ( mailaddress.isNull() || mailaddress.isEmpty() )
 		{
 			showErrorMsg( tr( "You must enter a email address!" ) );
 			return;
 		}
-		
+
 		appItem = new QTreeWidgetItem( treeWidgetMailAddressPref );
+
 		appItem->setText( 0, maildescription );
 		appItem->setText( 1, mailaddress );
 
@@ -180,19 +198,21 @@ namespace asaal
 	void DMSPreference::updateMailAddress()
 	{
 		appItem = treeWidgetMailAddressPref->currentItem();
-		if( appItem == NULL )
+
+		if ( appItem == NULL )
 		{
 			showErrorMsg( tr( "No item was selected!" ) );
 			return;
 		}
-		
-		if( lineEditMailAddress->text().isNull() || lineEditMailAddress->text().isEmpty() )
+
+		if ( lineEditMailAddress->text().isNull() || lineEditMailAddress->text().isEmpty() )
 		{
 			showErrorMsg( tr( "You must enter a email address!" ) );
 			return;
 		}
-		
+
 		appItem->setText( 0, lineEditMailAddressDescription->text() );
+
 		appItem->setText( 1, lineEditMailAddress->text() );
 	}
 
@@ -201,19 +221,22 @@ namespace asaal
 
 		appItem = treeWidgetMailAddressPref->currentItem();
 
-		if( appItem == NULL )
+		if ( appItem == NULL )
 		{
 			showErrorMsg( tr( "No item was selected!" ) );
 			return;
 		}
-		
-		switch( QMessageBox::question( this, tr( "DMS - Preference" ), tr( "Would you delete this item?" ), QMessageBox::Yes | QMessageBox::No ) )
+
+		switch ( QMessageBox::question( this, tr( "DMS - Preference" ), tr( "Would you delete this item?" ), QMessageBox::Yes | QMessageBox::No ) )
 		{
+
 			case QMessageBox::Yes:
 				delete appItem;
 				break;
+
 			case QMessageBox::No:
 				return;
+
 			default:
 				return;
 		}
@@ -223,10 +246,11 @@ namespace asaal
 	{
 		if ( item == NULL )
 			return;
-		
+
 		lineEditApplication->setText( item->text( 0 ) );
 
 		int idx = comboBoxFileExtensions->findText( item->text( 1 ), Qt::MatchExactly );
+
 		comboBoxFileExtensions->setCurrentIndex( idx );
 	}
 
@@ -234,8 +258,9 @@ namespace asaal
 	{
 		if ( item == NULL )
 			return;
-		
+
 		lineEditMailAddressDescription->setText( item->text( 0 ) );
+
 		lineEditMailAddress->setText( item->text( 1 ) );
 	}
 
@@ -246,6 +271,74 @@ namespace asaal
 
 	void DMSPreference::savePreferences()
 	{
+		// TODO Save general settings
+		if ( lineEditDocumentArchive->text().isEmpty() )
+		{
+			showErrorMsg( tr( "You must enter a valid document archive!" ) );
+			return;
+		}
+
+		_dms->insertApplicationSettings( objectName(), "General", "Documentarchive", lineEditDocumentArchive->text() );
+		_dms->insertApplicationSettings( objectName(), "General", "Language", comboBoxLanguage->currentText() );
+
+		
+#ifdef Q_OS_WIN32
+#else
+		if ( rbtnImageAsBlob->isChecked() )
+		{
+			_dms->insertApplicationSettings( objectName(), "General", "Scanoption", "blob" );
+		}
+		else if ( rbtnImageAsFile->isChecked() )
+		{
+			_dms->insertApplicationSettings( objectName(), "General", "Scanoption", "file" );
+		}
+#endif
+
+		// TODO Save database settings
+		if ( lineEditHost->text().isEmpty() )
+		{
+			showErrorMsg( tr( "You must enter a valid host or ip address!" ) );
+			return;
+		}
+
+		if ( spinBoxPort->value() <= 0 )
+		{
+			showErrorMsg( tr( "You must enter a valid port number!" ) );
+			return;
+		}
+
+		if ( lineEditUser->text().isEmpty() )
+		{
+			showErrorMsg( tr( "You must enter a valid user name!" ) );
+			return;
+		}
+
+		if ( comboBoxDatabase->currentText().isEmpty() || comboBoxDatabase->currentIndex() == -1 )
+		{
+			showErrorMsg( tr( "You must select a valid database!" ) );
+			return;
+		}
+
+		QString file = QDir::homePath();
+
+		QDir pref( file + "/.dms/connection" );
+
+		if ( !pref.exists() )
+			pref.mkpath( file + "/.dms/connection" );
+
+		file.append ( "/.dms/connection/mysql.xml" );
+
+		XMLPreferences dbsettings( "DMSMySqlConnection", "" );
+		dbsettings.setVersion( "0.1.0.0" );
+
+		dbsettings.setString( "MySqlConnection", "UserName", lineEditUser->text() );
+		dbsettings.setString( "MySqlConnection", "Password", Base64::encode( QVariant( lineEditPassword->text() ).toByteArray() ) );
+		dbsettings.setString( "MySqlConnection", "Database", comboBoxDatabase->currentText() );
+		dbsettings.setString( "MySqlConnection", "HostName", lineEditHost->text() );
+		dbsettings.setInt( "MySqlConnection", "Port", spinBoxPort->value() );
+
+		dbsettings.save( file );
+
 		// TODO Save application and this file-exstansion settings
 		for ( int i = 0; i < treeWidgetApplicationPref->topLevelItemCount(); i++ )
 		{
@@ -257,48 +350,6 @@ namespace asaal
 			QString itemAppExt = appItem->text( 1 );
 			_dms->insertApplicationSettings( objectName(), "File associations", itemApp, itemAppExt );
 		}
-		
-		// TODO Save database settings		
-		if( lineEditHost->text().isEmpty() )
-		{
-			showErrorMsg( tr( "You must enter a valid host or ip address!" ) );
-			return;
-		}
-
-		if( spinBoxPort->value() <= 0 )
-		{
-			showErrorMsg( tr( "You must enter a valid port number!" ) );
-			return;
-		}
-
-		if( lineEditUser->text().isEmpty() )
-		{
-			showErrorMsg( tr( "You must enter a valid user name!" ) );
-			return;
-		}
-
-		if( comboBoxDatabase->currentText().isEmpty() || comboBoxDatabase->currentIndex() == -1 )
-		{
-			showErrorMsg( tr( "You must select a valid database!" ) );
-			return;
-		}
-
-		QString file = QDir::homePath();
-
-		QDir pref( file + "/.dms/connection" );
-		if( !pref.exists() )
-			pref.mkpath( file + "/.dms/connection" );
-
-		file.append ( "/.dms/connection/mysql.xml" );
-
-		XMLPreferences dbsettings( "DMSMySqlConnection", "" );
-		dbsettings.setVersion( "0.1.0.0" );
-		dbsettings.setString( "MySqlConnection", "UserName", lineEditUser->text() );
-		dbsettings.setString( "MySqlConnection", "Password", Base64::encode( QVariant( lineEditPassword->text() ).toByteArray() ) );
-		dbsettings.setString( "MySqlConnection", "Database", comboBoxDatabase->currentText() );
-		dbsettings.setString( "MySqlConnection", "HostName", lineEditHost->text() );
-		dbsettings.setInt( "MySqlConnection", "Port", spinBoxPort->value() );
-		dbsettings.save( file );
 
 		// TODO Save eMail settings
 		for ( int i = 0; i < treeWidgetMailAddressPref->topLevelItemCount(); i++ )
@@ -318,41 +369,62 @@ namespace asaal
 
 		// TODO Save skin settings
 		// nothing to do at this time ...
-		
+
 		// at the end, we are close the widget
 		closeWidget();
 	}
 
 	void DMSPreference::loadPreferences()
 	{
-		// TODO Load widget geometry (location on screen only (center))
+		// TODO Load general settings
+		lineEditDocumentArchive->setText( _dms->getApplicationSettings( objectName(), "General", "Documentarchive" ).toString() );
 		
+		int language = comboBoxLanguage->findText( _dms->getApplicationSettings( objectName(), "General", "Language", "English" ).toString() );
+		comboBoxLanguage->setCurrentIndex( language );
+
+#ifdef Q_OS_WIN32
+		groupBoxScanOption->setEnabled( false );
+#else
+		groupBoxScanOption->setEnabled( true );
+
+		QString imgoption = _dms->getApplicationSettings( objectName(), "General", "Scanoption", "file" ).toString();
+		if( imgoption == "blob" )
+		{
+			rbtnImageAsBlob->setChecked( true );
+		}
+		else if( imgoption == "file" )
+		{
+			rbtnImageAsFile->setChecked( true );
+		}
+#endif
 
 		// TODO Load application and this file-exstansion settings
 		QMap< QString, QString> appFiles = _dms->getApplicationSettings( objectName(), "File associations" );
 		QMap< QString, QString>::const_iterator appIt = appFiles.begin();
 
-		while( appIt != appFiles.end() )
+		while ( appIt != appFiles.end() )
 		{
 			qApp->processEvents();
 
 			appItem = new QTreeWidgetItem( treeWidgetApplicationPref );
 			appItem->setText( 0, appIt.key() );
 			appItem->setText( 1, appIt.value() );
-			
+
 			++appIt;
 		}
-		
+
 		// TODO Load email settings
 		QMap<QString, QString> mails = _dms->getApplicationSettings( objectName(), "Mails" );
+
 		QMap<QString, QString>::const_iterator mailIt = mails.begin();
-		while( mailIt != mails.end() )
+
+		while ( mailIt != mails.end() )
 		{
 			qApp->processEvents();
 
 			appItem = new QTreeWidgetItem( treeWidgetMailAddressPref );
 			appItem->setText( 0, mailIt.value() );
-			appItem->setText( 1, mailIt.key() );			
+			appItem->setText( 1, mailIt.key() );
 
 			++mailIt;
 		}
@@ -360,6 +432,7 @@ namespace asaal
 
 		// TODO Load database settings
 		QString file = QDir::homePath();
+
 		file.append ( "/.dms/connection/mysql.xml" );
 
 		XMLPreferences dbsettings( "DMSMySqlConnection", "" );
@@ -371,8 +444,8 @@ namespace asaal
 		QString host = dbsettings.getString( "MySqlConnection", "HostName" );
 		QString db = dbsettings.getString( "MySqlConnection", "Database" );
 		int port =  dbsettings.getInt( "MySqlConnection", "Port" );
-		
-	
+
+
 		lineEditUser->setText( user );
 		lineEditPassword->setText( upwd );
 		lineEditHost->setText( host );
@@ -382,6 +455,7 @@ namespace asaal
 		upwd.clear();
 		user.clear();
 		host.clear();
+
 		port = 0;
 
 		// TODO Load plugin settings
@@ -396,20 +470,21 @@ namespace asaal
 		comboBoxDatabase->clear();
 
 		QSqlQuery queryDatabases( "SHOW DATABASES;" );
-		if(queryDatabases.isActive())
+
+		if ( queryDatabases.isActive() )
 		{
-			while(queryDatabases.next())
-			{					
+			while ( queryDatabases.next() )
+			{
 				QSqlQuery queryDms( "SELECT USERNAME FROM " + queryDatabases.value( 0 ).toString() + ".USERS" );
-					
-				if( queryDms.isActive() )
+
+				if ( queryDms.isActive() )
 				{
 					comboBoxDatabase->addItem( queryDatabases.value( 0 ).toString() );
-						
+
 					QSqlDatabase::removeDatabase ( "available_db" );
 					return;
 				}
-			}	
+			}
 		}
 	}
 

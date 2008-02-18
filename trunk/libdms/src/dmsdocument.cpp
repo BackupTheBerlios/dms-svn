@@ -313,8 +313,8 @@ namespace asaal
 		// Scanning dialog
 		m_scanWidget = new QWidget();		
 
-		QVBoxLayout *wlayout = new QVBoxLayout( m_scanWidget );
-		QHBoxLayout *btn_layout = new QHBoxLayout;
+		QVBoxLayout *vlayout = new QVBoxLayout( m_scanWidget );
+		QHBoxLayout *hlayout = new QHBoxLayout;
 
 		QFrame *separator = new QFrame( m_scanWidget );
 		separator->setFrameShape( QFrame::HLine );
@@ -367,11 +367,11 @@ namespace asaal
 		m_sanew->setIconZoomSel( QIcon( ":/scanimages/images/scanimages/viewmagfit.png" ) );
 		m_sanew->setIconZoomFit( QIcon( ":/scanimages/images/scanimages/view_fit_window.png" ) );
 
-		wlayout->setMargin( 2 );
-		wlayout->setSpacing( 2 );
-		wlayout->addWidget( m_sanew );
-		wlayout->addWidget( separator );
-		wlayout->addLayout( btn_layout );
+		vlayout->setMargin( 2 );
+		vlayout->setSpacing( 2 );
+		vlayout->addWidget( m_sanew );
+		vlayout->addWidget( separator );
+		vlayout->addLayout( hlayout );
 
 		_ws->addWindow( m_scanWidget );
 		m_scanWidget->show();
