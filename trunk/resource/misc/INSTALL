@@ -17,8 +17,14 @@ I make a configure script to disbaled sane if it not installed.
 	- it is recommed you install the libusb devel packages for access your usb scanner
 - Extract the sane-backends-1.0.19.tar.gz into your favorite directory
 - Change in this directory and enter the following commands
+- If you use a parport scanner and a scsi scanner then use this:
 
-	./configure --prefix=/usr --sysconfdir=/etc --enable-pnm-backend --enable-parport-directio=yes --enable-scsi-directio=yes --enable-static
+	./configure --prefix=/usr --sysconfdir=/etc --enable-static --enable-pnm-backend --enable-parport-directio=yes --enable-scsi-directio=yes
+
+- If not parport and/or scsi scanner availabel then use this:
+
+	./configure --prefix=/usr --sysconfdir=/etc --enable-static
+
 	make
 	su -c "make install" or use sudo
 	su -c "ldconfig && depmode -aq" or use sudo
@@ -77,6 +83,7 @@ You need the svn binary for Windows.
 	mingw32-make
 
 
-
+Have you trouble with installation or you found problems of DMS please send to dms-bugreport@lists.berlios.de and not directly to me.
+Have you trouble with installation and/or configuration of SANE please send to http://alioth.debian.org/mail/?group_id=30186 and not to me.
 
 
