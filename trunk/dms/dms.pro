@@ -48,7 +48,6 @@ SOURCES += src/main.cpp
 # Linux settings
 unix {
     TARGET = dms
-    #QMAKE_POST_LINK = strip -s ../bin/dms
     TARGETDEPS += ../bin/libdms.a
 	TARGETDEPS += /usr/lib/libsane.a
     LIBS += ../bin/libdms.a
