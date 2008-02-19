@@ -32,7 +32,7 @@
 
 #ifdef Q_OS_WIN32
 #else
-	#include <sane_widget.h>
+#include <sane_widget.h>
 #endif
 
 #include <QtCore>
@@ -311,7 +311,7 @@ namespace asaal
 		QString device( "" );
 
 		// Scanning dialog
-		m_scanWidget = new QWidget();		
+		m_scanWidget = new QWidget();
 
 		QVBoxLayout *vlayout = new QVBoxLayout( m_scanWidget );
 		QHBoxLayout *hlayout = new QHBoxLayout;
@@ -330,18 +330,13 @@ namespace asaal
 
 			if ( m_sanew->openDevice( dev ) == false )
 			{
-				QErrorMessage *err = new QErrorMessage( this );
-				err->showMessage( QString( "Opening the selected scanner failed!" ) );
-
 				if ( m_scanWidget != NULL )
 				{
-					delete( m_scanWidget );
 					m_scanWidget = NULL;
 				}
 
 				if ( m_sanew != NULL )
 				{
-					delete( m_sanew );
 					m_sanew = NULL;
 				}
 
@@ -353,6 +348,7 @@ namespace asaal
 
 
 		connect( m_sanew, SIGNAL( scanStart() ), this, SLOT( scanStart() ) );
+
 		connect( m_sanew, SIGNAL( scanFaild() ), this, SLOT( scanFailed() ) );
 		connect( m_sanew, SIGNAL( scanDone() ), this, SLOT( scanEnd() ) );
 		connect( m_sanew, SIGNAL( imageReady() ), this, SLOT( imageReady() ) );
@@ -436,11 +432,11 @@ namespace asaal
 
 		QMessageBox mb( "SaneWidget",
 
-		                "Scanning failed!\n",
-		                QMessageBox::Critical,
-		                QMessageBox::Ok | QMessageBox::Default,
-		                QMessageBox::NoButton,
-		                QMessageBox::NoButton );
+						"Scanning failed!\n",
+						QMessageBox::Critical,
+						QMessageBox::Ok | QMessageBox::Default,
+						QMessageBox::NoButton,
+						QMessageBox::NoButton );
 		mb.exec();
 #endif
 	}
@@ -449,13 +445,44 @@ namespace asaal
 	{
 #ifdef Q_OS_WIN32
 #else
+		qApp->processEvents();
+
+		bool ok;
+		QString text = QInputDialog::getText( this, tr( "Enter a valid Imagename!" ), tr( "Imagename:" ), QLineEdit::Normal, "Image_", &ok );
+
+		if ( !ok && ( text.isEmpty() || text.isNull() ) )
+			return;
+
 		QPixmap pix = QPixmap::fromImage( *( m_sanew->getFinalImage() ) );
 
 		if ( !pix.isNull() )
 		{
+			qApp->processEvents();
+
 			// Close scanwidget
 			m_scanWidget->close();
+
+			QString documentarchive = _dms->getApplicationSettings( "UiPreferenceBase", "General", "Documentarchive", QVariant( QDir::homePath() ) ).toString();
+
+			if ( documentarchive.isNull() || documentarchive.isEmpty() )
+			{
+				documentarchive = QDir::homePath() + QDir::separator() + ".dms" + QDir::separator() + "documents";
+				showErrorMsg( tr( "No document archive was set, use default.\n\nArchive: %1" ).arg( documentarchive ) );
+			}
+
+			documentarchive += text + ".png";
+
+			pix.save( documentarchive, "PNG" );
+
+			QFileInfo fi( documentarchive );
+
+			lineEditDocumentName->setText( fi.fileName().split( "." ).value( 0 ) );
+			lineEditDocumentPath->setText( documentarchive );
 		}
+
+		m_sanew = NULL;
+
+		m_scanWidget = NULL;
 
 #endif
 	}
