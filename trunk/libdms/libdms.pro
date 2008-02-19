@@ -85,7 +85,6 @@ SOURCES	+= xmlpref/XMLWriter.cpp
 unix {
 	TARGET	= dms
 	CONFIG += debug thread warn_on qt staticlib
-	#QMAKE_POST_LINK = strip -s ../bin/libdms.a
 	RCC_DIR	= ../build/libdms/unix/rcc
 	MOC_DIR	+= ../build/libdms/unix/moc
 	OBJECTS_DIR += ../build/libdms/unix/obj
