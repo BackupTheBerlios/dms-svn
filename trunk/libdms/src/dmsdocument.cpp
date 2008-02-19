@@ -136,24 +136,20 @@ namespace asaal
 			lineEditDocumentName->setSelection( 0, lineEditDocumentName->text().length() );
 			return;
 		}
-		else
-			if ( docpath.isNull() || docpath.isEmpty() )
-			{
-				showErrorMsg( tr( "Please select a document." ) );
-				lineEditDocumentPath->setFocus();
-				lineEditDocumentPath->setSelection( 0, lineEditDocumentPath->text().length() );
-				return;
-			}
+		
+		if ( docpath.isNull() || docpath.isEmpty() )
+		{
+			showErrorMsg( tr( "Please select a document." ) );
+			lineEditDocumentPath->setFocus();
+			lineEditDocumentPath->setSelection( 0, lineEditDocumentPath->text().length() );
+			return;
+		}
 
 		// add document to the list
 		docItem = new QTreeWidgetItem( treeWidgetDocument );
-
 		docItem->setText( 0, comboBoxUser->currentText() );
-
 		docItem->setText( 1, docname );
-
 		docItem->setText( 2, comboBoxGroup->currentText() );
-
 		docItem->setText( 3, docpath );
 
 		QString groupid = _dms->getGroupId( comboBoxGroup->currentText() );
@@ -166,7 +162,6 @@ namespace asaal
 		_dms->clearErrorMessage();
 
 		lineEditDocumentName->setText( "" );
-
 		lineEditDocumentPath->setText( "" );
 
 		newDocumentId();
@@ -448,10 +443,12 @@ namespace asaal
 		qApp->processEvents();
 
 		bool ok;
-		QString text = QInputDialog::getText( this, tr( "Enter a valid Imagename!" ), tr( "Imagename:" ), QLineEdit::Normal, "Image_", &ok );
+		QString imagename = QInputDialog::getText( this, tr( "New image name" ), tr( "Enter a valid Imagename!\n\nImagename:" ), QLineEdit::Normal, "Image", &ok );
 
-		if ( !ok && ( text.isEmpty() || text.isNull() ) )
+		if ( !ok && ( imagename.isEmpty() || imagename.isNull() ) )
 			return;
+
+		QApplication::setOverrideCursor( Qt::WaitCursor );
 
 		QPixmap pix = QPixmap::fromImage( *( m_sanew->getFinalImage() ) );
 
@@ -459,19 +456,21 @@ namespace asaal
 		{
 			qApp->processEvents();
 
-			// Close scanwidget
 			m_scanWidget->close();
 
 			QString documentarchive = _dms->getApplicationSettings( "UiPreferenceBase", "General", "Documentarchive", QVariant( QDir::homePath() ) ).toString();
 
 			if ( documentarchive.isNull() || documentarchive.isEmpty() )
 			{
+				QApplication::restoreOverrideCursor();
+
 				documentarchive = QDir::homePath() + QDir::separator() + ".dms" + QDir::separator() + "documents";
 				showErrorMsg( tr( "No document archive was set, use default.\n\nArchive: %1" ).arg( documentarchive ) );
+
+				QApplication::setOverrideCursor( Qt::WaitCursor );
 			}
 
-			documentarchive += text + ".png";
-
+			documentarchive += imagename + ".png";
 			pix.save( documentarchive, "PNG" );
 
 			QFileInfo fi( documentarchive );
@@ -481,8 +480,9 @@ namespace asaal
 		}
 
 		m_sanew = NULL;
-
 		m_scanWidget = NULL;
+		
+		QApplication::restoreOverrideCursor();
 
 #endif
 	}

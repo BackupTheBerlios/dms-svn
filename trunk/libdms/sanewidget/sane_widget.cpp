@@ -963,7 +963,7 @@ void SaneWidget::processData(void)
     SANE_Int read_bytes = 0;
     int i, j;
 
-    //printf("Pre read()\n");
+	//printf("Pre read()\n");
     status = sane_read(s_handle, img_data, IMG_DATA_R_SIZE, &read_bytes);
     //printf("Post read() read=%d\n", read_bytes);
 
