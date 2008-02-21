@@ -4,36 +4,13 @@ Compile under LUNIX
 For compilation under LUNIX you need the following software packages:
 
 - Qt 4.3.3 or higher
-- SANE 1.0.19 (backends)
-
-Compile SANE 1.0.19
--------------------
-
-SANE 1.0.19 is needed for scanner support, because DMS link this package statical and Qt4.3.3 or higher is only shared linked.
-I make a configure script to disbaled sane if it not installed.
-
-- Got to homepage of SANE and download the package.
-	- http://alioth.debian.org/frs/download.php/2318/sane-backends-1.0.19.tar.gz
-	- it is recommed you install the libusb devel packages for access your usb scanner
-- Extract the sane-backends-1.0.19.tar.gz into your favorite directory
-- Change in this directory and enter the following commands
-- If you use a parport scanner and a scsi scanner then use this:
-
-	./configure --prefix=/usr --sysconfdir=/etc --enable-static --enable-pnm-backend --enable-parport-directio=yes --enable-scsi-directio=yes
-
-- If not parport and/or scsi scanner availabel then use this:
-
-	./configure --prefix=/usr --sysconfdir=/etc --enable-static
-
-	make
-	su -c "make install" or use sudo
-	su -c "ldconfig && depmode -aq" or use sudo
+- SANE 1.0.19 (backends) or higher
 
 
 Compile DMS - Document Management System
 ----------------------------------------
 
-- After compiling and installing the SANE 1.0.19 backend
+- After installing the SANE 1.0.19 backend or higher
 	- Get the svn package from http://developer.berlios.de/projects/dms/
 		- svn checkout http://svn.berlios.de/svnroot/repos/dms/trunk dmsystem
 	- Change after download into this directory and enter the following commands
