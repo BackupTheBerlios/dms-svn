@@ -26,6 +26,8 @@
 #ifndef __DMS_PLUGININTERFACE_H__
 #define __DMS_PLUGININTERFACE_H__
 
+#include <libdms.h>
+
 #include <QtPlugin>
 
 // QtCore Classes
@@ -36,19 +38,20 @@ class QString;
 class QPixmap;
 class QWidget;
 
-
 /**
  * @author Alexander Saal <alex.saal@gmx.de>
  * @date 2008/01/14
  * @version 0.1.0
  * @since 0.1.0
  */
+using namespace asaal;
 
-class DMSPluginInterface {
-	
-	Q_CLASSINFO( "Author", "Alexander Saal" )
-	Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
-	Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
+class DMSPluginInterface
+{
+
+		Q_CLASSINFO( "Author", "Alexander Saal" )
+		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 	public:
 		/**
@@ -59,11 +62,11 @@ class DMSPluginInterface {
 		/**
 		 * Rückgabe des Pluginicons
 		 *
-		 * @return	QPixmap
+		 * @return QPixmap
 		 *
 		 * @code
 		 * QPixmap icon() {
-		 *	return QPixmap();
+		 * return QPixmap();
 		 * }
 		 * @endcode
 		 */
@@ -72,11 +75,11 @@ class DMSPluginInterface {
 		/**
 		 * Rückgabe des Pluginnamens
 		 *
-		 * @return	Pluginname
+		 * @return Pluginname
 		 *
 		 * @code
 		 * QString Pluginname() {
-		 *	return "Mein erstes Plugin";
+		 * return "Mein erstes Plugin";
 		 * }
 		 * @endcode
 		 */
@@ -85,11 +88,11 @@ class DMSPluginInterface {
 		/**
 		 * Rückgabe der Pluginversion
 		 *
-		 * @return	Plugin version
+		 * @return Plugin version
 		 *
 		 * @code
 		 * QString pluginVersion() {
-		 *	return "0.1.1.0";
+		 * return "0.1.1.0";
 		 * }
 		 * @endcode
 		 */
@@ -98,11 +101,11 @@ class DMSPluginInterface {
 		/**
 		 * Rückgabe der QAction
 		 *
-		 * @return	QAction
+		 * @return QAction
 		 *
 		 * @code
 		 * QAction action() {
-		 *	return new QAction();
+		 * return new QAction();
 		 * }
 		 * @endcode
 		 */
@@ -111,11 +114,11 @@ class DMSPluginInterface {
 		/**
 		 * Rückgabe der Pluginversion
 		 *
-		 * @return	Plugin version
+		 * @return Plugin version
 		 *
 		 * @code
 		 * QString pluginVersion() {
-		 *	return "0.1.1.0";
+		 * return "0.1.1.0";
 		 * }
 		 * @endcode
 		 */
@@ -124,15 +127,25 @@ class DMSPluginInterface {
 		/**
 		 * Rückgabe des QWidgets
 		 *
-		 * @return	QWidget
+		 * @return QWidget
 		 *
 		 * @code
 		 * QWidget widget() {
-		 *	return new QWidget();
+		 * return new QWidget();
 		 * }
 		 * @endcode
 		 */
 		virtual QWidget *widget() const = 0;
+
+		/**
+		 * Set the library
+		 */
+		virtual void setLibrary( LibDMS *ldms );
+
+		/**
+		 * Set the main workspace
+		 */
+		virtual void setWorspace( QWorkspace *ws );
 };
 
 Q_DECLARE_INTERFACE( DMSPluginInterface, "dms.DMSPluginInterface/0.1.0" )

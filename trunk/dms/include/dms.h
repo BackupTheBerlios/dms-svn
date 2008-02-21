@@ -64,7 +64,6 @@ namespace asaal
 			void closeEvent( QCloseEvent *e );
 
 	private:
-			int actionCount;
 			QToolBar *mnuToolBar;
 			QMenu	*mnuPlugin;
 
@@ -86,8 +85,6 @@ namespace asaal
 					*acWorkSheet,
 					*acClose;
 			
-			QList<QAction*> actionList;
-
 			LibDMS *ldms;
 	};
 }

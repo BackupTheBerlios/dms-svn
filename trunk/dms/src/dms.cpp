@@ -60,8 +60,6 @@ namespace asaal
 
 		login();
 
-		actionCount = 0;
-
 		createPluginMenu();		
 	}
 
@@ -262,8 +260,6 @@ namespace asaal
 
 	void DMSystem::createPluginMenu()
 	{
-		actionList.clear();
-
 		QDir pluginsDir = QDir( QDir::homePath() );
 		pluginsDir.cd( ".dms" );
 		pluginsDir.cd( "plugins" );
@@ -273,6 +269,7 @@ namespace asaal
 		else
 			return;
 
+		// iterate over the plugin directory and load plugins if necessary ...
 		foreach( QString fileName, pluginsDir.entryList( QDir::Files ) )
 		{
 			if ( fileName.split( "." ).value( 1 ).toLower()  == "dll" || fileName.split( "." ).value( 1 ).toLower() == "so" )
@@ -286,15 +283,16 @@ namespace asaal
 
 					if ( dpi )
 					{
-						actionList.insert( actionCount, dpi->action() );
-						actionCount += 1;
+						// set the required option
+						dpi->setLibrary( ldms );
+						dpi->setWorspace( ws );
+
+						// add plugin action to the actionlist
+						mnuPlugin->addAction( dpi->action() );
 					}
 				}
 			}
 		}
-
-		if ( actionList.size() >= 1 )
-			mnuPlugin->addActions( actionList );
 	}
 
 	void DMSystem::deactivateMenus( bool deactivate )
