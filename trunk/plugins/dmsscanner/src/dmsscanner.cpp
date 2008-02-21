@@ -41,6 +41,16 @@ DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 	dmsscanner = this;
 	
 	_dms = LibDMS::libdms_instcance();
+	
+	QDesktopWidget *desktop = qApp->desktop();
+	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
+	int left = ( rect.width() - width() ) / 2;
+	int top = ( rect.height() - height() ) / 2;
+
+	int height = this->height();
+	int width = this->width();
+
+	setGeometry( left, top, width, height );
 
 	initScan();
 }

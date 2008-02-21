@@ -2,77 +2,411 @@
 <!DOCTYPE TS><TS version="1.1" language="de_DE">
 <defaultcodec></defaultcodec>
 <context>
-    <name>LabeledGamma</name>
+    <name>DMSDocument</name>
     <message>
-        <location filename="../../libdms/sanewidget/labeled_gamma.cpp" line="29"/>
-        <source>Brightness</source>
-        <translation>Helligkeit</translation>
+        <location filename="../../libdms/src/dmsdocument.cpp" line="182"/>
+        <source>Please select a user.</source>
+        <translation>Bitte wählen Sie einen Benutzer.</translation>
     </message>
     <message>
-        <location filename="../../libdms/sanewidget/labeled_gamma.cpp" line="32"/>
-        <source>Contrast</source>
-        <translation>Kontrast</translation>
+        <location filename="../../libdms/src/dmsdocument.cpp" line="197"/>
+        <source>Please select a group.</source>
+        <translation>Bitte wählen Sie eine Gruppe.</translation>
     </message>
     <message>
-        <location filename="../../libdms/sanewidget/labeled_gamma.cpp" line="35"/>
-        <source>Gamma</source>
-        <translation>Gamma</translation>
+        <location filename="../../libdms/src/dmsdocument.cpp" line="189"/>
+        <source>Please enter document name.</source>
+        <translation>Bitte vergeben Sie einen Dokumentennamen.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsdocument.cpp" line="128"/>
+        <source>Please select a document.</source>
+        <translation>Bitte wählen Sie ein Dokument aus.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsdocument.cpp" line="241"/>
+        <source>No document was selected.</source>
+        <translation>Es wurde kein Dokument markiert.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsdocument.cpp" line="204"/>
+        <source>Please select a document path.</source>
+        <translation>Bitte wählen Sie einen Dokumentenpfad aus.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsdocument.cpp" line="269"/>
+        <source>Open document file</source>
+        <translation>Dokument öffnen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsdocument.cpp" line="269"/>
+        <source>All files (*.*)</source>
+        <translation>Alle Dateien (*.*)</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsdocument.cpp" line="337"/>
+        <source>DMS - Document</source>
+        <translation>DMS - Dokument</translation>
     </message>
 </context>
 <context>
-    <name>PreviewArea</name>
+    <name>DMSGroup</name>
     <message>
-        <location filename="../../libdms/sanewidget/preview_area.cpp" line="50"/>
-        <source>Zoom In</source>
-        <translation>Vergrößern</translation>
+        <location filename="../../libdms/src/dmsgroup.cpp" line="103"/>
+        <source>You can not add the same group.</source>
+        <translation>Eine Gruppe mit diesem Namen ist schon vorhanden.</translation>
     </message>
     <message>
-        <location filename="../../libdms/sanewidget/preview_area.cpp" line="53"/>
-        <source>Zoom Out</source>
-        <translation>Verkleinern</translation>
+        <location filename="../../libdms/src/dmsgroup.cpp" line="137"/>
+        <source>Please enter a group name.</source>
+        <translation>Bitte vergeben Sie einen Gruppennamen.</translation>
     </message>
     <message>
-        <location filename="../../libdms/sanewidget/preview_area.cpp" line="56"/>
-        <source>Zoom to Selection</source>
-        <translation>Zur Markierung zommen</translation>
+        <location filename="../../libdms/src/dmsgroup.cpp" line="170"/>
+        <source>No group was selected.</source>
+        <translation>Es wurde keien Gruppe ausgewählt.</translation>
     </message>
     <message>
-        <location filename="../../libdms/sanewidget/preview_area.cpp" line="59"/>
-        <source>Zoom to Fit</source>
-        <translation>+Zommen angleichen</translation>
+        <location filename="../../libdms/src/dmsgroup.cpp" line="229"/>
+        <source>DMS - Group</source>
+        <translation>DMS - Gruppe</translation>
     </message>
 </context>
 <context>
-    <name>SaneWidget</name>
+    <name>DMSLogin</name>
     <message>
-        <location filename="../../libdms/sanewidget/sane_widget.cpp" line="231"/>
-        <source>Zoom In</source>
-        <translation>Heranzommen</translation>
+        <location filename="../../libdms/src/dmslogin.cpp" line="88"/>
+        <source>DMS</source>
+        <translation>DMS</translation>
     </message>
     <message>
-        <location filename="../../libdms/sanewidget/sane_widget.cpp" line="232"/>
-        <source>Zoom Out</source>
-        <translation>Herauszommen</translation>
+        <location filename="../../libdms/src/dmslogin.cpp" line="72"/>
+        <source>You must enter a valid user name.</source>
+        <translation>Sie müssen einen gültigen Benutzernamen eingeben.</translation>
     </message>
     <message>
-        <location filename="../../libdms/sanewidget/sane_widget.cpp" line="233"/>
-        <source>Zoom to Selection</source>
-        <translation>Zur Markierung zommen</translation>
+        <location filename="../../libdms/src/dmslogin.cpp" line="78"/>
+        <source>Passwordfield can not be empty.</source>
+        <translation>Passwortfeld darf nicht leer sein.</translation>
     </message>
     <message>
-        <location filename="../../libdms/sanewidget/sane_widget.cpp" line="234"/>
-        <source>Zoom to Fit</source>
-        <translation>Zommen angleichen</translation>
+        <location filename="../../libdms/src/dmslogin.cpp" line="88"/>
+        <source>No user was found.</source>
+        <translation>Es wurde kein Benutzer gefunden.</translation>
+    </message>
+</context>
+<context>
+    <name>DMSMySqlConnection</name>
+    <message>
+        <location filename="../../libdms/src/dmsmysqlconnection.cpp" line="145"/>
+        <source>Error...</source>
+        <translation>Fehler...</translation>
     </message>
     <message>
-        <location filename="../../libdms/sanewidget/sane_widget.cpp" line="235"/>
-        <source>Preview</source>
-        <translation>Vorschau</translation>
+        <location filename="../../libdms/src/dmsmysqlconnection.cpp" line="145"/>
+        <source>Unable to connect to server!</source>
+        <translation>Keine Verbindung zum Server möglich!</translation>
+    </message>
+</context>
+<context>
+    <name>DMSPreference</name>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="80"/>
+        <source>Open application</source>
+        <translation>Anwendung öffnen</translation>
     </message>
     <message>
-        <location filename="../../libdms/sanewidget/sane_widget.cpp" line="236"/>
-        <source>Final Scan</source>
-        <translation>Fertig</translation>
+        <location filename="../../libdms/src/dmspreference.cpp" line="80"/>
+        <source>All files (*)</source>
+        <translation>AlleAlle Dateien (*.*)</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="90"/>
+        <source>Open document archive</source>
+        <translation>Dokumentenarchiv öffnen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="136"/>
+        <source>You must select a application!</source>
+        <translation>Sie müssen eine Anwendung wählen!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="142"/>
+        <source>You must enter a application suffix!</source>
+        <translation>Sie müssen ein Anwendung Suffix eintragen!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="224"/>
+        <source>No item was selected!</source>
+        <translation>Es wurde kein Eintrag ausgewählt!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="267"/>
+        <source>DMS - Preference</source>
+        <translation>DMS - Einstellung</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="228"/>
+        <source>Would you delete this item?</source>
+        <translation>Möchten Sie diesen Eintrag löschen?</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="208"/>
+        <source>You must enter a email address!</source>
+        <translation>Sie müssen eine e-Mail adresse angeben!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="275"/>
+        <source>You must enter a valid document archive!</source>
+        <translation>Sie müssen ein gültiges Dokumentenarchiv wählen!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="301"/>
+        <source>You must enter a valid host or ip address!</source>
+        <translation>Sie müssen eine gültige IP oder einen gültigen Server angeben!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="307"/>
+        <source>You must enter a valid port number!</source>
+        <translation>Sie müssen eine gültige Portnummer vergeben!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="313"/>
+        <source>You must enter a valid user name!</source>
+        <translation>Sie müssen einen gültigen Benutzernamen angeben!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmspreference.cpp" line="319"/>
+        <source>You must select a valid database!</source>
+        <translation>Sie müssen eine gültige Datenbank auswählen!</translation>
+    </message>
+</context>
+<context>
+    <name>DMSSearch</name>
+    <message>
+        <location filename="../../libdms/src/dmssearch.cpp" line="202"/>
+        <source>DMS - User</source>
+        <translation>DMS - Benutzer</translation>
+    </message>
+</context>
+<context>
+    <name>DMSUser</name>
+    <message>
+        <location filename="../../libdms/src/dmsuser.cpp" line="99"/>
+        <source>Please enter first name for this user.</source>
+        <translation>Bitte geben Sie einen Vornamen für diesen Benutzer an.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsuser.cpp" line="106"/>
+        <source>Please enter last name for this user.</source>
+        <translation>Bitte geben Sie einen Nachnamen für diesen Benutzer an.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsuser.cpp" line="113"/>
+        <source>Please enter user name.</source>
+        <translation>Bitte geben Sie einen Benutzernamen an.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsuser.cpp" line="120"/>
+        <source>The password for this user is not correct.</source>
+        <translation>Das Passwort für diesen Benutzer ist nicht richtig.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsuser.cpp" line="133"/>
+        <source>You can not add the same user.</source>
+        <translation>Der benutzer existiert bereits.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsuser.cpp" line="153"/>
+        <source>The password for this user is to short, min. 6 character.</source>
+        <translation>Das Passwort für diesen Benutzer ist zu kurz, min. 6 Zeichen.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsuser.cpp" line="252"/>
+        <source>No user was selected.</source>
+        <translation>Es wurde kein Benutzer ausgewählt.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsuser.cpp" line="323"/>
+        <source>DMS - User</source>
+        <translation>DMS - Benutzer</translation>
+    </message>
+</context>
+<context>
+    <name>DMSWorkSheet</name>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="376"/>
+        <source>DMS - Worksheet</source>
+        <translation>DMS - Arbeitsblatt</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="100"/>
+        <source>Directory is not supported by drag &amp; drop action.</source>
+        <translation>Verzeichnis per Drag&amp;Drop wird nicht unterstützt.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="255"/>
+        <source>No document was selected.</source>
+        <translation>Es wurde kein Dokument ausgewählt.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="219"/>
+        <source>Would you like delete the document from database and/or harddisk?
+</source>
+        <translation>Möchten Sie das Dokument von der Festplatte und/oder Datenbank löschen?
+</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="220"/>
+        <source>If you click &apos;Document from database&apos; only the link from database and
+</source>
+        <translation>Wenn Sie nur &apos;Dokument von Datenbank&apos; wählen, wird nur der Link von der Datenbank und
+</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="221"/>
+        <source>the document from list will removed.</source>
+        <translation>von der Liste gelöscht.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="223"/>
+        <source>DMS</source>
+        <translation>DMS</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="223"/>
+        <source>Document from database</source>
+        <translation>Dokument von Datenbank</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="223"/>
+        <source>Document from harddisk</source>
+        <translation>Dokument von Festplatte</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="223"/>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="263"/>
+        <source>Print document is not implemented yet!</source>
+        <translation>Drucken eines dokuments wird derzeit nicht unterstützt!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="270"/>
+        <source>Send document via eMail</source>
+        <translation>Dokument per e-Mail</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="273"/>
+        <source>New document</source>
+        <translation>Neues Dokument</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="277"/>
+        <source>Open document</source>
+        <translation>Dokument öffnen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="281"/>
+        <source>Delete document</source>
+        <translation>Dokument löschen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/dmsworksheet.cpp" line="285"/>
+        <source>Print document</source>
+        <translation>Dokument drucken</translation>
+    </message>
+</context>
+<context>
+    <name>LibDMS</name>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="90"/>
+        <source>User password is not correct.</source>
+        <translation>Benutzerpasswort ist nicht richtig.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="307"/>
+        <source>Please enter valid user name.</source>
+        <translation>Bitte geben Sie einen gültigen Benutzernamen ein.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="602"/>
+        <source>You can not insert the same user.</source>
+        <translation>Der benutzer existiert bereits.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="706"/>
+        <source>You can not update a user if he is not exists!</source>
+        <translation>Sie können keinen Benutzer aktualisieren der nicht existiert!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="745"/>
+        <source>You can&apos;t delete a user if he not exists!</source>
+        <translation>Sie können keinen Benutzer löschen der nicht existiert!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="953"/>
+        <source>You can not delete this group. This group is in use.</source>
+        <translation>Sie können diese Gruppe nicht löschen. Da sie derzeit verwendet wird.</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1250"/>
+        <source></source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1259"/>
+        <source>No e-Mail client on your system was found!</source>
+        <translation>Es wurde keine e-Mail Anwendung auf Ihrem System gefunden!</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1292"/>
+        <source>Process exited normal ...</source>
+        <translation>Prozess normal beendet ...</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1297"/>
+        <source>Process crashed ...</source>
+        <translation>Prozess ist abgestürzt ...</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1322"/>
+        <source>
+Can&apos;t check in the document: %1</source>
+        <translation>
+Kann Dokument: %1 nicht einpflegen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1333"/>
+        <source>File not found, resource error ...</source>
+        <translation>Datei nicht gefunden, resource fehler ...</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1337"/>
+        <source>A error has occured, process crashed ...</source>
+        <translation>Ein Fehler ist aufgetreten, prozess abgestürzt ...</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1341"/>
+        <source>A error has occured, process timeout ...</source>
+        <translation>Ein Fehler ist aufgetreten, prozess zeitlimit überschritten ...</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1345"/>
+        <source>A error has occured, process read error ...</source>
+        <translation>Ein Fehler ist aufgetreten, prozess lese fehle ...</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1349"/>
+        <source>A error has occured, process write error ...</source>
+        <translation>Ein Fehler ist aufgetreten, prozess mit fehler ...</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/src/libdms.cpp" line="1353"/>
+        <source>A error has occured, unkown process error ...</source>
+        <translation>Ein Fehler ist aufgetreten, unbekannter  prozessfehler ...</translation>
     </message>
 </context>
 <context>
@@ -80,7 +414,7 @@
     <message>
         <location filename="../../libdms/ui/login.ui" line="25"/>
         <source>Login</source>
-        <translation>Verbindung</translation>
+        <translation>Anmelden</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/login.ui" line="50"/>
@@ -95,50 +429,12 @@
     <message>
         <location filename="../../libdms/ui/login.ui" line="119"/>
         <source>&amp;Login</source>
-        <translation>&amp;Verbinden</translation>
+        <translation>&amp;Anmelden</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/login.ui" line="151"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
-    </message>
-</context>
-<context>
-    <name>UiMSSqlConnectionBase</name>
-    <message>
-        <location filename="../../libdms/ui/mssqlconnection.ui" line="25"/>
-        <source>MS SQL Connection Assistant</source>
-        <translation type="obsolete">MS SQL Verbindungs Assistant</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/mssqlconnection.ui" line="103"/>
-        <source>Server:</source>
-        <translation type="obsolete">Server:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/mssqlconnection.ui" line="129"/>
-        <source>Username:</source>
-        <translation type="obsolete">Benutzername:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/mssqlconnection.ui" line="155"/>
-        <source>Password:</source>
-        <translation type="obsolete">Passwort:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/mssqlconnection.ui" line="207"/>
-        <source>Database:</source>
-        <translation type="obsolete">Datenbank:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/mssqlconnection.ui" line="278"/>
-        <source>&amp;Ok</source>
-        <translation type="obsolete">&amp;Ok</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/mssqlconnection.ui" line="310"/>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Abbrechen</translation>
+        <translation>A&amp;bbrechen</translation>
     </message>
 </context>
 <context>
@@ -146,12 +442,12 @@
     <message>
         <location filename="../../libdms/ui/mysqlconnection.ui" line="13"/>
         <source>MySQL Connection Assistant</source>
-        <translation>MySQL Verbindungs Assistant</translation>
+        <translation>MySQL Verbindungsassistant</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/mysqlconnection.ui" line="34"/>
         <source>Connect to a MySQL database...</source>
-        <translation>Verbindung zur MySQL Datenbank...</translation>
+        <translation>Verbinden zu einer MySQL Datenbank ...</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/mysqlconnection.ui" line="62"/>
@@ -194,7 +490,7 @@
     <message>
         <location filename="../../libdms/ui/document.ui" line="13"/>
         <source>New / Edit Document</source>
-        <translation>Neu / Bearbeiten Dokument</translation>
+        <translation>Dokument erstellen / bearbeiten</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/document.ui" line="29"/>
@@ -227,6 +523,11 @@
         <translation>Benutzer:</translation>
     </message>
     <message>
+        <location filename="../../libdms/ui/document.ui" line="359"/>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
         <location filename="../../libdms/ui/document.ui" line="175"/>
         <source>&amp;Add</source>
         <translation>&amp;Hinzufügen</translation>
@@ -234,7 +535,7 @@
     <message>
         <location filename="../../libdms/ui/document.ui" line="194"/>
         <source>&amp;Update</source>
-        <translation>Akt&amp;ualisieren</translation>
+        <translation>&amp;Aktualisieren</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/document.ui" line="213"/>
@@ -257,24 +558,14 @@
         <translation>Dokument:</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/document.ui" line="359"/>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <location filename="../../libdms/ui/document.ui" line="389"/>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/document.ui" line="453"/>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
-    </message>
-    <message>
         <location filename="../../libdms/ui/document.ui" line="421"/>
-        <source>&amp;Scan</source>
-        <translation>&amp;Scan</translation>
+        <source>&amp;Cancel</source>
+        <translation>A&amp;bbrechen</translation>
     </message>
 </context>
 <context>
@@ -282,7 +573,7 @@
     <message>
         <location filename="../../libdms/ui/group.ui" line="25"/>
         <source>New / Edit Group</source>
-        <translation>Neu / Bearbeiten Gruppe</translation>
+        <translation>Grupp erstellen / bearbeiten</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/group.ui" line="38"/>
@@ -312,7 +603,7 @@
     <message>
         <location filename="../../libdms/ui/group.ui" line="181"/>
         <source>&amp;Update</source>
-        <translation>Akt&amp;ualisieren</translation>
+        <translation>&amp;Aktualisieren</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/group.ui" line="200"/>
@@ -332,7 +623,7 @@
     <message>
         <location filename="../../libdms/ui/group.ui" line="324"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <translation>A&amp;bbrechen</translation>
     </message>
 </context>
 <context>
@@ -340,7 +631,7 @@
     <message>
         <location filename="../../libdms/ui/user.ui" line="25"/>
         <source>New / Edit User</source>
-        <translation>Neu / Bearbeiten Benutzer</translation>
+        <translation>Benutzer erstellen / bearbeiten</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/user.ui" line="38"/>
@@ -350,7 +641,7 @@
     <message>
         <location filename="../../libdms/ui/user.ui" line="43"/>
         <source>Userpassword</source>
-        <translation>Benutzerpasswort</translation>
+        <translation>Benutzerpassword</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/user.ui" line="48"/>
@@ -380,7 +671,7 @@
     <message>
         <location filename="../../libdms/ui/user.ui" line="188"/>
         <source>&amp;Update</source>
-        <translation>Akt&amp;ualisieren</translation>
+        <translation>&amp;Aktualisieren</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/user.ui" line="207"/>
@@ -415,7 +706,7 @@
     <message>
         <location filename="../../libdms/ui/user.ui" line="416"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <translation>A&amp;bbrechen</translation>
     </message>
 </context>
 <context>
@@ -423,197 +714,37 @@
     <message>
         <location filename="../../libdms/ui/preference.ui" line="25"/>
         <source>Preference</source>
-        <translation>Einstellungen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="400"/>
-        <source>Database</source>
-        <translation>Datenbank</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="704"/>
-        <source>File associations</source>
-        <translation>Dateizuordnung</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="1131"/>
-        <source>Plugins</source>
-        <translation>Plugins</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="1180"/>
-        <source>Skins</source>
-        <translation>Theme</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="711"/>
-        <source>Documents</source>
-        <translation>Dokument</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="731"/>
-        <source>Application:</source>
-        <translation>Anwendung:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="757"/>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="778"/>
-        <source>Fileextansion:</source>
-        <translation>Dateiendung:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="816"/>
-        <source>Programm</source>
-        <translation>Anwendung</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="821"/>
-        <source>Fileextansion</source>
-        <translation>Dateiendung</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="794"/>
-        <source>odt;ott;sxw;stw;sdw;doc</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="799"/>
-        <source>ods;ots;sxc;stc;sdc;fods;xls;xlt;csv</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="1039"/>
-        <source>A&amp;dd</source>
-        <translation>&amp;Hinzufügen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="1058"/>
-        <source>&amp;Update</source>
-        <translation>Akt&amp;ualisieren</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="1077"/>
-        <source>&amp;Remove</source>
-        <translation>&amp;Löschen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="1218"/>
-        <source>A&amp;pply</source>
-        <translation>&amp;Anwenden</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="1250"/>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="161"/>
-        <source>Setup database</source>
-        <translation type="obsolete">Datenbankeinstellung</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="166"/>
-        <source>Manage connection</source>
-        <translation type="obsolete">Verbindungen verwalten</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="195"/>
-        <source>SQL Script:</source>
-        <translation type="obsolete">SQL Script:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="203"/>
-        <source>MySQL Server 5.1 Script</source>
-        <translation type="obsolete">MySQL Server 5.1 Script</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="208"/>
-        <source>MS SQL Server 2005 Script</source>
-        <translation type="obsolete">MS SQL Server 2005 Script</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="239"/>
-        <source>&amp;Execute</source>
-        <translation type="obsolete">Au&amp;sführen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="485"/>
-        <source>Connect to a MySQL database...</source>
-        <translation>Verbindung zur MySQL Datenbank...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="513"/>
-        <source>Host:</source>
-        <translation>Server:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="535"/>
-        <source>Port:</source>
-        <translation>Port:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="568"/>
-        <source>User:</source>
-        <translation>Benutzer:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="594"/>
-        <source>Password:</source>
-        <translation>Passwort:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="646"/>
-        <source>Database:</source>
-        <translation>Datenbank:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="456"/>
-        <source>If you change this settings, you must restart the application for apply the settings.</source>
-        <translation>Wenn Sie diese Einstellung ändern müssen Sie die Anwendung erneut starten.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="411"/>
-        <source>Manage MySQL Server 5.1 connection</source>
-        <translation>Verwaltung der MySQL Server 5.1 Verbindung</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="804"/>
-        <source>7z;zip;rar;tar;tar.gz;tar.bz2;gz;tgz;bzip;bzip2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="1017"/>
-        <source>e-Mail</source>
-        <translation>e-Mail</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="942"/>
-        <source>Addresses</source>
-        <translation>Adresse</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="962"/>
-        <source>Address description:</source>
-        <translation>Adressbeschreibung:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="992"/>
-        <source>e-Mail address:</source>
-        <translation>e-Mail Adresse:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/preference.ui" line="1012"/>
-        <source>Bezeichnung</source>
-        <translation>Bezeichnung</translation>
+        <translation>Einstellunge</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/preference.ui" line="163"/>
         <source>General</source>
         <translation>General</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="406"/>
+        <source>Database</source>
+        <translation>Datenbank</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="710"/>
+        <source>File associations</source>
+        <translation>Dateiverknüpfung</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="1023"/>
+        <source>e-Mail</source>
+        <translation>e-Mail</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="1137"/>
+        <source>Plugins</source>
+        <translation>Erweiterungen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="1186"/>
+        <source>Skins</source>
+        <translation>Skins</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/preference.ui" line="170"/>
@@ -624,6 +755,11 @@
         <location filename="../../libdms/ui/preference.ui" line="193"/>
         <source>Documentarchive:</source>
         <translation>Dokumentenarchive:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="763"/>
+        <source>...</source>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/preference.ui" line="231"/>
@@ -648,40 +784,142 @@
     <message>
         <location filename="../../libdms/ui/preference.ui" line="283"/>
         <source>Scanoption</source>
-        <translation>Scanoption</translation>
+        <translation>Scannoption</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="306"/>
+        <location filename="../../libdms/ui/preference.ui" line="309"/>
         <source>Image as Blob:</source>
-        <translation>Bild als BLOB:</translation>
+        <translation>Bild als Binär:</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preference.ui" line="336"/>
+        <location filename="../../libdms/ui/preference.ui" line="342"/>
         <source>Image as file:</source>
         <translation>Bild als Datei:</translation>
     </message>
-</context>
-<context>
-    <name>UiPreviewDocumentBase</name>
     <message>
-        <location filename="../../libdms/ui/preview.ui" line="25"/>
-        <source>Preview document</source>
-        <translation type="obsolete">Dokumentenvorschau</translation>
+        <location filename="../../libdms/ui/preference.ui" line="417"/>
+        <source>Manage MySQL Server 5.1 connection</source>
+        <translation>MySQL Server 5.1 Verbindung verwalten</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preview.ui" line="48"/>
-        <source>Document:</source>
-        <translation type="obsolete">Dokument:</translation>
+        <location filename="../../libdms/ui/preference.ui" line="462"/>
+        <source>If you change this settings, you must restart the application for apply the settings.</source>
+        <translation>Werden diese Einstellungen verändert, müssen Sie die Anwendung neu starten.</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preview.ui" line="84"/>
-        <source>&amp;Ok</source>
-        <translation type="obsolete">&amp;Ok</translation>
+        <location filename="../../libdms/ui/preference.ui" line="491"/>
+        <source>Connect to a MySQL database...</source>
+        <translation>Verbinde zur MySQL Datenbank ...</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/preview.ui" line="116"/>
+        <location filename="../../libdms/ui/preference.ui" line="519"/>
+        <source>Host:</source>
+        <translation>Server:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="541"/>
+        <source>Port:</source>
+        <translation>Port:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="574"/>
+        <source>User:</source>
+        <translation>Benutzer:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="600"/>
+        <source>Password:</source>
+        <translation>Passwort:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="652"/>
+        <source>Database:</source>
+        <translation>Datenbank:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="717"/>
+        <source>Documents</source>
+        <translation>Dokument</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="737"/>
+        <source>Application:</source>
+        <translation>Anwendung:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="784"/>
+        <source>Fileextansion:</source>
+        <translation>Dateierweiterung:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="800"/>
+        <source>odt;ott;sxw;stw;sdw;doc</source>
+        <translation>odt;ott;sxw;stw;sdw;doc</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="805"/>
+        <source>ods;ots;sxc;stc;sdc;fods;xls;xlt;csv</source>
+        <translation>ods;ots;sxc;stc;sdc;fods;xls;xlt;csv</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="810"/>
+        <source>7z;zip;rar;tar;tar.gz;tar.bz2;gz;tgz;bzip;bzip2</source>
+        <translation>7z;zip;rar;tar;tar.gz;tar.bz2;gz;tgz;bzip;bzip2</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="822"/>
+        <source>Programm</source>
+        <translation>Programm</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="827"/>
+        <source>Fileextansion</source>
+        <translation>Dateierweiterung</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="1045"/>
+        <source>A&amp;dd</source>
+        <translation>&amp;Hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="1064"/>
+        <source>&amp;Update</source>
+        <translation>&amp;Aktualisieren</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="1083"/>
+        <source>&amp;Remove</source>
+        <translation>&amp;Löschen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="948"/>
+        <source>Addresses</source>
+        <translation>Adressen</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="968"/>
+        <source>Address description:</source>
+        <translation>Adressbeschreibung:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="998"/>
+        <source>e-Mail address:</source>
+        <translation>e-Mail Adresse:</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="1018"/>
+        <source>Bezeichnung</source>
+        <translation>Bezeichnung</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="1224"/>
+        <source>A&amp;pply</source>
+        <translation>A&amp;nwenden</translation>
+    </message>
+    <message>
+        <location filename="../../libdms/ui/preference.ui" line="1256"/>
         <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Abbrechen</translation>
+        <translation>A&amp;bbrechen</translation>
     </message>
 </context>
 <context>
@@ -689,7 +927,7 @@
     <message>
         <location filename="../../libdms/ui/search.ui" line="13"/>
         <source>Search document</source>
-        <translation>Dokumentensuche</translation>
+        <translation>Dokument suchen</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/search.ui" line="22"/>
@@ -704,12 +942,7 @@
     <message>
         <location filename="../../libdms/ui/search.ui" line="68"/>
         <source>exact match</source>
-        <translation>genaue Suche</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/search.ui" line="94"/>
-        <source>Column:</source>
-        <translation type="obsolete">Spalte:</translation>
+        <translation>genaue suche</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/search.ui" line="94"/>
@@ -739,7 +972,7 @@
     <message>
         <location filename="../../libdms/ui/search.ui" line="214"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <translation>A&amp;bbrechen</translation>
     </message>
 </context>
 <context>
@@ -747,22 +980,17 @@
     <message>
         <location filename="../../libdms/ui/database.ui" line="25"/>
         <source>Select database</source>
-        <translation></translation>
+        <translation>Datenbank auswählen</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/database.ui" line="34"/>
         <source>The following databases was found on your system.</source>
-        <translation>Folgende Datenbanken wurden auf Ihrem System gefunden.</translation>
+        <translation>Die folgenden Datenbanksystem wurde auf Ihrem System gefunden.</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/database.ui" line="54"/>
         <source>Which database would you like to use</source>
         <translation>Welche Datenbank wollen Sie benutzen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/database.ui" line="65"/>
-        <source>MS SQL Server 2005 Express</source>
-        <translation type="obsolete">MS SQL Server 2005 Express</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/database.ui" line="63"/>
@@ -782,12 +1010,12 @@
     <message>
         <location filename="../../libdms/ui/database.ui" line="120"/>
         <source>&amp;Select</source>
-        <translation>Au&amp;swählen</translation>
+        <translation>&amp;Auswählen</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/database.ui" line="152"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <translation>A&amp;bbrechen</translation>
     </message>
 </context>
 <context>
@@ -798,14 +1026,9 @@
         <translation>Arbeitsblatt</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/worksheet.ui" line="36"/>
-        <source>Search document:</source>
-        <translation type="obsolete">Dokument suchen:</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/ui/worksheet.ui" line="77"/>
-        <source>User</source>
-        <translation type="obsolete">Benutzer</translation>
+        <location filename="../../libdms/ui/worksheet.ui" line="48"/>
+        <source>Group</source>
+        <translation>Gruppe</translation>
     </message>
     <message>
         <location filename="../../libdms/ui/worksheet.ui" line="53"/>
@@ -818,490 +1041,9 @@
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../../libdms/ui/worksheet.ui" line="48"/>
-        <source>Group</source>
-        <translation>Gruppe</translation>
-    </message>
-    <message>
         <location filename="../../libdms/ui/worksheet.ui" line="63"/>
         <source>Checked out</source>
-        <translation>Geöffnet</translation>
-    </message>
-</context>
-<context>
-    <name>asaal::DMSDocument</name>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="196"/>
-        <source>Please select a user.</source>
-        <translation>Bitte wählen Sie einen Benutzer aus.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="203"/>
-        <source>Please enter document name.</source>
-        <translation>Bitte geben Sie einen Dokumentennamen ein.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="142"/>
-        <source>Please select a document.</source>
-        <translation>Bitte wählen Sie ein Dokument aus.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="255"/>
-        <source>No document was selected.</source>
-        <translation>Es wurde kein Dokument markiert.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="512"/>
-        <source>DMS - Document</source>
-        <translation>DMS - Dokument</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="211"/>
-        <source>Please select a group.</source>
-        <translation>Bitte wälen Sie eine Gruppe aus.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="218"/>
-        <source>Please select a document path.</source>
-        <translation>Bitte wählen Sie den Pfad für das Dokument.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="283"/>
-        <source>Open document file</source>
-        <translation>Dokument öfnnen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="283"/>
-        <source>All files (*.*)</source>
-        <translation>Alle Dateien (*.*)</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="351"/>
-        <source>Scan document on [ %1 ]</source>
-        <translation>Scan Dokument auf  [ %1 ]</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="394"/>
-        <source>Scanning document ...</source>
-        <translation>Scanne Dokument ...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsdocument.cpp" line="396"/>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
-    </message>
-</context>
-<context>
-    <name>asaal::DMSGroup</name>
-    <message>
-        <location filename="../../libdms/src/dmsgroup.cpp" line="98"/>
-        <source>You can not add the same group.</source>
-        <translation>Es existiert beriets einen Gruppe mit deiem Namen.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsgroup.cpp" line="130"/>
-        <source>Please enter a group name.</source>
-        <translation>Bitte geben Sie einen Gruppennamen ein.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsgroup.cpp" line="160"/>
-        <source>No group was selected.</source>
-        <translation>Es wurde keine Gruppe ausgewählt.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsgroup.cpp" line="217"/>
-        <source>DMS - Group</source>
-        <translation>DMS - Gruppe</translation>
-    </message>
-</context>
-<context>
-    <name>asaal::DMSLogin</name>
-    <message>
-        <location filename="../../libdms/src/dmslogin.cpp" line="89"/>
-        <source>DMS</source>
-        <translation>DMS</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmslogin.cpp" line="74"/>
-        <source>You must enter a valid user name.</source>
-        <translation>Sie müssen einen gültigen Benutzernamen eingeben.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmslogin.cpp" line="80"/>
-        <source>Passwordfield can not be empty.</source>
-        <translation>Das Passwortfeld darf nicht leer sein.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmslogin.cpp" line="89"/>
-        <source>No user was found.</source>
-        <translation>Es wurde kein Benutzer gefunden.</translation>
-    </message>
-</context>
-<context>
-    <name>asaal::DMSMSSqlConnection</name>
-    <message>
-        <location filename="../../libdms/src/dmsmssqlconnection.cpp" line="95"/>
-        <source>Error...</source>
-        <translation type="obsolete">Fehler...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsmssqlconnection.cpp" line="95"/>
-        <source>Unable to connect to server!</source>
-        <translation type="obsolete">Es konnte keine Verbindung zum Server hergestellt werden!</translation>
-    </message>
-</context>
-<context>
-    <name>asaal::DMSMySqlConnection</name>
-    <message>
-        <location filename="../../libdms/src/dmsmysqlconnection.cpp" line="146"/>
-        <source>Error...</source>
-        <translation>Fehler...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsmysqlconnection.cpp" line="146"/>
-        <source>Unable to connect to server!</source>
-        <translation>Es konnte keine Verbindung zum Server hergestellt werden.</translation>
-    </message>
-</context>
-<context>
-    <name>asaal::DMSPreference</name>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="269"/>
-        <source>DMS - Preference</source>
-        <translation>DMS - Einstellungen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="82"/>
-        <source>Open application</source>
-        <translation>Anwendung öffnen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="82"/>
-        <source>All files (*)</source>
-        <translation>Alle Dateien (*)</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="138"/>
-        <source>You must select a application!</source>
-        <translation>Sie müssen einen Anwendung wählen!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="144"/>
-        <source>You must enter a application suffix!</source>
-        <translation>SIe müssen für die Anwendung die Endungen eintragen!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="226"/>
-        <source>No item was selected!</source>
-        <translation>Es wurde kein Eintrag ausgewählt!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="230"/>
-        <source>Would you delete this item?</source>
-        <translation>Möchten SIe den Eintrag wirklich löschn?</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="300"/>
-        <source>You must enter a valid host or ip address!</source>
-        <translation>Sie müssen einen gültigen Hostnamen oder eine gültige IP-Adresse eintragen!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="306"/>
-        <source>You must enter a valid port number!</source>
-        <translation>Sie müssen einen gültigen Port angeben!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="312"/>
-        <source>You must enter a valid user name!</source>
-        <translation>Sie müssen einen gültigen Benutzernamen angeben!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="318"/>
-        <source>You must select a valid database!</source>
-        <translation>Sie müssen einen gültige Datenbank auwählen!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="210"/>
-        <source>You must enter a email address!</source>
-        <translation>Sie müssen eine gültige e-Mail Adresse eingeben!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="92"/>
-        <source>Open document archive</source>
-        <translation>Dokumentenarchive öffnen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmspreference.cpp" line="277"/>
-        <source>You must enter a valid document archive!</source>
-        <translation>Sie müssen ein gültiges Dokumentenarchive angeben!</translation>
-    </message>
-</context>
-<context>
-    <name>asaal::DMSSearch</name>
-    <message>
-        <location filename="../../libdms/src/dmssearch.cpp" line="125"/>
-        <source>No columns was found!</source>
-        <translation type="obsolete">Keine Spalten gefunden!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmssearch.cpp" line="204"/>
-        <source>DMS - User</source>
-        <translation>DMS - Benutzer</translation>
-    </message>
-</context>
-<context>
-    <name>asaal::DMSUser</name>
-    <message>
-        <location filename="../../libdms/src/dmsuser.cpp" line="96"/>
-        <source>Please enter first name for this user.</source>
-        <translation>Bitt geben Sie einen Vornamen für diesen Benutzer ein.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsuser.cpp" line="103"/>
-        <source>Please enter last name for this user.</source>
-        <translation>Bitt geben Sie einen Nachnamen für diesen Benutzer ein.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsuser.cpp" line="110"/>
-        <source>Please enter user name.</source>
-        <translation>Bitte geben Sie einen Benutzernamen ein.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsuser.cpp" line="117"/>
-        <source>The password for this user is not correct.</source>
-        <translation>Das Passwort für diesen Benutzer ist nicht korrekt.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsuser.cpp" line="129"/>
-        <source>You can not add the same user.</source>
-        <translation>Es existiert bereits ein Benutzer mit diesem Namen.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsuser.cpp" line="149"/>
-        <source>The password for this user is to short, min. 6 character.</source>
-        <translation>Das Passwort für diesen Benutzer ist zu kurz, min. 6 Zeichen.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsuser.cpp" line="233"/>
-        <source>No user was selected.</source>
-        <translation>Es wurde kein Benutzer ausgewählt.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsuser.cpp" line="303"/>
-        <source>DMS - User</source>
-        <translation>DMS - Benutzer</translation>
-    </message>
-</context>
-<context>
-    <name>asaal::DMSWorkSheet</name>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="252"/>
-        <source>No document was selected.</source>
-        <translation>Es wurde kein Dokument ausgewählt.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="88"/>
-        <source>Checkout document</source>
-        <translation type="obsolete">Dokument auswählen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="92"/>
-        <source>Checkin document</source>
-        <translation type="obsolete">Dokument sichern</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="96"/>
-        <source>Change document</source>
-        <translation type="obsolete">Dokument bearbeiten</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="278"/>
-        <source>Delete document</source>
-        <translation>Dokument löschen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="282"/>
-        <source>Print document</source>
-        <translation>Dokument drucken</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="367"/>
-        <source>DMS - Worksheet</source>
-        <translation>DMS - Arbeitsblatt</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="133"/>
-        <source>Would you like delete the document from database and harddisk?
-</source>
-        <translation type="obsolete">Möchten Sie das Dokument aus der Datenbank und von der Festplatte löschen?
-</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="217"/>
-        <source>If you click &apos;Document from database&apos; only the link from database and
-</source>
-        <translation>Wählen Sie &apos;Dokument von Datenbank&apos; wird nur der Link aus der Datenbank und
-</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="218"/>
-        <source>the document from list will removed.</source>
-        <translation>das Dokument von der Liste gelöscht.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="220"/>
-        <source>DMS</source>
-        <translation>DMSDMS</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="220"/>
-        <source>Document from database</source>
-        <translation>Dokument von Datenbank</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="220"/>
-        <source>Document from harddisk</source>
-        <translation>Dokument von Festplatte</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="220"/>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="274"/>
-        <source>Open document</source>
-        <translation>Dokument öffnen</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="216"/>
-        <source>Would you like delete the document from database and/or harddisk?
-</source>
-        <translation>Möchten Sie das Dokument aus der Datenbank und von der Festplatte löschen?</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="270"/>
-        <source>New document</source>
-        <translation>Neues Dokument</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="267"/>
-        <source>Send document via eMail</source>
-        <translation>Sende Dokument per e-Mail</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="99"/>
-        <source>Directory is not supported by drag &amp; drop action.</source>
-        <translation>Unterstützung für Drag &amp; Drop eines Verzeichnisses wird nicht unterstützt.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/dmsworksheet.cpp" line="260"/>
-        <source>Print document is not implemented yet!</source>
-        <translation>Drucken wird zur Zeit nicht unterstützt!</translation>
-    </message>
-</context>
-<context>
-    <name>asaal::LibDMS</name>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="88"/>
-        <source>User password is not correct.</source>
-        <translation>Benutzerpasswort ist nicht korrekt.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="298"/>
-        <source>Please enter valid user name.</source>
-        <translation>Bitte geben Sie einen gültigen Benutzernamen ein.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="580"/>
-        <source>You can not insert the same user.</source>
-        <translation>Es existiert bereits ein Benutzer mit diesem Namen.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="684"/>
-        <source>You can not update a user if he is not exists!</source>
-        <translation>Sie können keinen Benutzer aktualisieren der nicht existiert!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="723"/>
-        <source>You can&apos;t delete a user if he not exists!</source>
-        <translation>Sie können keinen Benutzer löschen der nicht existiert!</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="770"/>
-        <source>DMS - Logging</source>
-        <translation type="obsolete">DMS - Loging</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="770"/>
-        <source>Can&apos;t open file: 
-
- %1</source>
-        <translation type="obsolete">Kan Datei nicht öffnen: 
-
-%1</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="606"/>
-        <source>Can&apos;t open file: %1</source>
-        <translation type="obsolete">Kann Datei nicht öffnen: %1</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="931"/>
-        <source>You can not delete this group. This group is in use.</source>
-        <translation>Die markierte Gruppe kann nicht gelöscht werden, da sie gerade benutzt wird.</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="1270"/>
-        <source>Process exited normal ...</source>
-        <translation>Prozzess wurde normal beendet ...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="1275"/>
-        <source>Process crashed ...</source>
-        <translation>Prozzess is abgestürzt ...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="1311"/>
-        <source>File not found, resource error ...</source>
-        <translation>Datei nicht gefunden, resource fehler ...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="1315"/>
-        <source>A error has occured, process crashed ...</source>
-        <translation>Ein Fehler ist aufgetretten, prozzess abgestürzt ...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="1319"/>
-        <source>A error has occured, process timeout ...</source>
-        <translation>Ein Fehler ist aufgetretten, prozzess zeitüberschreitung ...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="1323"/>
-        <source>A error has occured, process read error ...</source>
-        <translation>Ein Fehler ist aufgetretten, prozzess lese fehler ...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="1327"/>
-        <source>A error has occured, process write error ...</source>
-        <translation>Ein Fehler ist aufgetretten, prozzess schreibfehler ...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="1331"/>
-        <source>A error has occured, unkown process error ...</source>
-        <translation>Ein Fehler ist aufgetretten, ubekannter prozzess fehler ...</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="1300"/>
-        <source>
-Can&apos;t check in the document: %1</source>
-        <translation>
-Kann Dokument nicht wieder schließen: %1</translation>
-    </message>
-    <message>
-        <location filename="../../libdms/src/libdms.cpp" line="1237"/>
-        <source>No e-Mail client on your system was found!</source>
-        <translation>Es wurde keine e-Mail Anwendung auf Ihrem System gefunden!</translation>
+        <translation>Ausgewählt</translation>
     </message>
 </context>
 </TS>
