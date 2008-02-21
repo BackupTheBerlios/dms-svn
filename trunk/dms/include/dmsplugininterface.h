@@ -109,7 +109,7 @@ class DMSPluginInterface
 		 * }
 		 * @endcode
 		 */
-		virtual QAction *action() const = 0;
+		virtual QAction *action();
 
 		/**
 		 * Rückgabe der Pluginversion

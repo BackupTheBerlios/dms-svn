@@ -265,9 +265,19 @@ namespace asaal
 		pluginsDir.cd( "plugins" );
 
 		if ( pluginsDir.entryList( QDir::Files ).size() >= 1 )
+		{
 			mnuPlugin = menuBar()->addMenu( tr( "&Plugin" ) );
+		}
 		else
-			return;
+		{
+			pluginsDir = QDir( QCoreApplication::applicationDirPath() );
+			pluginsDir.cd( "plugins" );
+			
+			if( pluginsDir.entryList( QDir::Files ).size() >= 1 )
+				mnuPlugin = menuBar()->addMenu( tr( "&Plugin" ) );
+			else
+				return;			
+		}
 
 		// iterate over the plugin directory and load plugins if necessary ...
 		foreach( QString fileName, pluginsDir.entryList( QDir::Files ) )
@@ -276,6 +286,7 @@ namespace asaal
 			{
 				QPluginLoader loader( pluginsDir.absoluteFilePath( fileName ) );
 				QObject *plug = loader.instance();
+				qDebug() << plug;
 
 				if ( plug != NULL )
 				{

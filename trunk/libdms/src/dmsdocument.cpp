@@ -30,11 +30,6 @@
 
 #include <libdms.h>
 
-#ifdef Q_OS_WIN32
-#else
-#include <sane_widget.h>
-#endif
-
 #include <QtCore>
 #include <QtGui>
 
