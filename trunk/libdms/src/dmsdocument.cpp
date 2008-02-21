@@ -51,8 +51,6 @@ namespace asaal
 
 		connect( treeWidgetDocument, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetDocumentItem( QTreeWidgetItem *, int ) ) );
 
-		connect( btnScan, SIGNAL( clicked() ), this, SLOT( scanDocument() ) );
-
 		connect( btnUser, SIGNAL( clicked() ), this, SLOT( newUser() ) );
 		connect( btnGroup, SIGNAL( clicked() ), this, SLOT( newGroup() ) );
 		connect( btnDocId, SIGNAL( clicked() ), this, SLOT( newDocumentId() ) );
@@ -70,12 +68,6 @@ namespace asaal
 		newDocumentId();
 
 		_dms->clearErrorMessage();
-
-#ifdef Q_OS_WIN32
-		btnScan->setEnabled( false );
-#else
-		btnScan->setEnabled( true );
-#endif
 	}
 
 	DMSDocument::~DMSDocument()
@@ -110,6 +102,7 @@ namespace asaal
 		while ( userIt != users.end() )
 		{
 			qApp->processEvents();
+
 			QString fname = userIt.value().split( "#" ).value( 2 );
 			QString nname = userIt.value().split( "#" ).value( 3 );
 
@@ -181,7 +174,6 @@ namespace asaal
 		}
 
 		QString username = comboBoxUser->currentText();
-
 		QString docname = lineEditDocumentName->text();
 		QString groupname = comboBoxGroup->currentText();
 		QString docpath = lineEditDocumentPath->text();
@@ -483,7 +475,6 @@ namespace asaal
 		m_scanWidget = NULL;
 		
 		QApplication::restoreOverrideCursor();
-
 #endif
 	}
 
