@@ -23,7 +23,7 @@ Compile DMS - Document Management System
 Compile under Windows
 =====================
 
-Scansupport under Windows is at this time disabled, because i search for better solution for Twain.
+Scansupport under Windows is at this time disabled, because i search for better solution as Twain.
 
 For compilation under Windows you need the following software packages:
 
