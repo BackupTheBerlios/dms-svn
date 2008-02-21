@@ -261,7 +261,7 @@ void DMSystem::createPluginMenu()
 	QDir pluginsDir = QDir( QApplication::applicationDirPath() );
 	pluginsDir.cd( ".dms" );
 	pluginsDir.cd( "plugins" );
-	
+
 	bool firstInit = true;
 
 	// iterate over the plugin directory and load plugins if necessary ...
@@ -274,14 +274,15 @@ void DMSystem::createPluginMenu()
 
 			if ( plug != NULL )
 			{
-				if( firstInit )
+				if ( firstInit )
 				{
 					mnuPlugin = menuBar()->addMenu( tr( "&Plugin" ) );
 					firstInit = false;
 				}
 
 				DMSPluginInterface *dpi = qobject_cast<DMSPluginInterface *> ( plug );
-				if( dpi )
+
+				if ( dpi )
 					mnuPlugin->addAction( dpi->action() );
 			}
 		}

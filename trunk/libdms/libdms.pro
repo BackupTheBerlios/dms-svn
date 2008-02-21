@@ -21,8 +21,8 @@
 # Qt 4 Settings
 TEMPLATE = lib
 DESTDIR = ../bin
-DEPENDPATH += include src ui base64 xmlpref sanewidget ../resource
-INCLUDEPATH += include ui base64 xmlpref sanewidget
+DEPENDPATH += include src ui base64 xmlpref ../resource
+INCLUDEPATH += include ui base64 xmlpref
 RESOURCES += ../resource/dms.qrc
 CONFIG += debug thread warn_on qt
 QT += sql xml
