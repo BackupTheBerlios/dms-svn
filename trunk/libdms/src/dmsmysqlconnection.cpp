@@ -32,161 +32,164 @@
 #include <QtGui>
 #include <QtSql>
 
-namespace asaal
+DMSMySqlConnection *dmsmysqlconnection = NULL;
+DMSMySqlConnection::DMSMySqlConnection( QDialog *parent ) : QDialog( parent )
 {
-	DMSMySqlConnection *dmsmysqlconnection = NULL;
-	DMSMySqlConnection::DMSMySqlConnection( QDialog *parent ) : QDialog( parent )
+	setupUi( this );
+	dmsmysqlconnection = this;
+
+	connect( btnCheckConnection, SIGNAL( clicked() ), this, SLOT( check() ) );
+	connect( btnOk, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
+	connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
+
+	btnOk->setEnabled( false );
+
+	QDesktopWidget *desktop = qApp->desktop();
+	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
+	int left = ( rect.width() - width() ) / 2;
+	int top = ( rect.height() - height() ) / 2;
+	setGeometry( left, top, width(), height() );
+	setModal( true );
+
+	connected = false;
+}
+
+DMSMySqlConnection::~DMSMySqlConnection()
+{
+	dmsmysqlconnection = NULL;
+}
+
+void DMSMySqlConnection::closeEvent( QCloseEvent *e )
+{
+	dmsmysqlconnection = NULL;
+	e->accept();
+}
+
+void DMSMySqlConnection::check()
+{
+	int port = spinBoxPort->value();
+	QString host = lineEditoHost->text();
+	QString user = lineEditUser->text();
+	QString upwd = lineEditPassword->text();
+
+	QSqlDatabase qsqld = QSqlDatabase::addDatabase( "QMYSQL", "available_db" );
+	qsqld.setUserName( user );
+	qsqld.setPassword( upwd );
+	qsqld.setHostName( host );
+	qsqld.setPort( port );
+
+	if ( qsqld.open() )
 	{
-		setupUi( this );
-		dmsmysqlconnection = this;
+		// TODO [ START ] create database and tables ...
+		QFile sqlScript( QString::fromUtf8( ":/database/sql/mysql.sql" ) );
 
-		connect( btnCheckConnection, SIGNAL( clicked() ), this, SLOT( check() ) );
-		connect( btnOk, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
-		connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
-
-		btnOk->setEnabled( false );
-
-		QDesktopWidget *desktop = qApp->desktop();
-		const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
-		int left = ( rect.width() - width() ) / 2;
-		int top = ( rect.height() - height() ) / 2;
-		setGeometry( left, top, width(), height() );
-		setModal( true );
-
-		connected = false;
-	}
-
-	DMSMySqlConnection::~DMSMySqlConnection()
-	{
-		dmsmysqlconnection = NULL;
-	}
-
-	void DMSMySqlConnection::closeEvent( QCloseEvent *e )
-	{
-		dmsmysqlconnection = NULL;
-		e->accept();
-	}
-
-	void DMSMySqlConnection::check()
-	{
-		int port = spinBoxPort->value();
-		QString host = lineEditoHost->text();
-		QString user = lineEditUser->text();
-		QString upwd = lineEditPassword->text();
-
-		QSqlDatabase qsqld = QSqlDatabase::addDatabase( "QMYSQL", "available_db" );
-		qsqld.setUserName( user );
-		qsqld.setPassword( upwd );
-		qsqld.setHostName( host );
-		qsqld.setPort( port );
-
-		if ( qsqld.open() )
+		if ( !sqlScript.open( QIODevice::ReadOnly | QIODevice::Text ) )
 		{
-			// TODO [ START ] create database and tables ...
-			QFile sqlScript( QString::fromUtf8( ":/database/sql/mysql.sql" ) );
-
-			if ( !sqlScript.open( QIODevice::ReadOnly | QIODevice::Text ) )
-			{
-				qDebug() << "Can't read sql script ... " << sqlScript.fileName();
-			}
-			else
-			{
-				QTextStream in( &sqlScript );
-				QString line;
-
-				while ( !in.atEnd() )
-				{
-					line = in.readLine();
-
-					QSqlQuery queryCreateDatabase( line, qsqld );
-
-					if ( !queryCreateDatabase.isActive() )
-					{
-						qDebug() << "An error has occoured:\t" << queryCreateDatabase.lastError().text();
-						break;
-					}
-
-					if ( line.split( " " ).count() >= 5 )
-					{
-						if ( line.split( " " ).contains( "DATABASE" ) )
-						{
-							qDebug() << "Create database:\t" << line.split( " " ).value( 5 ).replace( "`", "" );
-						}
-						else if ( line.split( " " ).contains( "TABLE" ) )
-						{
-							qDebug() << "Create table:\t" << line.split( " " ).value( 5 ).replace( "`", "" );
-						}
-						else if( line.split( " " ).count() <= 3 )
-						{
-							qDebug() << "Create table:\t" << line.split( " " ).value( 2 ).replace( "`", "" );
-						}
-					}
-				}
-			}
-			// TODO [ END ] create database and tables ...
-
-			QSqlQuery queryDatabases( "SHOW DATABASES;", qsqld );
-
-			if ( queryDatabases.isActive() )
-			{
-				while ( queryDatabases.next() )
-				{
-					QSqlQuery queryDms( "SELECT USERNAME FROM " + queryDatabases.value( 0 ).toString() + ".USERS", qsqld );
-
-					if ( queryDms.isActive() )
-					{
-						comboBoxDatabase->addItem( queryDatabases.value( 0 ).toString() );
-					}
-				}
-			}
+			qDebug() << "Can't read sql script ... " << sqlScript.fileName();
 		}
 		else
 		{
-			QSqlError qsqlErr = qsqld.lastError();
-			QMessageBox::critical( this, tr( "Error..." ), tr( "Unable to connect to server!" ) + "\n\n" + qsqlErr.text() );
+			QTextStream in( &sqlScript );
+			QString line;
 
-			qsqld.close();
-			QSqlDatabase::removeDatabase( "available_db" );
+			while ( !in.atEnd() )
+			{
+				line = in.readLine();
 
-			connected = false;
+				QSqlQuery queryCreateDatabase( line, qsqld );
 
-			return;
+				if ( !queryCreateDatabase.isActive() )
+				{
+					qDebug() << "An error has occoured:\t" << queryCreateDatabase.lastError().text();
+					break;
+				}
+
+				if ( line.split( " " ).count() >= 5 )
+				{
+					if ( line.split( " " ).contains( "DATABASE" ) )
+					{
+						qDebug() << "Create database:\t" << line.split( " " ).value( 5 ).replace( "`", "" );
+					}
+					else if ( line.split( " " ).contains( "TABLE" ) )
+					{
+						qDebug() << "Create table:\t" << line.split( " " ).value( 5 ).replace( "`", "" );
+					}
+					else if ( line.split( " " ).count() <= 3 )
+					{
+						qDebug() << "Create table:\t" << line.split( " " ).value( 2 ).replace( "`", "" );
+					}
+				}
+			}
 		}
 
+		// TODO [ END ] create database and tables ...
+
+		QSqlQuery queryDatabases( "SHOW DATABASES;", qsqld );
+
+		if ( queryDatabases.isActive() )
+		{
+			while ( queryDatabases.next() )
+			{
+				QSqlQuery queryDms( "SELECT USERNAME FROM " + queryDatabases.value( 0 ).toString() + ".USERS", qsqld );
+
+				if ( queryDms.isActive() )
+				{
+					comboBoxDatabase->addItem( queryDatabases.value( 0 ).toString() );
+				}
+			}
+		}
+	}
+	else
+	{
+		QSqlError qsqlErr = qsqld.lastError();
+		QMessageBox::critical( this, tr( "Error..." ), tr( "Unable to connect to server!" ) + "\n\n" + qsqlErr.text() );
+
+		qsqld.close();
 		QSqlDatabase::removeDatabase( "available_db" );
 
-		connected = true;
+		connected = false;
 
-		btnOk->setEnabled( true );
+		return;
 	}
 
-	void DMSMySqlConnection::closeWidget()
+	QSqlDatabase::removeDatabase( "available_db" );
+
+	connected = true;
+
+	btnOk->setEnabled( true );
+}
+
+void DMSMySqlConnection::closeWidget()
+{
+	if ( connected )
 	{
-		if ( connected )
-		{
-			QString file = QDir::homePath();
+		QString file = QDir::homePath();
 
-			QDir pref( file + "/.dms/connection" );
+		QDir pref( file + "/.dms/connection" );
 
-			if ( !pref.exists() )
-				pref.mkpath( file + "/.dms/connection" );
+		if ( !pref.exists() )
+			pref.mkpath( file + "/.dms/connection" );
 
-			file.append( "/.dms/connection/mysql.xml" );
+		file.append( "/.dms/connection/mysql.xml" );
 
-			XMLPreferences dbsettings( "DMSMySqlConnection", "" );
+		XMLPreferences dbsettings( "DMSMySqlConnection", "" );
 
-			dbsettings.setVersion( "0.1.0.0" );
-			dbsettings.setString( "MySqlConnection", "UserName", lineEditUser->text() );
-			dbsettings.setString( "MySqlConnection", "Password", Base64::encode( QVariant( lineEditPassword->text() ).toByteArray() ) );
-			dbsettings.setString( "MySqlConnection", "Database", comboBoxDatabase->currentText() );
-			dbsettings.setString( "MySqlConnection", "HostName", lineEditoHost->text() );
-			dbsettings.setInt( "MySqlConnection", "Port", spinBoxPort->value() );
+		dbsettings.setVersion( "0.1.0.0" );
 
-			dbsettings.save( file );
+		dbsettings.setString( "MySqlConnection", "UserName", lineEditUser->text() );
 
-			QDialog::accept();
-		}
-		else
-			QDialog::reject();
+		dbsettings.setString( "MySqlConnection", "Password", Base64::encode( QVariant( lineEditPassword->text() ).toByteArray() ) );
+
+		dbsettings.setString( "MySqlConnection", "Database", comboBoxDatabase->currentText() );
+
+		dbsettings.setString( "MySqlConnection", "HostName", lineEditoHost->text() );
+
+		dbsettings.setInt( "MySqlConnection", "Port", spinBoxPort->value() );
+
+		dbsettings.save( file );
+
+		QDialog::accept();
 	}
+	else
+		QDialog::reject();
 }

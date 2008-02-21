@@ -31,12 +31,9 @@
 #include <QDebug>
 #include <QTranslator>
 
-using namespace asaal;
-
 int main( int argc, char **argv )
 {
 	QApplication app( argc, argv );
-	QCoreApplication::addLibraryPath( QCoreApplication::applicationDirPath() );
 
 	QTranslator dmsTranslator;
 	QTranslator libDmsTranslator;

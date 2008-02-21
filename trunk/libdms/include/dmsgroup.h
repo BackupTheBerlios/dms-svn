@@ -35,69 +35,66 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
-{
-
-	class EXPORT_ASAAL DMSGroup;
+class EXPORT_ASAAL DMSGroup;
 
 #ifdef Q_OS_WIN32
-	extern EXPORT_ASAAL DMSGroup *dmsgroup;
+extern EXPORT_ASAAL DMSGroup *dmsgroup;
 #else
-	extern DMSGroup *dmsgroup;
+extern DMSGroup *dmsgroup;
 #endif
 
-	/*!
-	* @author Alexander Saal <alex.saal@gmx.de>
-	* @sa http://chmaster.freeforge.net
-	* @date 2007/12/12
-	* @version 0.1.0.0
-	* @since 0.1.0.0
-	*/
+/*!
+* @author Alexander Saal <alex.saal@gmx.de>
+* @sa http://chmaster.freeforge.net
+* @date 2007/12/12
+* @version 0.1.0.0
+* @since 0.1.0.0
+*/
 
-	class EXPORT_ASAAL DMSGroup : public QWidget, public Ui::UiNewEditGroupBase
-	{
+class EXPORT_ASAAL DMSGroup : public QWidget, public Ui::UiNewEditGroupBase
+{
 
-			Q_OBJECT
+		Q_OBJECT
 
-			Q_CLASSINFO( "Author", "Alexander Saal" )
-			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
-			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
+		Q_CLASSINFO( "Author", "Alexander Saal" )
+		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
-		public:
-			DMSGroup( LibDMS *dms, QWidget *parent = 0L );
-			~DMSGroup();
+	public:
+		DMSGroup( LibDMS *dms, QWidget *parent = 0L );
+		~DMSGroup();
 
-			/*!
-			 * Get the external instance of @sa DMSGroup
-			 */
-			static DMSGroup *dmsgroup_instance()
-			{
-				return dmsgroup;
-			}
+		/*!
+		 * Get the external instance of @sa DMSGroup
+		 */
+		static DMSGroup *dmsgroup_instance()
+		{
+			return dmsgroup;
+		}
 
-		private slots:
-			void addGroup();
-			void updateGroup();
-			void deleteGroup();
-			void newGroupId();
+	private slots:
+		void addGroup();
+		void updateGroup();
+		void deleteGroup();
+		void newGroupId();
 
-			void loadGroups();
+		void loadGroups();
 
-			void treeWidgetGroupItem( QTreeWidgetItem *, int );
-			void showErrorMsg( const QString &error );
+		void treeWidgetGroupItem( QTreeWidgetItem *, int );
+		void showErrorMsg( const QString &error );
 
-			void closeWidget();
+		void closeWidget();
 
-		private:
-			LibDMS *_dms;
+	private:
+		LibDMS *_dms;
 
-			QMap<QString, QString> documents;
-			QTreeWidgetItem *groupItem;
+		QMap<QString, QString> documents;
+		QTreeWidgetItem *groupItem;
 
-		protected:
-			void closeEvent( QCloseEvent *e );
+	protected:
+		void closeEvent( QCloseEvent *e );
 
-	};
-}
+};
+
 
 #endif // DMSGROUP_H

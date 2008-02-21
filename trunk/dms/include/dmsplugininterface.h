@@ -33,9 +33,13 @@
 // QtCore Classes
 
 class QAction;
+
 class QDialog;
+
 class QString;
+
 class QPixmap;
+
 class QWidget;
 
 /**
@@ -44,7 +48,6 @@ class QWidget;
  * @version 0.1.0
  * @since 0.1.0
  */
-using namespace asaal;
 
 class DMSPluginInterface
 {

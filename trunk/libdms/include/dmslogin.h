@@ -35,9 +35,6 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
-{
-
 	class EXPORT_ASAAL DMSLogin;
 
 #ifdef Q_OS_WIN32
@@ -86,6 +83,6 @@ namespace asaal
 			void closeEvent( QCloseEvent *e );
 
 	};
-}
+
 
 #endif // DMSLOGIN_H

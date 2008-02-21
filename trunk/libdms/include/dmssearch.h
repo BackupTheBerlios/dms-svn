@@ -35,68 +35,64 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
-{
-
-	class EXPORT_ASAAL DMSSearch;
+class EXPORT_ASAAL DMSSearch;
 
 #ifdef Q_OS_WIN32
-	extern EXPORT_ASAAL DMSSearch *dmssearch;
+extern EXPORT_ASAAL DMSSearch *dmssearch;
 #else
-	extern DMSSearch *dmssearch;
+extern DMSSearch *dmssearch;
 #endif
 
-	/*!
-	* @author Alexander Saal <alex.saal@gmx.de>
-	* @sa http://chmaster.freeforge.net
-	* @date 2008/02/08
-	* @version 0.1.0.0
-	* @since 0.1.0.0
-	*/
+/*!
+* @author Alexander Saal <alex.saal@gmx.de>
+* @sa http://chmaster.freeforge.net
+* @date 2008/02/08
+* @version 0.1.0.0
+* @since 0.1.0.0
+*/
 
-	class EXPORT_ASAAL DMSSearch : public QWidget, public Ui::UiSearchBase
-	{
+class EXPORT_ASAAL DMSSearch : public QWidget, public Ui::UiSearchBase
+{
 
-			Q_OBJECT
+		Q_OBJECT
 
-			Q_CLASSINFO( "Author", "Alexander Saal" )
-			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
-			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
+		Q_CLASSINFO( "Author", "Alexander Saal" )
+		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
-		public:
-			DMSSearch( LibDMS *dms, QWidget *parent = 0L );
-			~DMSSearch();
+	public:
+		DMSSearch( LibDMS *dms, QWidget *parent = 0L );
+		~DMSSearch();
 
-			/*!
-			 * Get the external instance of @sa DMSSearch
-			 */
-			static DMSSearch *dmsserach_instance()
-			{
-				return dmssearch;
-			}
+		/*!
+		 * Get the external instance of @sa DMSSearch
+		 */
+		static DMSSearch *dmsserach_instance()
+		{
+			return dmssearch;
+		}
 
-		private slots:
-			void search();
-			void loadSearchPreferences();
+	private slots:
+		void search();
+		void loadSearchPreferences();
 
-			void showErrorMsg( const QString &error );
+		void showErrorMsg( const QString &error );
 
-			void closeWidget();
+		void closeWidget();
 
-		private:
-			LibDMS *_dms;
+	private:
+		LibDMS *_dms;
 
-			QMap<QString, QString> documents;
-			QMap<QString, QString> users;
-			QMap<QString, QString> groups;
-			QStringList columns;
+		QMap<QString, QString> documents;
+		QMap<QString, QString> users;
+		QMap<QString, QString> groups;
+		QStringList columns;
 
-			QTreeWidgetItem *docItem;
+		QTreeWidgetItem *docItem;
 
-		protected:
-			void closeEvent( QCloseEvent *e );
+	protected:
+		void closeEvent( QCloseEvent *e );
 
-	};
-}
+};
 
 #endif // DMSSEARCH_H

@@ -1,0 +1,35 @@
+#ifndef Q_CC_BOR
+# if defined(UNDER_CE) && UNDER_CE >= 400
+#  include <winbase.h>
+# else
+#  include <winver.h>
+# endif
+#endif
+
+VS_VERSION_INFO VERSIONINFO
+	FILEVERSION 0,1,0,1
+	PRODUCTVERSION 0,1,0,1
+	FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+	FILEFLAGS VS_FF_DEBUG
+#else
+	FILEFLAGS 0x0L
+#endif
+	FILEOS VOS__WINDOWS32
+	FILETYPE VFT_DLL
+	FILESUBTYPE 0x0L
+	BEGIN
+		BLOCK "StringFileInfo"
+		BEGIN
+			BLOCK "040904B0"
+			BEGIN
+				VALUE "CompanyName", "Alexander Saal\0"
+				VALUE "FileDescription", "DMS Scannerplugin.\0"
+				VALUE "FileVersion", "0.1.0.1\0"
+				VALUE "LegalCopyright", "Copyright (C) 2008 Alexander Saal\0"
+				VALUE "OriginalFilename", "libdmsscanner.dll\0"
+				VALUE "ProductName", "DMSScanner\0"
+			END
+		END
+	END
+

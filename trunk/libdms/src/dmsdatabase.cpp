@@ -28,43 +28,40 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
+DMSDatabase *dmsdatabase = NULL;
+DMSDatabase::DMSDatabase( QDialog *parent ) : QDialog( parent )
 {
-	DMSDatabase *dmsdatabase = NULL;
-	DMSDatabase::DMSDatabase( QDialog *parent ) : QDialog( parent )
-	{
-		setupUi( this );
-		dmsdatabase = this;
+	setupUi( this );
+	dmsdatabase = this;
 
-		connect( btnSelect, SIGNAL( clicked() ), this, SLOT( selectDatabase() ) );
-		connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
+	connect( btnSelect, SIGNAL( clicked() ), this, SLOT( selectDatabase() ) );
+	connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
 
-		QDesktopWidget *desktop = qApp->desktop();
-		const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
-		int left = ( rect.width() - width() ) / 2;
-		int top = ( rect.height() - height() ) / 2;
-		setGeometry( left, top, width(), height() );
-		setModal( true );
-	}
+	QDesktopWidget *desktop = qApp->desktop();
+	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
+	int left = ( rect.width() - width() ) / 2;
+	int top = ( rect.height() - height() ) / 2;
+	setGeometry( left, top, width(), height() );
+	setModal( true );
+}
 
-	DMSDatabase::~DMSDatabase()
-	{
-		dmsdatabase = NULL;
-	}
+DMSDatabase::~DMSDatabase()
+{
+	dmsdatabase = NULL;
+}
 
-	void DMSDatabase::closeEvent( QCloseEvent *e )
-	{
-		dmsdatabase = NULL;
-		e->accept();
-	}
+void DMSDatabase::closeEvent( QCloseEvent *e )
+{
+	dmsdatabase = NULL;
+	e->accept();
+}
 
-	void DMSDatabase::selectDatabase()
-	{
-		QDialog::accept();
-	}
+void DMSDatabase::selectDatabase()
+{
+	QDialog::accept();
+}
 
-	void DMSDatabase::closeWidget()
-	{
-		QDialog::reject();
-	}
+void DMSDatabase::closeWidget()
+{
+	QDialog::reject();
 }

@@ -31,99 +31,80 @@
 #include <dllexport.h>
 #include <libdms.h>
 
-#ifdef Q_OS_WIN32	
-#else
-	#include <sane_widget.h>
-#endif
-
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
+class EXPORT_ASAAL DMSDocument;
+
+#ifdef Q_OS_WIN32
+extern EXPORT_ASAAL DMSDocument *dmsdocument;
+#else
+extern DMSDocument *dmsdocument;
+#endif
+
+/*!
+* @author Alexander Saal <alex.saal@gmx.de>
+* @sa http://chmaster.freeforge.net
+* @date 2007/11/30
+* @version 0.1.0.0
+* @since 0.1.0.0
+*/
+
+class EXPORT_ASAAL DMSDocument : public QWidget, public Ui::UiNewEditDocumentBase
 {
-	class EXPORT_ASAAL DMSDocument;
 
-#ifdef Q_OS_WIN32
-	extern EXPORT_ASAAL DMSDocument *dmsdocument;
-#else
-	extern DMSDocument *dmsdocument;
-#endif
+		Q_OBJECT
 
-	/*!
-	* @author Alexander Saal <alex.saal@gmx.de>
-	* @sa http://chmaster.freeforge.net
-	* @date 2007/11/30
-	* @version 0.1.0.0
-	* @since 0.1.0.0
-	*/
+		Q_CLASSINFO( "Author", "Alexander Saal" )
+		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
-	class EXPORT_ASAAL DMSDocument : public QWidget, public Ui::UiNewEditDocumentBase
-	{
+	public:
+		DMSDocument( LibDMS *dms, QWorkspace *ws, QWidget *parent = 0L );
+		~DMSDocument();
 
-			Q_OBJECT
+		/*!
+		 * Get the external instance of @sa DMSDocument
+		 */
+		static DMSDocument *dmsdocument_instance()
+		{
+			return dmsdocument;
+		}
 
-			Q_CLASSINFO( "Author", "Alexander Saal" )
-			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
-			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
+	public slots:
+		void loadUser();
+		void loadGroups();
 
-		public:
-			DMSDocument( LibDMS *dms, QWorkspace *ws, QWidget *parent = 0L );
-			~DMSDocument();
+	private slots:
+		void addDocument();
+		void updateDocument();
+		void deleteDocument();
+		void selectDocument();
+		void newDocumentId();
 
-			/*!
-			 * Get the external instance of @sa DMSDocument
-			 */
-			static DMSDocument *dmsdocument_instance() { return dmsdocument; }
+		void newUser();
+		void newGroup();
 
-		public slots:
-			void loadUser();
-			void loadGroups();
+		void loadDocuments();
 
-		private slots:
-			void addDocument();
-			void updateDocument();
-			void deleteDocument();
-			void selectDocument();
-			void newDocumentId();
-			void scanDocument();
-			
-			void newUser();
-			void newGroup();
+		void treeWidgetDocumentItem( QTreeWidgetItem *, int );
+		void showErrorMsg( const QString &error );
 
-			void scanStart();
-			void scanEnd();
-			void scanFailed();
-			void imageReady();
+		void closeWidget();
 
-			void loadDocuments();
+	private:
+		LibDMS *_dms;
+		QWorkspace *_ws;
 
-			void treeWidgetDocumentItem( QTreeWidgetItem *, int );
-			void showErrorMsg( const QString &error );
+		QMap<QString, QString> users;
+		QMap<QString, QString> groups;
+		QMap<QString, QString> documents;
 
-			void closeWidget();
+		QTreeWidgetItem *docItem;
 
-		private:
-			LibDMS *_dms;
-			QWorkspace *_ws;
+	protected:
+		void closeEvent( QCloseEvent *e );
 
-			QMap<QString, QString> users;
-			QMap<QString, QString> groups;
-			QMap<QString, QString> documents;
-
-			QTreeWidgetItem *docItem;
-
-#ifdef Q_OS_WIN32
-#else
-			QWidget *m_scanWidget;
-			QProgressDialog *m_progressDialog;
-
-			SaneWidget *m_sanew;
-#endif
-
-		protected:
-			void closeEvent( QCloseEvent *e );
-
-	};
-}
+};
 
 #endif // DMSLOGIN_H

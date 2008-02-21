@@ -31,86 +31,84 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
+/*!
+ * @author Alexander Saal <alex.saal@gmx.de>
+ * @sa http://chmaster.freeforge.net
+ * @date 2008/01/30
+ * @version 0.1.0.0
+ * @since 0.1.0.0
+ */
+
+class EXPORT_ASAAL DMSMailAction : public QAction
 {
-	/*!
-	* @author Alexander Saal <alex.saal@gmx.de>
-	* @sa http://chmaster.freeforge.net
-	* @date 2008/01/30
-	* @version 0.1.0.0
-	* @since 0.1.0.0
-	*/
 
-	class EXPORT_ASAAL DMSMailAction : public QAction
-	{
+		Q_OBJECT
 
-			Q_OBJECT
+		Q_CLASSINFO( "Author", "Alexander Saal" )
+		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
-			Q_CLASSINFO( "Author", "Alexander Saal" )
-			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
-			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
+	public:
+		DMSMailAction( const QString &acText, QObject *parent );
+		inline virtual ~DMSMailAction() {}
 
-		public:
-			DMSMailAction( const QString &acText, QObject *parent );
-			inline virtual ~DMSMailAction() {}
+		/*!
+		 * Get the mail address
+		 */
+		QString getMailAddress();
 
-			/*!
-			 * Get the mail address
-			 */
-			QString getMailAddress();
+		/*!
+		 * Get the subject for this eMail
+		 */
+		QString getSubject();
 
-			/*!
-			 * Get the subject for this eMail
-			 */
-			QString getSubject();
+		/*!
+		 * Get the message for this eMail
+		 */
+		QString getMessage();
 
-			/*!
-			 * Get the message for this eMail
-			 */
-			QString getMessage();
+		/*!
+		 * Get the attachment for this eMail
+		 */
+		QString getAttachment();
 
-			/*!
-			 * Get the attachment for this eMail
-			 */
-			QString getAttachment();
+	public slots:
 
-		public slots:
+		/*!
+		  * Set the mail address
+		  *
+		  * @param subject The mail address
+		 */
+		void setMailAdress( const QString &mailaddress );
 
-			/*!
-		 	 * Set the mail address
-		 	 *
-		 	 * @param subject The mail address
-			 */
-			void setMailAdress( const QString &mailaddress );
-			
-			/*!
-			 * Set the subject for this eMail
-			 *
-			 * @param subject The subject
-			 */
-			void setSubject( const QString &subject );
+		/*!
+		 * Set the subject for this eMail
+		 *
+		 * @param subject The subject
+		 */
+		void setSubject( const QString &subject );
 
-			/*!
-			 * Set the message for this eMail
-			 *
-			 * @param message The message
-			 */
-			void setMessage( const QString &message );
+		/*!
+		 * Set the message for this eMail
+		 *
+		 * @param message The message
+		 */
+		void setMessage( const QString &message );
 
-			/*!
-			 * Set the attachment for this eMail
-			 *
-			 * @param attachment The attachment
-			 */
-			void setAttachment( const QString &attachment = QString( "" ) );
+		/*!
+		 * Set the attachment for this eMail
+		 *
+		 * @param attachment The attachment
+		 */
+		void setAttachment( const QString &attachment = QString( "" ) );
 
-		private:
-			QString _mailaddress;
-			QString _subject;
-			QString _message;
-			QString _attachment;
+	private:
+		QString _mailaddress;
+		QString _subject;
+		QString _message;
+		QString _attachment;
 
-	};
-}
+};
+
 
 #endif // DMSMAILACTION_H

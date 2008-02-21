@@ -33,52 +33,49 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
-{
 
-	class EXPORT_ASAAL DMSDatabase;
+class EXPORT_ASAAL DMSDatabase;
 
 #ifdef Q_OS_WIN32
-	extern EXPORT_ASAAL DMSDatabase *dmsdatabase;
+extern EXPORT_ASAAL DMSDatabase *dmsdatabase;
 #else
-	extern DMSDatabase *dmsdatabase;
+extern DMSDatabase *dmsdatabase;
 #endif
 
-	/*!
-	* @author Alexander Saal <alex.saal@gmx.de>
-	* @sa http://chmaster.freeforge.net
-	* @date 2007/12/10
-	* @version 0.1.0.0
-	* @since 0.1.0.0
-	*/
+/*!
+* @author Alexander Saal <alex.saal@gmx.de>
+* @sa http://chmaster.freeforge.net
+* @date 2007/12/10
+* @version 0.1.0.0
+* @since 0.1.0.0
+*/
 
-	class EXPORT_ASAAL DMSDatabase : public QDialog, public Ui::UiSelectDatabase
-	{
-			Q_OBJECT
-			Q_CLASSINFO( "Author", "Alexander Saal" )
-			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
-			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
+class EXPORT_ASAAL DMSDatabase : public QDialog, public Ui::UiSelectDatabase
+{
+		Q_OBJECT
+		Q_CLASSINFO( "Author", "Alexander Saal" )
+		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
-		public:
-			DMSDatabase( QDialog *parent = 0L );
-			~DMSDatabase();
+	public:
+		DMSDatabase( QDialog *parent = 0L );
+		~DMSDatabase();
 
-			/*!
-			 * Get the external instance of @sa DMSMSSqlConnection
-			 */
-			static DMSDatabase *dmsdatabase_instance()
-			{
-				return dmsdatabase;
-			}
+		/*!
+		 * Get the external instance of @sa DMSMSSqlConnection
+		 */
+		static DMSDatabase *dmsdatabase_instance()
+		{
+			return dmsdatabase;
+		}
 
-		private slots:
-			void selectDatabase();
-			void closeWidget();
+	private slots:
+		void selectDatabase();
+		void closeWidget();
 
-		protected:
-			void closeEvent( QCloseEvent *e );
+	protected:
+		void closeEvent( QCloseEvent *e );
 
-	};
-}
+};
 
 #endif // DMSDATABASE_H

@@ -30,182 +30,179 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
+DMSSearch *dmssearch = NULL;
+DMSSearch::DMSSearch( LibDMS *dms, QWidget *parent ) : QWidget( parent )
 {
-	DMSSearch *dmssearch = NULL;
-	DMSSearch::DMSSearch( LibDMS *dms, QWidget *parent ) : QWidget( parent )
+	setupUi( this );
+	dmssearch = this;
+
+	_dms = dms;
+
+	connect( btnSearch, SIGNAL( clicked() ), this, SLOT( search() ) );
+	connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
+
+	_dms->clearErrorMessage();
+	loadSearchPreferences();
+}
+
+DMSSearch::~DMSSearch()
+{
+	dmssearch = NULL;
+}
+
+void DMSSearch::closeEvent( QCloseEvent *e )
+{
+	dmssearch = NULL;
+	e->accept();
+}
+
+void DMSSearch::search()
+{
+	treeWidgetSearchDocument->clear();
+
+	QString searchword = lineEditSearchWord->text();
+	QString searchgroup = comboBoxSearchGroup->currentText();
+	QString searchuser = comboBoxSearchUser->currentText();
+	searchuser = searchuser.split( "," ).value( 1 ).trimmed() + ", " + searchuser.split( "," ).value( 0 ).trimmed();
+	bool exactMatch = checkBoxSearchExactly->isChecked();
+
+	progressBarSearch->setMaximum( documents.size() );
+
+	int progress = 0;
+	QMap<QString, QString>::const_iterator docIt = documents.begin();
+
+	while ( docIt != documents.end() )
 	{
-		setupUi( this );
-		dmssearch = this;
+		qApp->processEvents();
 
-		_dms = dms;
+		QString uname = docIt.value().split( "#" ).value( 0 );
+		QString gname = docIt.value().split( "#" ).value( 1 );
+		QString docname = docIt.value().split( "#" ).value( 2 );
+		QString docpath = docIt.value().split( "#" ).value( 3 );
+		QString updated = docIt.value().split( "#" ).value( 4 );
+		QString checkedout = docIt.value().split( "#" ).value( 5 );
 
-		connect( btnSearch, SIGNAL( clicked() ), this, SLOT( search() ) );
-		connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
-
-		_dms->clearErrorMessage();
-		loadSearchPreferences();
-	}
-
-	DMSSearch::~DMSSearch()
-	{
-		dmssearch = NULL;
-	}
-
-	void DMSSearch::closeEvent( QCloseEvent *e )
-	{
-		dmssearch = NULL;
-		e->accept();
-	}
-
-	void DMSSearch::search()
-	{
-		treeWidgetSearchDocument->clear();
-		
-		QString searchword = lineEditSearchWord->text();
-		QString searchgroup = comboBoxSearchGroup->currentText();
-		QString searchuser = comboBoxSearchUser->currentText();
-		searchuser = searchuser.split( "," ).value( 1 ).trimmed() + ", " + searchuser.split( "," ).value( 0 ).trimmed();
-		bool exactMatch = checkBoxSearchExactly->isChecked();
-
-		progressBarSearch->setMaximum( documents.size() );
-
-		int progress = 0;
-		QMap<QString, QString>::const_iterator docIt = documents.begin();
-
-		while ( docIt != documents.end() )
+		if ( uname == searchuser && gname == searchgroup )
 		{
-			qApp->processEvents();
-
-			QString uname = docIt.value().split( "#" ).value( 0 );
-			QString gname = docIt.value().split( "#" ).value( 1 );
-			QString docname = docIt.value().split( "#" ).value( 2 );
-			QString docpath = docIt.value().split( "#" ).value( 3 );
-			QString updated = docIt.value().split( "#" ).value( 4 );
-			QString checkedout = docIt.value().split( "#" ).value( 5 );
-
-			if ( uname == searchuser && gname == searchgroup )
+			if ( !exactMatch )
 			{
-				if ( !exactMatch )
+				if ( docname.toLower().contains( searchword.toLower() ) ||
+						docpath.toLower().contains( searchword.toLower() ) ||
+						docpath.toLower().contains( searchword.toLower() ) ||
+						updated.toLower().contains( searchword.toLower() ) ||
+						checkedout.toLower().contains( searchword.toLower() ) )
 				{
-					if ( docname.toLower().contains( searchword.toLower() ) ||
-					        docpath.toLower().contains( searchword.toLower() ) ||
-					        docpath.toLower().contains( searchword.toLower() ) ||
-					        updated.toLower().contains( searchword.toLower() ) ||
-					        checkedout.toLower().contains( searchword.toLower() ) )
-					{
-						docItem = new QTreeWidgetItem( treeWidgetSearchDocument );
-						docItem->setText( 0, docname );
-						docItem->setText( 1, updated );
-					}
-				}
-				else
-				{
-					if ( docname.toLower() == searchword.toLower() ||
-					        docpath.toLower() == searchword.toLower() ||
-					        docpath.toLower() == searchword.toLower() ||
-					        updated.toLower() == searchword.toLower() ||
-					        checkedout.toLower() == searchword.toLower() )
-					{
-						docItem = new QTreeWidgetItem( treeWidgetSearchDocument );
-						docItem->setText( 0, docname );
-						docItem->setText( 1, updated );
-					}
+					docItem = new QTreeWidgetItem( treeWidgetSearchDocument );
+					docItem->setText( 0, docname );
+					docItem->setText( 1, updated );
 				}
 			}
-
-			if ( uname == searchuser && searchgroup == "*" )
+			else
 			{
-
+				if ( docname.toLower() == searchword.toLower() ||
+						docpath.toLower() == searchword.toLower() ||
+						docpath.toLower() == searchword.toLower() ||
+						updated.toLower() == searchword.toLower() ||
+						checkedout.toLower() == searchword.toLower() )
+				{
+					docItem = new QTreeWidgetItem( treeWidgetSearchDocument );
+					docItem->setText( 0, docname );
+					docItem->setText( 1, updated );
+				}
 			}
-
-			if ( gname == searchgroup && searchuser == "*" )
-			{
-
-			}
-
-			if ( searchuser == "*" && searchgroup == "*" && (searchword == "*" || searchword.isEmpty() || searchword.isNull()) )
-			{
-				docItem = new QTreeWidgetItem( treeWidgetSearchDocument );
-				docItem->setText( 0, docname );
-				docItem->setText( 1, updated );
-			}
-
-			if ( searchuser == "*" )
-			{
-
-			}
-
-			if ( searchgroup == "*" )
-			{
-
-			}
-
-
-			progress++;
-
-			progressBarSearch->setValue( progress );
-
-			++docIt;
 		}
 
-
-		searchword = QString( "" );
-
-		searchgroup = QString( "" );
-		searchuser = QString( "" );
-		exactMatch = false;
-		progressBarSearch->setValue( 0 );
-	}
-
-	void DMSSearch::loadSearchPreferences()
-	{
-		documents.clear();
-		columns.clear();
-		groups.clear();
-
-		documents = _dms->geDocuments();
-		users = _dms->geUsers();
-		groups = _dms->getGroups();
-
-		QMap<QString, QString>::const_iterator userIt = users.begin();
-		comboBoxSearchUser->clear();
-		comboBoxSearchUser->addItem( "*" );
-
-		while ( userIt != users.end() )
+		if ( uname == searchuser && searchgroup == "*" )
 		{
-			qApp->processEvents();
 
-			QString uname = userIt.value().split( "#" ).value( 2 );
-			uname += ", " + userIt.value().split( "#" ).value( 3 );
-			comboBoxSearchUser->addItem( uname );
-
-			++userIt;
 		}
 
-		QMap<QString, QString>::const_iterator groupIt = groups.begin();
-
-		comboBoxSearchGroup->clear();
-		comboBoxSearchGroup->addItem( "*" );
-
-		while ( groupIt != groups.end() )
+		if ( gname == searchgroup && searchuser == "*" )
 		{
-			qApp->processEvents();
 
-			QString gname = groupIt.value().split( "#" ).value( 0 );
-			comboBoxSearchGroup->addItem( gname );
-
-			++groupIt;
 		}
+
+		if ( searchuser == "*" && searchgroup == "*" && ( searchword == "*" || searchword.isEmpty() || searchword.isNull() ) )
+		{
+			docItem = new QTreeWidgetItem( treeWidgetSearchDocument );
+			docItem->setText( 0, docname );
+			docItem->setText( 1, updated );
+		}
+
+		if ( searchuser == "*" )
+		{
+
+		}
+
+		if ( searchgroup == "*" )
+		{
+
+		}
+
+
+		progress++;
+
+		progressBarSearch->setValue( progress );
+
+		++docIt;
 	}
 
-	void DMSSearch::showErrorMsg( const QString &error )
+
+	searchword = QString( "" );
+
+	searchgroup = QString( "" );
+	searchuser = QString( "" );
+	exactMatch = false;
+	progressBarSearch->setValue( 0 );
+}
+
+void DMSSearch::loadSearchPreferences()
+{
+	documents.clear();
+	columns.clear();
+	groups.clear();
+
+	documents = _dms->geDocuments();
+	users = _dms->geUsers();
+	groups = _dms->getGroups();
+
+	QMap<QString, QString>::const_iterator userIt = users.begin();
+	comboBoxSearchUser->clear();
+	comboBoxSearchUser->addItem( "*" );
+
+	while ( userIt != users.end() )
 	{
-		QMessageBox::critical( this, tr( "DMS - User" ), error );
+		qApp->processEvents();
+
+		QString uname = userIt.value().split( "#" ).value( 2 );
+		uname += ", " + userIt.value().split( "#" ).value( 3 );
+		comboBoxSearchUser->addItem( uname );
+
+		++userIt;
 	}
 
-	void DMSSearch::closeWidget()
+	QMap<QString, QString>::const_iterator groupIt = groups.begin();
+
+	comboBoxSearchGroup->clear();
+	comboBoxSearchGroup->addItem( "*" );
+
+	while ( groupIt != groups.end() )
 	{
-		close();
+		qApp->processEvents();
+
+		QString gname = groupIt.value().split( "#" ).value( 0 );
+		comboBoxSearchGroup->addItem( gname );
+
+		++groupIt;
 	}
+}
+
+void DMSSearch::showErrorMsg( const QString &error )
+{
+	QMessageBox::critical( this, tr( "DMS - User" ), error );
+}
+
+void DMSSearch::closeWidget()
+{
+	close();
 }

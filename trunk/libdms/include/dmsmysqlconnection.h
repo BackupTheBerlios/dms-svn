@@ -33,57 +33,54 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
-{
-
-	class EXPORT_ASAAL DMSMySqlConnection;
+class EXPORT_ASAAL DMSMySqlConnection;
 
 #ifdef Q_OS_WIN32
-	extern EXPORT_ASAAL DMSMySqlConnection *dmsmysqlconnection;
+extern EXPORT_ASAAL DMSMySqlConnection *dmsmysqlconnection;
 #else
-	extern DMSMySqlConnection *dmsmysqlconnection;
+extern DMSMySqlConnection *dmsmysqlconnection;
 #endif
 
-	/*!
-	* @author Alexander Saal <alex.saal@gmx.de>
-	* @sa http://chmaster.freeforge.net
-	* @date 2007/12/10
-	* @version 0.1.0.0
-	* @since 0.1.0.0
-	*/
+/*!
+* @author Alexander Saal <alex.saal@gmx.de>
+* @sa http://chmaster.freeforge.net
+* @date 2007/12/10
+* @version 0.1.0.0
+* @since 0.1.0.0
+*/
 
-	class EXPORT_ASAAL DMSMySqlConnection : public QDialog, public Ui::UiMySqlConnectionBase
-	{
+class EXPORT_ASAAL DMSMySqlConnection : public QDialog, public Ui::UiMySqlConnectionBase
+{
 
-			Q_OBJECT
+		Q_OBJECT
 
-			Q_CLASSINFO( "Author", "Alexander Saal" )
-			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
-			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
+		Q_CLASSINFO( "Author", "Alexander Saal" )
+		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
-		public:
-			DMSMySqlConnection( QDialog *parent = 0L );
-			~DMSMySqlConnection();
+	public:
+		DMSMySqlConnection( QDialog *parent = 0L );
+		~DMSMySqlConnection();
 
-			/*!
-			 * Get the external instance of @sa DMSLogin
-			 */
-			static DMSMySqlConnection *dmsmysqlconnection_instance()
-			{
-				return dmsmysqlconnection;
-			}
+		/*!
+		 * Get the external instance of @sa DMSLogin
+		 */
+		static DMSMySqlConnection *dmsmysqlconnection_instance()
+		{
+			return dmsmysqlconnection;
+		}
 
-		private slots:
-			void check();
-			void closeWidget();
+	private slots:
+		void check();
+		void closeWidget();
 
-		private:
-			bool connected;
+	private:
+		bool connected;
 
-		protected:
-			void closeEvent( QCloseEvent *e );
+	protected:
+		void closeEvent( QCloseEvent *e );
 
-	};
-}
+};
+
 
 #endif // DMSMYSQLCONNECTION_H

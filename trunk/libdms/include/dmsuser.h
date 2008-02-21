@@ -35,9 +35,6 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
-{
-
 	class EXPORT_ASAAL DMSUser;
 
 #ifdef Q_OS_WIN32
@@ -97,6 +94,6 @@ namespace asaal
 			void closeEvent( QCloseEvent *e );
 
 	};
-}
+
 
 #endif // DMSUSER_H

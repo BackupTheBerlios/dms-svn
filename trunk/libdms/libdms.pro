@@ -89,35 +89,6 @@ unix {
 	MOC_DIR	+= ../build/libdms/unix/moc
 	OBJECTS_DIR += ../build/libdms/unix/obj
 	UI_DIR	+= ../build/libdms/unix/ui
-	LIBS += /usr/lib/libsane.a
-
-	SOURCES	+= sanewidget/gamma_disp.cpp
-	SOURCES	+= sanewidget/labeled_checkbox.cpp
-	SOURCES	+= sanewidget/labeled_combo.cpp
-	SOURCES	+= sanewidget/labeled_entry.cpp
-	SOURCES	+= sanewidget/labeled_fslider.cpp
-	SOURCES	+= sanewidget/labeled_gamma.cpp
-	SOURCES	+= sanewidget/labeled_separator.cpp
-	SOURCES	+= sanewidget/labeled_slider.cpp
-	SOURCES	+= sanewidget/preview_area.cpp
-	SOURCES	+= sanewidget/preview_image.cpp
-	SOURCES	+= sanewidget/radio_select.cpp
-	SOURCES	+= sanewidget/sane_option.cpp
-	SOURCES	+= sanewidget/sane_widget.cpp
-
-	HEADERS	+= sanewidget/gamma_disp.h
-	HEADERS	+= sanewidget/labeled_checkbox.h
-	HEADERS	+= sanewidget/labeled_combo.h
-	HEADERS	+= sanewidget/labeled_entry.h
-	HEADERS	+= sanewidget/labeled_fslider.h
-	HEADERS	+= sanewidget/labeled_gamma.h
-	HEADERS	+= sanewidget/labeled_separator.h
-	HEADERS	+= sanewidget/labeled_slider.h
-	HEADERS	+= sanewidget/preview_area.h
-	HEADERS	+= sanewidget/preview_image.h
-	HEADERS	+= sanewidget/radio_select.h
-	HEADERS	+= sanewidget/sane_option.h
-	HEADERS	+= sanewidget/sane_widget.h
 }
 
 # Windows settings

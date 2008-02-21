@@ -28,23 +28,50 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
+DMSMailAction::DMSMailAction( const QString &acText, QObject *parent  ) : QAction( acText, parent )
 {
-	DMSMailAction::DMSMailAction( const QString &acText, QObject *parent  ) : QAction( acText, parent )
-	{
-		_mailaddress = QString( "" );
-		_subject = QString( "" );
-		_message = QString( "" );
-		_attachment = QString( "" );
-	}
+	_mailaddress = QString( "" );
+	_subject = QString( "" );
+	_message = QString( "" );
+	_attachment = QString( "" );
+}
 
-	QString DMSMailAction::getMailAddress() { return _mailaddress; }
-	QString DMSMailAction::getSubject() { return _subject; }
-	QString DMSMailAction::getMessage() { return _message; }
-	QString DMSMailAction::getAttachment() { return _attachment; }
+QString DMSMailAction::getMailAddress()
+{
+	return _mailaddress;
+}
 
-	void DMSMailAction::setMailAdress( const QString &mailaddress ) { _mailaddress = mailaddress; }
-	void DMSMailAction::setSubject( const QString &subject ) { _subject = subject; }
-	void DMSMailAction::setMessage( const QString &message ) { _message = message; }
-	void DMSMailAction::setAttachment( const QString &attachment ) { _attachment = attachment; }
+QString DMSMailAction::getSubject()
+{
+	return _subject;
+}
+
+QString DMSMailAction::getMessage()
+{
+	return _message;
+}
+
+QString DMSMailAction::getAttachment()
+{
+	return _attachment;
+}
+
+void DMSMailAction::setMailAdress( const QString &mailaddress )
+{
+	_mailaddress = mailaddress;
+}
+
+void DMSMailAction::setSubject( const QString &subject )
+{
+	_subject = subject;
+}
+
+void DMSMailAction::setMessage( const QString &message )
+{
+	_message = message;
+}
+
+void DMSMailAction::setAttachment( const QString &attachment )
+{
+	_attachment = attachment;
 }

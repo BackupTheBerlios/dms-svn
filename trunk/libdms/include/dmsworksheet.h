@@ -39,9 +39,6 @@
 class QDragEnterEvent;
 class QDropEvent;
 	
-namespace asaal
-{
-
 	class EXPORT_ASAAL DMSWorkSheet;
 
 #ifdef Q_OS_WIN32
@@ -124,6 +121,6 @@ namespace asaal
 			void closeEvent( QCloseEvent *e );
 
 	};
-}
+
 
 #endif // DMSWORKSHEET_H

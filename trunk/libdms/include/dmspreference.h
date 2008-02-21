@@ -35,9 +35,6 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal
-{
-
 	class EXPORT_ASAAL DMSPreference;
 
 #ifdef Q_OS_WIN32
@@ -107,6 +104,6 @@ namespace asaal
 			void closeEvent( QCloseEvent *e );
 
 	};
-}
+
 
 #endif // DMSPREFERENCE_H

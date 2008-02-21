@@ -20,3 +20,4 @@ TEMPLATE = subdirs
 CONFIG += ordered
 SUBDIRS  += libdms
 SUBDIRS  += dms
+SUBDIRS  += plugins/dmsscanner

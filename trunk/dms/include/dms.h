@@ -31,62 +31,59 @@
 #include <QtCore>
 #include <QtGui>
 
-namespace asaal 
+class DMSystem : public QMainWindow
 {
-	class DMSystem : public QMainWindow
-	{
 		Q_OBJECT
 
-		public:
-			DMSystem( const QApplication &app, QMainWindow *parent = 0L );
-			~DMSystem();
+	public:
+		DMSystem( const QApplication &app, QMainWindow *parent = 0L );
+		~DMSystem();
 
-			QWorkspace *ws;
+		QWorkspace *ws;
 
-		private slots:
-			void login();
-			void logout();
+	private slots:
+		void login();
+		void logout();
 
-			void closeWidget();
+		void closeWidget();
 
-			void creatEditGroups();
-			void creatEditDocuments();
-			void openSearch();
-			void createEditUsers();
-			void openPreference();
-			void openWorkSheet();
+		void creatEditGroups();
+		void creatEditDocuments();
+		void openSearch();
+		void createEditUsers();
+		void openPreference();
+		void openWorkSheet();
 
-			void createMenus();
-			void createPluginMenu();
-			void deactivateMenus( bool deactivate );
+		void createMenus();
+		void createPluginMenu();
+		void deactivateMenus( bool deactivate );
 
-		protected:
-			void closeEvent( QCloseEvent *e );
+	protected:
+		void closeEvent( QCloseEvent *e );
 
 	private:
-			QToolBar *mnuToolBar;
-			QMenu	*mnuPlugin;
+		QToolBar *mnuToolBar;
+		QMenu *mnuPlugin;
 
-			QAction *acToolBarLogout,
-					*acToolBarLogin,
-					*acToolBarCreadEditGroups,
-					*acToolBarCreadEditDoucmnets,
-					*acToolBarSearch,
-					*acToolBarCreadEditUsers,
-					*acToolBarWorkSheet;
+		QAction *acToolBarLogout,
+		*acToolBarLogin,
+		*acToolBarCreadEditGroups,
+		*acToolBarCreadEditDoucmnets,
+		*acToolBarSearch,
+		*acToolBarCreadEditUsers,
+		*acToolBarWorkSheet;
 
-			QAction *acLogout,
-					*acLogin,
-	 				*acPreference,
-					*acCreadEditGroups,
-					*acCreadEditDoucmnets,
-					*acSearch,
-					*acCreadEditUsers,
-					*acWorkSheet,
-					*acClose;
-			
-			LibDMS *ldms;
-	};
-}
+		QAction *acLogout,
+		*acLogin,
+		*acPreference,
+		*acCreadEditGroups,
+		*acCreadEditDoucmnets,
+		*acSearch,
+		*acCreadEditUsers,
+		*acWorkSheet,
+		*acClose;
+
+		LibDMS *ldms;
+};
 
 #endif // DAOCMT_H

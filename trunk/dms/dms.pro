@@ -49,9 +49,7 @@ SOURCES += src/main.cpp
 unix {
     TARGET = dms
     TARGETDEPS += ../bin/libdms.a
-	TARGETDEPS += /usr/lib/libsane.a
     LIBS += ../bin/libdms.a
-	LIBS += /usr/lib/libsane.a
     RCC_DIR = ../build/dms/unix/rcc
     MOC_DIR += ../build/dms/unix/moc
     OBJECTS_DIR += ../build/dms/unix/obj
