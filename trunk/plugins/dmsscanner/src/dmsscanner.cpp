@@ -25,6 +25,8 @@
 
 #include <dmsscanner.h>
 
+#include <libdms.h>
+
 #ifdef Q_OS_WIN32
 #else
 	#include <sane_widget.h>
@@ -37,6 +39,8 @@ DMSScanner *dmsscanner = NULL;
 DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 {
 	dmsscanner = this;
+	
+	_dms = LibDMS::libdms_instcance();
 
 	initScan();
 }
@@ -208,6 +212,8 @@ void DMSScanner::imageReady()
 		qApp->processEvents();
 
 		dmsscanner->close();
+		
+		documentarchive = _dms->getApplicationSettings( "UiPreferenceBase", "General", "Documentarchive" ).toString();
 
 		if ( documentarchive.isNull() || documentarchive.isEmpty() )
 		{
@@ -221,7 +227,7 @@ void DMSScanner::imageReady()
 
 		documentarchive += imagename + ".png";
 		pix.save( documentarchive, "PNG" );
-
+		
 		QFileInfo fi( documentarchive );
 	}
 

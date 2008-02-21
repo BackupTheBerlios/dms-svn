@@ -34,6 +34,8 @@
 #include <sane_widget.h>
 #endif
 
+#include <libdms.h>
+
 class DMSScanner;
 extern DMSScanner *dmsscanner;
 
@@ -72,6 +74,7 @@ class DMSScanner : public QWidget
 
 	private:
 		QString documentarchive;
+		LibDMS *_dms;
 
 #ifdef Q_OS_WIN32
 #else

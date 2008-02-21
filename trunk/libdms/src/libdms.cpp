@@ -43,9 +43,13 @@
 #include <QtGui>
 #include <QtSql>
 
-LibDMS::LibDMS( QObject *parent ) : QObject( parent )
+LibDMS *libdms = NULL;
+LibDMS::LibDMS( QWorkspace *ws, QObject *parent ) : QObject( parent )
 {
 	p_obj = parent;
+
+	libdms = this;
+	_ws = ws;
 
 	username = QString( "" );
 	userpasswd = QString( "" );

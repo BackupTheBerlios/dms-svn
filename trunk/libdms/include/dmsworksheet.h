@@ -37,26 +37,27 @@
 #include <QtGui>
 
 class QDragEnterEvent;
+
 class QDropEvent;
-	
-	class EXPORT_ASAAL DMSWorkSheet;
+
+class EXPORT_ASAAL DMSWorkSheet;
 
 #ifdef Q_OS_WIN32
-	extern EXPORT_ASAAL DMSWorkSheet *dmsworksheet;
+extern EXPORT_ASAAL DMSWorkSheet *dmsworksheet;
 #else
-	extern DMSWorkSheet *dmsworksheet;
+extern DMSWorkSheet *dmsworksheet;
 #endif
 
-	/*!
-	* @author Alexander Saal <alex.saal@gmx.de>
-	* @sa http://chmaster.freeforge.net
-	* @date 2007/12/04
-	* @version 0.1.0.0
-	* @since 0.1.0.0
-	*/
+/*!
+* @author Alexander Saal <alex.saal@gmx.de>
+* @sa http://chmaster.freeforge.net
+* @date 2007/12/04
+* @version 0.1.0.0
+* @since 0.1.0.0
+*/
 
-	class EXPORT_ASAAL DMSWorkSheet : public QWidget, public Ui::UiWorkSheetBase
-	{
+class EXPORT_ASAAL DMSWorkSheet : public QWidget, public Ui::UiWorkSheetBase
+{
 
 		Q_OBJECT
 
@@ -64,63 +65,63 @@ class QDropEvent;
 		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
 		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
-		public:
-			DMSWorkSheet( LibDMS *dms, QWorkspace *ws, QWidget *parent = 0L );
-			~DMSWorkSheet();
+	public:
+		DMSWorkSheet( LibDMS *dms, QWorkspace *ws, QWidget *parent = 0L );
+		~DMSWorkSheet();
 
-			static DMSWorkSheet *dmsworksheet_instance()
-			{
-				return dmsworksheet;
-			}
+		static DMSWorkSheet *dmsworksheet_instance()
+		{
+			return dmsworksheet;
+		}
 
-		public slots:			
-			void loadDocuments();
-			
-		private slots:
-			void newDocument();
-			void openDocument();
-			void deleteDocument();
-			void printDocument();
-			void sendMail();
+	public slots:
+		void loadDocuments();
 
-			void createMenuAction();
+	private slots:
+		void newDocument();
+		void openDocument();
+		void deleteDocument();
+		void printDocument();
+		void sendMail();
 
-			void treeWidgetWorkSheetItem( QTreeWidgetItem *, int );
-			void treeWidgetWorkSheetMenu( QPoint );
-			void showErrorMsg( const QString &error );
+		void createMenuAction();
 
-			QTreeWidgetItem *getGroupItem( const QString &groupname );
+		void treeWidgetWorkSheetItem( QTreeWidgetItem *, int );
+		void treeWidgetWorkSheetMenu( QPoint );
+		void showErrorMsg( const QString &error );
 
-			void closeWidget();
+		QTreeWidgetItem *getGroupItem( const QString &groupname );
 
-		private:
-			bool isDocumentAvailabel( const QString &docname );
+		void closeWidget();
 
-			LibDMS *_dms;
-			QWorkspace *_ws;
+	private:
+		bool isDocumentAvailabel( const QString &docname );
 
-			QMap<QString, QString> documents;
+		LibDMS *_dms;
+		QWorkspace *_ws;
 
-			QTreeWidgetItem *docItem;
-			QTreeWidgetItem *groupItem;
+		QMap<QString, QString> documents;
 
-			QMenu *mnuMail;
+		QTreeWidgetItem *docItem;
+		QTreeWidgetItem *groupItem;
 
-			QAction *acNewDoc;
-			QAction *acOpenDoc;
-			DMSMailAction *acSendMail;
-			QAction *acDeleteDoc;
-			QAction *acPrintDoc;
+		QMenu *mnuMail;
 
-		protected:
-			void dragEnterEvent(QDragEnterEvent *event);
-			void dragMoveEvent(QDragMoveEvent *event);
-			void dropEvent(QDropEvent *event);
-			void mousePressEvent(QMouseEvent *event);
+		QAction *acNewDoc;
+		QAction *acOpenDoc;
+		DMSMailAction *acSendMail;
+		QAction *acDeleteDoc;
+		QAction *acPrintDoc;
 
-			void closeEvent( QCloseEvent *e );
+	protected:
+		void dragEnterEvent( QDragEnterEvent *event );
+		void dragMoveEvent( QDragMoveEvent *event );
+		void dropEvent( QDropEvent *event );
+		void mousePressEvent( QMouseEvent *event );
 
-	};
+		void closeEvent( QCloseEvent *e );
+
+};
 
 
 #endif // DMSWORKSHEET_H

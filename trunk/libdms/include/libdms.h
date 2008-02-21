@@ -32,6 +32,14 @@
 #include <QtGui>
 #include <QtSql>
 
+class EXPORT_ASAAL LibDMS;
+
+#ifdef Q_OS_WIN32
+extern EXPORT_ASAAL LibDMS *libdms;
+#else
+extern LibDMS *libdms;
+#endif
+
 /*!
 * @author Alexander Saal <alex.saal@gmx.de>
 * @sa http://chmaster.freeforge.net
@@ -76,8 +84,18 @@ class EXPORT_ASAAL LibDMS : public QObject
 		*
 		* @param parent <a href="http://doc.trolltech.com/4.3/qobject.html#QObject">QObject</a> (default is NULL)
 		*/
-		LibDMS( QObject *parent = 0 );
-		inline virtual ~LibDMS() {}
+		LibDMS( QWorkspace *ws = 0, QObject *parent = 0 );
+		inline virtual ~LibDMS() { libdms = NULL; }
+		
+		/**
+		 * Return the instance of dms libraray
+		 */
+		static LibDMS *libdms_instcance() {	return libdms; }
+		
+		/**
+		 * Returns the @see <a href="http://doc.trolltech.com/4.3/qworkspace.html#QWorkspace">QWorkspace</a>
+		 */
+		QWorkspace *workspace() { return _ws; }
 
 		/*!
 		* Login user
@@ -410,6 +428,7 @@ class EXPORT_ASAAL LibDMS : public QObject
 		// Check is user in database avalaibel
 		bool isUserAvailabel( const QString &userId, const QString &username );
 
+		QWorkspace *_ws;
 
 		// Local variables
 		QString userId;

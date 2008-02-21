@@ -27,12 +27,18 @@ DEPENDPATH += sanewidget
 DEPENDPATH += src
 DEPENDPATH += ../../resource
 DEPENDPATH += ../../dms/include
+DEPENDPATH += ../../libdms/include
+DEPENDPATH += ../../libdms/ui
+DEPENDPATH += ../../libdms/src
 
 INCLUDEPATH += include
 INCLUDEPATH += sanewidget
 INCLUDEPATH += src
 INCLUDEPATH += ../../resource
 INCLUDEPATH += ../../dms/include
+INCLUDEPATH += ../../libdms/include
+INCLUDEPATH += ../../libdms/ui
+INCLUDEPATH += ../../libdms/src
 
 RESOURCES += ../../resource/dms.qrc
 
@@ -51,6 +57,8 @@ SOURCES	+= src/dmsscannerplugin.cpp
 # Unix/Linux settings
 unix {
 	TARGET	= dmsscannerplugin
+    TARGETDEPS += ../../bin/libdms.a
+    LIBS += ../../bin/libdms.a
 	RCC_DIR	= ../../build/dmsscannerplugin/unix/rcc
 	MOC_DIR	+= ../../build/dmsscannerplugin/unix/moc
 	OBJECTS_DIR += ../../build/dmsscannerplugin/unix/obj

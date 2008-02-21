@@ -51,7 +51,7 @@ DMSystem::DMSystem( const QApplication &app, QMainWindow *parent ) : QMainWindow
 
 	statusBar()->show();
 
-	ldms = new LibDMS();
+	ldms = new LibDMS( ws );
 
 	createMenus();
 	acLogout->setEnabled( false );
