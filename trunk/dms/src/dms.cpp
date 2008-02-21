@@ -253,9 +253,6 @@ void DMSystem::createMenus()
 	acToolBarWorkSheet->setStatusTip( tr( "Open worksheet ..." ) );
 	connect( acToolBarWorkSheet, SIGNAL( triggered() ), this, SLOT( openWorkSheet() ) );
 
-	mnuPlugin = menuBar()->addMenu( tr( "&Plugin" ) );
-	mnuPlugin->setVisible( false );
-
 	addToolBar( mnuToolBar );
 }
 
@@ -264,6 +261,8 @@ void DMSystem::createPluginMenu()
 	QDir pluginsDir = QDir( QApplication::applicationDirPath() );
 	pluginsDir.cd( ".dms" );
 	pluginsDir.cd( "plugins" );
+	
+	bool firstInit = true;
 
 	// iterate over the plugin directory and load plugins if necessary ...
 	foreach( QString fileName, pluginsDir.entryList( QDir::Files ) )
@@ -271,23 +270,19 @@ void DMSystem::createPluginMenu()
 		if ( fileName.split( "." ).value( 1 ).toLower()  == "dll" || fileName.split( "." ).value( 1 ).toLower() == "so" )
 		{
 			QPluginLoader loader( pluginsDir.absoluteFilePath( fileName ) );
-			bool ok = loader.load();
-			qDebug() << ok;
 			QObject *plug = loader.instance();
 
 			if ( plug != NULL )
 			{
-				DMSPluginInterface *dpi = qobject_cast<DMSPluginInterface *> ( plug );
-
-				if( dpi )
+				if( firstInit )
 				{
-					// set the required option
-					dpi->setLibrary( ldms );
-					dpi->setWorspace( ws );
-
-					// add plugin action to the actionlist
-					mnuPlugin->addAction( dpi->action() );
+					mnuPlugin = menuBar()->addMenu( tr( "&Plugin" ) );
+					firstInit = false;
 				}
+
+				DMSPluginInterface *dpi = qobject_cast<DMSPluginInterface *> ( plug );
+				if( dpi )
+					mnuPlugin->addAction( dpi->action() );
 			}
 		}
 	}

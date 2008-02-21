@@ -27,25 +27,17 @@ DEPENDPATH += sanewidget
 DEPENDPATH += src
 DEPENDPATH += ../../resource
 DEPENDPATH += ../../dms/include
-DEPENDPATH += ../../dms/src
-DEPENDPATH += ../../libdms/include
-DEPENDPATH += ../../libdms/src
-DEPENDPATH += ../../libdms/ui
 
 INCLUDEPATH += include
 INCLUDEPATH += sanewidget
 INCLUDEPATH += src
 INCLUDEPATH += ../../resource
 INCLUDEPATH += ../../dms/include
-INCLUDEPATH += ../../dms/src
-INCLUDEPATH += ../../libdms/include
-INCLUDEPATH += ../../libdms/src
-INCLUDEPATH += ../../libdms/ui
 
 RESOURCES += ../../resource/dms.qrc
 
 CONFIG += debug thread warn_on qt plugin
-QT += sql
+QT += sql xml
 
 # Project Header
 HEADERS	+= ../../dms/include/dmsplugininterface.h
@@ -59,12 +51,10 @@ SOURCES	+= src/dmsscannerplugin.cpp
 # Unix/Linux settings
 unix {
 	TARGET	= dmsscannerplugin
-	TARGETDEPS += ../../bin/libdms.a
 	RCC_DIR	= ../../build/dmsscannerplugin/unix/rcc
 	MOC_DIR	+= ../../build/dmsscannerplugin/unix/moc
 	OBJECTS_DIR += ../../build/dmsscannerplugin/unix/obj
 	LIBS += -L/usr/lib -lsane
-	LIBS += ../../bin/libdms.a
 
 	SOURCES	+= sanewidget/gamma_disp.cpp
 	SOURCES	+= sanewidget/labeled_checkbox.cpp

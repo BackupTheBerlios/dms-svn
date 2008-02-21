@@ -29,13 +29,13 @@
 #include <QtCore>
 #include <QtGui>
 
-#include <libdms.h>
 #include <dmsplugininterface.h>
 
+class DMSPluginInterface;
 class DMSScannerPlugin : public QObject, public DMSPluginInterface
 {
-		Q_OBJECT
-		Q_INTERFACES( DMSPluginInterface )
+	Q_OBJECT
+	Q_INTERFACES( DMSPluginInterface )
 
 	public:
 		QPixmap icon() const;
@@ -43,15 +43,7 @@ class DMSScannerPlugin : public QObject, public DMSPluginInterface
 		QString pluginVersion() const;
 		QAction *action();
 		QDialog *dialog() const;
-
-		void setLibrary( LibDMS *libdms );
-		void setWorspace( QWorkspace *ws );
-
-	private:
 		QWidget *widget() const;
-
-		LibDMS *m_dms;
-		QWorkspace *m_ws;
 
 	private slots:
 		void showWidget();

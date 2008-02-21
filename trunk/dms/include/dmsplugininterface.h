@@ -26,20 +26,14 @@
 #ifndef __DMS_PLUGININTERFACE_H__
 #define __DMS_PLUGININTERFACE_H__
 
-#include <libdms.h>
 
 #include <QtPlugin>
 
 // QtCore Classes
-
 class QAction;
-
 class QDialog;
-
 class QString;
-
 class QPixmap;
-
 class QWidget;
 
 /**
@@ -48,13 +42,12 @@ class QWidget;
  * @version 0.1.0
  * @since 0.1.0
  */
-
 class DMSPluginInterface
 {
 
-		Q_CLASSINFO( "Author", "Alexander Saal" )
-		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
-		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
+	Q_CLASSINFO( "Author", "Alexander Saal" )
+	Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+	Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 	public:
 		/**
@@ -112,7 +105,7 @@ class DMSPluginInterface
 		 * }
 		 * @endcode
 		 */
-		virtual QAction *action();
+		virtual QAction *action() = 0;
 
 		/**
 		 * Rückgabe der Pluginversion
@@ -139,16 +132,6 @@ class DMSPluginInterface
 		 * @endcode
 		 */
 		virtual QWidget *widget() const = 0;
-
-		/**
-		 * Set the library
-		 */
-		virtual void setLibrary( LibDMS *ldms );
-
-		/**
-		 * Set the main workspace
-		 */
-		virtual void setWorspace( QWorkspace *ws );
 };
 
 Q_DECLARE_INTERFACE( DMSPluginInterface, "dms.DMSPluginInterface/0.1.0" )

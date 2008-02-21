@@ -23,13 +23,11 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
-#include <libdms.h>
+#include <QtGui>
+#include <QtCore>
 
 #include "dmsscanner.h"
 #include "dmsscannerplugin.h"
-
-#include <QtGui>
-#include <QtCore>
 
 QPixmap DMSScannerPlugin::icon() const
 {
@@ -68,7 +66,7 @@ QWidget *DMSScannerPlugin::widget() const
 
 	if ( !dmsscanner )
 	{
-		dmsscanner = new DMSScanner( m_dms, m_ws );
+		dmsscanner = new DMSScanner();
 	}
 	else
 	{
@@ -76,17 +74,6 @@ QWidget *DMSScannerPlugin::widget() const
 	}
 
 	return dmsscanner;
-}
-
-void DMSScannerPlugin::setLibrary( LibDMS *libdms )
-{
-	m_dms = libdms;
-}
-
-void DMSScannerPlugin::setWorspace( QWorkspace *ws )
-{
-
-	m_ws = ws;
 }
 
 void DMSScannerPlugin::showWidget()

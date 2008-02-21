@@ -26,8 +26,6 @@
 #ifndef DMSSCANNER_H
 #define DMSSCANNER_H
 
-#include <libdms.h>
-
 #include <QtCore>
 #include <QtGui>
 
@@ -35,7 +33,6 @@
 #else
 #include <sane_widget.h>
 #endif
-
 
 class DMSScanner;
 extern DMSScanner *dmsscanner;
@@ -47,7 +44,6 @@ extern DMSScanner *dmsscanner;
 * @version 0.1.0.1
 * @since 0.1.0.1
 */
-
 class DMSScanner : public QWidget
 {
 		Q_OBJECT
@@ -57,16 +53,13 @@ class DMSScanner : public QWidget
 		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 	public:
-		DMSScanner( LibDMS *dms, QWorkspace *ws, QWidget *parent = 0L );
+		DMSScanner( QWidget *parent = 0L );
 		~DMSScanner();
 
 		/*!
 		 * Get the external instance of @sa DMSScanner
 		 */
-		static DMSScanner *dmsdocument_instance()
-		{
-			return dmsscanner;
-		}
+		static DMSScanner *dmsdocument_instance() {	return dmsscanner; }
 
 	private slots:
 		void initScan();
@@ -78,8 +71,7 @@ class DMSScanner : public QWidget
 		void showErrorMsg( const QString &error );
 
 	private:
-		LibDMS *_dms;
-		QWorkspace *_ws;
+		QString documentarchive;
 
 #ifdef Q_OS_WIN32
 #else

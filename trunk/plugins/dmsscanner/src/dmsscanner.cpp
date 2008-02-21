@@ -24,25 +24,19 @@
  ***************************************************************************/
 
 #include <dmsscanner.h>
-#include <libdms.h>
 
 #ifdef Q_OS_WIN32
 #else
-#include <sane_widget.h>
+	#include <sane_widget.h>
 #endif
 
 #include <QtCore>
 #include <QtGui>
 
 DMSScanner *dmsscanner = NULL;
-DMSScanner::DMSScanner( LibDMS *dms, QWorkspace *ws, QWidget *parent ) : QWidget( parent )
+DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 {
 	dmsscanner = this;
-
-	_dms = dms;
-	_ws = ws;
-
-	_dms->clearErrorMessage();
 
 	initScan();
 }
@@ -121,7 +115,6 @@ void DMSScanner::initScan()
 	vlayout->addWidget( separator );
 	vlayout->addLayout( hlayout );
 
-	_ws->addWindow( dmsscanner );
 	dmsscanner->show();
 
 	QApplication::restoreOverrideCursor();
@@ -216,8 +209,6 @@ void DMSScanner::imageReady()
 
 		dmsscanner->close();
 
-		QString documentarchive = _dms->getApplicationSettings( "UiPreferenceBase", "General", "Documentarchive", QVariant( QDir::homePath() ) ).toString();
-
 		if ( documentarchive.isNull() || documentarchive.isEmpty() )
 		{
 			QApplication::restoreOverrideCursor();
@@ -232,9 +223,6 @@ void DMSScanner::imageReady()
 		pix.save( documentarchive, "PNG" );
 
 		QFileInfo fi( documentarchive );
-
-		//lineEditDocumentName->setText( fi.fileName().split( "." ).value( 0 ) );
-		//lineEditDocumentPath->setText( documentarchive );
 	}
 
 	m_sanew = NULL;

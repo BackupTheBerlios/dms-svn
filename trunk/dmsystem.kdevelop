@@ -160,7 +160,7 @@
   </kdevfilecreate>
   <kdevtrollproject>
     <general>
-      <activedir>dms</activedir>
+      <activedir>plugins/dmsscanner</activedir>
     </general>
     <run>
       <directoryradio>executable</directoryradio>
