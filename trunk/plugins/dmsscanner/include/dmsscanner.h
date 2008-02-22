@@ -30,8 +30,9 @@
 #include <QtGui>
 
 #ifdef Q_OS_WIN32
+	#include <qtwaininterface.h>
 #else
-#include <sane_widget.h>
+	#include <sane_widget.h>
 #endif
 
 #include <libdms.h>
@@ -63,12 +64,21 @@ class DMSScanner : public QWidget
 		 */
 		static DMSScanner *dmsdocument_instance() {	return dmsscanner; }
 
+#ifdef Q_OS_WIN32
+		void showEvent( QShowEvent *event );
+		bool winEvent( MSG *pMsg, long * result );
+#endif
+
 	private slots:
 		void initScan();
 		void scanStart();
 		void scanEnd();
 		void scanFailed();
 		void imageReady();
+
+#ifdef Q_OS_WIN32
+		void acquired( CDIB *pDib );
+#endif
 
 		void showErrorMsg( const QString &error );
 
@@ -77,6 +87,8 @@ class DMSScanner : public QWidget
 		LibDMS *_dms;
 
 #ifdef Q_OS_WIN32
+		QTwainInterface* m_pTwain;
+		QImage m_pImage;
 #else
 		QProgressDialog *m_progressDialog;
 		SaneWidget *m_sanew;

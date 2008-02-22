@@ -28,7 +28,9 @@
 #include <libdms.h>
 
 #ifdef Q_OS_WIN32
-
+	#include <qtwaininterface.h>
+	#include <qtwain.h>
+	#include <dib.h>
 #else
 	#include <sane_widget.h>
 #endif
@@ -61,9 +63,34 @@ DMSScanner::~DMSScanner()
 	dmsscanner = NULL;
 }
 
+#ifdef Q_OS_WIN32
+void DMSScanner::showEvent( QShowEvent *event )
+{
+	m_pTwain->setParent( this );
+}
+
+bool DMSScanner::winEvent( MSG *pMsg, long * result )
+{
+	return (m_pTwain->processMessage(*pMsg) == TRUE);
+}
+
+void DMSScanner::acquired( CDIB *pDib )
+{
+	m_pImage = QTwainInterface::convertToImage( pDib );
+
+	delete pDib;
+}
+#endif
+
 void DMSScanner::initScan()
 {
 #ifdef Q_OS_WIN32
+	m_pTwain = new QTwain( this );
+	connect( m_pTwain, SIGNAL( dibAcquired( CDIB* ) ), this, SLOT( acquired( CDIB* ) ) );
+
+	m_pTwain->selectSource();
+
+	//scanStart();
 #else
 	QApplication::setOverrideCursor( Qt::WaitCursor );
 	qApp->processEvents();
@@ -139,6 +166,10 @@ void DMSScanner::initScan()
 void DMSScanner::scanStart()
 {
 #ifdef Q_OS_WIN32
+	if (!m_pTwain->acquire())
+	{
+		qWarning("acquire() call not successful!");
+	}
 #else
 	QApplication::setOverrideCursor( Qt::WaitCursor );
 
@@ -169,6 +200,7 @@ void DMSScanner::scanEnd()
 {
 
 #ifdef Q_OS_WIN32
+	// nothing to do ...
 #else
 
 	if ( m_progressDialog != NULL )
@@ -183,6 +215,7 @@ void DMSScanner::scanEnd()
 void DMSScanner::scanFailed()
 {
 #ifdef Q_OS_WIN32
+	// nothing to do ...
 #else
 
 	if ( m_progressDialog != NULL )
@@ -205,6 +238,7 @@ void DMSScanner::scanFailed()
 void DMSScanner::imageReady()
 {
 #ifdef Q_OS_WIN32
+	// nothing to do ...
 #else
 	qApp->processEvents();
 
