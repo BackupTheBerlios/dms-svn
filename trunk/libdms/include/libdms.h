@@ -340,7 +340,7 @@ class EXPORT_ASAAL LibDMS : public QObject
 		 * @param widgetname The widgetname
 		 * @param section The section for application settings
 		 * @param key The key for determine the value
-		 * @param value  The <a href="http://doc.trolltech.com/4.3/qvariant.html#QVariant">QVariant</a> as value of application settings (optional)
+		 * @param value  The value of application settings (optional)
 		 */
 		void insertApplicationSettings( const QString &widgetname, const QString &section, const QString &key, const QString &value = QString() );
 
@@ -406,12 +406,9 @@ class EXPORT_ASAAL LibDMS : public QObject
 		void sendMail( const QString &email, const QString &subject = QString( "" ), const QString &attachment = QString( "" ), const QString &message = QString( "" ) );
 
 		/*!
-		* Clear error message ...
-		*/
-		void clearErrorMessage()
-		{
-			errorMessage = QString( "" );
-		}
+		 * Clear error message ...
+		 */
+		void clearErrorMessage() { errorMessage = QString( "" ); }
 
 	private slots:
 		/*!
@@ -428,9 +425,9 @@ class EXPORT_ASAAL LibDMS : public QObject
 		// Check is user in database avalaibel
 		bool isUserAvailabel( const QString &userId, const QString &username );
 
+		// Local variables
 		QWorkspace *_ws;
 
-		// Local variables
 		QString userId;
 		QString groupId;
 		QString docId;

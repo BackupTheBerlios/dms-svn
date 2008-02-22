@@ -1,27 +1,27 @@
 /***************************************************************************
- *   Copyright (C) 2007-2008 by Alexander Saal                             *
- *   alex.saal@gmx.de                                                      *
- *                                                                         *
- *   File: libdms.cpp                                                      *
- *   Desc: ${description}                                                  *
- *                                                                         *
- *   This file is part of DMS - Documnet Management System                 *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************/
+*   Copyright (C) 2007-2008 by Alexander Saal                             *
+*   alex.saal@gmx.de                                                      *
+*                                                                         *
+*   File: libdms.cpp                                                      *
+*   Desc: ${description}                                                  *
+*                                                                         *
+*   This file is part of DMS - Documnet Management System                 *
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+*   This program is distributed in the hope that it will be useful,       *
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+*   GNU General Public License for more details.                          *
+*                                                                         *
+*   You should have received a copy of the GNU General Public License     *
+*   along with this program; if not, write to the                         *
+*   Free Software Foundation, Inc.,                                       *
+*   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+***************************************************************************/
 
 #include <base64.h>
 
@@ -122,7 +122,7 @@ bool LibDMS::logout( const QString &userId )
 				return true;
 			}
 
-	return false;
+			return false;
 }
 
 bool LibDMS::isConnectionAvailabel( const QString &userId )
@@ -207,7 +207,6 @@ QMap<QString, QStringList> LibDMS::getTabelColumns( TableColumns tablecolumns )
 
 	switch ( tablecolumns )
 	{
-
 		case ALL:
 			sqlDatabaseTableColumnListQuery = "SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'DMS'";
 			tablename = "ALL";
@@ -379,17 +378,11 @@ QMap<QString, QString> LibDMS::geDocuments()
 
 			// sql query information about the document
 			QString did = queryDocList.value( 0 ).toString();
-
 			QString uid = uname;
-
 			QString gid = gname;
-
 			QString docname = queryDocList.value( 3 ).toString();
-
 			QString docpath = queryDocList.value( 4 ).toString();
-
 			QString updated = queryDocList.value( 5 ).toString();
-
 			QString checkedout = queryDocList.value( 6 ).toString();
 
 			QString document = uid + "#" + gid + "#" + docname + "#"  + docpath + "#"  + updated + "#" + checkedout;
@@ -454,17 +447,11 @@ QMap<QString, QString> LibDMS::geDocuments( const QString &userId )
 
 			// sql query information about the document
 			QString did = queryDocList.value( 0 ).toString();
-
 			QString uid = uname;
-
 			QString gid = gname;
-
 			QString docname = queryDocList.value( 3 ).toString();
-
 			QString docpath = queryDocList.value( 4 ).toString();
-
 			QString updated = queryDocList.value( 5 ).toString();
-
 			QString checkedout = queryDocList.value( 6 ).toString();
 
 			QString document = uid + "#" + gid + "#" + docname + "#"  + docpath + "#"  + updated + "#" + checkedout;
@@ -1039,7 +1026,6 @@ void LibDMS::insertApplicationSettings( const QString &widgetname, const QString
 	}
 
 	selectSettings.clear();
-
 	sqlInsertAppSettings.clear();
 }
 
@@ -1287,7 +1273,6 @@ void LibDMS::processFinish( int exitCode, QProcess::ExitStatus exitStatus )
 
 	switch ( exitStatus )
 	{
-
 		case QProcess::NormalExit:
 			errorMessage = tr( "Process exited normal ..." );
 			qDebug() << exitCode;
@@ -1328,7 +1313,6 @@ void LibDMS::processError( QProcess::ProcessError error )
 {
 	switch ( error )
 	{
-
 		case QProcess::FailedToStart:
 			errorMessage = tr( "File not found, resource error ..." );
 			break;
