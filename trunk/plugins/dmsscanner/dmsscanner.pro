@@ -118,7 +118,6 @@ win32 {
 	HEADERS	+= qtwain/twaincpp.h
 
 	SOURCES	+= qtwain/dib.cpp
-	SOURCES	+= qtwain/main.cpp
 	SOURCES	+= qtwain/qtwain.cpp
 	SOURCES	+= qtwain/qtwaininterface.cpp
 	SOURCES	+= qtwain/qtwainsubstitute.cpp
