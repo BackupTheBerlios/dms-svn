@@ -44,8 +44,8 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="-Zm200 -w34100 -w34189 -Zm200 -w34100 -w34189 -w34100 -w34189"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include\QtCore&quot;,&quot;$(QTDIR)\include\QtCore&quot;,&quot;$(QTDIR)\include\QtGui&quot;,&quot;$(QTDIR)\include\QtGui&quot;,&quot;$(QTDIR)\include\QtXml&quot;,&quot;$(QTDIR)\include\QtXml&quot;,&quot;$(QTDIR)\include\QtSql&quot;,&quot;$(QTDIR)\include\QtSql&quot;,&quot;$(QTDIR)\include&quot;,&quot;include&quot;,&quot;sanewidget&quot;,&quot;src&quot;,&quot;..\..\resource&quot;,&quot;..\..\dms\include&quot;,&quot;..\..\libdms\include&quot;,&quot;..\..\libdms\ui&quot;,&quot;..\..\libdms\src&quot;,&quot;$(QTDIR)\include\ActiveQt&quot;,&quot;..\..\build\dmsscannerplugin\win\moc&quot;,&quot;.&quot;,$(QTDIR)\mkspecs\win32-msvc2005"
-				PreprocessorDefinitions="_WINDOWS,UNICODE,WIN32,QT_LARGEFILE_SUPPORT,QT_DLL,QT_PLUGIN,QT_SQL_LIB,QT_XML_LIB,QT_GUI_LIB,QT_CORE_LIB,QT_THREAD_SUPPORT"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include\QtCore&quot;,&quot;$(QTDIR)\include\QtCore&quot;,&quot;$(QTDIR)\include\QtGui&quot;,&quot;$(QTDIR)\include\QtGui&quot;,&quot;$(QTDIR)\include\QtXml&quot;,&quot;$(QTDIR)\include\QtXml&quot;,&quot;$(QTDIR)\include\QtSql&quot;,&quot;$(QTDIR)\include\QtSql&quot;,&quot;$(QTDIR)\include&quot;,&quot;include&quot;,&quot;sanewidget&quot;,&quot;qtwain&quot;,&quot;src&quot;,&quot;..\..\resource&quot;,&quot;..\..\dms\include&quot;,&quot;..\..\libdms\include&quot;,&quot;..\..\libdms\ui&quot;,&quot;..\..\libdms\src&quot;,&quot;$(QTDIR)\include\ActiveQt&quot;,&quot;..\..\build\dmsscannerplugin\win\moc&quot;,&quot;.&quot;,$(QTDIR)\mkspecs\win32-msvc2005"
+				PreprocessorDefinitions="_WINDOWS,WIN32,QT_LARGEFILE_SUPPORT,QT_DLL,QT_PLUGIN,QT_SQL_LIB,QT_XML_LIB,QT_GUI_LIB,QT_CORE_LIB,QT_THREAD_SUPPORT"
 				GeneratePreprocessedFile="0"
 				ExceptionHandling="1"
 				BasicRuntimeChecks="3"
@@ -65,7 +65,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="_WINDOWS,UNICODE,WIN32,QT_LARGEFILE_SUPPORT,QT_DLL,QT_PLUGIN,QT_SQL_LIB,QT_XML_LIB,QT_GUI_LIB,QT_CORE_LIB,QT_THREAD_SUPPORT,_DEBUG"
+				PreprocessorDefinitions="_WINDOWS,WIN32,QT_LARGEFILE_SUPPORT,QT_DLL,QT_PLUGIN,QT_SQL_LIB,QT_XML_LIB,QT_GUI_LIB,QT_CORE_LIB,QT_THREAD_SUPPORT,_DEBUG"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -136,8 +136,8 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="-Zm200 -w34100 -w34189 -Zm200 -w34100 -w34189 -w34100 -w34189"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include\QtCore&quot;,&quot;$(QTDIR)\include\QtCore&quot;,&quot;$(QTDIR)\include\QtGui&quot;,&quot;$(QTDIR)\include\QtGui&quot;,&quot;$(QTDIR)\include\QtXml&quot;,&quot;$(QTDIR)\include\QtXml&quot;,&quot;$(QTDIR)\include\QtSql&quot;,&quot;$(QTDIR)\include\QtSql&quot;,&quot;$(QTDIR)\include&quot;,&quot;include&quot;,&quot;sanewidget&quot;,&quot;src&quot;,&quot;..\..\resource&quot;,&quot;..\..\dms\include&quot;,&quot;..\..\libdms\include&quot;,&quot;..\..\libdms\ui&quot;,&quot;..\..\libdms\src&quot;,&quot;$(QTDIR)\include\ActiveQt&quot;,&quot;..\..\build\dmsscannerplugin\win\moc&quot;,&quot;.&quot;,$(QTDIR)\mkspecs\win32-msvc2005"
-				PreprocessorDefinitions="QT_NO_DEBUG,NDEBUG,_WINDOWS,UNICODE,WIN32,QT_LARGEFILE_SUPPORT,QT_DLL,QT_NO_DEBUG,QT_PLUGIN,QT_SQL_LIB,QT_XML_LIB,QT_GUI_LIB,QT_CORE_LIB,QT_THREAD_SUPPORT,NDEBUG"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include\QtCore&quot;,&quot;$(QTDIR)\include\QtCore&quot;,&quot;$(QTDIR)\include\QtGui&quot;,&quot;$(QTDIR)\include\QtGui&quot;,&quot;$(QTDIR)\include\QtXml&quot;,&quot;$(QTDIR)\include\QtXml&quot;,&quot;$(QTDIR)\include\QtSql&quot;,&quot;$(QTDIR)\include\QtSql&quot;,&quot;$(QTDIR)\include&quot;,&quot;include&quot;,&quot;sanewidget&quot;,&quot;qtwain&quot;,&quot;src&quot;,&quot;..\..\resource&quot;,&quot;..\..\dms\include&quot;,&quot;..\..\libdms\include&quot;,&quot;..\..\libdms\ui&quot;,&quot;..\..\libdms\src&quot;,&quot;$(QTDIR)\include\ActiveQt&quot;,&quot;..\..\build\dmsscannerplugin\win\moc&quot;,&quot;.&quot;,$(QTDIR)\mkspecs\win32-msvc2005"
+				PreprocessorDefinitions="QT_NO_DEBUG,NDEBUG,_WINDOWS,WIN32,QT_LARGEFILE_SUPPORT,QT_DLL,QT_NO_DEBUG,QT_PLUGIN,QT_SQL_LIB,QT_XML_LIB,QT_GUI_LIB,QT_CORE_LIB,QT_THREAD_SUPPORT,NDEBUG"
 				GeneratePreprocessedFile="0"
 				ExceptionHandling="1"
 				BasicRuntimeChecks="3"
@@ -157,7 +157,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="QT_NO_DEBUG,NDEBUG,_WINDOWS,UNICODE,WIN32,QT_LARGEFILE_SUPPORT,QT_DLL,QT_NO_DEBUG,QT_PLUGIN,QT_SQL_LIB,QT_XML_LIB,QT_GUI_LIB,QT_CORE_LIB,QT_THREAD_SUPPORT"
+				PreprocessorDefinitions="QT_NO_DEBUG,NDEBUG,_WINDOWS,WIN32,QT_LARGEFILE_SUPPORT,QT_DLL,QT_NO_DEBUG,QT_PLUGIN,QT_SQL_LIB,QT_XML_LIB,QT_GUI_LIB,QT_CORE_LIB,QT_THREAD_SUPPORT"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -209,11 +209,35 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="qtwain\dib.cpp"
+				>
+			</File>
+			<File
 				RelativePath="src\dmsscanner.cpp"
 				>
 			</File>
 			<File
 				RelativePath="src\dmsscannerplugin.cpp"
+				>
+			</File>
+			<File
+				RelativePath="qtwain\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath="qtwain\qtwain.cpp"
+				>
+			</File>
+			<File
+				RelativePath="qtwain\qtwaininterface.cpp"
+				>
+			</File>
+			<File
+				RelativePath="qtwain\qtwainsubstitute.cpp"
+				>
+			</File>
+			<File
+				RelativePath="qtwain\twaincpp.cpp"
 				>
 			</File>
 		</Filter>
@@ -222,6 +246,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="qtwain\dib.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\dms\include\dmsplugininterface.h"
 				>
@@ -235,7 +263,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC include\dmsscanner.h"
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PLUGIN -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;sanewidget&quot; -I&quot;src&quot; -I&quot;..\..\resource&quot; -I&quot;..\..\dms\include&quot; -I&quot;..\..\libdms\include&quot; -I&quot;..\..\libdms\ui&quot; -I&quot;..\..\libdms\src&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\..\build\dmsscannerplugin\win\moc&quot; -I&quot;.&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmsscanner.h -o ..\..\build\dmsscannerplugin\win\moc\moc_dmsscanner.cpp&#x0D;&#x0A;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PLUGIN -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;sanewidget&quot; -I&quot;qtwain&quot; -I&quot;src&quot; -I&quot;..\..\resource&quot; -I&quot;..\..\dms\include&quot; -I&quot;..\..\libdms\include&quot; -I&quot;..\..\libdms\ui&quot; -I&quot;..\..\libdms\src&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\..\build\dmsscannerplugin\win\moc&quot; -I&quot;.&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmsscanner.h -o ..\..\build\dmsscannerplugin\win\moc\moc_dmsscanner.cpp&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;include\dmsscanner.h"
 						Outputs="..\..\build\dmsscannerplugin\win\moc\moc_dmsscanner.cpp"
 					/>
@@ -246,7 +274,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC include\dmsscanner.h"
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_PLUGIN -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;sanewidget&quot; -I&quot;src&quot; -I&quot;..\..\resource&quot; -I&quot;..\..\dms\include&quot; -I&quot;..\..\libdms\include&quot; -I&quot;..\..\libdms\ui&quot; -I&quot;..\..\libdms\src&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\..\build\dmsscannerplugin\win\moc&quot; -I&quot;.&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmsscanner.h -o ..\..\build\dmsscannerplugin\win\moc\moc_dmsscanner.cpp&#x0D;&#x0A;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_PLUGIN -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;sanewidget&quot; -I&quot;qtwain&quot; -I&quot;src&quot; -I&quot;..\..\resource&quot; -I&quot;..\..\dms\include&quot; -I&quot;..\..\libdms\include&quot; -I&quot;..\..\libdms\ui&quot; -I&quot;..\..\libdms\src&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\..\build\dmsscannerplugin\win\moc&quot; -I&quot;.&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmsscanner.h -o ..\..\build\dmsscannerplugin\win\moc\moc_dmsscanner.cpp&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;include\dmsscanner.h"
 						Outputs="..\..\build\dmsscannerplugin\win\moc\moc_dmsscanner.cpp"
 					/>
@@ -261,7 +289,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC include\dmsscannerplugin.h"
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PLUGIN -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;sanewidget&quot; -I&quot;src&quot; -I&quot;..\..\resource&quot; -I&quot;..\..\dms\include&quot; -I&quot;..\..\libdms\include&quot; -I&quot;..\..\libdms\ui&quot; -I&quot;..\..\libdms\src&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\..\build\dmsscannerplugin\win\moc&quot; -I&quot;.&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmsscannerplugin.h -o ..\..\build\dmsscannerplugin\win\moc\moc_dmsscannerplugin.cpp&#x0D;&#x0A;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PLUGIN -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;sanewidget&quot; -I&quot;qtwain&quot; -I&quot;src&quot; -I&quot;..\..\resource&quot; -I&quot;..\..\dms\include&quot; -I&quot;..\..\libdms\include&quot; -I&quot;..\..\libdms\ui&quot; -I&quot;..\..\libdms\src&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\..\build\dmsscannerplugin\win\moc&quot; -I&quot;.&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmsscannerplugin.h -o ..\..\build\dmsscannerplugin\win\moc\moc_dmsscannerplugin.cpp&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;include\dmsscannerplugin.h"
 						Outputs="..\..\build\dmsscannerplugin\win\moc\moc_dmsscannerplugin.cpp"
 					/>
@@ -272,11 +300,57 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="MOC include\dmsscannerplugin.h"
-						CommandLine="$(QTDIR)\bin\moc.exe  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_PLUGIN -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;sanewidget&quot; -I&quot;src&quot; -I&quot;..\..\resource&quot; -I&quot;..\..\dms\include&quot; -I&quot;..\..\libdms\include&quot; -I&quot;..\..\libdms\ui&quot; -I&quot;..\..\libdms\src&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\..\build\dmsscannerplugin\win\moc&quot; -I&quot;.&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmsscannerplugin.h -o ..\..\build\dmsscannerplugin\win\moc\moc_dmsscannerplugin.cpp&#x0D;&#x0A;"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_PLUGIN -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;sanewidget&quot; -I&quot;qtwain&quot; -I&quot;src&quot; -I&quot;..\..\resource&quot; -I&quot;..\..\dms\include&quot; -I&quot;..\..\libdms\include&quot; -I&quot;..\..\libdms\ui&quot; -I&quot;..\..\libdms\src&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\..\build\dmsscannerplugin\win\moc&quot; -I&quot;.&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 include\dmsscannerplugin.h -o ..\..\build\dmsscannerplugin\win\moc\moc_dmsscannerplugin.cpp&#x0D;&#x0A;"
 						AdditionalDependencies="$(QTDIR)\bin\moc.exe;include\dmsscannerplugin.h"
 						Outputs="..\..\build\dmsscannerplugin\win\moc\moc_dmsscannerplugin.cpp"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="qtwain\qtwain.h"
+				>
+			</File>
+			<File
+				RelativePath="qtwain\qtwaininterface.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC qtwain\qtwaininterface.h"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_PLUGIN -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;sanewidget&quot; -I&quot;qtwain&quot; -I&quot;src&quot; -I&quot;..\..\resource&quot; -I&quot;..\..\dms\include&quot; -I&quot;..\..\libdms\include&quot; -I&quot;..\..\libdms\ui&quot; -I&quot;..\..\libdms\src&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\..\build\dmsscannerplugin\win\moc&quot; -I&quot;.&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 qtwain\qtwaininterface.h -o ..\..\build\dmsscannerplugin\win\moc\moc_qtwaininterface.cpp&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;qtwain\qtwaininterface.h"
+						Outputs="..\..\build\dmsscannerplugin\win\moc\moc_qtwaininterface.cpp"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="MOC qtwain\qtwaininterface.h"
+						CommandLine="$(QTDIR)\bin\moc.exe  -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_NO_DEBUG -DQT_PLUGIN -DQT_SQL_LIB -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtCore&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtGui&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtXml&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include\QtSql&quot; -I&quot;$(QTDIR)\include&quot; -I&quot;include&quot; -I&quot;sanewidget&quot; -I&quot;qtwain&quot; -I&quot;src&quot; -I&quot;..\..\resource&quot; -I&quot;..\..\dms\include&quot; -I&quot;..\..\libdms\include&quot; -I&quot;..\..\libdms\ui&quot; -I&quot;..\..\libdms\src&quot; -I&quot;$(QTDIR)\include\ActiveQt&quot; -I&quot;..\..\build\dmsscannerplugin\win\moc&quot; -I&quot;.&quot; -I$(QTDIR)\mkspecs\win32-msvc2005 -D_MSC_VER=1400 -DWIN32 qtwain\qtwaininterface.h -o ..\..\build\dmsscannerplugin\win\moc\moc_qtwaininterface.cpp&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\moc.exe;qtwain\qtwaininterface.h"
+						Outputs="..\..\build\dmsscannerplugin\win\moc\moc_qtwaininterface.cpp"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="qtwain\qtwainsubstitute.h"
+				>
+			</File>
+			<File
+				RelativePath="qtwain\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath="qtwain\twain.h"
+				>
+			</File>
+			<File
+				RelativePath="qtwain\twaincpp.h"
+				>
 			</File>
 		</Filter>
 		<Filter
@@ -294,6 +368,10 @@
 			</File>
 			<File
 				RelativePath="..\..\build\dmsscannerplugin\win\moc\moc_dmsscannerplugin.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\build\dmsscannerplugin\win\moc\moc_qtwaininterface.cpp"
 				>
 			</File>
 			<File
