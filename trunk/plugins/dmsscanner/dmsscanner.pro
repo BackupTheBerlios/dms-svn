@@ -24,6 +24,7 @@ DESTDIR = ../../bin/plugins
 
 DEPENDPATH += include
 DEPENDPATH += sanewidget
+DEPENDPATH += qtwain
 DEPENDPATH += src
 DEPENDPATH += ../../resource
 DEPENDPATH += ../../dms/include
@@ -33,6 +34,7 @@ DEPENDPATH += ../../libdms/src
 
 INCLUDEPATH += include
 INCLUDEPATH += sanewidget
+INCLUDEPATH += qtwain
 INCLUDEPATH += src
 INCLUDEPATH += ../../resource
 INCLUDEPATH += ../../dms/include
@@ -57,8 +59,8 @@ SOURCES	+= src/dmsscannerplugin.cpp
 # Unix/Linux settings
 unix {
 	TARGET	= dmsscannerplugin
-    TARGETDEPS += ../../bin/libdms.a
-    LIBS += ../../bin/libdms.a
+	TARGETDEPS += ../../bin/libdms.a
+	LIBS += ../../bin/libdms.a
 	RCC_DIR	= ../../build/dmsscannerplugin/unix/rcc
 	MOC_DIR	+= ../../build/dmsscannerplugin/unix/moc
 	OBJECTS_DIR += ../../build/dmsscannerplugin/unix/obj
@@ -100,7 +102,25 @@ win32 {
 	OBJECTS_DIR += ../../build/dmsscannerplugin/win/obj
 
 	TARGET	= libdmsscannerplugin
-	LIBS += -llibdms -L../bin	
+	LIBS += -L../../bin -llibdms
+	
 	CONFIG	+= debug thread warn_on qt dll plugin embed_manifest_dll
+	DEFINES -= UNICODE
+
 	RC_FILE	= libdmsscanner.rc
+
+	HEADERS	+= qtwain/dib.h
+	HEADERS	+= qtwain/qtwain.h
+	HEADERS	+= qtwain/qtwaininterface.h
+	HEADERS	+= qtwain/qtwainsubstitute.h
+	HEADERS	+= qtwain/stdafx.h
+	HEADERS	+= qtwain/twain.h
+	HEADERS	+= qtwain/twaincpp.h
+
+	SOURCES	+= qtwain/dib.cpp
+	SOURCES	+= qtwain/main.cpp
+	SOURCES	+= qtwain/qtwain.cpp
+	SOURCES	+= qtwain/qtwaininterface.cpp
+	SOURCES	+= qtwain/qtwainsubstitute.cpp
+	SOURCES	+= qtwain/twaincpp.cpp
 } 
