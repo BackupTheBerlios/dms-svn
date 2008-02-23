@@ -65,7 +65,10 @@ DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 
 DMSScanner::~DMSScanner()
 {
+#ifdef Q_OS_WIN32
 	m_pTwain = NULL;
+#endif
+
 	dmsscanner = NULL;
 }
 
