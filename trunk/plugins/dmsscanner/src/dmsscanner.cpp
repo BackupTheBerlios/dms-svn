@@ -1,38 +1,38 @@
 /***************************************************************************
- *   Copyright (C) 2008 by Alexander Saal                                  *
- *   alex.saal@gmx.de                                                      *
- *                                                                         *
- *   File: dmsscanner.h                                                    *
- *   Desc: ${description}                                                  *
- *                                                                         *
- *   This file is part of DMS - Documnet Management System                 *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the                         *
- *   Free Software Foundation, Inc.,                                       *
- *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
- ***************************************************************************/
+*   Copyright (C) 2008 by Alexander Saal                                  *
+*   alex.saal@gmx.de                                                      *
+*                                                                         *
+*   File: dmsscanner.h                                                    *
+*   Desc: ${description}                                                  *
+*                                                                         *
+*   This file is part of DMS - Documnet Management System                 *
+*                                                                         *
+*   This program is free software; you can redistribute it and/or modify  *
+*   it under the terms of the GNU General Public License as published by  *
+*   the Free Software Foundation; either version 2 of the License, or     *
+*   (at your option) any later version.                                   *
+*                                                                         *
+*   This program is distributed in the hope that it will be useful,       *
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+*   GNU General Public License for more details.                          *
+*                                                                         *
+*   You should have received a copy of the GNU General Public License     *
+*   along with this program; if not, write to the                         *
+*   Free Software Foundation, Inc.,                                       *
+*   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+***************************************************************************/
 
 #include <dmsscanner.h>
 
 #include <libdms.h>
 
 #ifdef Q_OS_WIN32
-	#include <qtwaininterface.h>
-	#include <qtwain.h>
-	#include <dib.h>
+#include <qtwaininterface.h>
+#include <qtwain.h>
+#include <dib.h>
 #else
-	#include <sane_widget.h>
+#include <sane_widget.h>
 #endif
 
 #include <QtCore>
@@ -42,9 +42,9 @@ DMSScanner *dmsscanner = NULL;
 DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 {
 	dmsscanner = this;
-	
+
 	_dms = LibDMS::libdms_instcance();
-	
+
 	QDesktopWidget *desktop = qApp->desktop();
 	const QRect rect = desktop->availableGeometry( desktop->primaryScreen() );
 	int left = ( rect.width() - width() ) / 2;
@@ -56,7 +56,8 @@ DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 	setGeometry( left, top, width, height );
 
 #ifdef Q_OS_WIN32
-	m_pTwain = new QTwain( this );
+	m_pTwain = new QTwain();
+	connect( m_pTwain, SIGNAL( dibAcquired( CDIB* ) ), this, SLOT( acquired( CDIB* ) ) );
 #endif
 
 	initScan();
@@ -64,6 +65,7 @@ DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 
 DMSScanner::~DMSScanner()
 {
+	m_pTwain = NULL;
 	dmsscanner = NULL;
 }
 
@@ -78,9 +80,15 @@ bool DMSScanner::winEvent( MSG *pMsg, long * result )
 	return (m_pTwain->processMessage(*pMsg) == TRUE);
 }
 
+void DMSScanner::selectedSource()
+{
+	m_pTwain->selectSource();
+}
+
 void DMSScanner::acquired( CDIB *pDib )
 {
-	m_pImage = QTwainInterface::convertToImage( pDib );
+	m_pImage = QTwainInterface::convertToImage(pDib, pDib->Width(), pDib->Height() );
+
 
 	delete pDib;
 }
@@ -89,9 +97,35 @@ void DMSScanner::acquired( CDIB *pDib )
 void DMSScanner::initScan()
 {
 #ifdef Q_OS_WIN32
-	connect( m_pTwain, SIGNAL( dibAcquired( CDIB* ) ), this, SLOT( acquired( CDIB* ) ) );
+	gridLayout = new QGridLayout( this );
+	gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+	frameAcquire = new QFrame( this );
+	frameAcquire->setObjectName(QString::fromUtf8("frameAcquire"));
+	frameAcquire->setFrameShape(QFrame::StyledPanel);
+	frameAcquire->setFrameShadow(QFrame::Sunken);
 
-	m_pTwain->selectSource();
+	gridLayout->addWidget(frameAcquire, 0, 0, 1, 1);
+
+	hboxLayout = new QHBoxLayout();
+	hboxLayout->setObjectName( QString::fromUtf8("hboxLayout") );
+	btnAcquire = new QPushButton( this );
+	btnAcquire->setObjectName(QString::fromUtf8("btnAcquire"));
+	btnAcquire->setText( tr( "St&art scan" ) );
+	connect( btnAcquire, SIGNAL( clicked() ), this, SLOT( scanStart() ) );
+
+	hboxLayout->addWidget(btnAcquire);
+
+	spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+	hboxLayout->addItem(spacerItem);
+
+	btnSource = new QPushButton( this );
+	btnSource->setObjectName(QString::fromUtf8("btnSource"));
+    btnSource->setText( tr( "&Select Source" ) );
+	connect( btnSource, SIGNAL( clicked() ), this, SLOT( selectedSource() ) );
+
+	hboxLayout->addWidget(btnSource);
+	gridLayout->addLayout(hboxLayout, 1, 0, 1, 1);
 
 	//scanStart();
 #else
@@ -229,11 +263,11 @@ void DMSScanner::scanFailed()
 
 	QMessageBox mb( "SaneWidget",
 
-					"Scanning failed!\n",
-					QMessageBox::Critical,
-					QMessageBox::Ok | QMessageBox::Default,
-					QMessageBox::NoButton,
-					QMessageBox::NoButton );
+		"Scanning failed!\n",
+		QMessageBox::Critical,
+		QMessageBox::Ok | QMessageBox::Default,
+		QMessageBox::NoButton,
+		QMessageBox::NoButton );
 	mb.exec();
 #endif
 }
@@ -260,7 +294,7 @@ void DMSScanner::imageReady()
 		qApp->processEvents();
 
 		dmsscanner->close();
-		
+
 		documentarchive = _dms->getApplicationSettings( "UiPreferenceBase", "General", "Documentarchive" ).toString();
 
 		if ( documentarchive.isNull() || documentarchive.isEmpty() )
@@ -275,15 +309,15 @@ void DMSScanner::imageReady()
 
 		documentarchive += imagename + ".png";
 		pix.save( documentarchive, "PNG" );
-		
+
 		QFileInfo fi( documentarchive );
 	}
 
 	m_sanew = NULL;
 	dmsscanner = NULL;
-		
+
 	QApplication::restoreOverrideCursor();
-	
+
 	close();
 #endif
 }

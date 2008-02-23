@@ -77,6 +77,7 @@ class DMSScanner : public QWidget
 		void imageReady();
 
 #ifdef Q_OS_WIN32
+		void selectedSource();
 		void acquired( CDIB *pDib );
 #endif
 
@@ -89,6 +90,14 @@ class DMSScanner : public QWidget
 #ifdef Q_OS_WIN32
 		QTwainInterface* m_pTwain;
 		QImage m_pImage;
+
+		QSpacerItem *spacerItem;
+		QGridLayout *gridLayout;
+		QHBoxLayout *hboxLayout;
+
+		QFrame *frameAcquire;
+		QPushButton *btnAcquire;
+		QPushButton *btnSource;
 #else
 		QProgressDialog *m_progressDialog;
 		SaneWidget *m_sanew;
