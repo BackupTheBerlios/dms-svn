@@ -107,9 +107,8 @@ QImage QTwainInterface::convertToImage(CDIB* pDib, unsigned int nWidth, unsigned
 
 	//QImage* retval = new QImage( pixmap.convertToImage().smoothScale(nUseWidth, nUseHeight) );
 	QImage *image = new QImage( nUseWidth, nUseHeight, QImage::Format_RGB32 );
-	image->setNumColors( 24 );
-	qDebug() << image->getDC();
 	pDib->BitBlt( image->getDC(), 0, 0, pDib->Width(), pDib->Height(), 0, 0);
+
 	QImage retval = image->convertToFormat( QImage::Format_RGB32 );
 
 	return retval;

@@ -87,8 +87,10 @@ void DMSScanner::selectedSource()
 
 void DMSScanner::acquired( CDIB *pDib )
 {
-	m_pImage = QTwainInterface::convertToImage(pDib, pDib->Width(), pDib->Height() );
+	m_pImage = QTwainInterface::convertToImage( pDib, pDib->Width(), pDib->Height() );
+	m_pImageAcquire->setPixmap( QPixmap::fromImage( m_pImage ) );
 
+	setMaximumSize( pDib->Width(), pDib->Height() );
 
 	delete pDib;
 }
@@ -98,24 +100,25 @@ void DMSScanner::initScan()
 {
 #ifdef Q_OS_WIN32
 	gridLayout = new QGridLayout( this );
-	gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-	frameAcquire = new QFrame( this );
-	frameAcquire->setObjectName(QString::fromUtf8("frameAcquire"));
-	frameAcquire->setFrameShape(QFrame::StyledPanel);
-	frameAcquire->setFrameShadow(QFrame::Sunken);
+	gridLayout->setObjectName( "gridLayout" );
+	m_pImageAcquire = new QLabel( this );
+	m_pImageAcquire->setObjectName( "pImageAcquire" );
+	m_pImageAcquire->setFrameShape(QFrame::StyledPanel);
+	m_pImageAcquire->setFrameShadow(QFrame::Sunken);
 
-	gridLayout->addWidget(frameAcquire, 0, 0, 1, 1);
+	gridLayout->addWidget( m_pImageAcquire, 0, 0, 1, 1 );
 
 	hboxLayout = new QHBoxLayout();
-	hboxLayout->setObjectName( QString::fromUtf8("hboxLayout") );
+	hboxLayout->setObjectName( "hboxLayout" );
+
 	btnAcquire = new QPushButton( this );
-	btnAcquire->setObjectName(QString::fromUtf8("btnAcquire"));
+	btnAcquire->setObjectName( "btnAcquire" );
 	btnAcquire->setText( tr( "St&art scan" ) );
 	connect( btnAcquire, SIGNAL( clicked() ), this, SLOT( scanStart() ) );
 
 	hboxLayout->addWidget(btnAcquire);
 
-	spacerItem = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+	spacerItem = new QSpacerItem( 40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
 
 	hboxLayout->addItem(spacerItem);
 
@@ -124,10 +127,8 @@ void DMSScanner::initScan()
     btnSource->setText( tr( "&Select Source" ) );
 	connect( btnSource, SIGNAL( clicked() ), this, SLOT( selectedSource() ) );
 
-	hboxLayout->addWidget(btnSource);
-	gridLayout->addLayout(hboxLayout, 1, 0, 1, 1);
-
-	//scanStart();
+	hboxLayout->addWidget( btnSource );
+	gridLayout->addLayout( hboxLayout, 1, 0, 1, 1 );
 #else
 	QApplication::setOverrideCursor( Qt::WaitCursor );
 	qApp->processEvents();

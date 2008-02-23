@@ -95,7 +95,7 @@ class DMSScanner : public QWidget
 		QGridLayout *gridLayout;
 		QHBoxLayout *hboxLayout;
 
-		QFrame *frameAcquire;
+		QLabel *m_pImageAcquire;
 		QPushButton *btnAcquire;
 		QPushButton *btnSource;
 #else
