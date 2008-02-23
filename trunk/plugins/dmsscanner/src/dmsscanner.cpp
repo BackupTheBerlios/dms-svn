@@ -55,6 +55,10 @@ DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 
 	setGeometry( left, top, width, height );
 
+#ifdef Q_OS_WIN32
+	m_pTwain = new QTwain( this );
+#endif
+
 	initScan();
 }
 
@@ -85,7 +89,6 @@ void DMSScanner::acquired( CDIB *pDib )
 void DMSScanner::initScan()
 {
 #ifdef Q_OS_WIN32
-	m_pTwain = new QTwain( this );
 	connect( m_pTwain, SIGNAL( dibAcquired( CDIB* ) ), this, SLOT( acquired( CDIB* ) ) );
 
 	m_pTwain->selectSource();
