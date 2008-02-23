@@ -23,8 +23,6 @@ Compile DMS - Document Management System
 Compile under Windows
 =====================
 
-Scansupport under Windows is at this time disabled, because i search for better solution as Twain.
-
 For compilation under Windows you need the following software packages:
 
 - Microsoft Visual Studio Express 2005 (optional)
@@ -60,7 +58,7 @@ You need the svn binary for Windows.
 	mingw32-make
 
 
-Have you trouble with installation or you found problems of DMS please send to dms-bugreport@lists.berlios.de and not directly to me.
+Have you trouble with installation or you found problems in DMS please send to dms-bugreport@lists.berlios.de and not directly to me.
 Have you trouble with installation and/or configuration of SANE please send to http://alioth.debian.org/mail/?group_id=30186 and not to me.
 
 
