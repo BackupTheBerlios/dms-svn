@@ -93,6 +93,7 @@
 			void loadPreferences();
 
 			void checkConnection();
+			void resetDocumentCounter();
 			void closeWidget();
 
 		private:

@@ -54,6 +54,8 @@ DMSPreference::DMSPreference( LibDMS *dms, QWidget *parent ) : QWidget( parent )
 	connect( btnRemoveMailAddress, SIGNAL( clicked() ), this, SLOT( removeMailAddress() ) );
 
 	connect( btnSelectDocumentArchive, SIGNAL( clicked() ), this, SLOT( chooseDocumentArchive() ) );
+	connect( btnResetDocumentCounter, SIGNAL( clicked() ), this, SLOT( resetDocumentCounter() ) );
+
 	connect( btnCheck, SIGNAL( clicked() ), this, SLOT( checkConnection() ) );
 	connect( btnSelectApplication, SIGNAL( clicked() ), this, SLOT( chooseApplication() ) );
 	connect( btnApply, SIGNAL( clicked() ), this, SLOT( savePreferences() ) );
@@ -144,7 +146,6 @@ void DMSPreference::updateApplication()
 	}
 
 	appItem->setText( 0, lineEditApplication->text() );
-
 	appItem->setText( 1, comboBoxFileExtensions->currentText() );
 }
 
@@ -277,12 +278,7 @@ void DMSPreference::savePreferences()
 	}
 
 	_dms->insertApplicationSettings( objectName(), "General", "Documentarchive", lineEditDocumentArchive->text() );
-
 	_dms->insertApplicationSettings( objectName(), "General", "Language", comboBoxLanguage->currentText() );
-
-
-#ifdef Q_OS_WIN32
-#else
 
 	if ( rbtnImageAsBlob->isChecked() )
 	{
@@ -293,9 +289,12 @@ void DMSPreference::savePreferences()
 		_dms->insertApplicationSettings( objectName(), "General", "Scanoption", "file" );
 	}
 
-#endif
+	_dms->insertApplicationSettings( objectName(), "General", "ImageFormat", comboBoxImageFormat->currentText() );
+	_dms->insertApplicationSettings( objectName(), "General", "DocCounter", QString( "%1" ).arg( spinBoxDocumentCounter->value() ) );
+
 
 	// TODO Save database settings
+
 	if ( lineEditHost->text().isEmpty() )
 	{
 		showErrorMsg( tr( "You must enter a valid host or ip address!" ) );
@@ -332,15 +331,10 @@ void DMSPreference::savePreferences()
 	XMLPreferences dbsettings( "DMSMySqlConnection", "" );
 
 	dbsettings.setVersion( "0.1.0.0" );
-
 	dbsettings.setString( "MySqlConnection", "UserName", lineEditUser->text() );
-
 	dbsettings.setString( "MySqlConnection", "Password", Base64::encode( QVariant( lineEditPassword->text() ).toByteArray() ) );
-
 	dbsettings.setString( "MySqlConnection", "Database", comboBoxDatabase->currentText() );
-
 	dbsettings.setString( "MySqlConnection", "HostName", lineEditHost->text() );
-
 	dbsettings.setInt( "MySqlConnection", "Port", spinBoxPort->value() );
 
 	dbsettings.save( file );
@@ -388,13 +382,9 @@ void DMSPreference::loadPreferences()
 	int language = comboBoxLanguage->findText( _dms->getApplicationSettings( objectName(), "General", "Language", "English" ).toString() );
 	comboBoxLanguage->setCurrentIndex( language );
 
-#ifdef Q_OS_WIN32
-	groupBoxScanOption->setEnabled( false );
-#else
 	groupBoxScanOption->setEnabled( true );
 
 	QString imgoption = _dms->getApplicationSettings( objectName(), "General", "Scanoption", "file" ).toString();
-
 	if ( imgoption == "blob" )
 	{
 		rbtnImageAsBlob->setChecked( true );
@@ -404,7 +394,10 @@ void DMSPreference::loadPreferences()
 		rbtnImageAsFile->setChecked( true );
 	}
 
-#endif
+	int imageformat = comboBoxImageFormat->findText( _dms->getApplicationSettings( objectName(), "General", "ImageFormat", "PNG" ).toString() );
+	comboBoxImageFormat->setCurrentIndex( imageformat );
+
+	spinBoxDocumentCounter->setValue( _dms->getApplicationSettings( objectName(), "General", "DocCounter", "1" ).toInt() );
 
 	// TODO Load application and this file-exstansion settings
 	QMap< QString, QString> appFiles = _dms->getApplicationSettings( objectName(), "File associations" );
@@ -447,34 +440,23 @@ void DMSPreference::loadPreferences()
 	XMLPreferences dbsettings( "DMSMySqlConnection", "" );
 
 	dbsettings.setVersion( "0.1.0.0" );
-
 	dbsettings.load( file );
 
 	QString user = dbsettings.getString( "MySqlConnection", "UserName" );
-
 	QString upwd = QVariant( Base64::decode( dbsettings.getString( "MySqlConnection", "Password" ) ) ).toString();
-
 	QString host = dbsettings.getString( "MySqlConnection", "HostName" );
-
 	QString db = dbsettings.getString( "MySqlConnection", "Database" );
-
 	int port =  dbsettings.getInt( "MySqlConnection", "Port" );
 
 
 	lineEditUser->setText( user );
-
 	lineEditPassword->setText( upwd );
-
 	lineEditHost->setText( host );
-
 	spinBoxPort->setValue( port );
-
 	comboBoxDatabase->addItem( db );
 
 	upwd.clear();
-
 	user.clear();
-
 	host.clear();
 
 	port = 0;
@@ -506,6 +488,23 @@ void DMSPreference::checkConnection()
 				return;
 			}
 		}
+	}
+}
+
+void DMSPreference::resetDocumentCounter()
+{
+	switch ( QMessageBox::question( this, tr( "DMS - Preference" ), tr( "Are you sure you would reset the document counter?" ), QMessageBox::Yes | QMessageBox::No ) )
+	{
+
+		case QMessageBox::Yes:
+			spinBoxDocumentCounter->setValue( 1 );
+			break;
+
+		case QMessageBox::No:
+			return;
+
+		default:
+			return;
 	}
 }
 

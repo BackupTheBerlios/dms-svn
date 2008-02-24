@@ -23,20 +23,19 @@
 *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 ***************************************************************************/
 
-#include <dmsscanner.h>
+#include <QtCore>
+#include <QtGui>
 
+#include <dmsscanner.h>
 #include <libdms.h>
 
 #ifdef Q_OS_WIN32
-#include <qtwaininterface.h>
-#include <qtwain.h>
-#include <dib.h>
+	#include <qtwaininterface.h>
+	#include <qtwain.h>
+	#include <dib.h>
 #else
-#include <sane_widget.h>
+	#include <sane_widget.h>
 #endif
-
-#include <QtCore>
-#include <QtGui>
 
 DMSScanner *dmsscanner = NULL;
 DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
@@ -63,7 +62,7 @@ DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 #endif
 
 	scannedDoc = 0;
-	scannedDoc = _dms->getApplicationSettings( objectName(), "Scanner", "ScannedDocuments", QVariant( scannedDoc ) ).toInt();
+	scannedDoc = _dms->getApplicationSettings( "UiPreferenceBase", "General", "DocCounter", QVariant( scannedDoc ) ).toInt();
 
 	initScan();
 }
@@ -72,8 +71,10 @@ DMSScanner::~DMSScanner()
 {
 #ifdef Q_OS_WIN32
 	m_pTwain = NULL;
+#else
+	m_sanew = NULL;		
 #endif
-
+	
 	dmsscanner = NULL;
 }
 
@@ -304,7 +305,6 @@ void DMSScanner::imageReady()
 		dmsscanner->close();
 
 		documentarchive = _dms->getApplicationSettings( "UiPreferenceBase", "General", "Documentarchive" ).toString();
-
 		if ( documentarchive.isNull() || documentarchive.isEmpty() )
 		{
 			QApplication::restoreOverrideCursor();
@@ -315,37 +315,45 @@ void DMSScanner::imageReady()
 			QApplication::setOverrideCursor( Qt::WaitCursor );
 		}
 
-		documentarchive += imagename + ".pdf";
+		/*		
+		PDF		Portable Document Format				Write
 		
-		QPrinter printer( QPrinter::HighResolution );
-		printer.setPageSize( QPrinter::A4 );
-		printer.setFullPage( true );
-		printer.setOutputFormat( QPrinter::PdfFormat );
-		printer.setDocName( documentarchive ); 
-		printer.setOutputFileName( documentarchive );
-
-		/*
-		Image format
-		
+		Supported image formats (from Qt4 Documentation)		
 		BMP 	Windows Bitmap							Read/write
-		GIF		Graphic Interchange Format (optional)	Read
 		JPG		Joint Photographic Experts Group		Read/write
 		JPEG	Joint Photographic Experts Group		Read/write
 		PNG		Portable Network Graphics				Read/write
-		PBM		Portable Bitmap							Read
-		PGM		Portable Graymap						Read
 		PPM		Portable Pixmap							Read/write
 		XBM		X11 Bitmap								Read/write
 		XPM		X11 Pixmap								Read/write
 		*/
-		
-		QPainter p;
-		p.begin( &printer );
-		p.drawImage( 0, 0, pix.toImage() );
-		p.end();
+		QString imageformat = _dms->getApplicationSettings( "UiPreferenceBase", "General", "ImageFormat", QVariant( "PNG" ) ).toString();		
+		if( imageformat.toLower() == "pdf" )
+		{
+			documentarchive += imagename + "." + imageformat.toLower();
+
+			QPrinter printer( QPrinter::HighResolution );
+			printer.setPageSize( QPrinter::A4 );
+			printer.setFullPage( true );
+			printer.setOutputFormat( QPrinter::PdfFormat );
+			printer.setDocName( documentarchive ); 
+			printer.setOutputFileName( documentarchive );
+	
+			
+			QPainter p;
+			p.begin( &printer );
+			p.drawImage( 0, 0, pix.toImage() );
+			p.end();
+		}
+		else
+		{
+			documentarchive += imagename + "." + imageformat.toLower();
+			qDebug() << imageformat.toUpper().toAscii().data();
+			pix.save( documentarchive, imageformat.toUpper().toAscii().data() );
+		}
 
 		scannedDoc++;
-		_dms->insertApplicationSettings( objectName(), "Scanner", "ScannedDocuments",  QString( "%1" ).arg( scannedDoc ) );
+		_dms->insertApplicationSettings( "UiPreferenceBase", "General", "DocCounter",  QString( "%1" ).arg( scannedDoc ) );
 	}
 
 	m_sanew = NULL;
