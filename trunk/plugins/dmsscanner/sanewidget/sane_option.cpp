@@ -857,13 +857,18 @@ bool SaneOption::storeCurrentData(void)
 {
     SANE_Status status;
     SANE_Int res;
-
+	
     // check if we can read the value
-    if (type == SW_GROUP) return false;
-    if (sw_state == SW_STATE_HIDDEN) return false;
+    if (type == SW_GROUP)
+		return false;
+
+    if (sw_state == SW_STATE_HIDDEN)
+		return false;
 
     // read that current value
-    if (sane_data != 0) delete (sane_data);
+    if (sane_data != 0)
+		delete (sane_data);
+
     sane_data = (unsigned char *)malloc(sane_option->size);
     status = sane_control_option (sane_handle, opt_number, SANE_ACTION_GET_VALUE, sane_data, &res);
     if (status != SANE_STATUS_GOOD) {
@@ -878,12 +883,18 @@ bool SaneOption::storeCurrentData(void)
 bool SaneOption::restoreSavedData(void)
 {
     // check if we have saved any data
-    if (sane_data == 0) return false;
+    if (sane_data == 0)
+		return false;
 
     // check if we can write the value
-    if (type == SW_GROUP) return false;
-    if (sw_state == SW_STATE_HIDDEN) return false;
-    if (sw_state == SW_STATE_DISABLED) return false;
+    if (type == SW_GROUP)
+		return false;
+
+    if (sw_state == SW_STATE_HIDDEN)
+		return false;
+
+    if (sw_state == SW_STATE_DISABLED)
+		return false;
 
     writeData(sane_data);
 

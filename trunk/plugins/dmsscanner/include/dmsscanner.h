@@ -66,7 +66,7 @@ class DMSScanner : public QWidget
 
 #ifdef Q_OS_WIN32
 		void showEvent( QShowEvent *event );
-		bool winEvent( MSG *pMsg, long * result );
+		bool winEvent( MSG *pMsg, long *result );
 #endif
 
 	private slots:
@@ -80,12 +80,15 @@ class DMSScanner : public QWidget
 		void selectedSource();
 		void acquired( CDIB *pDib );
 #endif
-
 		void showErrorMsg( const QString &error );
 
 	private:
+		QString getScannedImageName();
+		
 		QString documentarchive;
 		LibDMS *_dms;
+		
+		int scannedDoc;
 
 #ifdef Q_OS_WIN32
 		QTwainInterface* m_pTwain;

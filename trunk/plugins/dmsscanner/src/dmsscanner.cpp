@@ -43,6 +43,8 @@ DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 {
 	dmsscanner = this;
 
+	setObjectName( "UiDocScannerPluginBase" );
+
 	_dms = LibDMS::libdms_instcance();
 
 	QDesktopWidget *desktop = qApp->desktop();
@@ -59,6 +61,9 @@ DMSScanner::DMSScanner( QWidget *parent ) : QWidget( parent )
 	m_pTwain = new QTwain();
 	connect( m_pTwain, SIGNAL( dibAcquired( CDIB* ) ), this, SLOT( acquired( CDIB* ) ) );
 #endif
+
+	scannedDoc = 0;
+	scannedDoc = _dms->getApplicationSettings( objectName(), "Scanner", "ScannedDocuments", QVariant( scannedDoc ) ).toInt();
 
 	initScan();
 }
@@ -104,6 +109,7 @@ void DMSScanner::initScan()
 #ifdef Q_OS_WIN32
 	gridLayout = new QGridLayout( this );
 	gridLayout->setObjectName( "gridLayout" );
+
 	m_pImageAcquire = new QLabel( this );
 	m_pImageAcquire->setObjectName( "pImageAcquire" );
 	m_pImageAcquire->setFrameShape(QFrame::StyledPanel);
@@ -177,7 +183,6 @@ void DMSScanner::initScan()
 
 
 	connect( m_sanew, SIGNAL( scanStart() ), this, SLOT( scanStart() ) );
-
 	connect( m_sanew, SIGNAL( scanFaild() ), this, SLOT( scanFailed() ) );
 	connect( m_sanew, SIGNAL( scanDone() ), this, SLOT( scanEnd() ) );
 	connect( m_sanew, SIGNAL( imageReady() ), this, SLOT( imageReady() ) );
@@ -282,17 +287,16 @@ void DMSScanner::imageReady()
 	// nothing to do ...
 #else
 	qApp->processEvents();
-
+	
 	bool ok;
-	QString imagename = QInputDialog::getText( this, tr( "New image name" ), tr( "Enter a valid Imagename!\n\nImagename:" ), QLineEdit::Normal, "Image", &ok );
+	QString imagename = QInputDialog::getText( this, tr( "New name for scanned file" ), tr( "Enter a valid name!\n\nName:" ), QLineEdit::Normal, tr( "DMS_SCANNED_IMAGE_%1" ).arg( scannedDoc ), &ok );
 
-	if ( !ok && ( imagename.isEmpty() || imagename.isNull() ) )
+	if ( !ok && (imagename.isEmpty() || imagename.isNull() || imagename == "" ) )
 		return;
 
 	QApplication::setOverrideCursor( Qt::WaitCursor );
 
 	QPixmap pix = QPixmap::fromImage( *( m_sanew->getFinalImage() ) );
-
 	if ( !pix.isNull() )
 	{
 		qApp->processEvents();
@@ -311,10 +315,20 @@ void DMSScanner::imageReady()
 			QApplication::setOverrideCursor( Qt::WaitCursor );
 		}
 
-		documentarchive += imagename + ".png";
-		pix.save( documentarchive, "PNG" );
+		documentarchive += imagename + ".pdf";
+		
+		QPrinter printer( QPrinter::HighResolution );
+		printer.setOutputFormat( QPrinter::PdfFormat );
+		printer.setDocName( documentarchive ); 
+		printer.setOutputFileName( documentarchive );
+		
+		QPainter p;
+		p.begin( &printer );
+		p.drawPixmap( 0, 0, pix );
+		p.end();
 
-		QFileInfo fi( documentarchive );
+		scannedDoc++;
+		_dms->insertApplicationSettings( objectName(), "Scanner", "ScannedDocuments",  QString( "%1" ).arg( scannedDoc ) );
 	}
 
 	m_sanew = NULL;

@@ -748,13 +748,26 @@ void SaneWidget::scanPreview(void)
     //std::cout << "scanPreview" << std::endl;
 
     // store the current settings of parameters to be changed
-    if (opt_depth != 0) opt_depth->storeCurrentData();
-    if (opt_res != 0) opt_res->storeCurrentData();
-    if (opt_res_y != 0) opt_res_y->storeCurrentData();
-    if (opt_tl_x != 0) opt_tl_x->storeCurrentData();
-    if (opt_tl_y != 0) opt_tl_y->storeCurrentData();
-    if (opt_br_x != 0) opt_br_x->storeCurrentData();
-    if (opt_br_y != 0) opt_br_y->storeCurrentData();
+    if (opt_depth != 0)
+		opt_depth->storeCurrentData();
+
+    if (opt_res != 0)
+		opt_res->storeCurrentData();
+
+    if (opt_res_y != 0)
+		opt_res_y->storeCurrentData();
+
+    if (opt_tl_x != 0)
+		opt_tl_x->storeCurrentData();
+
+    if (opt_tl_y != 0)
+		opt_tl_y->storeCurrentData();
+
+    if (opt_br_x != 0)
+		opt_br_x->storeCurrentData();
+
+    if (opt_br_y != 0)
+		opt_br_y->storeCurrentData();
 
     // set 8 bits per color if possible
     if (opt_depth != 0) {
