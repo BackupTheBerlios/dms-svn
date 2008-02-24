@@ -289,6 +289,121 @@
           <item row="0" column="0" >
            <layout class="QHBoxLayout" >
             <item>
+             <widget class="QLabel" name="labelImageFormat" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Imageformat:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxImageFormat" >
+              <item>
+               <property name="text" >
+                <string>PDF</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>BMP</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>GIF</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>JPG</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>JPEG</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>PNG</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>PBM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>PGM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>PPM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>XBM</string>
+               </property>
+              </item>
+              <item>
+               <property name="text" >
+                <string>XPM</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0" >
+           <layout class="QHBoxLayout" >
+            <item>
+             <widget class="QLabel" name="labelDocumentCounter" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Documentcounter:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBoxDocumentCounter" >
+              <property name="maximum" >
+               <number>9999</number>
+              </property>
+              <property name="value" >
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0" >
+           <layout class="QHBoxLayout" >
+            <item>
              <widget class="QLabel" name="labelImageAsBlob" >
               <property name="enabled" >
                <bool>false</bool>
@@ -322,7 +437,7 @@
             </item>
            </layout>
           </item>
-          <item row="1" column="0" >
+          <item row="3" column="0" >
            <layout class="QHBoxLayout" >
             <item>
              <widget class="QLabel" name="labelImageAsFile" >
@@ -365,8 +480,8 @@
          </property>
          <property name="sizeHint" >
           <size>
-           <width>569</width>
-           <height>21</height>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
         </spacer>

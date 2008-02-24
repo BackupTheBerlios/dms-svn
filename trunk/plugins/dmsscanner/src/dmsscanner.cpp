@@ -318,13 +318,30 @@ void DMSScanner::imageReady()
 		documentarchive += imagename + ".pdf";
 		
 		QPrinter printer( QPrinter::HighResolution );
+		printer.setPageSize( QPrinter::A4 );
+		printer.setFullPage( true );
 		printer.setOutputFormat( QPrinter::PdfFormat );
 		printer.setDocName( documentarchive ); 
 		printer.setOutputFileName( documentarchive );
+
+		/*
+		Image format
+		
+		BMP 	Windows Bitmap							Read/write
+		GIF		Graphic Interchange Format (optional)	Read
+		JPG		Joint Photographic Experts Group		Read/write
+		JPEG	Joint Photographic Experts Group		Read/write
+		PNG		Portable Network Graphics				Read/write
+		PBM		Portable Bitmap							Read
+		PGM		Portable Graymap						Read
+		PPM		Portable Pixmap							Read/write
+		XBM		X11 Bitmap								Read/write
+		XPM		X11 Pixmap								Read/write
+		*/
 		
 		QPainter p;
 		p.begin( &printer );
-		p.drawPixmap( 0, 0, pix );
+		p.drawImage( 0, 0, pix.toImage() );
 		p.end();
 
 		scannedDoc++;
