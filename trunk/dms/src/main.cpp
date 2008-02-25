@@ -35,54 +35,67 @@ int main( int argc, char **argv )
 {
 	QApplication app( argc, argv );
 
+	// init qt4 translation
+	QString qtTranslation = QLatin1String( "qt_" );
+	qtTranslation += QLocale::system().name();
+	QTranslator *translator = new QTranslator( &app );
+
+	if ( translator->load( qtTranslation, QLibraryInfo::location( QLibraryInfo::TranslationsPath ) ) )
+		app.installTranslator( translator );
+
+	// init dms translation
 	QTranslator dmsTranslator;
 	QTranslator libDmsTranslator;
+
 	QString dmsTrFile = QString( "" );
 	dmsTrFile = ":/misc/translation/dms_ger.qm";
-
 	dmsTranslator.load ( dmsTrFile );
 	app.installTranslator ( &dmsTranslator );
 
 	QString libDmsTrFile = QString( "" );
 	libDmsTrFile = ":/misc/translation/libdms_ger.qm";
-
 	libDmsTranslator.load ( libDmsTrFile );
 	app.installTranslator ( &libDmsTranslator );
-	
+
 	QString homeDir = QDir::homePath();
 	homeDir.append( "/.dms" );
-	
+
 	QDir prefDir( homeDir );
-	if( !prefDir.exists( homeDir ) )
+	if ( !prefDir.exists( homeDir ) )
 		prefDir.mkpath( homeDir );
-	
+
 	homeDir.clear();
+
 	homeDir = QDir::homePath();
 	homeDir.append( "/.dms/connection" );
-	
+
 	QDir conDir( homeDir );
-	if( !conDir.exists( homeDir ) )
+	if ( !conDir.exists( homeDir ) )
 		conDir.mkpath( homeDir );
 
 	homeDir.clear();
+
 	homeDir = QDir::homePath();
 	homeDir.append( "/.dms/plugins" );
 
 	QDir pluginDir( homeDir );
-	if( !pluginDir.exists( homeDir ) )
+	if ( !pluginDir.exists( homeDir ) )
 		pluginDir.mkpath( homeDir );
-	
+
 	homeDir.clear();
+
 	homeDir = QDir::homePath();
 	homeDir.append( "/.dms/documents" );
 
 	QDir documentDir( homeDir );
-	if( !documentDir.exists( homeDir ) )
+	if ( !documentDir.exists( homeDir ) )
 		documentDir.mkpath( homeDir );
 
 	DMSystem *dms = new DMSystem( app );
+
 	dms->show();
 
 	app.connect( &app, SIGNAL( lastWindowClosed() ), &app, SLOT( quit() ) );
+
 	return app.exec();
 }

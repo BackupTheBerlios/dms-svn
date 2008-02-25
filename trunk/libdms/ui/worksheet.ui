@@ -13,14 +13,16 @@
    <string>Worksheet</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../../resource/dms.qrc" >
-    <normaloff>:/picture/32/images/32x32/home_32.png</normaloff>:/picture/32/images/32x32/home_32.png</iconset>
+   <iconset resource="../../resource/dms.qrc" >:/picture/32/images/32x32/home_32.png</iconset>
   </property>
   <layout class="QGridLayout" >
    <item row="0" column="0" >
     <widget class="QTreeWidget" name="treeWidgetWorkSheet" >
      <property name="contextMenuPolicy" >
       <enum>Qt::CustomContextMenu</enum>
+     </property>
+     <property name="tabKeyNavigation" >
+      <bool>true</bool>
      </property>
      <property name="showDropIndicator" stdset="0" >
       <bool>false</bool>

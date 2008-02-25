@@ -90,7 +90,9 @@
 			void showErrorMsg( const QString &error );
 
 			void savePreferences();
-			void loadPreferences();
+			
+			void loadPreferences();			
+			void loadPluginPreferences();
 
 			void checkConnection();
 			void resetDocumentCounter();

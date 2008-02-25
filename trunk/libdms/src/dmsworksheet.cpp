@@ -52,11 +52,8 @@ DMSWorkSheet::DMSWorkSheet( LibDMS *dms, QWorkspace *ws, QWidget *parent ) : QWi
 	createMenuAction();
 
 	_dms->clearErrorMessage();
-
+	
 	loadDocuments();
-
-	QVariant geo = _dms->getApplicationSettings( objectName(), "Geometry", "Position" );
-	qDebug() << geo;
 }
 
 DMSWorkSheet::~DMSWorkSheet()

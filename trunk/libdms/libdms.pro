@@ -21,8 +21,8 @@
 # Qt 4 Settings
 TEMPLATE = lib
 DESTDIR = ../bin
-DEPENDPATH += include src ui base64 xmlpref ../resource
-INCLUDEPATH += include ui base64 xmlpref
+DEPENDPATH += include src ui base64 xmlpref ../resource ../dms/include/
+INCLUDEPATH += include ui base64 xmlpref ../dms/include/
 RESOURCES += ../resource/dms.qrc
 CONFIG += debug thread warn_on qt
 QT += sql xml
@@ -57,6 +57,7 @@ HEADERS	+= include/dmsgroup.h
 HEADERS	+= include/dmslogin.h
 HEADERS	+= include/dmsmailaction.h
 HEADERS	+= include/dmsmysqlconnection.h
+HEADERS	+= ../dms/include/dmsplugininterface.h
 HEADERS	+= include/dmspreference.h
 HEADERS	+= include/dmssearch.h
 HEADERS	+= include/dmsuser.h

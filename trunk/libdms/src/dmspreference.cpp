@@ -23,6 +23,7 @@
  *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
  ***************************************************************************/
 
+#include <dmsplugininterface.h>
 #include <dmsmysqlconnection.h>
 #include <dmspreference.h>
 
@@ -62,6 +63,7 @@ DMSPreference::DMSPreference( LibDMS *dms, QWidget *parent ) : QWidget( parent )
 	connect( btnCancel, SIGNAL( clicked() ), this, SLOT( closeWidget() ) );
 
 	loadPreferences();
+	loadPluginPreferences();
 
 	_dms->clearErrorMessage();
 }
@@ -466,6 +468,35 @@ void DMSPreference::loadPreferences()
 
 	// TODO Load skin settings
 	// nothing to do at this time ...
+}
+
+void DMSPreference::loadPluginPreferences()
+{
+	comboBoxPlugins->clear();
+	comboBoxPlugins->addItem( "" );
+
+	QDir pluginsDir = QDir( QApplication::applicationDirPath() );
+	pluginsDir.cd( ".dms" );
+	pluginsDir.cd( "plugins" );
+
+	// iterate over the plugin directory and load plugins if necessary ...
+	foreach( QString fileName, pluginsDir.entryList( QDir::Files ) )
+	{
+		if ( fileName.split( "." ).value( 1 ).toLower()  == "dll" || fileName.split( "." ).value( 1 ).toLower() == "so" )
+		{
+			QPluginLoader loader( pluginsDir.absoluteFilePath( fileName ) );
+			QObject *plug = loader.instance();
+
+			if ( plug != NULL )
+			{
+				DMSPluginInterface *dpi = qobject_cast<DMSPluginInterface *> ( plug );
+				if ( dpi )
+				{
+					comboBoxPlugins->addItem( dpi->pluginName() + " " + dpi->pluginVersion() );
+				}
+			}
+		}
+	}
 }
 
 void DMSPreference::checkConnection()

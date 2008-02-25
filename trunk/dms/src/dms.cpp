@@ -44,12 +44,11 @@ DMSystem::DMSystem( const QApplication &app, QMainWindow *parent ) : QMainWindow
 	int left = ( rect.width() - width() ) / 2;
 	int top = ( rect.height() - height() ) / 2;
 
-	int height = this->height();
-	int width = this->width();
-
-	setGeometry( left, top, width, height );
+	setGeometry( left, top, width(), height() );
 
 	statusBar()->show();
+	
+	setWindowState( windowState() ^ Qt::WindowMaximized );
 
 	ldms = new LibDMS( ws );
 
