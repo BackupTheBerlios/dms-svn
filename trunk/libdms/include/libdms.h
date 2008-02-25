@@ -35,17 +35,17 @@
 class EXPORT_ASAAL LibDMS;
 
 #ifdef Q_OS_WIN32
-extern EXPORT_ASAAL LibDMS *libdms;
+	extern EXPORT_ASAAL LibDMS *libdms;
 #else
-extern LibDMS *libdms;
+	extern LibDMS *libdms;
 #endif
 
 /*!
 * @author Alexander Saal <alex.saal@gmx.de>
 * @sa http://chmaster.freeforge.net
-* @date 2007/11/30
-* @version 0.1.0.0
-* @since 0.1.0.0
+* @date 2007/11/30 
+* @version 0.1.0.1
+* @since 0.1.0.1
 */
 
 class EXPORT_ASAAL LibDMS : public QObject
@@ -82,13 +82,19 @@ class EXPORT_ASAAL LibDMS : public QObject
 		/*!
 		* Default constructor
 		*
-		* @param parent <a href="http://doc.trolltech.com/4.3/qobject.html#QObject">QObject</a> (default is NULL)
+		* @param ws @see <a href="http://doc.trolltech.com/4.3/qworkspace.html#QWorkspace">QWorkspace</a> (default is NULL)
+		* @param parent <a href="http://doc.trolltech.com/4.3/qobject.html#QObject">QObject</a> (default is NULL)		
 		*/
 		LibDMS( QWorkspace *ws = 0, QObject *parent = 0 );
+		
+		/*!
+		 * Default deconstructor
+	 	 */
 		inline virtual ~LibDMS() { libdms = NULL; }
 		
 		/**
 		 * Return the instance of dms libraray
+		 * This is neede if you create a plugin for DMS
 		 */
 		static LibDMS *libdms_instcance() {	return libdms; }
 		
@@ -131,14 +137,14 @@ class EXPORT_ASAAL LibDMS : public QObject
 		bool closeConnection();
 
 		/*!
-		* Get the qt4 sql driver
+		* Get the Qt4 SQL Driver
 		*
 		* @return <a href="http://doc.trolltech.com/4.3/qstringlist.html#QStringList">QStringList</a> with qt4 sql driver
 		*/
 		QStringList getSqlDriver();
 
 		/*!
-		* Get the sql databases
+		* Get the SQL Databases
 		*
 		* @return <a href="http://doc.trolltech.com/4.3/qstringlist.html#QStringList">QStringList</a> with sql databases
 		*/
@@ -152,8 +158,14 @@ class EXPORT_ASAAL LibDMS : public QObject
 		QMap<QString, QStringList> getTabelColumns( TableColumns tablecolumns );
 
 		/*!
-		* The logged user
+		* The logged user. This variables are set if you login into DMS
 		*
+		* @return The user are logged in
+		*		
+		* @code
+		* QString userid = libdms->getUserId( libdms->loggedUser );
+		* QMap<QString, QString> userdocuments = libdms->geDocuments( userid );
+		* @endcode
 		*/
 		QString loggedUser;
 
@@ -396,7 +408,7 @@ class EXPORT_ASAAL LibDMS : public QObject
 
 		/*!
 		* Send email (a simple solution, not the best but is enough)
-		* We are use your mail client on you system.
+		* The e-Mail client on your system is used.
 		*
 		* @param email The e-Mail address
 		* @param subject The subject for this e-Mail (optional)

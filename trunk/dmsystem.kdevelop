@@ -3,28 +3,18 @@
   <general>
     <author>Alexander Saal</author>
     <email>alex.saal@gmx.de</email>
-    <version>0.1.0.0</version>
+    <version>1</version>
     <projectmanagement>KDevTrollProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>
       <keyword>Qt</keyword>
     </keywords>
     <projectname>dmsystem</projectname>
-    <ignoreparts>
-      <part>kdevfileview</part>
-      <part>kdevfilegroups</part>
-      <part>kdevfilelist</part>
-      <part>kdevfileselector</part>
-      <part>kdevsnippet</part>
-      <part>kdevregexptest</part>
-      <part>kdevquickopen</part>
-      <part>kdevscripting</part>
-      <part>kdevbookmarks</part>
-    </ignoreparts>
+    <ignoreparts/>
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
-    <description/>
-    <defaultencoding/>
+    <description></description>
+    <defaultencoding></defaultencoding>
     <versioncontrol>kdevsubversion</versioncontrol>
   </general>
   <kdevfileview>
@@ -39,7 +29,6 @@
     <tree>
       <hidepatterns>*.o,*.lo,CVS</hidepatterns>
       <hidenonprojectfiles>false</hidenonprojectfiles>
-      <showvcsfields>false</showvcsfields>
     </tree>
   </kdevfileview>
   <kdevdoctreeview>
@@ -82,11 +71,11 @@
   </kdevdoctreeview>
   <kdevdebugger>
     <general>
-      <dbgshell/>
-      <gdbpath/>
-      <configGdbScript/>
-      <runShellScript/>
-      <runGdbScript/>
+      <dbgshell></dbgshell>
+      <gdbpath></gdbpath>
+      <configGdbScript></configGdbScript>
+      <runShellScript></runShellScript>
+      <runGdbScript></runGdbScript>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
@@ -120,7 +109,7 @@
       <completionBoxItemOrder>0</completionBoxItemOrder>
       <howEvaluationContextMenu>true</howEvaluationContextMenu>
       <showCommentWithArgumentHint>true</showCommentWithArgumentHint>
-      <statusBarTypeEvaluation>true</statusBarTypeEvaluation>
+      <statusBarTypeEvaluation>false</statusBarTypeEvaluation>
       <namespaceAliases>std=_GLIBCXX_STD;__gnu_cxx=std</namespaceAliases>
       <processPrimaryTypes>true</processPrimaryTypes>
       <processFunctionArguments>false</processFunctionArguments>
@@ -129,7 +118,7 @@
       <resolveIncludePathsUsingMakeExperimental>false</resolveIncludePathsUsingMakeExperimental>
       <alwaysParseInBackground>true</alwaysParseInBackground>
       <usePermanentCaching>true</usePermanentCaching>
-      <alwaysIncludeNamespaces>true</alwaysIncludeNamespaces>
+      <alwaysIncludeNamespaces>false</alwaysIncludeNamespaces>
       <includePaths>.;</includePaths>
     </codecompletion>
     <creategettersetter>
@@ -160,36 +149,27 @@
   </kdevfilecreate>
   <kdevtrollproject>
     <general>
-      <activedir>libdms</activedir>
+      <activedir>plugins/dmsscanner</activedir>
     </general>
     <run>
       <directoryradio>executable</directoryradio>
-      <mainprogram>/home/asaal/projekte/dmsystem/bin/dms</mainprogram>
-      <programargs/>
-      <globaldebugarguments/>
-      <globalcwd>/home/asaal/projekte/dmsystem</globalcwd>
+      <mainprogram>/data/projekte/dmsystem/bin/dms</mainprogram>
+      <programargs></programargs>
+      <globaldebugarguments></globaldebugarguments>
+      <globalcwd>/data/projekte/dmsystem</globalcwd>
       <useglobalprogram>true</useglobalprogram>
       <terminal>false</terminal>
       <autocompile>true</autocompile>
       <autoinstall>false</autoinstall>
       <autokdesu>false</autokdesu>
       <envvars/>
-      <runarguments>
-        <dms/>
-      </runarguments>
-      <cwd>
-        <dms>/home/alex/projekte/cpp/dmsystem/..</dms>
-      </cwd>
-      <debugarguments>
-        <dms/>
-      </debugarguments>
     </run>
     <make>
       <abortonerror>true</abortonerror>
       <runmultiplejobs>false</runmultiplejobs>
       <numberofjobs>1</numberofjobs>
       <dontact>false</dontact>
-      <makebin/>
+      <makebin></makebin>
       <prio>0</prio>
       <envvars/>
     </make>
@@ -210,41 +190,9 @@
   </cppsupportpart>
   <kdevdocumentation>
     <projectdoc>
-      <docsystem/>
-      <docurl/>
-      <usermanualurl/>
+      <docsystem></docsystem>
+      <docurl></docurl>
+      <usermanualurl></usermanualurl>
     </projectdoc>
   </kdevdocumentation>
-  <ctagspart>
-    <customArguments/>
-    <customTagfilePath>tags</customTagfilePath>
-    <activeTagsFiles/>
-  </ctagspart>
-  <dist>
-    <custom>false</custom>
-    <bzip>false</bzip>
-    <archname/>
-    <appname>DMS</appname>
-    <version>0.1.0.1</version>
-    <release/>
-    <vendor>Alexander Saal</vendor>
-    <licence>GPL v2</licence>
-    <summary/>
-    <group>Office</group>
-    <packager>Alexander Saal (alex.saal@gmx.de)</packager>
-    <description>DMSystem (Document Management System) is
-a small application to manage your documents
-or other files on your hard drive. DMS is for
-private, non-commercial and non-profit use.</description>
-    <changelog/>
-    <devpackage>false</devpackage>
-    <docspackage>false</docspackage>
-    <appicon>false</appicon>
-    <arch>0</arch>
-    <genHTML>false</genHTML>
-    <useRPM>false</useRPM>
-    <ftpkde>false</ftpkde>
-    <appskde>false</appskde>
-    <url/>
-  </dist>
 </kdevelop>
