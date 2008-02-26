@@ -76,6 +76,26 @@ QWidget *DMSScannerPlugin::widget() const
 	return dmsscanner;
 }
 
+QWidget *DMSScannerPlugin::config() const
+{
+	QPalette palette;
+    QBrush brush(QColor(255, 0, 0, 255));
+	brush.setStyle(Qt::SolidPattern);
+	palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
+	palette.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+
+	QBrush brush1(QColor(119, 119, 115, 255));
+	brush1.setStyle(Qt::SolidPattern);
+	palette.setBrush(QPalette::Disabled, QPalette::WindowText, brush1);
+	
+	QLabel *config = new QLabel( tr( "<b><h3>No configuration avalaibel!</h3><b>" ) );
+	config->setPalette( palette );
+	config->setAlignment ( Qt::AlignCenter );
+	config->setGeometry( 0, 0, 284, 551 );
+		
+	return config;
+}
+
 void DMSScannerPlugin::showWidget()
 {
 	widget()->show();

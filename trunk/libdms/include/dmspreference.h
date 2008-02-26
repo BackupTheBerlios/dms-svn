@@ -26,16 +26,16 @@
 #ifndef DMSPREFERENCE_H
 #define DMSPREFERENCE_H
 
-#include <dllexport.h>
-
-#include <ui_preference.h>
-
-#include <libdms.h>
-
 #include <QtCore>
 #include <QtGui>
 
-	class EXPORT_ASAAL DMSPreference;
+#include <dllexport.h>
+#include <ui_preference.h>
+
+#include <dmsplugininterface.h>
+#include <libdms.h>
+
+class EXPORT_ASAAL DMSPreference;
 
 #ifdef Q_OS_WIN32
 	extern EXPORT_ASAAL DMSPreference *dmspreference;
@@ -43,70 +43,66 @@
 	extern DMSPreference *dmspreference;
 #endif
 
-	/*!
-	* @author Alexander Saal <alex.saal@gmx.de>
-	* @sa http://chmaster.freeforge.net
-	* @date 2008/01/20
-	* @version 0.1.0.0
-	* @since 0.1.0.0
-	*/
+/*!
+* @author Alexander Saal <alex.saal@gmx.de>
+* @sa http://chmaster.freeforge.net
+* @date 2008/01/20
+* @version 0.1.0.0
+* @since 0.1.0.0
+*/
 
-	class EXPORT_ASAAL DMSPreference : public QWidget, public Ui::UiPreferenceBase
-	{
+class EXPORT_ASAAL DMSPreference : public QWidget, public Ui::UiPreferenceBase
+{
+		Q_OBJECT
 
-			Q_OBJECT
+		Q_CLASSINFO( "Author", "Alexander Saal" )
+		Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
+		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
-			Q_CLASSINFO( "Author", "Alexander Saal" )
-			Q_CLASSINFO( "EMAIL", "alex.saal@gmx.de" )
-			Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
+	public:
+		DMSPreference( LibDMS *dms, QWidget *parent = 0L );
+		~DMSPreference();
 
-		public:
-			DMSPreference( LibDMS *dms, QWidget *parent = 0L );
-			~DMSPreference();
+		/*! Get the external instance of @sa DMSPreference */
+		static DMSPreference *dmspreference_instance() { return dmspreference; }
 
-			/*!
-			 * Get the external instance of @sa DMSPreference
-			 */
-			static DMSPreference *dmspreference_instance()
-			{
-				return dmspreference;
-			}
+	private slots:
+		void chooseApplication();
+		void chooseDocumentArchive();
 
-		private slots:
-			void chooseApplication();
-			void chooseDocumentArchive();
+		void addApplication();
+		void updateApplication();
+		void removeApplication();
 
-			void addApplication();
-			void updateApplication();
-			void removeApplication();
+		void addMailAddress();
+		void updateMailAddress();
+		void removeMailAddress();
 
-			void addMailAddress();
-			void updateMailAddress();
-			void removeMailAddress();
+		void treeWidgetApplicationPrefItem( QTreeWidgetItem *, int );
+		void treeWidgetMailAddressPrefItem( QTreeWidgetItem *, int );
 
-			void treeWidgetApplicationPrefItem( QTreeWidgetItem *, int );
-			void treeWidgetMailAddressPrefItem( QTreeWidgetItem *, int );
+		void showErrorMsg( const QString &error );
 
-			void showErrorMsg( const QString &error );
+		void savePreferences();
 
-			void savePreferences();
-			
-			void loadPreferences();			
-			void loadPluginPreferences();
+		void loadPreferences();
+		void loadPluginPreferences();
+		void loadPluginConfigWidget( const QString & );
 
-			void checkConnection();
-			void resetDocumentCounter();
-			void closeWidget();
+		void checkConnection();
+		void resetDocumentCounter();
+		void closeWidget();
 
-		private:
-			LibDMS *_dms;
+	private:
+		LibDMS *_dms;
+		DMSPluginInterface *dpi;
+		QList< DMSPluginInterface * > plugins;
 
-			QTreeWidgetItem *appItem;
+		QTreeWidgetItem *appItem;
 
-		protected:
-			void closeEvent( QCloseEvent *e );
+	protected:
+		void closeEvent( QCloseEvent *e );
 
-	};
-
+};
 
 #endif // DMSPREFERENCE_H

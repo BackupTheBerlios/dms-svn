@@ -44,6 +44,7 @@ class DMSScannerPlugin : public QObject, public DMSPluginInterface
 		QAction *action();
 		QDialog *dialog() const;
 		QWidget *widget() const;
+		QWidget *config() const;
 
 	private slots:
 		void showWidget();

@@ -51,12 +51,12 @@ class DMSPluginInterface
 
 	public:
 		/**
-		 * Konstrukor DMSPluginInterface
+		 * Constructor DMSPluginInterface
 		 */
 		virtual ~DMSPluginInterface() {}
 
 		/**
-		 * Rückgabe des Pluginicons
+		 * Return the plugin icon
 		 *
 		 * @return QPixmap
 		 *
@@ -69,7 +69,7 @@ class DMSPluginInterface
 		virtual QPixmap icon() const = 0;
 
 		/**
-		 * Rückgabe des Pluginnamens
+		 * Return the plugin name
 		 *
 		 * @return Pluginname
 		 *
@@ -82,7 +82,7 @@ class DMSPluginInterface
 		virtual QString pluginName() const = 0;
 
 		/**
-		 * Rückgabe der Pluginversion
+		 * Return the plugin version
 		 *
 		 * @return Plugin version
 		 *
@@ -95,7 +95,7 @@ class DMSPluginInterface
 		virtual QString pluginVersion() const = 0;
 
 		/**
-		 * Rückgabe der QAction
+		 * Return the QAction
 		 *
 		 * @return QAction
 		 *
@@ -108,30 +108,48 @@ class DMSPluginInterface
 		virtual QAction *action() = 0;
 
 		/**
-		 * Rückgabe der Pluginversion
+		 * Return the QDialog
+		 * If you use a QWidget you must set this to NULL.
 		 *
 		 * @return Plugin version
 		 *
 		 * @code
-		 * QString pluginVersion() {
-		 * return "0.1.1.0";
+		 * QDialog *dialog() {
+		 * 	return NULL;
 		 * }
 		 * @endcode
 		 */
 		virtual QDialog *dialog() const = 0;
 
 		/**
-		 * Rückgabe des QWidgets
+		 * Return the QWidget
+		 * If you use a QDailog you must set this to NULL.
 		 *
 		 * @return QWidget
 		 *
 		 * @code
-		 * QWidget widget() {
-		 * return new QWidget();
+		 * QWidget *widget() {
+		 * 	return NULL;
 		 * }
 		 * @endcode
 		 */
 		virtual QWidget *widget() const = 0;
+		
+		/**
+		 * Return the plugin configuration widget
+		 * The size of this widget must be: w = 551 and h = 284.
+		 *
+		 * If you have no configuration widget you must set this to NULL.
+		 *
+		 * @return QWidget
+		 *
+		 * @code
+		 * QWidget *widget() {
+		 * 	return NULL;
+		 * }
+		 * @endcode
+		 */
+		virtual QWidget *config() const = 0;
 };
 
 Q_DECLARE_INTERFACE( DMSPluginInterface, "dms.DMSPluginInterface/0.1.0" )

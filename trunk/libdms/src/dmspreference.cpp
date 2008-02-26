@@ -41,10 +41,12 @@ DMSPreference::DMSPreference( LibDMS *dms, QWidget *parent ) : QWidget( parent )
 	setupUi( this );
 	dmspreference = this;
 
-	_dms = dms;
+	_dms = dms;	
 
 	connect( treeWidgetApplicationPref, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetApplicationPrefItem( QTreeWidgetItem *, int ) ) );
 	connect( treeWidgetMailAddressPref, SIGNAL( itemClicked( QTreeWidgetItem *, int ) ), this, SLOT( treeWidgetMailAddressPrefItem( QTreeWidgetItem *, int ) ) );
+	connect( comboBoxPlugins, SIGNAL( currentIndexChanged( const QString & ) ), this, SLOT( loadPluginConfigWidget( const QString & ) ) );
+	
 
 	connect( btnAddApplication, SIGNAL( clicked() ), this, SLOT( addApplication() ) );
 	connect( btnUpdateApplication, SIGNAL( clicked() ), this, SLOT( updateApplication() ) );
@@ -472,6 +474,8 @@ void DMSPreference::loadPreferences()
 
 void DMSPreference::loadPluginPreferences()
 {
+	plugins.clear();
+
 	comboBoxPlugins->clear();
 	comboBoxPlugins->addItem( "" );
 
@@ -482,6 +486,8 @@ void DMSPreference::loadPluginPreferences()
 	// iterate over the plugin directory and load plugins if necessary ...
 	foreach( QString fileName, pluginsDir.entryList( QDir::Files ) )
 	{
+		qApp->processEvents();
+
 		if ( fileName.split( "." ).value( 1 ).toLower()  == "dll" || fileName.split( "." ).value( 1 ).toLower() == "so" )
 		{
 			QPluginLoader loader( pluginsDir.absoluteFilePath( fileName ) );
@@ -489,10 +495,53 @@ void DMSPreference::loadPluginPreferences()
 
 			if ( plug != NULL )
 			{
-				DMSPluginInterface *dpi = qobject_cast<DMSPluginInterface *> ( plug );
+				dpi = qobject_cast<DMSPluginInterface *> ( plug );
 				if ( dpi )
 				{
-					comboBoxPlugins->addItem( dpi->pluginName() + " " + dpi->pluginVersion() );
+					comboBoxPlugins->addItem( dpi->pluginName() );
+					plugins.append( dpi );
+				}
+			}
+		}
+	}
+}
+
+void DMSPreference::loadPluginConfigWidget( const QString &text )
+{
+	if ( text.isNull() || text.isEmpty() )
+		return;						
+
+	if ( plugins.count() >= 1 )
+	{
+		for( int i = 0; i < plugins.count(); i++ )
+		{
+			qApp->processEvents();
+
+			dpi = plugins.at( i );
+			if ( dpi )
+			{
+				if ( dpi->pluginName() == text )
+				{
+					QWidget *configwidget = dpi->config();
+					if ( configwidget )
+					{
+						if( (configwidget->height() <= 551) && (configwidget->width() <= 284) )
+						{
+							stackedWidgetPluginPreference->removeWidget( configwidget );
+
+							QGridLayout *gridLayout = new QGridLayout( pagePlugin );
+							gridLayout->addWidget( configwidget, 0, 0, 1, 1 );
+							return;
+						}
+					}
+					else
+					{
+						QGridLayout *gridLayout = new QGridLayout( pagePlugin );
+						QLabel *lblPluginInfo = new QLabel( tr( "<b><h3>This plugin has no configuration widget.</h3></b>" ), pagePlugin );
+						lblPluginInfo->setAlignment ( Qt::AlignCenter );
+						gridLayout->addWidget( lblPluginInfo, 0, 0, 1, 1 );
+						return;						
+					}
 				}
 			}
 		}
@@ -509,6 +558,8 @@ void DMSPreference::checkConnection()
 	{
 		while ( queryDatabases.next() )
 		{
+			qApp->processEvents();
+
 			QSqlQuery queryDms( "SELECT USERNAME FROM " + queryDatabases.value( 0 ).toString() + ".USERS" );
 
 			if ( queryDms.isActive() )
@@ -526,7 +577,6 @@ void DMSPreference::resetDocumentCounter()
 {
 	switch ( QMessageBox::question( this, tr( "DMS - Preference" ), tr( "Are you sure you would reset the document counter?" ), QMessageBox::Yes | QMessageBox::No ) )
 	{
-
 		case QMessageBox::Yes:
 			spinBoxDocumentCounter->setValue( 1 );
 			break;

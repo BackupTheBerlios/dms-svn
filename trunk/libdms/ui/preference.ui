@@ -1290,17 +1290,12 @@
         </layout>
        </item>
        <item row="2" column="0" >
-        <spacer>
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
+        <widget class="QStackedWidget" name="stackedWidgetPluginPreference" >
+         <property name="currentIndex" >
+          <number>0</number>
          </property>
-         <property name="sizeHint" >
-          <size>
-           <width>569</width>
-           <height>181</height>
-          </size>
-         </property>
-        </spacer>
+         <widget class="QWidget" name="pagePlugin" />
+        </widget>
        </item>
       </layout>
      </widget>
@@ -1473,12 +1468,12 @@
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>329</x>
-     <y>69</y>
+     <x>264</x>
+     <y>38</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>329</x>
-     <y>78</y>
+     <x>264</x>
+     <y>38</y>
     </hint>
    </hints>
   </connection>
