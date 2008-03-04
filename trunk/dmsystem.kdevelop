@@ -136,7 +136,8 @@
       <orientation>Vertical</orientation>
     </splitheadersource>
     <references>
-      <pcs>Qt4</pcs>
+      <pcs>SuSE%20-%20Qt4</pcs>
+      <pcs>KDE3%20Library</pcs>
     </references>
   </kdevcppsupport>
   <kdevfilecreate>
@@ -150,14 +151,21 @@
   </kdevfilecreate>
   <kdevtrollproject>
     <general>
-      <activedir>libdms</activedir>
+      <activedir>plugins/dmsscanner</activedir>
     </general>
     <run>
       <directoryradio>executable</directoryradio>
+<<<<<<< .mine
+      <mainprogram>/data/projekte/dmsystem/bin/dms</mainprogram>
+      <programargs></programargs>
+      <globaldebugarguments></globaldebugarguments>
+      <globalcwd>/data/projekte/dmsystem</globalcwd>
+=======
       <mainprogram>/home/alex/projekte/cpp/dmsystem/bin/dms</mainprogram>
       <programargs></programargs>
       <globaldebugarguments></globaldebugarguments>
       <globalcwd>/home/alex/projekte/cpp/dmsystem</globalcwd>
+>>>>>>> .r156
       <useglobalprogram>true</useglobalprogram>
       <terminal>false</terminal>
       <autocompile>true</autocompile>
