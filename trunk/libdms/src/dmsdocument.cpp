@@ -76,12 +76,14 @@ void DMSDocument::closeEvent( QCloseEvent *e )
 
 void DMSDocument::addDocument()
 {
+	// check if user selected
 	if ( comboBoxUser->currentText().isNull() || comboBoxUser->currentText().isEmpty() )
 	{
 		showErrorMsg( tr( "Please select a user." ) );
 		return;
 	}
 
+	// check if group selected
 	if ( comboBoxGroup->currentText().isNull() || comboBoxGroup->currentText().isEmpty() )
 	{
 		showErrorMsg( tr( "Please select a group." ) );
@@ -89,7 +91,6 @@ void DMSDocument::addDocument()
 	}
 
 	QString userid = QString( "" );
-
 	QMap< QString, QString>::const_iterator userIt = users.begin();
 
 	while ( userIt != users.end() )
@@ -133,17 +134,12 @@ void DMSDocument::addDocument()
 
 	// add document to the list
 	docItem = new QTreeWidgetItem( treeWidgetDocument );
-
 	docItem->setText( 0, comboBoxUser->currentText() );
-
 	docItem->setText( 1, docname );
-
 	docItem->setText( 2, comboBoxGroup->currentText() );
-
 	docItem->setText( 3, docpath );
 
 	QString groupid = _dms->getGroupId( comboBoxGroup->currentText() );
-
 	_dms->insertDocument( docid, userid, groupid, docname, docpath );
 
 	if ( !_dms->getErrorMessage().isEmpty() )
@@ -152,7 +148,6 @@ void DMSDocument::addDocument()
 	_dms->clearErrorMessage();
 
 	lineEditDocumentName->setText( "" );
-
 	lineEditDocumentPath->setText( "" );
 
 	newDocumentId();
@@ -223,7 +218,6 @@ void DMSDocument::updateDocument()
 	_dms->clearErrorMessage();
 
 	lineEditDocumentName->setText( "" );
-
 	lineEditDocumentPath->setText( "" );
 
 	newDocumentId();
@@ -330,6 +324,8 @@ void DMSDocument::treeWidgetDocumentItem( QTreeWidgetItem *item, int column )
 
 	if ( groupIndex >= 0 )
 		comboBoxGroup->setCurrentIndex( groupIndex );
+
+	newDocumentId();
 }
 
 void DMSDocument::showErrorMsg( const QString &error )
