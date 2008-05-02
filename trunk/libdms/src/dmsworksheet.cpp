@@ -207,7 +207,6 @@ void DMSWorkSheet::deleteDocument()
 	}
 
 	QString userid = _dms->getUserId( _dms->getUserId( _dms->loggedUser ) );
-
 	QString docid = _dms->getDocId( userid, docItem->text( 0 ) );
 
 	QFile docfile ( docItem->text( 1 ) );
@@ -228,6 +227,15 @@ void DMSWorkSheet::deleteDocument()
 			_dms->deleteDocument( docid, userid );
 
 			delete docItem;
+
+			for( int i = 0; i < treeWidgetWorkSheet->topLevelItemCount(); i++ )
+			{
+				QTreeWidgetItem *dgItem = treeWidgetWorkSheet->topLevelItem( i );
+				if( dgItem->childCount() <= 0 )
+				{
+					delete dgItem;
+				}
+			}
 
 			break;
 
@@ -300,9 +308,6 @@ void DMSWorkSheet::treeWidgetWorkSheetMenu( QPoint point )
 
 	QMenu menu( this );
 	QMouseEvent *mevent = new QMouseEvent( QEvent::MouseButtonPress, point, Qt::RightButton, Qt::RightButton, Qt::NoModifier );
-
-	if ( acSendMail != NULL )
-		delete acSendMail;
 
 	menu.clear();
 
