@@ -62,27 +62,8 @@ DMSGroup::~DMSGroup()
 
 void DMSGroup::closeEvent( QCloseEvent *e )
 {
-	QString file = QDir::homePath();
-
-	QDir pref( file + "/.dms/settings" );
-
-	if ( !pref.exists() )
-		pref.mkpath( file + "/.dms/settings" );
-
-	file.append ( "/.dms/settings/" + objectName() + ".xml" );
-
-	XMLPreferences widgetSettings( objectName() );
-
-	widgetSettings.setVersion( "1.0" );
-
-	widgetSettings.setRect( objectName(), this->rect() );
-
-	widgetSettings.save( file );
-
 	dmsgroup = NULL;
-
 	groupItem = NULL;
-
 	e->accept();
 }
 
@@ -93,7 +74,7 @@ void DMSGroup::addGroup()
 
 	if ( ( !gname.isNull() || !gname.isEmpty() ) && gname.size() >= 1 )
 	{
-		// check if user in the list exists
+		// check if group in the list exists
 		for ( int a = 0; a < treeWidgetGroup->topLevelItemCount(); a++ )
 		{
 			groupItem = treeWidgetGroup->topLevelItem( a );
