@@ -280,7 +280,6 @@ void DMSystem::createPluginMenu()
 				}
 
 				DMSPluginInterface *dpi = qobject_cast<DMSPluginInterface *> ( plug );
-
 				if ( dpi )
 				{
 					mnuPlugin->addAction( dpi->action() );
