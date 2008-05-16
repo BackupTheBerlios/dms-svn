@@ -25,7 +25,8 @@
    <string>New / Edit User</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../../resource/dms.qrc" >:/picture/16/images/16x16/user_16.png</iconset>
+   <iconset resource="../../resource/dms.qrc" >
+    <normaloff>:/picture/32/images/32x32/user_32.png</normaloff>:/picture/32/images/32x32/user_32.png</iconset>
   </property>
   <layout class="QGridLayout" >
    <item row="0" column="0" colspan="2" >
@@ -110,7 +111,8 @@
         <string/>
        </property>
        <property name="icon" >
-        <iconset resource="../../resource/dms.qrc" >:/picture/16/images/16x16/reload_16.png</iconset>
+        <iconset resource="../../resource/dms.qrc" >
+         <normaloff>:/picture/16/images/16x16/reload_16.png</normaloff>:/picture/16/images/16x16/reload_16.png</iconset>
        </property>
       </widget>
      </item>
@@ -213,7 +215,7 @@
        <property name="orientation" >
         <enum>Qt::Vertical</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>20</width>
          <height>20</height>
@@ -390,7 +392,7 @@
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>
        </property>
-       <property name="sizeHint" >
+       <property name="sizeHint" stdset="0" >
         <size>
          <width>40</width>
          <height>20</height>
