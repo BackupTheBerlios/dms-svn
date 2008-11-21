@@ -1,7 +1,7 @@
 Compile under LUNIX
 ===================
 
-For compilation under LUNIX you need the following software packages:
+For compilation under LINUX you need the following software packages:
 
 - Qt 4.3.3 or higher
 - SANE 1.0.19 (backends) or higher

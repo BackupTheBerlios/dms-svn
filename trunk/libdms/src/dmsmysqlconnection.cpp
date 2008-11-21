@@ -72,7 +72,7 @@ void DMSMySqlConnection::check()
 	QString user = lineEditUser->text();
 	QString upwd = lineEditPassword->text();
 
-	QSqlDatabase qsqld = QSqlDatabase::addDatabase( "QMYSQL", "available_db" );
+        QSqlDatabase qsqld = QSqlDatabase::addDatabase( "QMYSQL", "available_db" );
 	qsqld.setUserName( user );
 	qsqld.setPassword( upwd );
 	qsqld.setHostName( host );
