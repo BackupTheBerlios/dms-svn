@@ -1,14 +1,13 @@
+DMS - Document Management System
+--------------------------------
+
 Compile under LUNIX
 ===================
 
 For compilation under LINUX you need the following software packages:
 
-- Qt 4.3.3 or higher
-- SANE 1.0.19 (backends) or higher
-
-
-Compile DMS - Document Management System
-----------------------------------------
+- Qt 4.4.x or higher (http://www.qtsoftware.com/)
+- SANE 1.0.19 (backends) or higher (http://alioth.debian.org/projects/sane/)
 
 - After installing the SANE 1.0.19 backend or higher
 	- Get the svn package from http://developer.berlios.de/projects/dms/
@@ -25,38 +24,22 @@ Compile under Windows
 
 For compilation under Windows you need the following software packages:
 
-- Microsoft Visual Studio Express 2005 (optional)
-    - Microsoft Platform SDK 2003 R2
-	- Qt4 compiled for use with MSVC++
-      - Download the latest Qt4 Source Package for Windows (http://www.trolltech.com).
-	  - compile it and set the path enviroment QTDIR=/your/qt/direcory without spaces
+- Microsoft Visual Studio C++ 2008 Express (optional)
+    - Windows SDK for Windows Server 2008 and .NET Framework 3.5 
+			(Supported Operating Systems: Windows Server 2003, Windows Server 2008, Windows Vista, Windows XP)
+			- http://www.microsoft.com/downloads/details.aspx?familyid=F26B1AA4-741A-433A-9BE5-FA919850BDBF&displaylang=en
+			
+			- Qt 4.4.x compiled for use with MSVC++2008 Express
+				- Download the latest Qt4 Source Package for Windows (http://www.qtsoftware.com/).
+				- compile it and set the path enviroment QTDIR=/your/qt/direcory without spaces
+
+OR
 
 - MinGW
-	- Download the page http://downloads.sourceforge.net/mingw/MinGW-5.1.3.exe?modtime=1168811236&big_mirror=1
-	- Qt4 compiled for use with MinGW
+	- Download the page http://downloads.sourceforge.net/mingw/MinGW-5.1.4.exe
+	- Qt 4.4.x compiled for use with MinGW
       - Download the latest Qt4 Source Package for Windows (http://www.trolltech.com).
-	  - compile it and set the path enviroment QTDIR=/your/qt/direcory without spaces
-
-
-Compile DMS - Document Management System
-----------------------------------------
-
-You need the svn binary for Windows.
-
-- MSVC++ 2005
-	- Get the svn package from http://developer.berlios.de/projects/dms/
-		- svn checkout http://svn.berlios.de/svnroot/repos/dms/trunk dmsystem
-	- Change after download into this directory
-	- Open the solution file (dms.sln) in the dmsystem directory and compile it
-
-- MinGW
-	- Change after download into this directory
-	- Open the commandline from Windows (Start->Run->cmd / Start->Ausführen->cmd)
-		- The MinGW path enviroment must set.
-
-	qmake
-	mingw32-make
-
+			- compile it and set the path enviroment QTDIR=/your/qt/direcory without spaces
 
 Have you trouble with installation or you found problems in DMS please send to dms-bugreport@lists.berlios.de and not directly to me.
 Have you trouble with installation and/or configuration of SANE please send to http://alioth.debian.org/mail/?group_id=30186 and not to me.
