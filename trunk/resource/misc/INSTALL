@@ -24,14 +24,12 @@ Compile under Windows
 
 For compilation under Windows you need the following software packages:
 
-- Microsoft Visual Studio C++ 2008 Express (optional)
+- Microsoft Visual Studio C++ 2008 SP1 Express (optional)
     - Windows SDK for Windows Server 2008 and .NET Framework 3.5 
 			(Supported Operating Systems: Windows Server 2003, Windows Server 2008, Windows Vista, Windows XP)
-			- http://www.microsoft.com/downloads/details.aspx?familyid=F26B1AA4-741A-433A-9BE5-FA919850BDBF&displaylang=en
-			
-			- Qt 4.4.x compiled for use with MSVC++2008 Express
-				- Download the latest Qt4 Source Package for Windows (http://www.qtsoftware.com/).
-				- compile it and set the path enviroment QTDIR=/your/qt/direcory without spaces
+			- http://www.microsoft.com/downloads/details.aspx?familyid=F26B1AA4-741A-433A-9BE5-FA919850BDBF&displaylang=en and install it.
+			- Download the latest Qt 4.4.x Source Package for Windows (http://www.qtsoftware.com/).
+			- compile it and set the path enviroment QTDIR=/your/qt/direcory without spaces
 
 OR
 
