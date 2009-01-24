@@ -261,9 +261,10 @@ QMap<QString, QStringList> LibDMS::getTabelColumns( TableColumns tablecolumns )
 	return tableColumnList;
 }
 
-QMap<QString, QString> LibDMS::geUsers()
+QList< LibDMS::UserInfo* > LibDMS::geUsers()
 {
 	userList.clear();
+  errorMessage = QString( "" );
 
 	QSqlQuery queryUserList( m_qsqld );
 
@@ -278,16 +279,14 @@ QMap<QString, QString> LibDMS::geUsers()
 		{
 			qApp->processEvents();
 
-			// sql query information about the user data
-			QString uid = queryUserList.value( 0 ).toString();
-			QString uname = queryUserList.value( 1 ).toString();
-			QString upwd = queryUserList.value( 2 ).toString();
-			QString fname = queryUserList.value( 3 ).toString();
-			QString lname = queryUserList.value( 4 ).toString();
+      userInfo = new UserInfo;
+			userInfo->userId = queryUserList.value( 0 ).toString();
+			userInfo->userName = queryUserList.value( 1 ).toString();
+			userInfo->userPwd = queryUserList.value( 2 ).toString();
+			userInfo->firstName = queryUserList.value( 3 ).toString();
+			userInfo->lastName = queryUserList.value( 4 ).toString();
 
-			QString udata = uname + "#" + upwd + "#" + fname + "#" + lname;
-
-			userList.insert( uid, udata );
+      userList.append( userInfo );
 		}
 	}
 	else
@@ -695,6 +694,11 @@ void LibDMS::updateUser( const QString &userId, const QString &username, const Q
 	}
 }
 
+void LibDMS::deleteUser( const LibDMS::UserInfo &userInfo ) {
+
+  deleteUser( userInfo.userId, userInfo.userName );
+}
+
 void LibDMS::deleteUser( const QString &userId, const QString &username )
 {
 	if ( isUserAvailabel( userId, username ) )
@@ -713,7 +717,6 @@ void LibDMS::deleteUser( const QString &userId, const QString &username )
 		}
 
 		QString sqlDeleteUserQuery = QString( "" );
-
 		sqlDeleteUserQuery += "DELETE FROM USERS WHERE UID = '" + userId + "'";
 
 		QSqlQuery queryDeleteUser( m_qsqld );
@@ -1256,10 +1259,15 @@ bool LibDMS::isUserAvailabel( const QString &userId, const QString &username )
 	QSqlQuery queryIsUserAvailabel( m_qsqld );
 	queryIsUserAvailabel.exec( sqlIsUserAvailableQuery );
 
-	if ( queryIsUserAvailabel.isActive() )
-		while ( queryIsUserAvailabel.next() )
-			if ( !queryIsUserAvailabel.value( 0 ).toString().isNull() || !queryIsUserAvailabel.value( 0 ).toString().isEmpty() )
+  if ( queryIsUserAvailabel.isActive() ) {
+    
+    while ( queryIsUserAvailabel.next() ) {
+      
+      if ( !queryIsUserAvailabel.value( 0 ).toString().isNull() || !queryIsUserAvailabel.value( 0 ).toString().isEmpty() ) {
 				return true;
+      }
+    }
+  }
 
 	sqlIsUserAvailableQuery.clear();
 

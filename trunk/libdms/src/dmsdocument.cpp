@@ -91,41 +91,32 @@ void DMSDocument::addDocument()
 	}
 
 	QString userid = QString( "" );
-	QMap< QString, QString>::const_iterator userIt = users.begin();
+  foreach( LibDMS::UserInfo *user, users ) {
 
-	while ( userIt != users.end() )
-	{
-		qApp->processEvents();
+    qApp->processEvents();
 
-		QString fname = userIt.value().split( "#" ).value( 2 );
-		QString nname = userIt.value().split( "#" ).value( 3 );
-
-		QString completename = nname + ", " +  fname;
-
-		if ( completename == comboBoxUser->currentText() )
-		{
-			userid = userIt.key();
-			break;
-		}
-
-		++userIt;
-	}
+    QString completename = user->lastName + ", " +  user->firstName;
+    if ( completename == comboBoxUser->currentText() )
+    {
+      userid = user->userId;
+      break;
+    }
+  }
 
 	QString docid = lineEditDocumentId->text();
-
 	QString docname = lineEditDocumentName->text();
 	QString docpath = lineEditDocumentPath->text();
 
-	if ( docname.isNull() || docname.isEmpty() )
-	{
+	if ( docname.isNull() || docname.isEmpty() ) {
+
 		showErrorMsg( tr( "Please enter document name." ) );
 		lineEditDocumentName->setFocus();
 		lineEditDocumentName->setSelection( 0, lineEditDocumentName->text().length() );
 		return;
 	}
 
-	if ( docpath.isNull() || docpath.isEmpty() )
-	{
+	if ( docpath.isNull() || docpath.isEmpty() ) {
+
 		showErrorMsg( tr( "Please select a document." ) );
 		lineEditDocumentPath->setFocus();
 		lineEditDocumentPath->setSelection( 0, lineEditDocumentPath->text().length() );
@@ -142,8 +133,9 @@ void DMSDocument::addDocument()
 	QString groupid = _dms->getGroupId( comboBoxGroup->currentText() );
 	_dms->insertDocument( docid, userid, groupid, docname, docpath );
 
-	if ( !_dms->getErrorMessage().isEmpty() )
-		showErrorMsg( _dms->getErrorMessage() );
+  if ( !_dms->getErrorMessage().isEmpty() ) {
+    showErrorMsg( _dms->getErrorMessage() );
+  }
 
 	_dms->clearErrorMessage();
 
@@ -152,8 +144,10 @@ void DMSDocument::addDocument()
 
 	newDocumentId();
 
-	if ( dmsworksheet )
+  if ( dmsworksheet ) {
+
 		dmsworksheet->loadDocuments();
+  }
 }
 
 void DMSDocument::updateDocument()
@@ -336,17 +330,12 @@ void DMSDocument::loadUser()
 
 	users = _dms->geUsers();
 
-	QMap< QString, QString>::const_iterator userIt = users.begin();
+  foreach( LibDMS::UserInfo *user, users ) {
 
-	while ( userIt != users.end() )
-	{
-		qApp->processEvents();
-		QString fname = userIt.value().split( "#" ).value( 2 );
-		QString nname = userIt.value().split( "#" ).value( 3 );
+    qApp->processEvents();
 
-		comboBoxUser->addItem( nname + ", " +  fname );
-		++userIt;
-	}
+    comboBoxUser->addItem( user->lastName + ", " + user->firstName );
+  }
 }
 
 void DMSDocument::loadGroups()

@@ -84,7 +84,7 @@ class EXPORT_ASAAL DMSSearch : public QWidget, public Ui::UiSearchBase
 		LibDMS *_dms;
 
 		QMap<QString, QString> documents;
-		QMap<QString, QString> users;
+    QList< LibDMS::UserInfo * > users;
 		QMap<QString, QString> groups;
 		QStringList columns;
 

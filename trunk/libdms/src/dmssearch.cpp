@@ -166,20 +166,15 @@ void DMSSearch::loadSearchPreferences()
 	users = _dms->geUsers();
 	groups = _dms->getGroups();
 
-	QMap<QString, QString>::const_iterator userIt = users.begin();
 	comboBoxSearchUser->clear();
 	comboBoxSearchUser->addItem( "*" );
 
-	while ( userIt != users.end() )
-	{
-		qApp->processEvents();
+  foreach( LibDMS::UserInfo *user, users ) {
 
-		QString uname = userIt.value().split( "#" ).value( 2 );
-		uname += ", " + userIt.value().split( "#" ).value( 3 );
-		comboBoxSearchUser->addItem( uname );
+    qApp->processEvents();
 
-		++userIt;
-	}
+    comboBoxSearchUser->addItem( user->lastName + ", " + user->firstName );
+  }
 
 	QMap<QString, QString>::const_iterator groupIt = groups.begin();
 

@@ -170,41 +170,29 @@ void DMSUser::addUser()
 
 	// add user to the list
 	userItem = new QTreeWidgetItem( treeWidgetUser );
-
 	userItem->setText( 0, username );
-
-	userItem->setText( 1, pwd );
-
+  userItem->setText( 1, pwd );
 	userItem->setText( 2, fname );
-
 	userItem->setText( 3, lname );
 
 	// clear decoded password
 	pwd.clear();
 
-	// clear all relevant datas
+	// clear all relevant data
 	fname = "";
-
 	lname = "";
-
 	username = "";
-
 	userpwd = "";
-
 	userpwd_confirm = "";
 
-	lineEditUserFirstName->setText( "" );
-
+  lineEditUserFirstName->setText( "" );
 	lineEditUserLastName->setText( "" );
-
 	lineEditUserName->setText( "" );
-
 	lineEditUserPassword->setText( "" );
-
 	lineEditUserPasswordConfirm->setText( "" );
 
-	// create new user id
-	lineEditUserId->setText( QUuid::createUuid().toString().replace( "-", "" ).replace( "{", "" ).replace( "}", "" ) );
+  // create new user id
+  newUserId();
 }
 
 void DMSUser::updateUser()
@@ -217,8 +205,7 @@ void DMSUser::updateUser()
 		return;
 	}
 
-	userItem->setText( 0, lineEditUserName->text() );
-
+	userItem->setText( 0, lineEditUserName->text() );   
 	userItem->setText( 2, lineEditUserFirstName->text() );
 	userItem->setText( 3, lineEditUserLastName->text() );
 
@@ -240,11 +227,13 @@ void DMSUser::updateUser()
 	lineEditUserPassword->setText( "" );
 	lineEditUserPasswordConfirm->setText( "" );
 
-	lineEditUserId->setText( QUuid::createUuid().toString().replace( "-", "" ).replace( "{", "" ).replace( "}", "" ) );
+  newUserId();
 }
 
 void DMSUser::deleteUser()
 {
+  _dms->clearErrorMessage();
+
 	userItem = treeWidgetUser->currentItem();
 
 	if ( userItem == NULL )
@@ -253,9 +242,14 @@ void DMSUser::deleteUser()
 		return;
 	}
 
-	QString userId = _dms->getUserId( userItem->text( 0 ) );
+  LibDMS::UserInfo userinfo;
+  userinfo.userName = userItem->text( 0 );
+  userinfo.userPwd = userItem->text( 1 );
+  userinfo.firstName = userItem->text( 2 );
+  userinfo.lastName = userItem->text( 3 );
+  userinfo.userId = _dms->getUserId( userItem->text( 0 ) );
 
-	_dms->deleteUser( userId, userItem->text( 0 ) );
+	_dms->deleteUser( userinfo );
 
 	lineEditUserFirstName->setText( "" );
 	lineEditUserLastName->setText( "" );
@@ -263,7 +257,7 @@ void DMSUser::deleteUser()
 	lineEditUserPassword->setText( "" );
 	lineEditUserPasswordConfirm->setText( "" );
 
-	lineEditUserId->setText( QUuid::createUuid().toString().replace( "-", "" ).replace( "{", "" ).replace( "}", "" ) );
+	newUserId();
 
 	delete userItem;
 }
@@ -275,30 +269,18 @@ void DMSUser::newUserId()
 
 void DMSUser::loadUser()
 {
-	QMap<QString, QString> users = _dms->geUsers();
+  QList< LibDMS::UserInfo* > users = _dms->geUsers();
 
-	if ( users.size() <= 0 )
-		return;
+  foreach( LibDMS::UserInfo *user, users ) {
 
-	QMap<QString, QString>::const_iterator u_it = users.begin();
+    qApp->processEvents();
 
-	while ( u_it != users.end() )
-	{
-		qApp->processEvents();
-
-		QString uname = u_it.value().split( "#" ).value( 0 );
-		QString upwd = u_it.value().split( "#" ).value( 1 );
-		QString fname = u_it.value().split( "#" ).value( 2 );
-		QString lname = u_it.value().split( "#" ).value( 3 );
-
-		userItem = new QTreeWidgetItem( treeWidgetUser );
-		userItem->setText( 0, uname );
-		userItem->setText( 1, upwd );
-		userItem->setText( 2, fname );
-		userItem->setText( 3, lname );
-
-		++u_it;
-	}
+    userItem = new QTreeWidgetItem( treeWidgetUser );
+    userItem->setText( 0, user->userName );
+    userItem->setText( 1, user->userPwd );
+    userItem->setText( 2, user->firstName );
+    userItem->setText( 3, user->lastName );
+  }
 }
 
 void DMSUser::treeWidgetUserItem( QTreeWidgetItem *item, int column )

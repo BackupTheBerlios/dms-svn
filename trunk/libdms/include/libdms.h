@@ -57,6 +57,119 @@ class EXPORT_ASAAL LibDMS : public QObject
 		Q_CLASSINFO( "URL", "http://chmaster.freeforge.net" )
 
 	public:
+    /**
+     * \brief User information
+     * 
+     * @date 2009/01/24 
+     * @version 0.1.0.1
+     * @since 0.1.0.1
+     */ 
+    struct UserInfo {
+
+      /**
+       * User ID
+       */ 
+      QString userId;
+      
+      /**
+       * User name
+       */ 
+      QString userName;
+      
+      /**
+       * User password (decrypted)
+       */ 
+      QString userPwd;
+
+      /**
+       * Last name from user
+       */ 
+      QString lastName;
+      
+      /**
+       * First name from user
+       */ 
+      QString firstName;
+      
+      /**
+       * User updated?
+       */ 
+      bool update;
+    };
+
+    /**
+    * \brief Document information
+    * 
+    * @date 2009/01/24 
+    * @version 0.1.0.1
+    * @since 0.1.0.1
+    */ 
+    struct DocumentInfo {
+
+      /**
+       * Document ID
+       */
+      QString docId;
+
+      /**
+       * Group ID
+       */
+      QString groupId;
+
+      /**
+       * User ID
+       */
+      QString userId;
+
+      /**
+       * Document name
+       */
+      QString docName;
+
+      /**
+       * Document path
+       */
+      QString docPath;
+
+      /**
+       * Document updated?
+       */
+      bool update;
+
+      /**
+       * Document checked out?
+       */
+      bool checkedOut;
+    };
+
+    /**
+    * \brief Group information
+    * 
+    * @date 2009/01/24 
+    * @version 0.1.0.1
+    * @since 0.1.0.1
+    */
+    struct GroupInfo {
+      /**
+       * Group ID
+       */ 
+      QString groupId;
+
+      /**
+       * Group name
+       */ 
+      QString groupName;
+
+      /**
+       * Group description
+       */ 
+      QString groupDescription;
+
+      /**
+       * Group updated?
+       */ 
+      bool update;
+    };
 
 		/*!
 		* Columns in the database
@@ -82,24 +195,24 @@ class EXPORT_ASAAL LibDMS : public QObject
 		/*!
 		* Default constructor
 		*
-		* @param ws @see <a href="http://doc.trolltech.com/4.3/qworkspace.html#QWorkspace">QWorkspace</a> (default is NULL)
-		* @param parent <a href="http://doc.trolltech.com/4.3/qobject.html#QObject">QObject</a> (default is NULL)		
+		* @param ws @see <a href="http://doc.trolltech.com/4.4/qworkspace.html#QWorkspace">QWorkspace</a> (default is NULL)
+		* @param parent <a href="http://doc.trolltech.com/4.4/qobject.html#QObject">QObject</a> (default is NULL)		
 		*/
 		LibDMS( QWorkspace *ws = 0, QObject *parent = 0 );
 		
-		/*!
-		 * Default deconstructor
+		/*
+		 * \breif De-Constructor
 	 	 */
 		inline virtual ~LibDMS() { libdms = NULL; }
 		
 		/**
-		 * Return the instance of dms libraray
-		 * This is neede if you create a plugin for DMS
+		 * Return the instance of dms library
+		 * This is needed if you create a plug in for DMS
 		 */
 		static LibDMS *libdms_instcance() {	return libdms; }
 		
 		/**
-		 * Returns the @see <a href="http://doc.trolltech.com/4.3/qworkspace.html#QWorkspace">QWorkspace</a>
+		 * Returns the @see <a href="http://doc.trolltech.com/4.4/qworkspace.html#QWorkspace">QWorkspace</a>
 		 */
 		QWorkspace *workspace() { return _ws; }
 
@@ -109,7 +222,7 @@ class EXPORT_ASAAL LibDMS : public QObject
 		* @param userId The user id
 		* @param userPwd The user password
 		*
-		* @return true if login seccesfull otherwise false
+		* @return true if login successfully otherwise false
 		*/
 		bool login( const QString &userId, const QString &userPwd );
 
@@ -118,7 +231,7 @@ class EXPORT_ASAAL LibDMS : public QObject
 		*
 		* @param userId The user id
 		*
-		* @return true if login seccesfull otherwise false
+		* @return true if login successfully otherwise false
 		*/
 		bool logout( const QString &userId );
 
@@ -139,21 +252,21 @@ class EXPORT_ASAAL LibDMS : public QObject
 		/*!
 		* Get the Qt4 SQL Driver
 		*
-		* @return <a href="http://doc.trolltech.com/4.3/qstringlist.html#QStringList">QStringList</a> with qt4 sql driver
+		* @return <a href="http://doc.trolltech.com/4.4/qstringlist.html#QStringList">QStringList</a> with qt4 sql driver
 		*/
 		QStringList getSqlDriver();
 
 		/*!
 		* Get the SQL Databases
 		*
-		* @return <a href="http://doc.trolltech.com/4.3/qstringlist.html#QStringList">QStringList</a> with sql databases
+		* @return <a href="http://doc.trolltech.com/4.4/qstringlist.html#QStringList">QStringList</a> with sql databases
 		*/
 		QStringList getSqlDatabases();
 
 		/*!
 		* Get the table columns from database
 		*
-		* @return <a href="http://doc.trolltech.com/4.3/qmap.html#QMap">QMap</a><TableName, Columns>
+		* @return <a href="http://doc.trolltech.com/4.4/qmap.html#QMap">QMap</a><TableName, Columns>
 		*/
 		QMap<QString, QStringList> getTabelColumns( TableColumns tablecolumns );
 
@@ -172,9 +285,9 @@ class EXPORT_ASAAL LibDMS : public QObject
 		/*!
 		* Get the user from database
 		*
-		* @return <a href="http://doc.trolltech.com/4.3/qmap.html#QMap">QMap</a><UserId, UserName> with all users
+		* @return <a href="http://doc.trolltech.com/4.4/qmap.html#QMap">QMap</a><UserId, UserName> with all users
 		*/
-		QMap<QString, QString> geUsers();
+		QList< UserInfo* > geUsers();
 
 		/*!
 		* Get the user id
@@ -187,7 +300,7 @@ class EXPORT_ASAAL LibDMS : public QObject
 		* Get all documents from database
 		*
 		*
-		* @return <a href="http://doc.trolltech.com/4.3/qmap.html#QMap">QMap</a><DocId, Documents> with all users
+		* @return <a href="http://doc.trolltech.com/4.4/qmap.html#QMap">QMap</a><DocId, Documents> with all users
 		*/
 		QMap<QString, QString> geDocuments();
 
@@ -196,7 +309,7 @@ class EXPORT_ASAAL LibDMS : public QObject
 		*
 		* @param userId The user id
 		*
-		* @return <a href="http://doc.trolltech.com/4.3/qmap.html#QMap">QMap</a><DocId, Documents>
+		* @return <a href="http://doc.trolltech.com/4.4/qmap.html#QMap">QMap</a><DocId, Documents>
 		*/
 		QMap<QString, QString> geDocuments( const QString &userId );
 
@@ -212,7 +325,7 @@ class EXPORT_ASAAL LibDMS : public QObject
 		/*!
 		* Get the groups from database
 		*
-		* @return <a href="http://doc.trolltech.com/4.3/qmap.html#QMap">QMap</a><GroupId, Group> with all groups
+		* @return <a href="http://doc.trolltech.com/4.4/qmap.html#QMap">QMap</a><GroupId, Group> with all groups
 		*/
 		QMap<QString, QString> getGroups();
 
@@ -239,14 +352,14 @@ class EXPORT_ASAAL LibDMS : public QObject
 		 * @param widgetname The widget name
 		 * @param section The section for application settings
 		 *
-		 * @return <a href="http://doc.trolltech.com/4.3/qmap.html#QMap">QMap</a><App, AppExt> with all application settings
+		 * @return <a href="http://doc.trolltech.com/4.4/qmap.html#QMap">QMap</a><App, AppExt> with all application settings
 		 */
 		QMap<QString, QString> getApplicationSettings( const QString &widgetname, const QString &section );
 
 		/*!
 		* Get the error message, if exist.
 		*
-		* @return <a href="http://doc.trolltech.com/4.3/qstring.html#QString">QString</a> with error message
+		* @return <a href="http://doc.trolltech.com/4.4/qstring.html#QString">QString</a> with error message
 		*/
 		QString getErrorMessage()
 		{
@@ -276,13 +389,12 @@ class EXPORT_ASAAL LibDMS : public QObject
 		*/
 		void updateUser( const QString &userId, const QString &username, const QString &userpwd, const QString &vname, const QString &nname );
 
-		/*!
-		* Delete user
-		*
-		* @param userId The user id
-		* @param username The user name
-		*/
-		void deleteUser( const QString &userId, const QString &username );
+    /*!
+    * Delete user
+    *
+    * @param userInfo TThe @see UserInfo
+    */
+    void deleteUser( const UserInfo &userInfo );
 
 		/*!
 		* Create/Insert document
@@ -422,7 +534,15 @@ class EXPORT_ASAAL LibDMS : public QObject
 		 */
 		void clearErrorMessage() { errorMessage = QString( "" ); }
 
-	private slots:
+  private slots:
+    /*!
+     * Delete user
+     *
+     * @param userId The user id
+     * @param username The user name
+     */
+    void deleteUser( const QString &userId, const QString &username );
+
 		/*!
 		 * Process was closed
 		 */
@@ -458,7 +578,8 @@ class EXPORT_ASAAL LibDMS : public QObject
 		QSqlRecord m_qsqlr;
 		QSqlError m_qsqle;
 
-		QMap<QString, QString> userList;
+    UserInfo *userInfo;
+		QList< UserInfo* > userList;
 		QMap<QString, QString> groupList;
 		QMap<QString, QString> documentList;
 		QMap<QString, QString> appSettList;

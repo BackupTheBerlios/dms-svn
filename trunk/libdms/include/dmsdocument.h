@@ -96,7 +96,7 @@ class EXPORT_ASAAL DMSDocument : public QWidget, public Ui::UiNewEditDocumentBas
 		LibDMS *_dms;
 		QWorkspace *_ws;
 
-		QMap<QString, QString> users;
+    QList< LibDMS::UserInfo * > users;
 		QMap<QString, QString> groups;
 		QMap<QString, QString> documents;
 
