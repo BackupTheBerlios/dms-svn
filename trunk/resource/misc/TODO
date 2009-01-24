@@ -2,3 +2,7 @@
 * add support for sqlite
 * add support to archive your e-mails from your e-mail client (only thunderbird and kmail would supported)
 * add support for scan under windows
+* change source code for using new structures
+	* UserInfo = 90%
+	* DocumentInfo = 0%
+	* GroupInfo = 0%
