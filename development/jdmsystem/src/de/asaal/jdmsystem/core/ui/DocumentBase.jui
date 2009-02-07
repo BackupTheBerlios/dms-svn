@@ -1,0 +1,444 @@
+<ui version="4.0" language="jambi" >
+ <class>DocumentBase</class>
+ <widget class="QWidget" name="DocumentBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>415</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>640</width>
+    <height>415</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayoutDocumentWidget" >
+   <item row="0" column="0" >
+    <layout class="QGridLayout" name="gridLayoutDocumentBase" >
+     <item row="0" column="0" >
+      <widget class="QTreeWidget" name="treeWidgetDocument" >
+       <property name="rootIsDecorated" >
+        <bool>false</bool>
+       </property>
+       <property name="sortingEnabled" >
+        <bool>true</bool>
+       </property>
+       <column>
+        <property name="text" >
+         <string>User</string>
+        </property>
+       </column>
+       <column>
+        <property name="text" >
+         <string>Document</string>
+        </property>
+       </column>
+       <column>
+        <property name="text" >
+         <string>Group</string>
+        </property>
+       </column>
+       <column>
+        <property name="text" >
+         <string>Documentpath</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item row="1" column="0" >
+      <layout class="QGridLayout" name="gridLayoutDocumentSettings" >
+       <item row="0" column="0" colspan="2" >
+        <layout class="QHBoxLayout" name="horizontalLayoutDocumentId" >
+         <item>
+          <widget class="QLabel" name="labelDocumentId" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Document ID:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditDocumentId</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditDocumentId" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="frame" >
+            <bool>true</bool>
+           </property>
+           <property name="readOnly" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnDocId" >
+           <property name="minimumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutDocumentGroup" >
+         <item>
+          <widget class="QLabel" name="labelGroup" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Group:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>comboBoxGroup</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBoxGroup" />
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnGroup" >
+           <property name="minimumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item rowspan="3" row="1" column="1" >
+        <layout class="QVBoxLayout" name="verticalLayoutDocumentButtonGroup" >
+         <item>
+          <widget class="QPushButton" name="btnAddDocument" >
+           <property name="minimumSize" >
+            <size>
+             <width>75</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>75</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>&amp;Add</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnUpdateDocument" >
+           <property name="minimumSize" >
+            <size>
+             <width>75</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>75</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>&amp;Update</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnDeleteDocument" >
+           <property name="minimumSize" >
+            <size>
+             <width>75</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>75</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>&amp;Delete</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer" >
+           <property name="orientation" >
+            <enum>com.trolltech.qt.core.Qt.Orientation.Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutDocumentUser" >
+         <item>
+          <widget class="QLabel" name="labelUser" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>User:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>comboBoxUser</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBoxUser" />
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnUser" >
+           <property name="minimumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutDocumentName" >
+         <item>
+          <widget class="QLabel" name="labelDocumentName" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Document name:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditDocumentName</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditDocumentName" >
+           <property name="frame" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="0" colspan="2" >
+        <layout class="QHBoxLayout" name="horizontalLayoutDocumentPath" >
+         <item>
+          <widget class="QLabel" name="labelDocument" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Document:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditDocumentPath</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditDocumentPath" >
+           <property name="frame" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnSelectDocument" >
+           <property name="minimumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>23</width>
+             <height>23</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0" >
+      <widget class="QFrame" name="lineDocumentSplit" >
+       <property name="frameShape" >
+        <enum>com.trolltech.qt.gui.QFrame.Shape.HLine</enum>
+       </property>
+       <property name="frameShadow" >
+        <enum>com.trolltech.qt.gui.QFrame.Shadow.Sunken</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" >
+      <layout class="QHBoxLayout" name="horizontalLayoutDocumentWidgetButtonGroup" >
+       <item>
+        <spacer name="horizontalSpacerDocumentWidget" >
+         <property name="orientation" >
+          <enum>com.trolltech.qt.core.Qt.Orientation.Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>37</width>
+           <height>17</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnOk" >
+         <property name="minimumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>&amp;Ok</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCancel" >
+         <property name="minimumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>&amp;Cancel</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="E:/dmsystem/resource/dms.qrc" />
+ </resources>
+ <connections/>
+</ui>

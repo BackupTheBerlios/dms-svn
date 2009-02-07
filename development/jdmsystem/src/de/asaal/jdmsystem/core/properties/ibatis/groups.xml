@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GroupsStatements">
+	<resultMap id="GroupResult" class="de.asaal.jdmsystem.core.dto.GroupDTO">
+		<result property="groupId" column="GID" />
+		<result property="groupName" column="GROUPNAME" />
+		<result property="groupDescription" column="GROUPDESCRIPTION" />
+		<result property="created" column="CREATED" />
+		<result property="updated" column="UPDATED" />
+	</resultMap>
+
+	<select id="selectGroups" resultMap="GroupResult">
+		SELECT * FROM GROUPS
+	</select>
+
+	<select id="getGroupId" parameterClass="java.lang.String" resultClass="java.lang.String">
+	</select>
+
+	<insert id="createGroup" parameterClass="de.asaal.jdmsystem.core.dto.GroupDTO">
+	</insert>
+
+	<delete id="deleteGroup" parameterClass="de.asaal.jdmsystem.core.dto.GroupDTO">
+	</delete>
+</sqlMap>

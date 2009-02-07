@@ -1,0 +1,354 @@
+<ui version="4.0" language="jambi" >
+ <class>AdvancedUserBase</class>
+ <widget class="QDialog" name="AdvancedUserBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>415</width>
+    <height>258</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayoutAdvUserDialog" >
+   <item row="0" column="0" >
+    <layout class="QGridLayout" name="gridLayoutAdvUserSettings" >
+     <item row="0" column="0" >
+      <layout class="QGridLayout" name="gridLayoutAdvUser" >
+       <item row="0" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutFirstName" >
+         <item>
+          <widget class="QLabel" name="labelFirstName" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Firstname:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditFirstName</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditFirstName" >
+           <property name="focusPolicy" >
+            <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutLastName" >
+         <item>
+          <widget class="QLabel" name="labelLastName" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Lastname:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditLastName</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditLastName" >
+           <property name="focusPolicy" >
+            <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutStreetName" >
+         <item>
+          <widget class="QLabel" name="labelStreetName" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Street:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditStreetName</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditStreetName" >
+           <property name="focusPolicy" >
+            <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutStreetNr" >
+         <item>
+          <widget class="QLabel" name="labelStreetNumber" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Street Nr.:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditStreetNumber</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditStreetNumber" >
+           <property name="focusPolicy" >
+            <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutCity" >
+         <item>
+          <widget class="QLabel" name="labelCity" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>City (Town):</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditCity</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditCity" >
+           <property name="focusPolicy" >
+            <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="5" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutPostalCode" >
+         <item>
+          <widget class="QLabel" name="labelPostalCode" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Postalcode (ZipCode):</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditPostalCode</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditPostalCode" >
+           <property name="focusPolicy" >
+            <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="6" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutCountry" >
+         <item>
+          <widget class="QLabel" name="labelCountry" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Country:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditCountry</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditCountry" >
+           <property name="focusPolicy" >
+            <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0" >
+      <spacer name="verticalSpacer" >
+       <property name="orientation" >
+        <enum>com.trolltech.qt.core.Qt.Orientation.Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0" >
+        <size>
+         <width>17</width>
+         <height>37</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="2" column="0" >
+      <widget class="QFrame" name="lineSplitAdvUser" >
+       <property name="frameShape" >
+        <enum>com.trolltech.qt.gui.QFrame.Shape.HLine</enum>
+       </property>
+       <property name="frameShadow" >
+        <enum>com.trolltech.qt.gui.QFrame.Shadow.Sunken</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" >
+      <layout class="QHBoxLayout" name="horizontalLayoutAdvUserButtonGroup" >
+       <item>
+        <spacer name="horizontalSpacerAdvUserButtonGroup" >
+         <property name="orientation" >
+          <enum>com.trolltech.qt.core.Qt.Orientation.Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>37</width>
+           <height>17</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnOk" >
+         <property name="minimumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="focusPolicy" >
+          <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+         </property>
+         <property name="text" >
+          <string>&amp;Ok</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCancel" >
+         <property name="minimumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="focusPolicy" >
+          <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+         </property>
+         <property name="text" >
+          <string>&amp;Cancel</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineEditFirstName</tabstop>
+  <tabstop>lineEditLastName</tabstop>
+  <tabstop>lineEditStreetName</tabstop>
+  <tabstop>lineEditStreetNumber</tabstop>
+  <tabstop>lineEditCity</tabstop>
+  <tabstop>lineEditPostalCode</tabstop>
+  <tabstop>lineEditCountry</tabstop>
+  <tabstop>btnOk</tabstop>
+  <tabstop>btnCancel</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

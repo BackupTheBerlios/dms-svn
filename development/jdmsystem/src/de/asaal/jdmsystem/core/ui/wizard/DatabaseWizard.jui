@@ -1,0 +1,18 @@
+<ui version="4.0" language="jambi" >
+ <class>DatabaseWizard</class>
+ <widget class="QDialog" name="DatabaseWizard" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>552</width>
+    <height>422</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Dialog</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

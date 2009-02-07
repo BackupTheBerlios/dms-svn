@@ -1,0 +1,345 @@
+<ui version="4.0" language="jambi" >
+ <class>UserBase</class>
+ <widget class="QWidget" name="UserBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>415</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>640</width>
+    <height>415</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>User</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayoutUserWidget" >
+   <item row="0" column="0" >
+    <layout class="QGridLayout" name="gridLayoutUser" >
+     <item row="0" column="0" colspan="2" >
+      <widget class="QTreeWidget" name="treeWidgetUser" >
+       <property name="contextMenuPolicy" >
+        <enum>com.trolltech.qt.core.Qt.ContextMenuPolicy.CustomContextMenu</enum>
+       </property>
+       <property name="rootIsDecorated" >
+        <bool>false</bool>
+       </property>
+       <property name="sortingEnabled" >
+        <bool>true</bool>
+       </property>
+       <column>
+        <property name="text" >
+         <string>Username</string>
+        </property>
+       </column>
+       <column>
+        <property name="text" >
+         <string>Firstname</string>
+        </property>
+       </column>
+       <column>
+        <property name="text" >
+         <string>Lastname</string>
+        </property>
+       </column>
+       <column>
+        <property name="text" >
+         <string>Created</string>
+        </property>
+       </column>
+       <column>
+        <property name="text" >
+         <string>Updated</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="2" >
+      <layout class="QGridLayout" name="gridLayoutUserOption" >
+       <item row="0" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutUserName" >
+         <item>
+          <widget class="QLabel" name="labelUserName" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Username:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditUserName</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditUserName" >
+           <property name="frame" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutUserPassword" >
+         <item>
+          <widget class="QLabel" name="labelUserPassword" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Password:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditUserPassword</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditUserPassword" >
+           <property name="echoMode" >
+            <enum>com.trolltech.qt.gui.QLineEdit.EchoMode.Password</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayoutUserConfirmPassword" >
+         <item>
+          <widget class="QLabel" name="labelUserConfirmPassword" >
+           <property name="minimumSize" >
+            <size>
+             <width>110</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Confirm password:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>lineEditUserPasswordConfirm</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditUserPasswordConfirm" >
+           <property name="echoMode" >
+            <enum>com.trolltech.qt.gui.QLineEdit.EchoMode.Password</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="2" >
+        <widget class="QPushButton" name="btnAddUser" >
+         <property name="minimumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>&amp;Add</string>
+         </property>
+         <property name="shortcut" >
+          <string>Alt+A</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" >
+        <widget class="QPushButton" name="btnUpdateUser" >
+         <property name="minimumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>&amp;Update</string>
+         </property>
+         <property name="shortcut" >
+          <string>Alt+U</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2" >
+        <widget class="QPushButton" name="btnDeleteUser" >
+         <property name="minimumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>&amp;Delete</string>
+         </property>
+         <property name="shortcut" >
+          <string>Alt+D</string>
+         </property>
+        </widget>
+       </item>
+       <item rowspan="3" row="0" column="1" >
+        <widget class="QFrame" name="lineUser" >
+         <property name="frameShape" >
+          <enum>com.trolltech.qt.gui.QFrame.Shape.VLine</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>com.trolltech.qt.gui.QFrame.Shadow.Sunken</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0" colspan="2" >
+      <widget class="QFrame" name="lineUserSplitWidget" >
+       <property name="frameShape" >
+        <enum>com.trolltech.qt.gui.QFrame.Shape.HLine</enum>
+       </property>
+       <property name="frameShadow" >
+        <enum>com.trolltech.qt.gui.QFrame.Shadow.Sunken</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="2" >
+      <layout class="QHBoxLayout" name="horizontalLayoutUserButtonGroup" >
+       <item>
+        <widget class="QPushButton" name="btnAdvanceUser" >
+         <property name="minimumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="focusPolicy" >
+          <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+         </property>
+         <property name="text" >
+          <string>Ad&amp;v. User</string>
+         </property>
+         <property name="shortcut" >
+          <string>Alt+V</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacerUserWidgetButtonGroup" >
+         <property name="orientation" >
+          <enum>com.trolltech.qt.core.Qt.Orientation.Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>37</width>
+           <height>17</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnOk" >
+         <property name="minimumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>&amp;Ok</string>
+         </property>
+         <property name="shortcut" >
+          <string>Alt+O</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCancel" >
+         <property name="minimumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>75</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>&amp;Cancel</string>
+         </property>
+         <property name="shortcut" >
+          <string>Alt+C</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="E:/dmsystem/resource/dms.qrc" />
+ </resources>
+ <connections/>
+</ui>

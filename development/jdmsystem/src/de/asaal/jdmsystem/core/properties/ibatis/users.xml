@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserStatements">
+	<resultMap id="UserDataDTOResult" class="de.asaal.jdmsystem.core.dto.UserDataDTO">
+		<result property="userDataId" column="UDID" />
+		<result property="fkUserId" column="UID" />
+		<result property="firstName" column="FNAME" />
+		<result property="lastName" column="LNAME" />
+		<result property="streetName" column="STREETNAME" />
+		<result property="streetNr" column="STREETNR" />
+		<result property="city" column="CITY" />
+		<result property="zipCode" column="ZIPCODE" />
+		<result property="country" column="COUNTRY" />
+		<result property="created" column="CREATED" />
+		<result property="updated" column="UPDATED" />
+	</resultMap>
+
+	<resultMap id="UserDTOResult" class="de.asaal.jdmsystem.core.dto.UserDTO"
+		extends="UserDataDTOResult">
+		<result property="userId" column="UID" />
+		<result property="userName" column="USERNAME" />
+		<result property="userPwd" column="USERPASSWD" />
+		<result property="loggedIn" column="LOGGEDIN" />
+		<result property="created" column="CREATED" />
+		<result property="updated" column="UPDATED" />
+	</resultMap>
+
+	<select id="selectAllUsers" resultMap="UserDTOResult">
+		SELECT U.*, UD.* FROM USERS U LEFT JOIN USERSDATA UD ON U.UID = UD.UID
+	</select>
+
+	<select id="selectUserByName" resultClass="java.lang.String">
+		SELECT U.UID FROM USERS U WHERE LOWER( U.USERNAME ) = LOWER( #value# )
+	</select>
+
+	<insert id="createUser" parameterClass="de.asaal.jdmsystem.core.dto.UserDTO">
+		INSERT INTO USERS (
+			UID,
+			USERNAME,
+			USERPASSWD,
+			LOGGEDIN,
+			CREATED,
+			UPDATED
+		) VALUES (
+			#userId#,
+			#userName#,
+			<isNotEmpty property="userPwd">
+				#userPwd#,
+			</isNotEmpty>
+			<isEmpty property="userPwd">
+				NULL,
+			</isEmpty>
+			<isNotEmpty property="loggedIn">
+				#loggedIn#,
+			</isNotEmpty>
+			<isEmpty property="loggedIn">
+				0,
+			</isEmpty>
+			<isNotEmpty property="created">
+				#created#,
+			</isNotEmpty>
+			<isEmpty property="created">
+				CURRENT_DATE,
+			</isEmpty>
+			<isNotEmpty property="updated">
+				#updated#
+			</isNotEmpty>
+			<isEmpty property="updated">
+				CURRENT_DATE
+			</isEmpty>
+		)
+	</insert>
+
+	<insert id="createUserData" parameterClass="de.asaal.jdmsystem.core.dto.UserDataDTO">
+		INSERT INTO USERSDATA (
+			UDID,
+			UID,
+			FNAME,
+			LNAME,
+			STREETNAME,
+			STREETNR,
+			CITY,
+			ZIPCODE,
+			COUNTRY,
+			CREATED,
+			UPDATED
+		) VALUES (
+			#userDataId#,
+			#fkUserId#,
+			#firstName#,
+			#lastName#,
+			#streetName#,
+			#streetNr#,
+			#city#,
+			#zipCode#,
+			#country#,
+			<isNotEmpty property="created">
+				#created#,
+			</isNotEmpty>
+			<isEmpty property="created">
+				CURRENT_DATE,
+			</isEmpty>
+			<isNotEmpty property="updated">
+				#updated#
+			</isNotEmpty>
+			<isEmpty property="updated">
+				CURRENT_DATE
+			</isEmpty>
+		)
+	</insert>
+
+	<update id="updateUser" parameterClass="de.asaal.jdmsystem.core.dto.UserDTO">
+		UPDATE USERS SET
+			<isNotEmpty property="userName">
+				USERNAME = #updated#,
+			</isNotEmpty>
+			<isNotEmpty property="userPwd">
+				USERPASSWD = #userPwd#,
+			</isNotEmpty>
+			<isNotEmpty property="updated">
+				UPDATED = #updated#
+			</isNotEmpty>
+			<isEmpty property="updated">
+				UPDATED = CURRENT_DATE
+			</isEmpty>
+		WHERE
+			UID = #userId#
+	</update>
+
+	<update id="updateUserData" parameterClass="de.asaal.jdmsystem.core.dto.UserDataDTO">
+		UPDATE USERSDATA SET
+			<isNotEmpty property="firstName">
+				FNAME = #firstName#,
+			</isNotEmpty>
+			<isNotEmpty property="lastName">
+				LNAME = #lastName#,
+			</isNotEmpty>
+			<isNotEmpty property="streetName">
+				STREETNAME = #streetName#,
+			</isNotEmpty>
+			<isNotEmpty property="streetNr">
+				STREETNR = #streetNr#,
+			</isNotEmpty>
+			<isNotEmpty property="city">
+				CITY = #city#,
+			</isNotEmpty>
+			<isNotEmpty property="zipCode">
+				ZIPCODE = #zipCode#,
+			</isNotEmpty>
+			<isNotEmpty property="country">
+				COUNTRY = #country#,
+			</isNotEmpty>
+			<isNotEmpty property="updated">
+				UPDATED = #updated#
+			</isNotEmpty>
+			<isEmpty property="updated">
+				UPDATED = CURRENT_DATE
+			</isEmpty>
+		WHERE
+			UID = #fkUserId#
+			AND UDID = #userDataId#
+	</update>
+
+	<update id="updateUserLogin" parameterClass="de.asaal.jdmsystem.core.dto.UserDTO">
+		UPDATE USERS SET LOGGEDIN = #loggedIn# WHERE UID = #userId#
+	</update>
+
+	<delete id="deleteUser" parameterClass="de.asaal.jdmsystem.core.dto.UserDTO">
+		DELETE FROM USERS WHERE UID = #userId#
+	</delete>
+	
+	<delete id="deleteUserData" parameterClass="de.asaal.jdmsystem.core.dto.UserDTO">
+		DELETE FROM USERSDATA WHERE UID = #userId#
+	</delete>
+</sqlMap>

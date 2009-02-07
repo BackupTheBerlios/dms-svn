@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DocumentStatements">
+	<resultMap id="DocumentResult" class="de.asaal.jdmsystem.core.dto.DocumentDTO">
+		<result property="docId" column="DID" />
+		<result property="fkUserId" column="UID" />
+		<result property="fkGroupId" column="GID" />
+		<result property="docName" column="DOCNAME" />
+		<result property="docPath" column="DOCPATH" />
+		<result property="created" column="CREATED" />
+		<result property="updated" column="UPDATED" />
+		<result property="checkedOut" column="CHECKEDOUT" />
+	</resultMap>
+
+	<select id="selectDocuments" resultMap="DocumentResult">
+	</select>
+
+	<select id="selectDocumentsByUser" parameterClass="de.asaal.jdmsystem.core.dto.UserDTO" resultMap="DocumentResult">
+	</select>
+
+	<select id="selectDocumentIdByName" resultClass="java.lang.String">
+	</select>
+
+	<insert id="createDocument" parameterClass="de.asaal.jdmsystem.core.dto.DocumentDTO">
+	</insert>
+
+	<update id="updateDocument" parameterClass="de.asaal.jdmsystem.core.dto.DocumentDTO">
+	</update>
+	
+	<delete id="deleteDocument" parameterClass="de.asaal.jdmsystem.core.dto.DocumentDTO">
+	</delete>
+</sqlMap>

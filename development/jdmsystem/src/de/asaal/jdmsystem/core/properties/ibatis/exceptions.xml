@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ExceptionStatements">
+	<resultMap id="ExceptionStack" class="de.asaal.jdmsystem.core.dto.ExceptionStackDTO">
+		<result property="sqlId" column="SQLID" />
+		<result property="sqlMessage" column="SQLMESSAGE" />
+		<result property="sqlState" column="SQLSTATE" />
+		<result property="sqlVendorCode" column="SQLVENDORCODE" />
+		<result property="message" column="MESSAGE" />
+		<result property="className" column="CLASSNAME" />
+		<result property="fileName" column="FILENAME" />
+		<result property="lineNumber" column="LINENUMBER" />
+		<result property="methodeName" column="METHODENAME" />
+		<result property="hashCode" column="HASHCODE" />
+		<result property="isNativeMethode" column="IS_NATIVEMETHODE" />
+		<result property="created" column="CREATED" />
+	</resultMap>
+
+	<select id="selectExceptions" resultMap="ExceptionStack">
+		SELECT * FROM EXCEPTIONS
+	</select>
+
+	<insert id="createException" parameterClass="de.asaal.jdmsystem.core.dto.ExceptionStackDTO">
+		INSERT INTO EXCEPTIONS (
+			SQLID,
+			SQLMESSAGE,
+			`SQLSTATE`,
+			SQLVENDORCODE,
+			MESSAGE,
+			CLASSNAME,
+			FILENAME,
+			LINENUMBER,
+			METHODENAME,
+			HASHCODE,
+			IS_NATIVEMETHODE,
+			CREATED
+		) VALUES (
+			#sqlId#,
+			#sqlMessage#,
+			#sqlState#,
+			#sqlVendorCode#,
+			#message#,
+			#className#,
+			#fileName#,
+			#lineNumber#,
+			#methodeName#,
+			#hashCode#,
+			#isNativeMethode#,
+			<isNotEmpty property="created">
+				#created#
+			</isNotEmpty>
+			<isEmpty property="created">
+				CURRENT_DATE
+			</isEmpty>
+		)
+	</insert>
+
+	<delete id="clearExcetions">
+		TRUNCATE TABLE EXCEPTIONS
+	</delete>
+</sqlMap>

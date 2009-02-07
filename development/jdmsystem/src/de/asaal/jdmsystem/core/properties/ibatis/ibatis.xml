@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<transactionManager type="JDBC">
+		<dataSource type="SIMPLE">
+			<property name="JDBC.Driver" value="${mysql_driver}" />
+			<property name="JDBC.ConnectionURL" value="${mysql_url}" />
+			<property name="JDBC.Username" value="${mysql_username}" />
+			<property name="JDBC.Password" value="${mysql_password}" />
+			<property name="JDBC.DefaultAutoCommit" value="true" />
+		</dataSource>
+	</transactionManager>
+
+	<sqlMap resource="de/asaal/jdmsystem/core/properties/ibatis/documents.xml" />
+	<sqlMap resource="de/asaal/jdmsystem/core/properties/ibatis/exceptions.xml" />
+	<sqlMap resource="de/asaal/jdmsystem/core/properties/ibatis/groups.xml" />
+	<sqlMap resource="de/asaal/jdmsystem/core/properties/ibatis/users.xml" />
+</sqlMapConfig>
