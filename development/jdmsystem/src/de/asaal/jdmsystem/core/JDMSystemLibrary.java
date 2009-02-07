@@ -97,14 +97,14 @@ public class JDMSystemLibrary implements IJDMSystem
   @Override
   public String createDocument( DocumentDTO documentDTO )
   {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   @Override
   public String createGroup( GroupDTO groupDTO )
   {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
@@ -165,14 +165,14 @@ public class JDMSystemLibrary implements IJDMSystem
   @Override
   public boolean deleteDocument( DocumentDTO documentDTO )
   {
-    // TODO Auto-generated method stub
+
     return false;
   }
 
   @Override
   public boolean deleteGroup( GroupDTO groupDTO )
   {
-    // TODO Auto-generated method stub
+
     return false;
   }
 
@@ -206,35 +206,35 @@ public class JDMSystemLibrary implements IJDMSystem
   @Override
   public List< DocumentDTO > geDocuments( String userId )
   {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   @Override
   public String getDocId( String userId, String docName )
   {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   @Override
   public List< DocumentDTO > getDocuments()
   {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   @Override
   public String getGroupId( String groupName )
   {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
   @Override
   public List< GroupDTO > getGroups()
   {
-    // TODO Auto-generated method stub
+
     return null;
   }
 
@@ -341,14 +341,14 @@ public class JDMSystemLibrary implements IJDMSystem
   @Override
   public boolean updateDocument( DocumentDTO documentDTO )
   {
-    // TODO Auto-generated method stub
+
     return false;
   }
 
   @Override
   public boolean updateGroup( GroupDTO groupDTO )
   {
-    // TODO Auto-generated method stub
+
     return false;
   }
 
