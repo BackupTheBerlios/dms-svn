@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/batis.jar"/>
 	<classpathentry kind="lib" path="lib/mysql.jar"/>
 	<classpathentry kind="lib" path="lib/qtjambi-runtime.jar"/>
 	<classpathentry kind="lib" path="lib/qtjambi.jar"/>
+	<classpathentry kind="lib" path="lib/ibatis.jar"/>
 	<classpathentry kind="output" path="java"/>
 </classpath>
