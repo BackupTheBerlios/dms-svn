@@ -87,7 +87,11 @@ public class AdvancedUserBase extends UiAdvancedUserBase implements IDialog
   @Override
   public void accept()
   {
-    userDataDTO = new UserDataDTO();
+    if( userDataDTO == null )
+    {
+      userDataDTO = new UserDataDTO();
+    }
+
     userDataDTO.setFkUserId( getUserId() );
     userDataDTO.setFirstName( lineEditFirstName.text() );
     userDataDTO.setLastName( lineEditLastName.text() );
@@ -114,6 +118,26 @@ public class AdvancedUserBase extends UiAdvancedUserBase implements IDialog
   public void setUserId( String userId )
   {
     this.userId = userId;
+  }
+
+  /**
+   * Set advanced {@link UserDataDTO}
+   * 
+   * @param userDataDTO
+   *          The {@link UserDataDTO}
+   */
+  public void setUserDataDTO( UserDataDTO userDataDTO )
+  {
+    this.userDataDTO = userDataDTO;
+    setUserId( userDataDTO.getFkUserId() );
+
+    lineEditFirstName.setText( userDataDTO.getFirstName() );
+    lineEditLastName.setText( userDataDTO.getLastName() );
+    lineEditCity.setText( userDataDTO.getCity() );
+    lineEditCountry.setText( userDataDTO.getCountry() );
+    lineEditStreetName.setText( userDataDTO.getStreetName() );
+    lineEditStreetNumber.setText( userDataDTO.getStreetNr() );
+    lineEditPostalCode.setText( userDataDTO.getZipCode() );
   }
 
   /**
