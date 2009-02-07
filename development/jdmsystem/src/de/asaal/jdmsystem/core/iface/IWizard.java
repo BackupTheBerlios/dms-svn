@@ -26,13 +26,28 @@ package de.asaal.jdmsystem.core.iface;
  */
 public interface IWizard
 {
+  /**
+   * Back to the 
+   */
   public void back();
 
+  /**
+   * 
+   */
   public void cancel();
 
+  /**
+   * 
+   */
   public void finsish();
 
+  /**
+   * 
+   */
   public void help();
 
+  /**
+   * 
+   */
   public void next();
 }
