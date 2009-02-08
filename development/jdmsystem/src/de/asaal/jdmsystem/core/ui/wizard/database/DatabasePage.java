@@ -31,12 +31,12 @@ import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
 public class DatabasePage extends QWizardPage
 {
   private static DatabasePage instance   = null;
-  private UiConnectionPage    uiInstance = null;
+  private UiDatabasePage    uiInstance = null;
 
   private DatabasePage()
   {
     super();
-    uiInstance = new UiConnectionPage();
+    uiInstance = new UiDatabasePage();
     uiInstance.setupUi( this );
     instance = this;
   }

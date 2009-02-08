@@ -1,24 +1,162 @@
-<ui version="4.0" language="jambi">
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
+<ui version="4.0" language="jambi" >
  <class>DatabasePage</class>
  <widget class="QWizardPage" name="DatabasePage" >
-  <property name="objectName" >
-   <string notr="true" >DatabasePage</string>
-  </property>
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>639</width>
     <height>300</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>QWizardPage</string>
   </property>
+  <widget class="QWidget" name="layoutWidget" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>430</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout" >
+    <item row="0" column="0" >
+     <layout class="QHBoxLayout" name="horizontalLayout_3" >
+      <item>
+       <widget class="QLabel" name="labelHost" >
+        <property name="minimumSize" >
+         <size>
+          <width>110</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize" >
+         <size>
+          <width>110</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text" >
+         <string>Host:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEditoHost" />
+      </item>
+     </layout>
+    </item>
+    <item rowspan="3" row="0" column="1" >
+     <layout class="QVBoxLayout" name="verticalLayout" >
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4" >
+        <item>
+         <widget class="QLabel" name="labelPort" >
+          <property name="minimumSize" >
+           <size>
+            <width>110</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>110</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Port:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinBoxPort" >
+          <property name="maximum" >
+           <number>65536</number>
+          </property>
+          <property name="value" >
+           <number>3306</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer" >
+        <property name="orientation" >
+         <enum>com.trolltech.qt.core.Qt.Orientation.Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0" >
+         <size>
+          <width>17</width>
+          <height>37</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0" >
+     <layout class="QHBoxLayout" name="horizontalLayout_2" >
+      <item>
+       <widget class="QLabel" name="labelUser" >
+        <property name="minimumSize" >
+         <size>
+          <width>110</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize" >
+         <size>
+          <width>110</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text" >
+         <string>User:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEditUser" />
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0" >
+     <layout class="QHBoxLayout" name="horizontalLayout" >
+      <item>
+       <widget class="QLabel" name="labelPassword" >
+        <property name="minimumSize" >
+         <size>
+          <width>110</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize" >
+         <size>
+          <width>110</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text" >
+         <string>Password:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEditPassword" >
+        <property name="echoMode" >
+         <enum>com.trolltech.qt.gui.QLineEdit.EchoMode.Normal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
  </widget>
- <pixmapfunction></pixmapfunction>
+ <resources/>
  <connections/>
 </ui>
