@@ -57,6 +57,6 @@ public class WelcomePage extends QWizardPage
   @Override
   public int nextId()
   {
-    return DatabaseWizard.PAGE_CONNECTION;
+    return DatabaseWizard.PAGE_DATABASE;
   }
 }
