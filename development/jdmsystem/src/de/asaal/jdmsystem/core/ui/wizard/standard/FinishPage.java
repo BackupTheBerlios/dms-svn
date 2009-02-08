@@ -2,25 +2,29 @@ package de.asaal.jdmsystem.core.ui.wizard.standard;
 
 import com.trolltech.qt.gui.*;
 
-public class FinishPage extends QWidget {
+public class FinishPage extends UiFinishPage
+{
+  private QWizardPage       finishPage = null;
+  private static FinishPage instance   = null;
 
-    UiFinishPage ui = new UiFinishPage();
+  private FinishPage()
+  {
+    finishPage = new QWizardPage();
+    setupUi( finishPage );
 
-    public static void main(String[] args) {
-        QApplication.initialize(args);
+    instance = this;
+  }
 
-        FinishPage testFinishPage = new FinishPage();
-        testFinishPage.show();
-
-        QApplication.exec();
+  public static FinishPage finishPageInstance()
+  {
+    if( instance != null )
+    {
+      return instance;
     }
-
-    public FinishPage() {
-        ui.setupUi(this);
+    else
+    {
+      instance = new FinishPage();
+      return instance;
     }
-
-    public FinishPage(QWidget parent) {
-        super(parent);
-        ui.setupUi(this);
-    }
+  }
 }

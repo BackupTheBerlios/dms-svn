@@ -2,25 +2,14 @@ package de.asaal.jdmsystem.core.ui.wizard.standard;
 
 import com.trolltech.qt.gui.*;
 
-public class WelcomePage extends QWidget {
+public class WelcomePage extends UiWelcomePage
+{
 
-    UiWelcomePage ui = new UiWelcomePage();
+  private QWizardPage welcomPage = null;
 
-    public static void main(String[] args) {
-        QApplication.initialize(args);
-
-        WelcomePage testWelcomePage = new WelcomePage();
-        testWelcomePage.show();
-
-        QApplication.exec();
-    }
-
-    public WelcomePage() {
-        ui.setupUi(this);
-    }
-
-    public WelcomePage(QWidget parent) {
-        super(parent);
-        ui.setupUi(this);
-    }
+  public WelcomePage()
+  {
+    welcomPage = new QWizardPage();
+    setupUi( welcomPage );
+  }
 }

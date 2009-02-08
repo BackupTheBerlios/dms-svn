@@ -3,7 +3,7 @@
  <comment></comment>
  <exportmacro></exportmacro>
  <class>WelcomePage</class>
- <widget class="QWidget" name="WelcomePage" >
+ <widget class="QWizardPage" name="WelcomePage" >
   <property name="objectName" >
    <string notr="true" >WelcomePage</string>
   </property>

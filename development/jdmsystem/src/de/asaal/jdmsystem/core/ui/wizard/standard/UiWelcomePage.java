@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'WelcomePage.jui'
 **
-** Created: So 8. Feb 13:15:55 2009
+** Created: So 8. Feb 13:17:22 2009
 **      by: Qt User Interface Compiler version 4.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -17,7 +17,7 @@ public class UiWelcomePage
 
     public UiWelcomePage() { super(); }
 
-    public void setupUi(QWidget WelcomePage)
+    public void setupUi(QWizardPage WelcomePage)
     {
         WelcomePage.setObjectName("WelcomePage");
         WelcomePage.resize(new QSize(400, 300).expandedTo(WelcomePage.minimumSizeHint()));
@@ -26,7 +26,7 @@ public class UiWelcomePage
         WelcomePage.connectSlotsByName();
     } // setupUi
 
-    void retranslateUi(QWidget WelcomePage)
+    void retranslateUi(QWizardPage WelcomePage)
     {
         WelcomePage.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("WelcomePage", "Form"));
     } // retranslateUi
