@@ -58,6 +58,6 @@ public class FinishPage extends QWizardPage
   @Override
   public int nextId()
   {
-    return DatabaseWizard.PAGE_FINISH;
+    return -1;
   }
 }

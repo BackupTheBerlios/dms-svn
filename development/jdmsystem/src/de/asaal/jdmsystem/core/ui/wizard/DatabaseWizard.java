@@ -1,5 +1,6 @@
 package de.asaal.jdmsystem.core.ui.wizard;
 
+import com.trolltech.qt.gui.QPixmap;
 import com.trolltech.qt.gui.QWidget;
 import com.trolltech.qt.gui.QWizard;
 
@@ -61,6 +62,11 @@ public class DatabaseWizard extends QWizard
 
     databaseWizard = this;
     registerPages();
+
+    setWindowTitle( tr( "Database Assistant" ) );
+    //setSubTitle( tr( "Select as first a opion and then mak your settings. You must set a host, port and a user. Password are optional." ) );
+
+    setPixmap( WizardPixmap.WatermarkPixmap, new QPixmap( "classpath:de/asaal/jdmsystem/resource/images/wizard_logo.png" ) );
   }
 
   private void registerPages()

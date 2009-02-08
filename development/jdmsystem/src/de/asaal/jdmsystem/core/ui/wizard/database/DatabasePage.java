@@ -1,6 +1,5 @@
 package de.asaal.jdmsystem.core.ui.wizard.database;
 
-import com.trolltech.qt.QSignalEmitter;
 import com.trolltech.qt.core.QObject;
 import com.trolltech.qt.gui.QRadioButton;
 import com.trolltech.qt.gui.QWizardPage;
@@ -86,10 +85,10 @@ public class DatabasePage extends QWizardPage
     try
     {
       QRadioButton rbtn = (QRadioButton)QObject.signalSender();
-      if(rbtn.equals( uiInstance.rbtnNewDatabase ) )
+      if( rbtn.equals( uiInstance.rbtnNewDatabase ) )
       {
       }
-      else if(rbtn.equals( uiInstance.rbtnChooseDatabase ) )
+      else if( rbtn.equals( uiInstance.rbtnChooseDatabase ) )
       {
       }
     }
@@ -98,7 +97,7 @@ public class DatabasePage extends QWizardPage
       // TODO: handle exception
     }
   }
-  
+
   public String fieldWidgetValue( String fieldName )
   {
     try

@@ -39,9 +39,6 @@ public class WelcomePage extends QWizardPage
     instance.setupUi( this );
 
     welcomPage = this;
-    
-    setTitle( tr( "Welcome" ) );
-    setSubTitle( tr( "Read this information carefully!" ) );
   }
 
   public static WelcomePage welcomePage()
