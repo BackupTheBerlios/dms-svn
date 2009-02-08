@@ -2,29 +2,38 @@ package de.asaal.jdmsystem.core.ui.wizard.standard;
 
 import com.trolltech.qt.gui.*;
 
-public class FinishPage extends UiFinishPage
+import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
+
+public class FinishPage extends QWizardPage
 {
-  private QWizardPage       finishPage = null;
-  private static FinishPage instance   = null;
+  private static FinishPage finishPage = null;
+  private UiFinishPage      instance   = null;
 
   private FinishPage()
   {
-    finishPage = new QWizardPage();
-    setupUi( finishPage );
+    super();
+    instance = new UiFinishPage();
+    instance.setupUi( this );
 
-    instance = this;
+    finishPage = this;
   }
 
   public static FinishPage finishPage()
   {
-    if( instance != null )
+    if( finishPage != null )
     {
-      return instance;
+      return finishPage;
     }
     else
     {
-      instance = new FinishPage();
-      return instance;
+      finishPage = new FinishPage();
+      return finishPage;
     }
+  }
+
+  @Override
+  public int nextId()
+  {
+    return DatabaseWizard.PAGE_FINISH;
   }
 }

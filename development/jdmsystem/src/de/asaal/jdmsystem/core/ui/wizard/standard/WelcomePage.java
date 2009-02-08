@@ -1,31 +1,38 @@
 package de.asaal.jdmsystem.core.ui.wizard.standard;
 
-import com.trolltech.qt.gui.*;
+import com.trolltech.qt.gui.QWizardPage;
 
-public class WelcomePage extends UiWelcomePage
+import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
+
+public class WelcomePage extends QWizardPage
 {
-
-  private QWizardPage        welcomPage = null;
-  private static WelcomePage instance   = null;
+  private static WelcomePage welcomPage = null;
+  private UiWelcomePage      instance   = null;
 
   private WelcomePage()
   {
-    welcomPage = new QWizardPage();
-    setupUi( welcomPage );
+    instance = new UiWelcomePage();
+    instance.setupUi( this );
 
-    instance = this;
+    welcomPage = this;
   }
 
   public static WelcomePage welcomePage()
   {
-    if( instance != null )
+    if( welcomPage != null )
     {
-      return instance;
+      return welcomPage;
     }
     else
     {
-      instance = new WelcomePage();
-      return instance;
+      welcomPage = new WelcomePage();
+      return welcomPage;
     }
+  }
+
+  @Override
+  public int nextId()
+  {
+    return DatabaseWizard.PAGE_CONNECTION;
   }
 }

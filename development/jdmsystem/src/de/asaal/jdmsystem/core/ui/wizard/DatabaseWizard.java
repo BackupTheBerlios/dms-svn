@@ -3,6 +3,11 @@ package de.asaal.jdmsystem.core.ui.wizard;
 import com.trolltech.qt.gui.QWidget;
 import com.trolltech.qt.gui.QWizard;
 
+import de.asaal.jdmsystem.core.ui.wizard.database.ConnectionPage;
+import de.asaal.jdmsystem.core.ui.wizard.database.DatabasePage;
+import de.asaal.jdmsystem.core.ui.wizard.standard.FinishPage;
+import de.asaal.jdmsystem.core.ui.wizard.standard.WelcomePage;
+
 /**
  * Copyright (C) 2009 Alexander Saal<br>
  * alex.saal@gmx.de<br>
@@ -29,36 +34,65 @@ import com.trolltech.qt.gui.QWizard;
  */
 public class DatabaseWizard extends QWizard
 {
-  private static DatabaseWizard instance = null;
+  private static DatabaseWizard databaseWizard  = null;
+  private ConnectionPage        connectionPage  = null;
+  private DatabasePage          databasePage    = null;
+  private FinishPage            finishPage      = null;
 
-  public static enum Pages
+  /**
+   * Display welcome page
+   */
+  public static int             PAGE_WELCOME    = 0;
+
+  /**
+   * Display connection page
+   */
+  public static int             PAGE_CONNECTION = 1;
+
+  /**
+   * Display database selection page
+   */
+  public static int             PAGE_DATABASE   = 2;
+
+  /**
+   * Display finish page
+   */
+  public static int             PAGE_FINISH     = 3;
+
+  private DatabaseWizard()
   {
-    /**
-     * Display welcome page
-     */
-    PAGE_WELCOME,
-
-    /**
-     * Display connection page
-     */
-    PAGE_CONNECTION,
-
-    /**
-     * Display database selection page
-     */
-    PAGE_DATABASE,
-
-    /**
-     * Display finish page
-     */
-    PAGE_FINISH
+    new DatabaseWizard( null );
   }
 
-  public DatabaseWizard( QWidget parent )
+  private DatabaseWizard( QWidget parent )
+  {
+    super( parent );
+
+    try
+    {
+      connectionPage = ConnectionPage.connectionPage();
+      databasePage = DatabasePage.databasePage();
+      finishPage = FinishPage.finishPage();
+
+      setPage( PAGE_WELCOME, WelcomePage.welcomePage() );
+      setPage( PAGE_CONNECTION, connectionPage );
+      setPage( PAGE_DATABASE, databasePage );
+      setPage( PAGE_FINISH, finishPage );
+      setStartId( PAGE_WELCOME );
+
+      databaseWizard = this;
+    }
+    catch( Exception ex )
+    {
+    }
+  }
+
+  @Override
+  public void accept()
   {
     try
     {
-      instance = this;
+
     }
     catch( Exception ex )
     {
@@ -67,7 +101,15 @@ public class DatabaseWizard extends QWizard
 
   public static DatabaseWizard databaseWizardInstance()
   {
-    return instance;
+    if( databaseWizard != null )
+    {
+      return databaseWizard;
+    }
+    else
+    {
+      databaseWizard = new DatabaseWizard();
+      return databaseWizard;
+    }
   }
 
 }

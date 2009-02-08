@@ -2,19 +2,19 @@ package de.asaal.jdmsystem.core.ui.wizard.database;
 
 import com.trolltech.qt.gui.QWizardPage;
 
-public class ConnectionPage extends UiConnectionPage
-{
+import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
 
-  private QWizardPage           connectionPage = null;
-  private static ConnectionPage instance       = null;
+public class ConnectionPage extends QWizardPage
+{
+  private static ConnectionPage instance   = null;
+  private UiConnectionPage      uiInstance = null;
 
   private ConnectionPage()
   {
     super();
 
-    connectionPage = new QWizardPage();
-    setupUi( connectionPage );
-    instance = this;
+    uiInstance = new UiConnectionPage();
+    uiInstance.setupUi( this );
   }
 
   public static ConnectionPage connectionPage()
@@ -28,5 +28,11 @@ public class ConnectionPage extends UiConnectionPage
       instance = new ConnectionPage();
       return instance;
     }
+  }
+
+  @Override
+  public int nextId()
+  {
+    return DatabaseWizard.PAGE_DATABASE;
   }
 }
