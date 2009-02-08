@@ -1,6 +1,6 @@
 package de.asaal.jdmsystem.core.ui.wizard.database;
 
-import com.trolltech.qt.gui.*;
+import com.trolltech.qt.gui.QWizardPage;
 
 import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
 
@@ -31,14 +31,53 @@ import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
 public class DatabasePage extends QWizardPage
 {
   private static DatabasePage instance   = null;
-  private UiDatabasePage    uiInstance = null;
+  private UiDatabasePage      uiInstance = null;
 
   private DatabasePage()
   {
     super();
+
     uiInstance = new UiDatabasePage();
     uiInstance.setupUi( this );
     instance = this;
+
+    initialFields();
+  }
+
+  private void initialFields()
+  {
+    try
+    {
+      registerField( "newDatabase", uiInstance.rbtnNewDatabase );
+      registerField( "chooseDatabase", uiInstance.rbtnChooseDatabase );
+      registerField( "dbHost*", uiInstance.lineEditoHost );
+      registerField( "dbPort*", uiInstance.spinBoxPort );
+      registerField( "dbUser*", uiInstance.lineEditUser );
+      registerField( "dbUserPassword", uiInstance.lineEditPassword );
+    }
+    catch( Exception ex )
+    {
+    }
+  }
+
+  public String fieldWidgetValue( String fieldName )
+  {
+    try
+    {
+      if( fieldName != null && !fieldName.isEmpty() )
+      {
+        if( fieldName.equalsIgnoreCase( "database" ) )
+        {
+          return uiInstance.comboBoxDatabase.currentText();
+        }
+      }
+
+      return null;
+    }
+    catch( Exception ex )
+    {
+      return null;
+    }
   }
 
   public static DatabasePage databasePage()

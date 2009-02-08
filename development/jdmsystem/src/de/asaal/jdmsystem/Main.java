@@ -6,7 +6,7 @@ import com.trolltech.qt.gui.QWidget;
 
 import de.asaal.jdmsystem.core.JDMSystemLibrary;
 import de.asaal.jdmsystem.core.ui.UserBase;
-
+import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
 
 /**
  * Copyright (C) 2009 Alexander Saal<br>
@@ -45,32 +45,17 @@ public class Main extends QWidget
     JDMSystemLibrary.setUsername( "root" );
     JDMSystemLibrary.setPassword( "Ms!//9pSicher!Code" );
 
-    JDMSystemLibrary library = new JDMSystemLibrary();
-    JDMSystemBase base = new JDMSystemBase( null, library );
-    base.showMaximized();
+    JDMSystemLibrary systemLibrary = new JDMSystemLibrary();
 
-    UserBase userBase = new UserBase();
-    userBase.show();
-    // UserDTO userDTO = new UserDTO();
-    // userDTO.setUserName( "asaal" );
-    // userDTO.setUserPwd( "Ms!//9pSicher!CodeMasterOfUniverse" );
-    // String userId = library.createUser( userDTO );
-    //    
-    // UserDataDTO userDataDTO = new UserDataDTO();
-    // userDataDTO.setFkUserId( userId );
-    // userDataDTO.setFirstName( "Alexander" );
-    // userDataDTO.setLastName( "Saal" );
-    // userDataDTO.setCity( "Landshut" );
-    // userDataDTO.setCountry( "Bayern" );
-    // userDataDTO.setStreetName( "Ahornweg" );
-    // userDataDTO.setStreetNr( "16" );
-    // userDataDTO.setZipCode( "84032" );
-    // String userDataId = library.createUserData( userDataDTO );
-    //    
-    // userDataDTO.setZipCode( "84032" );
-    // boolean ok = library.updateUser( userDTO, userDataDTO );
-    //    
-    // System.out.println(userDataId);
+    DatabaseWizard databaseWizard = DatabaseWizard.databaseWizard();
+    databaseWizard.setSystemLibrary( systemLibrary );
+    if( databaseWizard.exec() == 1 )
+    {
+
+    }
+
+    JDMSystemBase base = new JDMSystemBase( null, systemLibrary );
+    base.showMaximized();
 
     QApplication.exec();
   }

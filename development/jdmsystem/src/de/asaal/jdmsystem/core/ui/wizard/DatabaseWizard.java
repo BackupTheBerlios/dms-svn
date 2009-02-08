@@ -3,6 +3,7 @@ package de.asaal.jdmsystem.core.ui.wizard;
 import com.trolltech.qt.gui.QWidget;
 import com.trolltech.qt.gui.QWizard;
 
+import de.asaal.jdmsystem.core.JDMSystemLibrary;
 import de.asaal.jdmsystem.core.ui.wizard.database.DatabasePage;
 import de.asaal.jdmsystem.core.ui.wizard.standard.FinishPage;
 import de.asaal.jdmsystem.core.ui.wizard.standard.WelcomePage;
@@ -34,8 +35,10 @@ import de.asaal.jdmsystem.core.ui.wizard.standard.WelcomePage;
 public class DatabaseWizard extends QWizard
 {
   private static DatabaseWizard databaseWizard = null;
+  private WelcomePage           welcomePage    = null;
   private DatabasePage          databasePage   = null;
   private FinishPage            finishPage     = null;
+  private JDMSystemLibrary      systemLibrary  = null;
 
   /**
    * Display welcome page
@@ -61,11 +64,22 @@ public class DatabaseWizard extends QWizard
   {
     super( parent );
 
+    databaseWizard = this;
+    registerPages();
+  }
+
+  private void registerPages()
+  {
     try
     {
-      initialConnections();
+      welcomePage = WelcomePage.welcomePage();
+      databasePage = DatabasePage.databasePage();
+      finishPage = FinishPage.finishPage();
 
-      databaseWizard = this;
+      setPage( PAGE_WELCOME, welcomePage );
+      setPage( PAGE_DATABASE, databasePage );
+      setPage( PAGE_FINISH, finishPage );
+      setStartId( PAGE_WELCOME );
     }
     catch( Exception ex )
     {
@@ -84,7 +98,11 @@ public class DatabaseWizard extends QWizard
     }
   }
 
-  public static DatabaseWizard databaseWizardInstance()
+  /**
+   * Return instance of {@link DatabaseWizard}. If instance null it create new
+   * instance otherwise it returns available instance.
+   */
+  public static DatabaseWizard databaseWizard()
   {
     if( databaseWizard != null )
     {
@@ -97,20 +115,8 @@ public class DatabaseWizard extends QWizard
     }
   }
 
-  private void initialConnections()
+  public void setSystemLibrary( JDMSystemLibrary systemLibrary )
   {
-    try
-    {
-      databasePage = DatabasePage.databasePage();
-      finishPage = FinishPage.finishPage();
-
-      setPage( PAGE_WELCOME, WelcomePage.welcomePage() );
-      setPage( PAGE_DATABASE, databasePage );
-      setPage( PAGE_FINISH, finishPage );
-      setStartId( PAGE_WELCOME );
-    }
-    catch( Exception ex )
-    {
-    }
+    this.systemLibrary = systemLibrary;
   }
 }

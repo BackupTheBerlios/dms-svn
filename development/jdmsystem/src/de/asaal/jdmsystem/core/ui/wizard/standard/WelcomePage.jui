@@ -1,24 +1,30 @@
-<ui version="4.0" language="jambi">
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
+<ui version="4.0" language="jambi" >
  <class>WelcomePage</class>
  <widget class="QWizardPage" name="WelcomePage" >
-  <property name="objectName" >
-   <string notr="true" >WelcomePage</string>
-  </property>
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>470</width>
     <height>300</height>
    </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>470</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>470</width>
+    <height>300</height>
+   </size>
   </property>
   <property name="windowTitle" >
    <string>Form</string>
   </property>
  </widget>
- <pixmapfunction></pixmapfunction>
+ <resources/>
  <connections/>
 </ui>
