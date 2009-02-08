@@ -1,5 +1,5 @@
-JDMSystem need the following libraries and version:
----------------------------------------------------
+JDMSystem need the following libraries:
+---------------------------------------
 
 QtJambi in version 4.4.3
   - example: qtjambi-4.4.3_01.jar (rename to qtjambi.jar)
