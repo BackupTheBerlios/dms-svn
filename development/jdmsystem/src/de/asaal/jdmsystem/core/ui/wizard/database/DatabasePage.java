@@ -55,8 +55,8 @@ public class DatabasePage extends QWizardPage
   {
     try
     {
-      uiInstance.rbtnNewDatabase.toggled.connect( this, "databaseOptionChanged( boolean checked )" );
-      uiInstance.rbtnChooseDatabase.toggled.connect( this, "databaseOptionChanged( boolean checked )" );
+      uiInstance.rbtnNewDatabase.toggled.connect( this, "databaseOptionChanged( boolean )" );
+      uiInstance.rbtnChooseDatabase.toggled.connect( this, "databaseOptionChanged( boolean )" );
     }
     catch( Exception e )
     {
