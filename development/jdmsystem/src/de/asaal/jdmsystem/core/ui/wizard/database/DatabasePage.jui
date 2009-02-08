@@ -5,158 +5,305 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>639</width>
+    <width>470</width>
     <height>300</height>
    </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>470</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize" >
+   <size>
+    <width>470</width>
+    <height>300</height>
+   </size>
   </property>
   <property name="windowTitle" >
    <string>QWizardPage</string>
   </property>
-  <widget class="QWidget" name="layoutWidget" >
-   <property name="geometry" >
-    <rect>
-     <x>10</x>
-     <y>80</y>
-     <width>430</width>
-     <height>80</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout" >
-    <item row="0" column="0" >
-     <layout class="QHBoxLayout" name="horizontalLayout_3" >
-      <item>
-       <widget class="QLabel" name="labelHost" >
-        <property name="minimumSize" >
-         <size>
-          <width>110</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize" >
-         <size>
-          <width>110</width>
-          <height>16777215</height>
-         </size>
+  <layout class="QGridLayout" name="gridLayoutDatabasePage" >
+   <item row="0" column="0" >
+    <widget class="QGroupBox" name="groupBoxDatabaseOption" >
+     <property name="title" >
+      <string>Option</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayoutOption" >
+      <item row="0" column="0" >
+       <widget class="QRadioButton" name="rbtnNewDatabase" >
+        <property name="focusPolicy" >
+         <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
         </property>
         <property name="text" >
-         <string>Host:</string>
+         <string>Create ew database</string>
+        </property>
+        <property name="checked" >
+         <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QLineEdit" name="lineEditoHost" />
+      <item row="1" column="0" >
+       <widget class="QRadioButton" name="rbtnChooseDatabase" >
+        <property name="focusPolicy" >
+         <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
+        </property>
+        <property name="text" >
+         <string>Choose available database</string>
+        </property>
+       </widget>
       </item>
      </layout>
-    </item>
-    <item rowspan="3" row="0" column="1" >
-     <layout class="QVBoxLayout" name="verticalLayout" >
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4" >
-        <item>
-         <widget class="QLabel" name="labelPort" >
-          <property name="minimumSize" >
-           <size>
-            <width>110</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize" >
-           <size>
-            <width>110</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text" >
-           <string>Port:</string>
-          </property>
-         </widget>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>Connections</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayoutConnection" >
+      <item row="0" column="0" >
+       <layout class="QGridLayout" name="gridLayoutDatabaseConnection" >
+        <item row="0" column="0" >
+         <layout class="QHBoxLayout" name="horizontalLayoutHost" >
+          <item>
+           <widget class="QLabel" name="labelHost" >
+            <property name="minimumSize" >
+             <size>
+              <width>110</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>110</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Host:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>lineEditoHost</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditoHost" />
+          </item>
+         </layout>
         </item>
-        <item>
-         <widget class="QSpinBox" name="spinBoxPort" >
-          <property name="maximum" >
-           <number>65536</number>
-          </property>
-          <property name="value" >
-           <number>3306</number>
-          </property>
-         </widget>
+        <item rowspan="4" row="0" column="1" >
+         <layout class="QVBoxLayout" name="verticalLayoutPort" >
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayoutPort" >
+            <item>
+             <widget class="QLabel" name="labelPort" >
+              <property name="minimumSize" >
+               <size>
+                <width>110</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize" >
+               <size>
+                <width>110</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text" >
+               <string>Port:</string>
+              </property>
+              <property name="buddy" >
+               <cstring>spinBoxPort</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBoxPort" >
+              <property name="maximum" >
+               <number>65536</number>
+              </property>
+              <property name="value" >
+               <number>3306</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacerPort" >
+            <property name="orientation" >
+             <enum>com.trolltech.qt.core.Qt.Orientation.Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>17</width>
+              <height>37</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0" >
+         <layout class="QHBoxLayout" name="horizontalLayoutUser" >
+          <item>
+           <widget class="QLabel" name="labelUser" >
+            <property name="minimumSize" >
+             <size>
+              <width>110</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>110</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>User:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>lineEditUser</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditUser" />
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0" >
+         <layout class="QHBoxLayout" name="horizontalLayoutPassword" >
+          <item>
+           <widget class="QLabel" name="labelPassword" >
+            <property name="minimumSize" >
+             <size>
+              <width>110</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>110</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Password:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>lineEditPassword</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditPassword" >
+            <property name="echoMode" >
+             <enum>com.trolltech.qt.gui.QLineEdit.EchoMode.Normal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="3" column="0" >
+         <layout class="QHBoxLayout" name="horizontalLayoutDatabase" >
+          <item>
+           <widget class="QLabel" name="labelDatabase" >
+            <property name="minimumSize" >
+             <size>
+              <width>110</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>110</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Database</string>
+            </property>
+            <property name="buddy" >
+             <cstring>comboBoxDatabase</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxDatabase" >
+            <property name="focusPolicy" >
+             <enum>com.trolltech.qt.core.Qt.FocusPolicy.WheelFocus</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
-      <item>
-       <spacer name="verticalSpacer" >
-        <property name="orientation" >
-         <enum>com.trolltech.qt.core.Qt.Orientation.Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0" >
-         <size>
-          <width>17</width>
-          <height>37</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
      </layout>
-    </item>
-    <item row="1" column="0" >
-     <layout class="QHBoxLayout" name="horizontalLayout_2" >
-      <item>
-       <widget class="QLabel" name="labelUser" >
-        <property name="minimumSize" >
-         <size>
-          <width>110</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize" >
-         <size>
-          <width>110</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text" >
-         <string>User:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEditUser" />
-      </item>
-     </layout>
-    </item>
-    <item row="2" column="0" >
-     <layout class="QHBoxLayout" name="horizontalLayout" >
-      <item>
-       <widget class="QLabel" name="labelPassword" >
-        <property name="minimumSize" >
-         <size>
-          <width>110</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize" >
-         <size>
-          <width>110</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text" >
-         <string>Password:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEditPassword" >
-        <property name="echoMode" >
-         <enum>com.trolltech.qt.gui.QLineEdit.EchoMode.Normal</enum>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
+    </widget>
+   </item>
+   <item row="2" column="0" >
+    <spacer name="verticalSpacerDatabasePage" >
+     <property name="orientation" >
+      <enum>com.trolltech.qt.core.Qt.Orientation.Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>17</width>
+       <height>49</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
  </widget>
+ <tabstops>
+  <tabstop>rbtnNewDatabase</tabstop>
+  <tabstop>rbtnChooseDatabase</tabstop>
+  <tabstop>lineEditoHost</tabstop>
+  <tabstop>spinBoxPort</tabstop>
+  <tabstop>lineEditUser</tabstop>
+  <tabstop>lineEditPassword</tabstop>
+  <tabstop>comboBoxDatabase</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>rbtnNewDatabase</sender>
+   <signal>toggled&lt;java.lang.Boolean></signal>
+   <receiver>labelDatabase</receiver>
+   <slot>setEnabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>102</x>
+     <y>42</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>102</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rbtnNewDatabase</sender>
+   <signal>toggled&lt;java.lang.Boolean></signal>
+   <receiver>comboBoxDatabase</receiver>
+   <slot>setEnabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>155</x>
+     <y>43</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>153</x>
+     <y>185</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

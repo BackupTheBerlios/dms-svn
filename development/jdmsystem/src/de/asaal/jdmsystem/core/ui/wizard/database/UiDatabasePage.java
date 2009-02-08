@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'DatabasePage.jui'
 **
-** Created: So 8. Feb 16:28:45 2009
+** Created: So 8. Feb 16:29:44 2009
 **      by: Qt User Interface Compiler version 4.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -16,7 +16,7 @@ public class UiDatabasePage
 {
     public QGridLayout gridLayoutDatabasePage;
     public QGroupBox groupBoxDatabaseOption;
-    public QGridLayout gridLayout_2;
+    public QGridLayout gridLayoutOption;
     public QRadioButton rbtnNewDatabase;
     public QRadioButton rbtnChooseDatabase;
     public QGroupBox groupBox;
@@ -53,20 +53,20 @@ public class UiDatabasePage
         gridLayoutDatabasePage.setObjectName("gridLayoutDatabasePage");
         groupBoxDatabaseOption = new QGroupBox(DatabasePage);
         groupBoxDatabaseOption.setObjectName("groupBoxDatabaseOption");
-        gridLayout_2 = new QGridLayout(groupBoxDatabaseOption);
-        gridLayout_2.setObjectName("gridLayout_2");
+        gridLayoutOption = new QGridLayout(groupBoxDatabaseOption);
+        gridLayoutOption.setObjectName("gridLayoutOption");
         rbtnNewDatabase = new QRadioButton(groupBoxDatabaseOption);
         rbtnNewDatabase.setObjectName("rbtnNewDatabase");
         rbtnNewDatabase.setFocusPolicy(com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus);
         rbtnNewDatabase.setChecked(true);
 
-        gridLayout_2.addWidget(rbtnNewDatabase, 0, 0, 1, 1);
+        gridLayoutOption.addWidget(rbtnNewDatabase, 0, 0, 1, 1);
 
         rbtnChooseDatabase = new QRadioButton(groupBoxDatabaseOption);
         rbtnChooseDatabase.setObjectName("rbtnChooseDatabase");
         rbtnChooseDatabase.setFocusPolicy(com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus);
 
-        gridLayout_2.addWidget(rbtnChooseDatabase, 1, 0, 1, 1);
+        gridLayoutOption.addWidget(rbtnChooseDatabase, 1, 0, 1, 1);
 
 
         gridLayoutDatabasePage.addWidget(groupBoxDatabaseOption, 0, 0, 1, 1);
