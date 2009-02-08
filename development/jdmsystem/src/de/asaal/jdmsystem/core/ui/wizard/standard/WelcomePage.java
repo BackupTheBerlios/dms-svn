@@ -16,7 +16,7 @@ public class WelcomePage extends UiWelcomePage
     instance = this;
   }
 
-  public static WelcomePage welcomePageInstance()
+  public static WelcomePage welcomePage()
   {
     if( instance != null )
     {

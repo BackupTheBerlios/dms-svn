@@ -15,7 +15,7 @@ public class FinishPage extends UiFinishPage
     instance = this;
   }
 
-  public static FinishPage finishPageInstance()
+  public static FinishPage finishPage()
   {
     if( instance != null )
     {
