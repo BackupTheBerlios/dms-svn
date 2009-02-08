@@ -3,7 +3,6 @@ package de.asaal.jdmsystem.core.ui.wizard;
 import com.trolltech.qt.gui.QWidget;
 import com.trolltech.qt.gui.QWizard;
 
-import de.asaal.jdmsystem.core.ui.wizard.database.ConnectionPage;
 import de.asaal.jdmsystem.core.ui.wizard.database.DatabasePage;
 import de.asaal.jdmsystem.core.ui.wizard.standard.FinishPage;
 import de.asaal.jdmsystem.core.ui.wizard.standard.WelcomePage;
@@ -34,30 +33,24 @@ import de.asaal.jdmsystem.core.ui.wizard.standard.WelcomePage;
  */
 public class DatabaseWizard extends QWizard
 {
-  private static DatabaseWizard databaseWizard  = null;
-  private ConnectionPage        connectionPage  = null;
-  private DatabasePage          databasePage    = null;
-  private FinishPage            finishPage      = null;
+  private static DatabaseWizard databaseWizard = null;
+  private DatabasePage          databasePage   = null;
+  private FinishPage            finishPage     = null;
 
   /**
    * Display welcome page
    */
-  public static int             PAGE_WELCOME    = 0;
-
-  /**
-   * Display connection page
-   */
-  public static int             PAGE_CONNECTION = 1;
+  public static int             PAGE_WELCOME   = 0;
 
   /**
    * Display database selection page
    */
-  public static int             PAGE_DATABASE   = 2;
+  public static int             PAGE_DATABASE  = 1;
 
   /**
    * Display finish page
    */
-  public static int             PAGE_FINISH     = 3;
+  public static int             PAGE_FINISH    = 2;
 
   private DatabaseWizard()
   {
@@ -70,15 +63,7 @@ public class DatabaseWizard extends QWizard
 
     try
     {
-      connectionPage = ConnectionPage.connectionPage();
-      databasePage = DatabasePage.databasePage();
-      finishPage = FinishPage.finishPage();
-
-      setPage( PAGE_WELCOME, WelcomePage.welcomePage() );
-      setPage( PAGE_CONNECTION, connectionPage );
-      setPage( PAGE_DATABASE, databasePage );
-      setPage( PAGE_FINISH, finishPage );
-      setStartId( PAGE_WELCOME );
+      initialConnections();
 
       databaseWizard = this;
     }
@@ -112,4 +97,20 @@ public class DatabaseWizard extends QWizard
     }
   }
 
+  private void initialConnections()
+  {
+    try
+    {
+      databasePage = DatabasePage.databasePage();
+      finishPage = FinishPage.finishPage();
+
+      setPage( PAGE_WELCOME, WelcomePage.welcomePage() );
+      setPage( PAGE_DATABASE, databasePage );
+      setPage( PAGE_FINISH, finishPage );
+      setStartId( PAGE_WELCOME );
+    }
+    catch( Exception ex )
+    {
+    }
+  }
 }
