@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'WelcomePage.jui'
 **
-** Created: So 8. Feb 16:55:30 2009
+** Created: So 8. Feb 17:09:09 2009
 **      by: Qt User Interface Compiler version 4.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -31,6 +31,7 @@ public class UiWelcomePage
     void retranslateUi(QWizardPage WelcomePage)
     {
         WelcomePage.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("WelcomePage", "Form"));
+        WelcomePage.setTitle(com.trolltech.qt.core.QCoreApplication.translate("WelcomePage", "Welcome to Database wizard"));
     } // retranslateUi
 
 }

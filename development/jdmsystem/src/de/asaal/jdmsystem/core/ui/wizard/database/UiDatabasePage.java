@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'DatabasePage.jui'
 **
-** Created: So 8. Feb 16:29:44 2009
+** Created: So 8. Feb 17:22:46 2009
 **      by: Qt User Interface Compiler version 4.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -24,7 +24,7 @@ public class UiDatabasePage
     public QGridLayout gridLayoutDatabaseConnection;
     public QHBoxLayout horizontalLayoutHost;
     public QLabel labelHost;
-    public QLineEdit lineEditoHost;
+    public QLineEdit lineEditHost;
     public QVBoxLayout verticalLayoutPort;
     public QHBoxLayout horizontalLayoutPort;
     public QLabel labelPort;
@@ -86,10 +86,10 @@ public class UiDatabasePage
 
         horizontalLayoutHost.addWidget(labelHost);
 
-        lineEditoHost = new QLineEdit(groupBox);
-        lineEditoHost.setObjectName("lineEditoHost");
+        lineEditHost = new QLineEdit(groupBox);
+        lineEditHost.setObjectName("lineEditHost");
 
-        horizontalLayoutHost.addWidget(lineEditoHost);
+        horizontalLayoutHost.addWidget(lineEditHost);
 
 
         gridLayoutDatabaseConnection.addLayout(horizontalLayoutHost, 0, 0, 1, 1);
@@ -161,6 +161,7 @@ public class UiDatabasePage
         horizontalLayoutDatabase.setObjectName("horizontalLayoutDatabase");
         labelDatabase = new QLabel(groupBox);
         labelDatabase.setObjectName("labelDatabase");
+        labelDatabase.setEnabled(false);
         labelDatabase.setMinimumSize(new QSize(110, 0));
         labelDatabase.setMaximumSize(new QSize(110, 16777215));
 
@@ -168,6 +169,7 @@ public class UiDatabasePage
 
         comboBoxDatabase = new QComboBox(groupBox);
         comboBoxDatabase.setObjectName("comboBoxDatabase");
+        comboBoxDatabase.setEnabled(false);
         comboBoxDatabase.setFocusPolicy(com.trolltech.qt.core.Qt.FocusPolicy.WheelFocus);
 
         horizontalLayoutDatabase.addWidget(comboBoxDatabase);
@@ -185,20 +187,18 @@ public class UiDatabasePage
 
         gridLayoutDatabasePage.addItem(verticalSpacerDatabasePage, 2, 0, 1, 1);
 
-        labelHost.setBuddy(lineEditoHost);
+        labelHost.setBuddy(lineEditHost);
         labelPort.setBuddy(spinBoxPort);
         labelUser.setBuddy(lineEditUser);
         labelPassword.setBuddy(lineEditPassword);
         labelDatabase.setBuddy(comboBoxDatabase);
         QWidget.setTabOrder(rbtnNewDatabase, rbtnChooseDatabase);
-        QWidget.setTabOrder(rbtnChooseDatabase, lineEditoHost);
-        QWidget.setTabOrder(lineEditoHost, spinBoxPort);
+        QWidget.setTabOrder(rbtnChooseDatabase, lineEditHost);
+        QWidget.setTabOrder(lineEditHost, spinBoxPort);
         QWidget.setTabOrder(spinBoxPort, lineEditUser);
         QWidget.setTabOrder(lineEditUser, lineEditPassword);
         QWidget.setTabOrder(lineEditPassword, comboBoxDatabase);
         retranslateUi(DatabasePage);
-        rbtnNewDatabase.toggled.connect(labelDatabase, "setEnabled(boolean)");
-        rbtnNewDatabase.toggled.connect(comboBoxDatabase, "setEnabled(boolean)");
 
         DatabasePage.connectSlotsByName();
     } // setupUi

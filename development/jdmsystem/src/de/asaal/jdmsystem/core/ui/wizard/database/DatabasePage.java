@@ -1,5 +1,8 @@
 package de.asaal.jdmsystem.core.ui.wizard.database;
 
+import com.trolltech.qt.QSignalEmitter;
+import com.trolltech.qt.core.QObject;
+import com.trolltech.qt.gui.QRadioButton;
 import com.trolltech.qt.gui.QWizardPage;
 
 import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
@@ -37,21 +40,39 @@ public class DatabasePage extends QWizardPage
   {
     super();
 
+    setTitle( tr( "Database" ) );
+    setSubTitle( tr( "Select as first a opion and then mak your settings. You must set a host, port and a user. Password are optional." ) );
+
     uiInstance = new UiDatabasePage();
     uiInstance.setupUi( this );
     instance = this;
 
-    initialFields();
+    initialConnections();
+    registerFields();
   }
 
-  private void initialFields()
+  private void initialConnections()
   {
     try
     {
-      registerField( "newDatabase", uiInstance.rbtnNewDatabase );
-      registerField( "chooseDatabase", uiInstance.rbtnChooseDatabase );
-      registerField( "dbHost*", uiInstance.lineEditoHost );
-      registerField( "dbPort*", uiInstance.spinBoxPort );
+      uiInstance.rbtnNewDatabase.toggled.connect( this, "databaseOptionChanged( boolean checked )" );
+      uiInstance.rbtnChooseDatabase.toggled.connect( this, "databaseOptionChanged( boolean checked )" );
+    }
+    catch( Exception e )
+    {
+      // TODO: handle exception
+    }
+
+  }
+
+  private void registerFields()
+  {
+    try
+    {
+      registerField( "dbNew", uiInstance.rbtnNewDatabase );
+      registerField( "dbChoose", uiInstance.rbtnChooseDatabase );
+      registerField( "dbHost*", uiInstance.lineEditHost );
+      registerField( "dbPort", uiInstance.spinBoxPort );
       registerField( "dbUser*", uiInstance.lineEditUser );
       registerField( "dbUserPassword", uiInstance.lineEditPassword );
     }
@@ -60,6 +81,24 @@ public class DatabasePage extends QWizardPage
     }
   }
 
+  protected void databaseOptionChanged( boolean checked )
+  {
+    try
+    {
+      QRadioButton rbtn = (QRadioButton)QObject.signalSender();
+      if(rbtn.equals( uiInstance.rbtnNewDatabase ) )
+      {
+      }
+      else if(rbtn.equals( uiInstance.rbtnChooseDatabase ) )
+      {
+      }
+    }
+    catch( Exception e )
+    {
+      // TODO: handle exception
+    }
+  }
+  
   public String fieldWidgetValue( String fieldName )
   {
     try

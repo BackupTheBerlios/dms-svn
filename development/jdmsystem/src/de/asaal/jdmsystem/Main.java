@@ -5,7 +5,6 @@ import com.trolltech.qt.gui.QMainWindow;
 import com.trolltech.qt.gui.QWidget;
 
 import de.asaal.jdmsystem.core.JDMSystemLibrary;
-import de.asaal.jdmsystem.core.ui.UserBase;
 import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
 
 /**
@@ -49,13 +48,7 @@ public class Main extends QWidget
 
     DatabaseWizard databaseWizard = DatabaseWizard.databaseWizard();
     databaseWizard.setSystemLibrary( systemLibrary );
-    if( databaseWizard.exec() == 1 )
-    {
-
-    }
-
-    JDMSystemBase base = new JDMSystemBase( null, systemLibrary );
-    base.showMaximized();
+    databaseWizard.exec();
 
     QApplication.exec();
   }

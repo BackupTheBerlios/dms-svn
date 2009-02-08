@@ -55,11 +55,6 @@ public class DatabaseWizard extends QWizard
    */
   public static int             PAGE_FINISH    = 2;
 
-  private DatabaseWizard()
-  {
-    new DatabaseWizard( null );
-  }
-
   private DatabaseWizard( QWidget parent )
   {
     super( parent );
@@ -110,7 +105,7 @@ public class DatabaseWizard extends QWizard
     }
     else
     {
-      databaseWizard = new DatabaseWizard();
+      databaseWizard = new DatabaseWizard( null );
       return databaseWizard;
     }
   }

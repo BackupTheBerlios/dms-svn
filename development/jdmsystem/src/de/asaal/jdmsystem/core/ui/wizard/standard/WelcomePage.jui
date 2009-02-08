@@ -24,6 +24,9 @@
   <property name="windowTitle" >
    <string>Form</string>
   </property>
+  <property name="title" >
+   <string>Welcome to Database wizard</string>
+  </property>
  </widget>
  <resources/>
  <connections/>
