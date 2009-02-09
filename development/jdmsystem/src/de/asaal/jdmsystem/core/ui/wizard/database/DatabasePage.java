@@ -1,9 +1,14 @@
 package de.asaal.jdmsystem.core.ui.wizard.database;
 
 import com.trolltech.qt.core.QObject;
+import com.trolltech.qt.core.Qt.CursorShape;
+import com.trolltech.qt.gui.QApplication;
+import com.trolltech.qt.gui.QCursor;
+import com.trolltech.qt.gui.QMessageBox;
 import com.trolltech.qt.gui.QRadioButton;
 import com.trolltech.qt.gui.QWizardPage;
 
+import de.asaal.jdmsystem.core.JDMSystemLibrary;
 import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
 
 /**
@@ -32,15 +37,15 @@ import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
  */
 public class DatabasePage extends QWizardPage
 {
-  private static DatabasePage instance   = null;
-  private UiDatabasePage      uiInstance = null;
+  private static DatabasePage instance      = null;
+  private UiDatabasePage      uiInstance    = null;
+  private JDMSystemLibrary    systemLibrary = null;
 
   private DatabasePage()
   {
     super();
 
-    setTitle( tr( "Database" ) );
-    setSubTitle( tr( "Select as first a opion and then mak your settings. You must set a host, port and a user. Password are optional." ) );
+    setTitle( tr( "Database connection" ) );
 
     uiInstance = new UiDatabasePage();
     uiInstance.setupUi( this );
@@ -56,12 +61,57 @@ public class DatabasePage extends QWizardPage
     {
       uiInstance.rbtnNewDatabase.toggled.connect( this, "databaseOptionChanged( boolean )" );
       uiInstance.rbtnChooseDatabase.toggled.connect( this, "databaseOptionChanged( boolean )" );
+      uiInstance.btnRefreshDatabases.clicked.connect( this, "refreshDatabases()" );
     }
-    catch( Exception e )
+    catch( Exception ex )
     {
-      // TODO: handle exception
+      systemLibrary.createExceptions( ex, null );
+      ex.printStackTrace();
     }
 
+  }
+
+  @Override
+  public boolean validatePage()
+  {
+    QApplication.setOverrideCursor( new QCursor( CursorShape.WaitCursor ) );
+
+    boolean valid = false;
+    String errorMessage = null;
+    try
+    {
+      systemLibrary = DatabaseWizard.databaseWizard().systemLibrary();
+
+      if( uiInstance.rbtnChooseDatabase.isChecked() )
+      {
+        errorMessage = systemLibrary.isConnectionAvailabel( uiInstance.lineEditUser.text(), uiInstance.lineEditPassword.text(), uiInstance.lineEditHost.text(), String.valueOf( uiInstance.spinBoxPort.value() ), uiInstance.comboBoxDatabase.currentText() );
+      }
+      else if( uiInstance.rbtnNewDatabase.isChecked() )
+      {
+        errorMessage = systemLibrary.isConnectionAvailabel( uiInstance.lineEditUser.text(), uiInstance.lineEditPassword.text(), uiInstance.lineEditHost.text(), String.valueOf( uiInstance.spinBoxPort.value() ), null );
+      }
+
+      if( errorMessage != null && !errorMessage.isEmpty() )
+      {
+        QApplication.restoreOverrideCursor();
+
+        QMessageBox.critical( this, title(), errorMessage );
+        valid = false;
+      }
+
+      QApplication.restoreOverrideCursor();
+    }
+    catch( Exception ex )
+    {
+      systemLibrary.createExceptions( ex, null );
+      ex.printStackTrace();
+
+      valid = false;
+
+      QApplication.restoreOverrideCursor();
+    }
+
+    return valid;
   }
 
   private void registerFields()
@@ -70,13 +120,15 @@ public class DatabasePage extends QWizardPage
     {
       registerField( "dbNew", uiInstance.rbtnNewDatabase );
       registerField( "dbChoose", uiInstance.rbtnChooseDatabase );
-      registerField( "dbHost*", uiInstance.lineEditHost );
+      registerField( "dbHost", uiInstance.lineEditHost );
       registerField( "dbPort", uiInstance.spinBoxPort );
-      registerField( "dbUser*", uiInstance.lineEditUser );
+      registerField( "dbUser", uiInstance.lineEditUser );
       registerField( "dbUserPassword", uiInstance.lineEditPassword );
     }
     catch( Exception ex )
     {
+      systemLibrary.createExceptions( ex, null );
+      ex.printStackTrace();
     }
   }
 
@@ -87,14 +139,42 @@ public class DatabasePage extends QWizardPage
       QRadioButton rbtn = (QRadioButton)QObject.signalSender();
       if( rbtn.equals( uiInstance.rbtnNewDatabase ) )
       {
+        uiInstance.labelDatabase.setEnabled( false );
+        uiInstance.comboBoxDatabase.setEnabled( false );
+        uiInstance.btnRefreshDatabases.setEnabled( false );
       }
       else if( rbtn.equals( uiInstance.rbtnChooseDatabase ) )
       {
+        uiInstance.labelDatabase.setEnabled( true );
+        uiInstance.comboBoxDatabase.setEnabled( true );
+        uiInstance.btnRefreshDatabases.setEnabled( true );
       }
     }
-    catch( Exception e )
+    catch( Exception ex )
     {
-      // TODO: handle exception
+      systemLibrary.createExceptions( ex, null );
+      ex.printStackTrace();
+    }
+  }
+
+  @SuppressWarnings( "unchecked" )
+  protected void refreshDatabases()
+  {
+    try
+    {
+      if( validatePage() )
+      {
+        if( systemLibrary != null )
+        {
+          uiInstance.comboBoxDatabase.clear();
+          uiInstance.comboBoxDatabase.addItems( systemLibrary.getDatabases() );
+        }
+      }
+    }
+    catch( Exception ex )
+    {
+      systemLibrary.createExceptions( ex, null );
+      ex.printStackTrace();
     }
   }
 
@@ -114,6 +194,9 @@ public class DatabasePage extends QWizardPage
     }
     catch( Exception ex )
     {
+      systemLibrary.createExceptions( ex, null );
+      ex.printStackTrace();
+
       return null;
     }
   }

@@ -156,6 +156,12 @@ public interface IJDMSystem
 
   // TODO: Miscellaneous
   // ########################################################################
+
+  /**
+   * Returns the databases on MySQL Server
+   */
+  public List getDatabases();
+
   /**
    * @param userDTO
    * @return
@@ -175,7 +181,22 @@ public interface IJDMSystem
   public boolean isConnectionAvailabel( UserDTO userDTO );
 
   /**
+   * Returns a message if connection available
    * 
+   * @param dbUser
+   *          The database user (default is "root")
+   * @param dbUserPwd
+   *          The database user password
+   * @param host
+   *          The database host
+   * @param port
+   *          The database port
+   * @param database
+   *          The database name (default is "mysql")
+   */
+  public String isConnectionAvailabel( String dbUser, String dbUserPwd, String host, String port, String database );
+
+  /**
    * @param exception
    * @param sqlException
    */

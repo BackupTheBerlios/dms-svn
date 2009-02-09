@@ -64,8 +64,9 @@ public class DatabaseWizard extends QWizard
     registerPages();
 
     setWindowTitle( tr( "Database Assistant" ) );
-    //setSubTitle( tr( "Select as first a opion and then mak your settings. You must set a host, port and a user. Password are optional." ) );
-
+    // setSubTitle( tr(
+    // "Select as first a opion and then mak your settings. You must set a host, port and a user. Password are optional."
+    // ) );
     setPixmap( WizardPixmap.WatermarkPixmap, new QPixmap( "classpath:de/asaal/jdmsystem/resource/images/wizard_logo.png" ) );
   }
 
@@ -92,7 +93,6 @@ public class DatabaseWizard extends QWizard
   {
     try
     {
-
     }
     catch( Exception ex )
     {
@@ -119,5 +119,10 @@ public class DatabaseWizard extends QWizard
   public void setSystemLibrary( JDMSystemLibrary systemLibrary )
   {
     this.systemLibrary = systemLibrary;
+  }
+  
+  public JDMSystemLibrary systemLibrary()
+  {
+    return systemLibrary;
   }
 }

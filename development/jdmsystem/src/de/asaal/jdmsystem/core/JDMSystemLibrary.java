@@ -289,6 +289,41 @@ public class JDMSystemLibrary implements IJDMSystem
   }
 
   @Override
+  public String isConnectionAvailabel( String dbUser, String dbUserPwd, String host, String port, String database )
+  {
+    String connectionValid = null;
+    try
+    {
+      if( dbUser == null || dbUser.isEmpty() )
+      {
+        dbUser = "root";
+      }
+      
+      if( database == null || database.isEmpty() )
+      {
+        database = "mysql";
+      }
+
+      Class.forName( "com.mysql.jdbc.Driver" ).newInstance();
+
+      Statement stmt = null;
+      Connection conn = DriverManager.getConnection( "jdbc:mysql://" + host + ":" + port + "/" + database + "?user=" + dbUser + "&password=" + dbUserPwd );
+      if( conn != null )
+      {
+        connectionValid = "";
+        conn = null;
+      }
+    }
+    catch( Exception ex )
+    {
+      createExceptions( ex, null );
+      connectionValid = ex.getMessage();
+    }
+
+    return connectionValid;
+  }
+
+  @Override
   public boolean login( UserDTO userDTO )
   {
     boolean logedIn = false;
@@ -754,5 +789,26 @@ public class JDMSystemLibrary implements IJDMSystem
   private String getDatabase()
   {
     return userDatabase;
+  }
+
+  @Override
+  public List getDatabases()
+  {
+    List databases = null;
+
+    try
+    {
+      if( sqlMapper != null )
+      {
+        databases = sqlMapper.queryForList( "selectDatabase" );
+      }
+    }
+    catch( SQLException ex )
+    {
+      createExceptions( ex, ex );
+      databases = null;
+    }
+
+    return databases;
   }
 }

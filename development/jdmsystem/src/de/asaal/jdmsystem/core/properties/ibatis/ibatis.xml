@@ -11,6 +11,7 @@
 		</dataSource>
 	</transactionManager>
 
+	<sqlMap resource="de/asaal/jdmsystem/core/properties/ibatis/database.xml" />
 	<sqlMap resource="de/asaal/jdmsystem/core/properties/ibatis/documents.xml" />
 	<sqlMap resource="de/asaal/jdmsystem/core/properties/ibatis/exceptions.xml" />
 	<sqlMap resource="de/asaal/jdmsystem/core/properties/ibatis/groups.xml" />

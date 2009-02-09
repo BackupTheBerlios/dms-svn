@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'DatabasePage.jui'
 **
-** Created: So 8. Feb 17:22:46 2009
+** Created: Mo 9. Feb 14:41:02 2009
 **      by: Qt User Interface Compiler version 4.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -14,31 +14,33 @@ import com.trolltech.qt.gui.*;
 
 public class UiDatabasePage
 {
-    public QGridLayout gridLayoutDatabasePage;
+    public QGridLayout gridLayout_2;
+    public QLabel label;
     public QGroupBox groupBoxDatabaseOption;
     public QGridLayout gridLayoutOption;
     public QRadioButton rbtnNewDatabase;
     public QRadioButton rbtnChooseDatabase;
     public QGroupBox groupBox;
-    public QGridLayout gridLayoutConnection;
-    public QGridLayout gridLayoutDatabaseConnection;
+    public QGridLayout gridLayout;
     public QHBoxLayout horizontalLayoutHost;
     public QLabel labelHost;
     public QLineEdit lineEditHost;
-    public QVBoxLayout verticalLayoutPort;
+    public QLabel label_2;
     public QHBoxLayout horizontalLayoutPort;
     public QLabel labelPort;
     public QSpinBox spinBoxPort;
-    public QSpacerItem verticalSpacerPort;
+    public QLabel label_5;
     public QHBoxLayout horizontalLayoutUser;
     public QLabel labelUser;
     public QLineEdit lineEditUser;
+    public QLabel label_3;
     public QHBoxLayout horizontalLayoutPassword;
     public QLabel labelPassword;
     public QLineEdit lineEditPassword;
-    public QHBoxLayout horizontalLayoutDatabase;
+    public QHBoxLayout horizontalLayout;
     public QLabel labelDatabase;
     public QComboBox comboBoxDatabase;
+    public QPushButton btnRefreshDatabases;
     public QSpacerItem verticalSpacerDatabasePage;
 
     public UiDatabasePage() { super(); }
@@ -49,8 +51,14 @@ public class UiDatabasePage
         DatabasePage.resize(new QSize(470, 300).expandedTo(DatabasePage.minimumSizeHint()));
         DatabasePage.setMinimumSize(new QSize(470, 300));
         DatabasePage.setMaximumSize(new QSize(470, 300));
-        gridLayoutDatabasePage = new QGridLayout(DatabasePage);
-        gridLayoutDatabasePage.setObjectName("gridLayoutDatabasePage");
+        gridLayout_2 = new QGridLayout(DatabasePage);
+        gridLayout_2.setObjectName("gridLayout_2");
+        label = new QLabel(DatabasePage);
+        label.setObjectName("label");
+        label.setWordWrap(true);
+
+        gridLayout_2.addWidget(label, 0, 0, 1, 1);
+
         groupBoxDatabaseOption = new QGroupBox(DatabasePage);
         groupBoxDatabaseOption.setObjectName("groupBoxDatabaseOption");
         gridLayoutOption = new QGridLayout(groupBoxDatabaseOption);
@@ -69,14 +77,12 @@ public class UiDatabasePage
         gridLayoutOption.addWidget(rbtnChooseDatabase, 1, 0, 1, 1);
 
 
-        gridLayoutDatabasePage.addWidget(groupBoxDatabaseOption, 0, 0, 1, 1);
+        gridLayout_2.addWidget(groupBoxDatabaseOption, 1, 0, 1, 1);
 
         groupBox = new QGroupBox(DatabasePage);
         groupBox.setObjectName("groupBox");
-        gridLayoutConnection = new QGridLayout(groupBox);
-        gridLayoutConnection.setObjectName("gridLayoutConnection");
-        gridLayoutDatabaseConnection = new QGridLayout();
-        gridLayoutDatabaseConnection.setObjectName("gridLayoutDatabaseConnection");
+        gridLayout = new QGridLayout(groupBox);
+        gridLayout.setObjectName("gridLayout");
         horizontalLayoutHost = new QHBoxLayout();
         horizontalLayoutHost.setObjectName("horizontalLayoutHost");
         labelHost = new QLabel(groupBox);
@@ -91,11 +97,17 @@ public class UiDatabasePage
 
         horizontalLayoutHost.addWidget(lineEditHost);
 
+        label_2 = new QLabel(groupBox);
+        label_2.setObjectName("label_2");
+        label_2.setMinimumSize(new QSize(16, 16));
+        label_2.setMaximumSize(new QSize(16, 16));
+        label_2.setPixmap(new QPixmap(("classpath:de/asaal/jdmsystem/resource/images/info.png")));
 
-        gridLayoutDatabaseConnection.addLayout(horizontalLayoutHost, 0, 0, 1, 1);
+        horizontalLayoutHost.addWidget(label_2);
 
-        verticalLayoutPort = new QVBoxLayout();
-        verticalLayoutPort.setObjectName("verticalLayoutPort");
+
+        gridLayout.addLayout(horizontalLayoutHost, 0, 0, 1, 1);
+
         horizontalLayoutPort = new QHBoxLayout();
         horizontalLayoutPort.setObjectName("horizontalLayoutPort");
         labelPort = new QLabel(groupBox);
@@ -112,15 +124,16 @@ public class UiDatabasePage
 
         horizontalLayoutPort.addWidget(spinBoxPort);
 
+        label_5 = new QLabel(groupBox);
+        label_5.setObjectName("label_5");
+        label_5.setMinimumSize(new QSize(16, 16));
+        label_5.setMaximumSize(new QSize(16, 16));
+        label_5.setPixmap(new QPixmap(("classpath:de/asaal/jdmsystem/resource/images/info.png")));
 
-        verticalLayoutPort.addLayout(horizontalLayoutPort);
-
-        verticalSpacerPort = new QSpacerItem(17, 37, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
-
-        verticalLayoutPort.addItem(verticalSpacerPort);
+        horizontalLayoutPort.addWidget(label_5);
 
 
-        gridLayoutDatabaseConnection.addLayout(verticalLayoutPort, 0, 1, 4, 1);
+        gridLayout.addLayout(horizontalLayoutPort, 1, 0, 1, 1);
 
         horizontalLayoutUser = new QHBoxLayout();
         horizontalLayoutUser.setObjectName("horizontalLayoutUser");
@@ -136,8 +149,16 @@ public class UiDatabasePage
 
         horizontalLayoutUser.addWidget(lineEditUser);
 
+        label_3 = new QLabel(groupBox);
+        label_3.setObjectName("label_3");
+        label_3.setMinimumSize(new QSize(16, 16));
+        label_3.setMaximumSize(new QSize(16, 16));
+        label_3.setPixmap(new QPixmap(("classpath:de/asaal/jdmsystem/resource/images/info.png")));
 
-        gridLayoutDatabaseConnection.addLayout(horizontalLayoutUser, 1, 0, 1, 1);
+        horizontalLayoutUser.addWidget(label_3);
+
+
+        gridLayout.addLayout(horizontalLayoutUser, 2, 0, 1, 1);
 
         horizontalLayoutPassword = new QHBoxLayout();
         horizontalLayoutPassword.setObjectName("horizontalLayoutPassword");
@@ -150,42 +171,48 @@ public class UiDatabasePage
 
         lineEditPassword = new QLineEdit(groupBox);
         lineEditPassword.setObjectName("lineEditPassword");
-        lineEditPassword.setEchoMode(com.trolltech.qt.gui.QLineEdit.EchoMode.Normal);
+        lineEditPassword.setEchoMode(com.trolltech.qt.gui.QLineEdit.EchoMode.Password);
 
         horizontalLayoutPassword.addWidget(lineEditPassword);
 
 
-        gridLayoutDatabaseConnection.addLayout(horizontalLayoutPassword, 2, 0, 1, 1);
+        gridLayout.addLayout(horizontalLayoutPassword, 3, 0, 1, 1);
 
-        horizontalLayoutDatabase = new QHBoxLayout();
-        horizontalLayoutDatabase.setObjectName("horizontalLayoutDatabase");
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout.setObjectName("horizontalLayout");
         labelDatabase = new QLabel(groupBox);
         labelDatabase.setObjectName("labelDatabase");
         labelDatabase.setEnabled(false);
         labelDatabase.setMinimumSize(new QSize(110, 0));
         labelDatabase.setMaximumSize(new QSize(110, 16777215));
 
-        horizontalLayoutDatabase.addWidget(labelDatabase);
+        horizontalLayout.addWidget(labelDatabase);
 
         comboBoxDatabase = new QComboBox(groupBox);
         comboBoxDatabase.setObjectName("comboBoxDatabase");
         comboBoxDatabase.setEnabled(false);
         comboBoxDatabase.setFocusPolicy(com.trolltech.qt.core.Qt.FocusPolicy.WheelFocus);
 
-        horizontalLayoutDatabase.addWidget(comboBoxDatabase);
+        horizontalLayout.addWidget(comboBoxDatabase);
+
+        btnRefreshDatabases = new QPushButton(groupBox);
+        btnRefreshDatabases.setObjectName("btnRefreshDatabases");
+        btnRefreshDatabases.setEnabled(false);
+        btnRefreshDatabases.setMinimumSize(new QSize(20, 20));
+        btnRefreshDatabases.setMaximumSize(new QSize(20, 20));
+        btnRefreshDatabases.setFocusPolicy(com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus);
+
+        horizontalLayout.addWidget(btnRefreshDatabases);
 
 
-        gridLayoutDatabaseConnection.addLayout(horizontalLayoutDatabase, 3, 0, 1, 1);
+        gridLayout.addLayout(horizontalLayout, 4, 0, 1, 1);
 
 
-        gridLayoutConnection.addLayout(gridLayoutDatabaseConnection, 0, 0, 1, 1);
-
-
-        gridLayoutDatabasePage.addWidget(groupBox, 1, 0, 1, 1);
+        gridLayout_2.addWidget(groupBox, 2, 0, 1, 1);
 
         verticalSpacerDatabasePage = new QSpacerItem(17, 49, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
 
-        gridLayoutDatabasePage.addItem(verticalSpacerDatabasePage, 2, 0, 1, 1);
+        gridLayout_2.addItem(verticalSpacerDatabasePage, 3, 0, 1, 1);
 
         labelHost.setBuddy(lineEditHost);
         labelPort.setBuddy(spinBoxPort);
@@ -206,15 +233,32 @@ public class UiDatabasePage
     void retranslateUi(QWizardPage DatabasePage)
     {
         DatabasePage.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "QWizardPage"));
+        label.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Select as first a option and then make your settings. You must set a host, port and a user. Password are optional."));
         groupBoxDatabaseOption.setTitle(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Option"));
         rbtnNewDatabase.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Create ew database"));
         rbtnChooseDatabase.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Choose available database"));
         groupBox.setTitle(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Connections"));
         labelHost.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Host:"));
+        label_2.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
+"p, li { white-space: pre-wrap; }\n"+
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;\">If <span style=\" font-weight:600;\">host</span> is blank, the default host is used. The default host are <span style=\" font-weight:600;\">localhost</span> or <span style=\" font-weight:600;\">127.0.0.1</span>.</p></body></html>"));
         labelPort.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Port:"));
+        label_5.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
+"p, li { white-space: pre-wrap; }\n"+
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;\">If <span style=\" font-weight:600;\">port</span> is blank or zerro, the default database port is used. The default database port is <span style=\" font-weight:600;\">3306</span>.</p></body></html>"));
         labelUser.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "User:"));
+        label_3.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
+"p, li { white-space: pre-wrap; }\n"+
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;\">If <span style=\" font-weight:600;\">user</span> is blank, the default database user is used. The default database user is <span style=\" font-weight:600;\">root</span>.</p></body></html>"));
         labelPassword.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Password:"));
         labelDatabase.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Database"));
+        btnRefreshDatabases.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "..."));
     } // retranslateUi
 
 }

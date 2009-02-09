@@ -24,9 +24,26 @@
   <property name="windowTitle" >
    <string>Form</string>
   </property>
-  <property name="title" >
-   <string>Welcome to Database wizard</string>
-  </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" >
+    <widget class="QLabel" name="label" >
+     <property name="text" >
+      <string>Thank you for using this Database Assistant. The Database Assistant helps you to create new database or select a existing database.
+
+It is recommed you have the MySQL Server  or the MySQL Embedded Server 5.1 installed.
+
+
+
+
+
+</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

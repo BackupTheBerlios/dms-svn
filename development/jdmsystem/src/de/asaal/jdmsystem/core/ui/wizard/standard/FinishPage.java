@@ -2,8 +2,6 @@ package de.asaal.jdmsystem.core.ui.wizard.standard;
 
 import com.trolltech.qt.gui.QWizardPage;
 
-import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
-
 /**
  * Copyright (C) 2009 Alexander Saal<br>
  * alex.saal@gmx.de<br>

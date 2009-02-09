@@ -35,6 +35,8 @@ public class WelcomePage extends QWizardPage
 
   private WelcomePage()
   {
+    setTitle( tr( "Welcome to the Database Assistant" ) );
+
     instance = new UiWelcomePage();
     instance.setupUi( this );
 
