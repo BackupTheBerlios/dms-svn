@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'UserBase.jui'
 **
-** Created: Fr 6. Feb 10:38:29 2009
+** Created: Mo 9. Feb 23:09:09 2009
 **      by: Qt User Interface Compiler version 4.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!

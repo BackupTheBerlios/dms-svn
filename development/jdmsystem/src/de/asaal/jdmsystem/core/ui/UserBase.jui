@@ -338,8 +338,5 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="E:/dmsystem/resource/dms.qrc" />
- </resources>
  <connections/>
 </ui>
