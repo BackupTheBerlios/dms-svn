@@ -1,5 +1,7 @@
 package de.asaal.jdmsystem.core.ui.wizard.database;
 
+import java.util.List;
+
 import com.trolltech.qt.core.QObject;
 import com.trolltech.qt.core.Qt.CursorShape;
 import com.trolltech.qt.gui.QApplication;
@@ -9,6 +11,7 @@ import com.trolltech.qt.gui.QRadioButton;
 import com.trolltech.qt.gui.QWizardPage;
 
 import de.asaal.jdmsystem.core.JDMSystemLibrary;
+import de.asaal.jdmsystem.core.dto.DatabaseDTO;
 import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
 
 /**
@@ -98,6 +101,10 @@ public class DatabasePage extends QWizardPage
         QMessageBox.critical( this, title(), errorMessage );
         valid = false;
       }
+      else
+      {
+        valid = true;
+      }
 
       QApplication.restoreOverrideCursor();
     }
@@ -157,7 +164,6 @@ public class DatabasePage extends QWizardPage
     }
   }
 
-  @SuppressWarnings( "unchecked" )
   protected void refreshDatabases()
   {
     try
@@ -167,7 +173,11 @@ public class DatabasePage extends QWizardPage
         if( systemLibrary != null )
         {
           uiInstance.comboBoxDatabase.clear();
-          uiInstance.comboBoxDatabase.addItems( systemLibrary.getDatabases() );
+          List< DatabaseDTO > databases = systemLibrary.getDatabases();
+          for( DatabaseDTO databaseDTO : databases )
+          {
+            uiInstance.comboBoxDatabase.addItem( databaseDTO.getDbDatabases() );
+          }
         }
       }
     }

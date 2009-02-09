@@ -2,7 +2,14 @@
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="DatabaseStatements">
-	<select id="selectDatabase" resultClass="java.util.List">
-		SHOW DATABASES
+
+	<resultMap id="DatabaseDTOResult" class="de.asaal.jdmsystem.core.dto.DatabaseDTO">
+		<result property="dbHost" column="Host" />
+		<result property="dbDatabases" column="Db" />
+		<result property="dbUser" column="User" />
+	</resultMap>
+
+	<select id="selectDatabase" resultMap="DatabaseDTOResult">
+		SELECT `Host`, `Db`, `User` FROM mysql.`db`;
 	</select>
 </sqlMap>

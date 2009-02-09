@@ -3,6 +3,7 @@ package de.asaal.jdmsystem.core.iface;
 import java.sql.SQLException;
 import java.util.List;
 
+import de.asaal.jdmsystem.core.dto.DatabaseDTO;
 import de.asaal.jdmsystem.core.dto.DocumentDTO;
 import de.asaal.jdmsystem.core.dto.ExceptionStackDTO;
 import de.asaal.jdmsystem.core.dto.GroupDTO;
@@ -160,7 +161,7 @@ public interface IJDMSystem
   /**
    * Returns the databases on MySQL Server
    */
-  public List getDatabases();
+  public List< DatabaseDTO > getDatabases();
 
   /**
    * @param userDTO

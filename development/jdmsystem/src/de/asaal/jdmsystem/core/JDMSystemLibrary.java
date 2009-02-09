@@ -28,6 +28,7 @@ import com.ibatis.sqlmap.client.SqlMapException;
 import com.trolltech.qt.core.QDateTime;
 import com.trolltech.qt.core.Qt.DateFormat;
 
+import de.asaal.jdmsystem.core.dto.DatabaseDTO;
 import de.asaal.jdmsystem.core.dto.DocumentDTO;
 import de.asaal.jdmsystem.core.dto.ExceptionStackDTO;
 import de.asaal.jdmsystem.core.dto.GroupDTO;
@@ -298,7 +299,7 @@ public class JDMSystemLibrary implements IJDMSystem
       {
         dbUser = "root";
       }
-      
+
       if( database == null || database.isEmpty() )
       {
         database = "mysql";
@@ -641,6 +642,13 @@ public class JDMSystemLibrary implements IJDMSystem
             System.out.println( "VendorError: " + e.getErrorCode() );
           }
         }
+
+        stmt = conn.createStatement();
+        stmt.execute( "GRANT ALL PRIVILEGES ON `dms`.* TO '" + properties.getProperty( "mysql_username" ) + "'@'" + getHost() + "' WITH GRANT OPTION" );
+
+        stmt.close();
+        stmt = null;
+
         if( in != null )
         {
           in.close();
@@ -792,9 +800,9 @@ public class JDMSystemLibrary implements IJDMSystem
   }
 
   @Override
-  public List getDatabases()
+  public List< DatabaseDTO > getDatabases()
   {
-    List databases = null;
+    List< DatabaseDTO > databases = null;
 
     try
     {
@@ -803,10 +811,10 @@ public class JDMSystemLibrary implements IJDMSystem
         databases = sqlMapper.queryForList( "selectDatabase" );
       }
     }
-    catch( SQLException ex )
+    catch( Exception ex )
     {
-      createExceptions( ex, ex );
-      databases = null;
+      createExceptions( ex, null );
+      ex.printStackTrace();
     }
 
     return databases;
