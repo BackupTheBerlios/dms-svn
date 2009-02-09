@@ -23,18 +23,18 @@
 
 	<insert id="createException" parameterClass="de.asaal.jdmsystem.core.dto.ExceptionStackDTO">
 		INSERT INTO EXCEPTIONS (
-			SQLID,
-			SQLMESSAGE,
+			`SQLID,
+			`SQLMESSAGE`,
 			`SQLSTATE`,
-			SQLVENDORCODE,
-			MESSAGE,
-			CLASSNAME,
-			FILENAME,
-			LINENUMBER,
-			METHODENAME,
-			HASHCODE,
-			IS_NATIVEMETHODE,
-			CREATED
+			`SQLVENDORCODE`,
+			`MESSAGE`,
+			`CLASSNAME`,
+			`FILENAME`,
+			`LINENUMBER`,
+			`METHODENAME`,
+			`HASHCODE`,
+			`IS_NATIVEMETHODE`,
+			`CREATED`
 		) VALUES (
 			#sqlId#,
 			#sqlMessage#,
