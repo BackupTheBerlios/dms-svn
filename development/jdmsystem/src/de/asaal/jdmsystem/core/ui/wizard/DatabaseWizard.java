@@ -116,13 +116,8 @@ public class DatabaseWizard extends QWizard
     }
   }
 
-  public void setSystemLibrary( JDMSystemLibrary systemLibrary )
-  {
-    this.systemLibrary = systemLibrary;
-  }
-  
   public JDMSystemLibrary systemLibrary()
   {
-    return systemLibrary;
+    return databasePage.systemLibrary();
   }
 }

@@ -1,5 +1,11 @@
 package de.asaal.jdmsystem;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 import com.trolltech.qt.gui.QApplication;
 import com.trolltech.qt.gui.QMainWindow;
 import com.trolltech.qt.gui.QWidget;
@@ -33,23 +39,59 @@ import de.asaal.jdmsystem.core.ui.wizard.DatabaseWizard;
  */
 public class Main extends QWidget
 {
-
   public static void main( String[] args )
   {
-    QApplication.initialize( args );
+    try
+    {
+      QApplication.initialize( args );
 
-    JDMSystemLibrary.setHost( "localhost" );
-    JDMSystemLibrary.setPort( 3306 );
-    JDMSystemLibrary.setDatabase( "mysql" );
-    JDMSystemLibrary.setUsername( "root" );
-    JDMSystemLibrary.setPassword( "Ms!//9pSicher!Code" );
+      Properties properties = new Properties();
+      FileInputStream inputStream = null;
+      DatabaseWizard databaseWizard = null;
+      JDMSystemLibrary systemLibrary = null;
+      JDMSystemBase systemBase = null;
 
-    JDMSystemLibrary systemLibrary = new JDMSystemLibrary();
+      if( new File( "properties/mysql.properties" ).exists() )
+      {
+        inputStream = new FileInputStream( "properties/mysql.properties" );
+        properties.load( inputStream );
 
-    DatabaseWizard databaseWizard = DatabaseWizard.databaseWizard();
-    databaseWizard.setSystemLibrary( systemLibrary );
-    databaseWizard.exec();
+        JDMSystemLibrary.setHost( properties.getProperty( "mysql_host", "localhost" ) );
+        JDMSystemLibrary.setPort( Integer.parseInt( properties.getProperty( "mysql_port", "3306" ) ) );
+        JDMSystemLibrary.setDatabase( "mysql" );
+        JDMSystemLibrary.setUsername( properties.getProperty( "mysql_username", "root" ) );
+        JDMSystemLibrary.setPassword( JDMSystemLibrary.decodeUserPwd( properties.getProperty( "mysql_password", "" ) ) );
 
-    QApplication.exec();
+        systemLibrary = new JDMSystemLibrary();
+        properties = null;
+      }
+      else
+      {
+        databaseWizard = DatabaseWizard.databaseWizard();
+        if( databaseWizard.exec() == 1 )
+        {
+          systemLibrary = databaseWizard.systemLibrary();
+        }
+        else
+        {
+          System.exit( -1 );
+        }
+      }
+
+      systemBase = new JDMSystemBase( null, systemLibrary );
+      systemBase.show();
+
+      QApplication.exec();
+    }
+    catch( FileNotFoundException ex )
+    {
+      ex.printStackTrace();
+      System.exit( -1 );
+    }
+    catch( IOException ex )
+    {
+      ex.printStackTrace();
+      System.exit( -1 );
+    }
   }
 }

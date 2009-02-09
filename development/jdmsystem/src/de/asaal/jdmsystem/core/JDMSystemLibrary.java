@@ -452,7 +452,10 @@ public class JDMSystemLibrary implements IJDMSystem
 
       try
       {
-        sqlMapper.insert( "createException", stackDTO );
+        if( sqlMapper != null )
+        {
+          sqlMapper.insert( "createException", stackDTO );
+        }
       }
       catch( SQLException e )
       {
@@ -568,6 +571,8 @@ public class JDMSystemLibrary implements IJDMSystem
         {
           properties.setProperty( "mysql_driver", "com.mysql.jdbc.Driver" );
           properties.setProperty( "mysql_url", "jdbc:mysql://" + getHost() + ":" + getPort() + "/mysql" );
+          properties.setProperty( "mysql_host", getHost() );
+          properties.setProperty( "mysql_port", String.valueOf( getPort() ) );
           properties.setProperty( "mysql_username", getUsername() );
           properties.setProperty( "mysql_password", encodeUserPwd( getPassword() ) );
           properties.store( outputStream, "MySQL Server Settings" );
@@ -585,22 +590,22 @@ public class JDMSystemLibrary implements IJDMSystem
 
       properties.setProperty( "mysql_password", decodeUserPwd( properties.getProperty( "mysql_password" ) ) );
 
-      setPassword( null );
-
       Reader reader = Resources.getResourceAsReader( "de/asaal/jdmsystem/core/properties/ibatis/ibatis.xml" );
       sqlMapper = SqlMapClientBuilder.buildSqlMapClient( reader, properties );
       reader.close();
 
-      properties = null;
       if( inputStream != null )
       {
         inputStream.close();
         inputStream = null;
       }
+
+      properties = null;
+      setPassword( null );
     }
-    catch( Exception e )
+    catch( Exception ex )
     {
-      createExceptions( e, null );
+      createExceptions( ex, null );
     }
   }
 
@@ -742,7 +747,7 @@ public class JDMSystemLibrary implements IJDMSystem
    * @param encodedPassword
    *          The encoded password
    */
-  private String decodeUserPwd( String encodedPassword )
+  public static String decodeUserPwd( String encodedPassword )
   {
     String decodedPassword = null;
 

@@ -68,7 +68,10 @@ public class DatabasePage extends QWizardPage
     }
     catch( Exception ex )
     {
-      systemLibrary.createExceptions( ex, null );
+      if( systemLibrary != null )
+      {
+        systemLibrary.createExceptions( ex, null );
+      }
       ex.printStackTrace();
     }
 
@@ -81,9 +84,16 @@ public class DatabasePage extends QWizardPage
 
     boolean valid = false;
     String errorMessage = null;
+
     try
     {
-      systemLibrary = DatabaseWizard.databaseWizard().systemLibrary();
+      systemLibrary = null;
+      JDMSystemLibrary.setHost( uiInstance.lineEditHost.text() );
+      JDMSystemLibrary.setPort( uiInstance.spinBoxPort.value() );
+      JDMSystemLibrary.setDatabase( "mysql" );
+      JDMSystemLibrary.setUsername( uiInstance.lineEditUser.text() );
+      JDMSystemLibrary.setPassword( uiInstance.lineEditPassword.text() );
+      systemLibrary = new JDMSystemLibrary();
 
       if( uiInstance.rbtnChooseDatabase.isChecked() )
       {
@@ -110,7 +120,10 @@ public class DatabasePage extends QWizardPage
     }
     catch( Exception ex )
     {
-      systemLibrary.createExceptions( ex, null );
+      if( systemLibrary != null )
+      {
+        systemLibrary.createExceptions( ex, null );
+      }
       ex.printStackTrace();
 
       valid = false;
@@ -127,14 +140,17 @@ public class DatabasePage extends QWizardPage
     {
       registerField( "dbNew", uiInstance.rbtnNewDatabase );
       registerField( "dbChoose", uiInstance.rbtnChooseDatabase );
-      registerField( "dbHost", uiInstance.lineEditHost );
+      registerField( "dbHost*", uiInstance.lineEditHost );
       registerField( "dbPort", uiInstance.spinBoxPort );
-      registerField( "dbUser", uiInstance.lineEditUser );
+      registerField( "dbUser*", uiInstance.lineEditUser );
       registerField( "dbUserPassword", uiInstance.lineEditPassword );
     }
     catch( Exception ex )
     {
-      systemLibrary.createExceptions( ex, null );
+      if( systemLibrary != null )
+      {
+        systemLibrary.createExceptions( ex, null );
+      }
       ex.printStackTrace();
     }
   }
@@ -159,7 +175,10 @@ public class DatabasePage extends QWizardPage
     }
     catch( Exception ex )
     {
-      systemLibrary.createExceptions( ex, null );
+      if( systemLibrary != null )
+      {
+        systemLibrary.createExceptions( ex, null );
+      }
       ex.printStackTrace();
     }
   }
@@ -183,7 +202,10 @@ public class DatabasePage extends QWizardPage
     }
     catch( Exception ex )
     {
-      systemLibrary.createExceptions( ex, null );
+      if( systemLibrary != null )
+      {
+        systemLibrary.createExceptions( ex, null );
+      }
       ex.printStackTrace();
     }
   }
@@ -204,7 +226,10 @@ public class DatabasePage extends QWizardPage
     }
     catch( Exception ex )
     {
-      systemLibrary.createExceptions( ex, null );
+      if( systemLibrary != null )
+      {
+        systemLibrary.createExceptions( ex, null );
+      }
       ex.printStackTrace();
 
       return null;
@@ -222,6 +247,11 @@ public class DatabasePage extends QWizardPage
       instance = new DatabasePage();
       return instance;
     }
+  }
+
+  public JDMSystemLibrary systemLibrary()
+  {
+    return systemLibrary;
   }
 
   @Override

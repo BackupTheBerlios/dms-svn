@@ -90,7 +90,7 @@
            </size>
           </property>
           <property name="text" >
-           <string>Host:</string>
+           <string>Host*:</string>
           </property>
           <property name="buddy" >
            <cstring>lineEditHost</cstring>
@@ -99,32 +99,6 @@
         </item>
         <item>
          <widget class="QLineEdit" name="lineEditHost" />
-        </item>
-        <item>
-         <widget class="QLabel" name="label_2" >
-          <property name="minimumSize" >
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="maximumSize" >
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="toolTip" >
-           <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
-p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;">
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">If &lt;span style=" font-weight:600;">host&lt;/span> is blank, the default host is used. The default host are &lt;span style=" font-weight:600;">localhost&lt;/span> or &lt;span style=" font-weight:600;">127.0.0.1&lt;/span>.&lt;/p>&lt;/body>&lt;/html></string>
-          </property>
-          <property name="pixmap" >
-           <pixmap>classpath:de/asaal/jdmsystem/resource/images/info.png</pixmap>
-          </property>
-         </widget>
         </item>
        </layout>
       </item>
@@ -162,32 +136,6 @@ p, li { white-space: pre-wrap; }
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLabel" name="label_5" >
-          <property name="minimumSize" >
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="maximumSize" >
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="toolTip" >
-           <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
-p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;">
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">If &lt;span style=" font-weight:600;">port&lt;/span> is blank or zerro, the default database port is used. The default database port is &lt;span style=" font-weight:600;">3306&lt;/span>.&lt;/p>&lt;/body>&lt;/html></string>
-          </property>
-          <property name="pixmap" >
-           <pixmap>classpath:de/asaal/jdmsystem/resource/images/info.png</pixmap>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
       <item row="2" column="0" >
@@ -207,7 +155,7 @@ p, li { white-space: pre-wrap; }
            </size>
           </property>
           <property name="text" >
-           <string>User:</string>
+           <string>User*:</string>
           </property>
           <property name="buddy" >
            <cstring>lineEditUser</cstring>
@@ -216,32 +164,6 @@ p, li { white-space: pre-wrap; }
         </item>
         <item>
          <widget class="QLineEdit" name="lineEditUser" />
-        </item>
-        <item>
-         <widget class="QLabel" name="label_3" >
-          <property name="minimumSize" >
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="maximumSize" >
-           <size>
-            <width>16</width>
-            <height>16</height>
-           </size>
-          </property>
-          <property name="toolTip" >
-           <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
-p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;">
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">If &lt;span style=" font-weight:600;">user&lt;/span> is blank, the default database user is used. The default database user is &lt;span style=" font-weight:600;">root&lt;/span>.&lt;/p>&lt;/body>&lt;/html></string>
-          </property>
-          <property name="pixmap" >
-           <pixmap>classpath:de/asaal/jdmsystem/resource/images/info.png</pixmap>
-          </property>
-         </widget>
         </item>
        </layout>
       </item>

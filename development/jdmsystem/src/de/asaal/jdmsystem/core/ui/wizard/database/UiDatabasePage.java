@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'DatabasePage.jui'
 **
-** Created: Mo 9. Feb 14:41:02 2009
+** Created: Mo 9. Feb 16:04:11 2009
 **      by: Qt User Interface Compiler version 4.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -25,15 +25,12 @@ public class UiDatabasePage
     public QHBoxLayout horizontalLayoutHost;
     public QLabel labelHost;
     public QLineEdit lineEditHost;
-    public QLabel label_2;
     public QHBoxLayout horizontalLayoutPort;
     public QLabel labelPort;
     public QSpinBox spinBoxPort;
-    public QLabel label_5;
     public QHBoxLayout horizontalLayoutUser;
     public QLabel labelUser;
     public QLineEdit lineEditUser;
-    public QLabel label_3;
     public QHBoxLayout horizontalLayoutPassword;
     public QLabel labelPassword;
     public QLineEdit lineEditPassword;
@@ -97,14 +94,6 @@ public class UiDatabasePage
 
         horizontalLayoutHost.addWidget(lineEditHost);
 
-        label_2 = new QLabel(groupBox);
-        label_2.setObjectName("label_2");
-        label_2.setMinimumSize(new QSize(16, 16));
-        label_2.setMaximumSize(new QSize(16, 16));
-        label_2.setPixmap(new QPixmap(("classpath:de/asaal/jdmsystem/resource/images/info.png")));
-
-        horizontalLayoutHost.addWidget(label_2);
-
 
         gridLayout.addLayout(horizontalLayoutHost, 0, 0, 1, 1);
 
@@ -124,14 +113,6 @@ public class UiDatabasePage
 
         horizontalLayoutPort.addWidget(spinBoxPort);
 
-        label_5 = new QLabel(groupBox);
-        label_5.setObjectName("label_5");
-        label_5.setMinimumSize(new QSize(16, 16));
-        label_5.setMaximumSize(new QSize(16, 16));
-        label_5.setPixmap(new QPixmap(("classpath:de/asaal/jdmsystem/resource/images/info.png")));
-
-        horizontalLayoutPort.addWidget(label_5);
-
 
         gridLayout.addLayout(horizontalLayoutPort, 1, 0, 1, 1);
 
@@ -148,14 +129,6 @@ public class UiDatabasePage
         lineEditUser.setObjectName("lineEditUser");
 
         horizontalLayoutUser.addWidget(lineEditUser);
-
-        label_3 = new QLabel(groupBox);
-        label_3.setObjectName("label_3");
-        label_3.setMinimumSize(new QSize(16, 16));
-        label_3.setMaximumSize(new QSize(16, 16));
-        label_3.setPixmap(new QPixmap(("classpath:de/asaal/jdmsystem/resource/images/info.png")));
-
-        horizontalLayoutUser.addWidget(label_3);
 
 
         gridLayout.addLayout(horizontalLayoutUser, 2, 0, 1, 1);
@@ -238,24 +211,9 @@ public class UiDatabasePage
         rbtnNewDatabase.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Create ew database"));
         rbtnChooseDatabase.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Choose available database"));
         groupBox.setTitle(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Connections"));
-        labelHost.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Host:"));
-        label_2.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
-"p, li { white-space: pre-wrap; }\n"+
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;\">If <span style=\" font-weight:600;\">host</span> is blank, the default host is used. The default host are <span style=\" font-weight:600;\">localhost</span> or <span style=\" font-weight:600;\">127.0.0.1</span>.</p></body></html>"));
+        labelHost.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Host*:"));
         labelPort.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Port:"));
-        label_5.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
-"p, li { white-space: pre-wrap; }\n"+
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;\">If <span style=\" font-weight:600;\">port</span> is blank or zerro, the default database port is used. The default database port is <span style=\" font-weight:600;\">3306</span>.</p></body></html>"));
-        labelUser.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "User:"));
-        label_3.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
-"p, li { white-space: pre-wrap; }\n"+
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;\">If <span style=\" font-weight:600;\">user</span> is blank, the default database user is used. The default database user is <span style=\" font-weight:600;\">root</span>.</p></body></html>"));
+        labelUser.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "User*:"));
         labelPassword.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Password:"));
         labelDatabase.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Database"));
         btnRefreshDatabases.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "..."));
