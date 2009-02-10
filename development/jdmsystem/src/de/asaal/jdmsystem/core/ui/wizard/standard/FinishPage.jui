@@ -24,6 +24,29 @@
   <property name="windowTitle" >
    <string>Form</string>
   </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" >
+    <widget class="QLabel" name="label" >
+     <property name="text" >
+      <string>Database connection is now configured.
+
+
+If you make configure the database connection again, call this assistant from menu Option -> Database -> Database Assistant.
+
+
+
+
+
+
+
+</string>
+     </property>
+     <property name="wordWrap" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

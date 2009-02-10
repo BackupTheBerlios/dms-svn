@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'DatabasePage.jui'
 **
-** Created: Mo 9. Feb 16:04:11 2009
+** Created: Di 10. Feb 13:07:27 2009
 **      by: Qt User Interface Compiler version 4.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -206,9 +206,9 @@ public class UiDatabasePage
     void retranslateUi(QWizardPage DatabasePage)
     {
         DatabasePage.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "QWizardPage"));
-        label.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Select as first a option and then make your settings. You must set a host, port and a user. Password are optional."));
+        label.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "If you would like to create new database than select this option and enter the database connection option."));
         groupBoxDatabaseOption.setTitle(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Option"));
-        rbtnNewDatabase.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Create ew database"));
+        rbtnNewDatabase.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Create new database"));
         rbtnChooseDatabase.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Choose available database"));
         groupBox.setTitle(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Connections"));
         labelHost.setText(com.trolltech.qt.core.QCoreApplication.translate("DatabasePage", "Host*:"));

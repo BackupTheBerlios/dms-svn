@@ -28,7 +28,7 @@
    <item row="0" column="0" >
     <widget class="QLabel" name="label" >
      <property name="text" >
-      <string>Select as first a option and then make your settings. You must set a host, port and a user. Password are optional.</string>
+      <string>If you would like to create new database than select this option and enter the database connection option.</string>
      </property>
      <property name="wordWrap" >
       <bool>true</bool>
@@ -47,7 +47,7 @@
          <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
         </property>
         <property name="text" >
-         <string>Create ew database</string>
+         <string>Create new database</string>
         </property>
         <property name="checked" >
          <bool>true</bool>

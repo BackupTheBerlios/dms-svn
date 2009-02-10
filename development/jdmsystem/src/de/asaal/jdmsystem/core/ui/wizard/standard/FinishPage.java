@@ -34,6 +34,9 @@ public class FinishPage extends QWizardPage
   private FinishPage()
   {
     super();
+
+    setTitle( tr( "Finish Database Assistant" ) );
+
     instance = new UiFinishPage();
     instance.setupUi( this );
 
