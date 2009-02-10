@@ -1,5 +1,7 @@
 package de.asaal.jdmsystem.core.iface;
 
+import com.trolltech.qt.gui.QAction;
+
 /**
  * Copyright (C) 2009 Alexander Saal<br>
  * alex.saal@gmx.de<br>
@@ -27,6 +29,8 @@ package de.asaal.jdmsystem.core.iface;
 public interface IMainWindow
 {
   public void closeWidget();
+
+  public void createActions();
 
   public void creatEditDocuments();
 

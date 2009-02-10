@@ -79,19 +79,19 @@ public class Main extends QWidget
       }
 
       systemBase = new JDMSystemBase( null, systemLibrary );
-      systemBase.show();
+      systemBase.showMaximized();
 
       QApplication.exec();
     }
     catch( FileNotFoundException ex )
     {
       ex.printStackTrace();
-      System.exit( -1 );
+      QApplication.exit( -1 );
     }
     catch( IOException ex )
     {
       ex.printStackTrace();
-      System.exit( -1 );
+      QApplication.exit( -1 );
     }
   }
 }
