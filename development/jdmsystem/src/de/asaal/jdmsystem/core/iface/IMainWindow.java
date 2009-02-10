@@ -1,6 +1,5 @@
 package de.asaal.jdmsystem.core.iface;
 
-import com.trolltech.qt.gui.QAction;
 
 /**
  * Copyright (C) 2009 Alexander Saal<br>
@@ -47,6 +46,8 @@ public interface IMainWindow
   public void login();
 
   public void logout();
+
+  public void openLog();
 
   public void openPreference();
 

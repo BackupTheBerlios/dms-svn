@@ -8,7 +8,6 @@ import com.trolltech.qt.core.Qt.ContextMenuPolicy;
 import com.trolltech.qt.gui.QAction;
 import com.trolltech.qt.gui.QApplication;
 import com.trolltech.qt.gui.QCloseEvent;
-import com.trolltech.qt.gui.QContextMenuEvent;
 import com.trolltech.qt.gui.QDesktopWidget;
 import com.trolltech.qt.gui.QMainWindow;
 import com.trolltech.qt.gui.QMenu;
@@ -19,6 +18,7 @@ import com.trolltech.qt.gui.QWorkspace;
 
 import de.asaal.jdmsystem.core.JDMSystemLibrary;
 import de.asaal.jdmsystem.core.iface.IMainWindow;
+import de.asaal.jdmsystem.core.ui.ExceptionLogBase;
 
 /**
  * Copyright (C) 2009 Alexander Saal<br>
@@ -49,6 +49,7 @@ public class JDMSystemBase extends QMainWindow implements IMainWindow
 {
   private static JDMSystemBase    systemBase                  = null;
   private static JDMSystemLibrary systemLibrary               = null;
+  private ExceptionLogBase        exceptionLogBase            = null;
 
   private QWorkspace              workspace                   = null;
 
@@ -70,6 +71,7 @@ public class JDMSystemBase extends QMainWindow implements IMainWindow
   private QAction                 acSearch                    = null;
   private QAction                 acCreadEditUsers            = null;
   private QAction                 acWorkSheet                 = null;
+  private QAction                 acErrorLog                  = null;
   private QAction                 acClose                     = null;
 
   public JDMSystemBase( QWidget parent, JDMSystemLibrary library )
@@ -199,6 +201,12 @@ public class JDMSystemBase extends QMainWindow implements IMainWindow
       acWorkSheet.setStatusTip( tr( "Open worksheet ..." ) );
       acWorkSheet.triggered.connect( this, "openWorkSheet()" );
 
+      QMenu mnuLog = menuBar().addMenu( tr( "&Log" ) );
+      acErrorLog = mnuLog.addAction( tr( "Open &Log" ) );
+      acErrorLog.setIcon( new QPixmap( "classpath:de/asaal/jdmsystem/resource/images/menu/16/trash_16.png" ) );
+      acErrorLog.setStatusTip( tr( "Open log window ..." ) );
+      acErrorLog.triggered.connect( this, "openLog()" );
+
       // Toolbar
       mnuToolBar = new QToolBar( tr( "Maintoolbar" ), this );
       mnuToolBar.setIconSize( new QSize( 24, 24 ) );
@@ -241,6 +249,7 @@ public class JDMSystemBase extends QMainWindow implements IMainWindow
       acToolBarWorkSheet.triggered.connect( this, "openWorkSheet()" );
 
       addToolBar( mnuToolBar );
+      statusBar().show();
     }
     catch( Exception e )
     {
@@ -285,6 +294,25 @@ public class JDMSystemBase extends QMainWindow implements IMainWindow
 
     }
     catch( Exception ex )
+    {
+    }
+  }
+
+  @Override
+  public void openLog()
+  {
+    try
+    {
+      exceptionLogBase = ExceptionLogBase.exceptionLogBaseInstance();
+      if( exceptionLogBase == null )
+      {
+        exceptionLogBase = new ExceptionLogBase();
+        workspace.addWindow( exceptionLogBase.widget() );
+      }
+
+      exceptionLogBase.show();
+    }
+    catch( Exception e )
     {
     }
   }
