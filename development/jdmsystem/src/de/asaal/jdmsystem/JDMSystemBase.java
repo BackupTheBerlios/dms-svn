@@ -19,6 +19,7 @@ import com.trolltech.qt.gui.QWorkspace;
 import de.asaal.jdmsystem.core.JDMSystemLibrary;
 import de.asaal.jdmsystem.core.iface.IMainWindow;
 import de.asaal.jdmsystem.core.ui.ExceptionLogBase;
+import de.asaal.jdmsystem.core.ui.UserBase;
 
 /**
  * Copyright (C) 2009 Alexander Saal<br>
@@ -50,6 +51,7 @@ public class JDMSystemBase extends QMainWindow implements IMainWindow
   private static JDMSystemBase    systemBase                  = null;
   private static JDMSystemLibrary systemLibrary               = null;
   private ExceptionLogBase        exceptionLogBase            = null;
+  private UserBase                userBase                    = null;
 
   private QWorkspace              workspace                   = null;
 
@@ -141,7 +143,21 @@ public class JDMSystemBase extends QMainWindow implements IMainWindow
   @Override
   public void createEditUsers()
   {
+    try
+    {
+      userBase = UserBase.userBaseInstance();
+      if( userBase == null )
+      {
+        userBase = new UserBase();
+        workspace.addWindow( userBase.widget() );
+      }
 
+      userBase.reloadUsers();
+      userBase.show();
+    }
+    catch( Exception e )
+    {
+    }
   }
 
   @Override
@@ -309,7 +325,7 @@ public class JDMSystemBase extends QMainWindow implements IMainWindow
         exceptionLogBase = new ExceptionLogBase();
         workspace.addWindow( exceptionLogBase.widget() );
       }
-
+      exceptionLogBase.reloadExceptions();
       exceptionLogBase.show();
     }
     catch( Exception e )

@@ -79,6 +79,14 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
     }
   }
 
+  /**
+   * Returns the internal {@link QWidget} with all visual components
+   */
+  public QWidget widget()
+  {
+    return userBase;
+  }
+  
   @Override
   public void initialConnections()
   {
@@ -161,7 +169,17 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
   {
     try
     {
-
+      if( userId != null && !userId.isEmpty() )
+      {
+        for( UserDTO userDTO : userDTOs )
+        {
+          if( userDTO.getUserId().equalsIgnoreCase( userId ))
+          {
+            systemLibrary.deleteUser( userDTO );
+            return;
+          }
+        }
+      }
     }
     catch( Exception ex )
     {
@@ -195,7 +213,7 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
   /**
    * Reload users from database
    */
-  private void reloadUsers()
+  public void reloadUsers()
   {
     try
     {

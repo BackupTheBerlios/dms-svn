@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'ExceptionLogBase.jui'
 **
-** Created: Mi 11. Feb 16:26:41 2009
+** Created: Mi 11. Feb 16:43:21 2009
 **      by: Qt User Interface Compiler version 4.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -190,7 +190,7 @@ public class UiExceptionLogBase
         QWidget.setTabOrder(textBrowserMessage, btnSendMail);
         retranslateUi(ExceptionLogBase);
 
-        comboBoxGroupBy.setCurrentIndex(2);
+        comboBoxGroupBy.setCurrentIndex(5);
 
 
         ExceptionLogBase.connectSlotsByName();
@@ -202,10 +202,11 @@ public class UiExceptionLogBase
         labelGroupBy.setText(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Group by:"));
         comboBoxGroupBy.clear();
         comboBoxGroupBy.addItem(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", ""));
-        comboBoxGroupBy.addItem(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Name"));
-        comboBoxGroupBy.addItem(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Date"));
-        comboBoxGroupBy.addItem(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Exception"));
-        comboBoxGroupBy.addItem(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "File"));
+        comboBoxGroupBy.addItem(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "State"));
+        comboBoxGroupBy.addItem(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Vendor code"));
+        comboBoxGroupBy.addItem(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Classname"));
+        comboBoxGroupBy.addItem(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Filename"));
+        comboBoxGroupBy.addItem(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Created"));
         labelDate.setText(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Date:"));
         treeWidgetExceptions.headerItem().setText(0, com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "SQL State"));
         treeWidgetExceptions.headerItem().setText(1, com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "SQL Vendor code"));

@@ -45,7 +45,7 @@ public class ExceptionLogBase extends UiExceptionLogBase implements IWidget
 
   private static ExceptionLogBase   instance         = null;
 
-  private String                    searchFor        = null;
+  private String                    searchFor        = "All";
 
   public ExceptionLogBase()
   {
@@ -134,7 +134,7 @@ public class ExceptionLogBase extends UiExceptionLogBase implements IWidget
       {
         if( searchFor.equalsIgnoreCase( "all" ) )
         {
-
+          reloadExceptions();
         }
         else
         {
@@ -166,7 +166,7 @@ public class ExceptionLogBase extends UiExceptionLogBase implements IWidget
   /**
    * Reloads the exception from database
    */
-  protected void reloadExceptions()
+  public void reloadExceptions()
   {
     try
     {
@@ -199,6 +199,7 @@ public class ExceptionLogBase extends UiExceptionLogBase implements IWidget
     catch( Exception ex )
     {
       systemLibrary.createExceptions( ex, null );
+      reloadExceptions();
     }
   }
 
