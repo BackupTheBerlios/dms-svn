@@ -559,35 +559,37 @@ public class JDMSystemLibrary implements IJDMSystem
     try
     {
       properties = new Properties();
-
-      if( new File( "properties/mysql.properties" ).exists() )
+      outputStream = new FileOutputStream( "properties/mysql.properties", false );
       {
-        inputStream = new FileInputStream( "properties/mysql.properties" );
-        properties.load( inputStream );
+        properties.setProperty( "mysql_driver", "com.mysql.jdbc.Driver" );
+        properties.setProperty( "mysql_url", "jdbc:mysql://" + getHost() + ":" + getPort() + "/mysql" );
+        properties.setProperty( "mysql_host", getHost() );
+        properties.setProperty( "mysql_port", String.valueOf( getPort() ) );
+        properties.setProperty( "mysql_username", getUsername() );
+        properties.setProperty( "mysql_password", encodeUserPwd( getPassword() ) );
+        properties.store( outputStream, "MySQL Server Settings" );
       }
-      else
-      {
-        outputStream = new FileOutputStream( "properties/mysql.properties", false );
-        {
-          properties.setProperty( "mysql_driver", "com.mysql.jdbc.Driver" );
-          properties.setProperty( "mysql_url", "jdbc:mysql://" + getHost() + ":" + getPort() + "/mysql" );
-          properties.setProperty( "mysql_host", getHost() );
-          properties.setProperty( "mysql_port", String.valueOf( getPort() ) );
-          properties.setProperty( "mysql_username", getUsername() );
-          properties.setProperty( "mysql_password", encodeUserPwd( getPassword() ) );
-          properties.store( outputStream, "MySQL Server Settings" );
-        }
-        outputStream.flush();
-        outputStream.close();
-        outputStream = null;
-      }
+      outputStream.flush();
+      outputStream.close();
+      outputStream = null;
 
       createDatabase( properties );
 
       String url = properties.getProperty( "mysql_url" );
-      url = url.replace( getPort() + "/mysql", getPort() + "/dms" );
+      String hostName = getHostSystemName().toLowerCase();
+      if( hostName.contains( "windows" ) )
+      {
+        url = url.replace( getPort() + "/mysql", getPort() + "/dms" );
+      }
+      else if( hostName.contains( "linux" ) || getHostSystemName().contains( "unix" ) )
+      {
+        url = url.replace( getPort() + "/mysql", getPort() + "/DMS" );
+      }
+      else
+      {
+        url = url.replace( getPort() + "/mysql", getPort() + "/dms" );
+      }
       properties.setProperty( "mysql_url", url );
-
       properties.setProperty( "mysql_password", decodeUserPwd( properties.getProperty( "mysql_password" ) ) );
 
       Reader reader = Resources.getResourceAsReader( "de/asaal/jdmsystem/core/properties/ibatis/ibatis.xml" );
@@ -701,6 +703,14 @@ public class JDMSystemLibrary implements IJDMSystem
   private String getCurrentDate()
   {
     return QDateTime.currentDateTime().toString( DateFormat.ISODate );
+  }
+
+  /**
+   * Returns the host system name
+   */
+  private String getHostSystemName()
+  {
+    return System.getProperty( "os.name" );
   }
 
   /**

@@ -97,7 +97,7 @@ public class DatabasePage extends QWizardPage
 
       if( uiInstance.rbtnChooseDatabase.isChecked() )
       {
-        errorMessage = systemLibrary.isConnectionAvailabel( uiInstance.lineEditUser.text(), uiInstance.lineEditPassword.text(), uiInstance.lineEditHost.text(), String.valueOf( uiInstance.spinBoxPort.value() ), uiInstance.comboBoxDatabase.currentText() );
+        errorMessage = systemLibrary.isConnectionAvailabel( uiInstance.lineEditUser.text(), uiInstance.lineEditPassword.text(), uiInstance.lineEditHost.text(), String.valueOf( uiInstance.spinBoxPort.value() ), uiInstance.comboBoxDatabase.currentText().toUpperCase() );
       }
       else if( uiInstance.rbtnNewDatabase.isChecked() )
       {

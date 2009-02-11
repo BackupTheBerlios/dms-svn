@@ -10,6 +10,6 @@
 	</resultMap>
 
 	<select id="selectDatabase" resultMap="DatabaseDTOResult">
-		SELECT `Host`, `Db`, `User` FROM mysql.`db`;
+		SELECT `Host`, `Db`, `User` FROM mysql.`db` GROUP BY 2;
 	</select>
 </sqlMap>
