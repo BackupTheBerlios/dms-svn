@@ -86,7 +86,7 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
   {
     return userBase;
   }
-  
+
   @Override
   public void initialConnections()
   {
@@ -129,6 +129,7 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
       systemLibrary.createUser( userDTO );
 
       reloadUsers();
+      clearFileds();
     }
     catch( Exception ex )
     {
@@ -152,6 +153,7 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
           {
             systemLibrary.createUserData( userDataDTO );
             reloadUsers();
+            clearFileds();
 
             advancedUserBase = null;
           }
@@ -173,9 +175,13 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
       {
         for( UserDTO userDTO : userDTOs )
         {
-          if( userDTO.getUserId().equalsIgnoreCase( userId ))
+          QApplication.processEvents();
+
+          if( userDTO.getUserId().equalsIgnoreCase( userId ) )
           {
             systemLibrary.deleteUser( userDTO );
+            reloadUsers();
+            clearFileds();
             return;
           }
         }
@@ -189,7 +195,40 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
 
   @Override
   public void updateUser()
-  {}
+  {
+    try
+    {
+      if( userId != null && !userId.isEmpty() )
+      {
+        for( UserDTO userDTO : userDTOs )
+        {
+          QApplication.processEvents();
+
+          if( userDTO.getUserId().equalsIgnoreCase( userId ) )
+          {
+            if( !lineEditUserName.text().isEmpty() )
+            {
+              userDTO.setUserName( lineEditUserName.text() );
+            }
+
+            if( !lineEditUserPassword.text().isEmpty() )
+            {
+              userDTO.setUserPwd( lineEditUserPassword.text() );
+            }
+
+            systemLibrary.deleteUser( userDTO );
+            reloadUsers();
+            clearFileds();
+            break;
+          }
+        }
+      }
+    }
+    catch( Exception ex )
+    {
+      systemLibrary.createExceptions( ex, null );
+    }
+  }
 
   @Override
   public void close()
@@ -197,17 +236,12 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
     userBase.close();
   }
 
+  /**
+   * Returns the instance of {@link UserBase}
+   */
   public static UserBase userBaseInstance()
   {
     return instance;
-  }
-
-  /**
-   * Returns the internal user id
-   */
-  private String getUserId()
-  {
-    return userId;
   }
 
   /**
@@ -217,13 +251,18 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
   {
     try
     {
+      treeWidgetUser.clear();
+
+      if( userDTOs != null )
+      {
+        userDTOs.clear();
+      }
+
       userDTOs = systemLibrary.getUsers();
       if( userDTOs == null || userDTOs.size() <= 0 )
       {
         return;
       }
-
-      treeWidgetUser.clear();
 
       for( UserDTO userDTO : userDTOs )
       {
@@ -263,5 +302,31 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
     {
       systemLibrary.createExceptions( ex, null );
     }
+  }
+
+  /**
+   * Clear text fields
+   */
+  private void clearFileds()
+  {
+    try
+    {
+      userId = null;
+      lineEditUserName.setText( "" );
+      lineEditUserPassword.setText( "" );
+      lineEditUserPasswordConfirm.setText( "" );
+    }
+    catch( Exception ex )
+    {
+      systemLibrary.createExceptions( ex, null );
+    }
+  }
+  
+  /**
+   * Returns the internal user id
+   */
+  private String getUserId()
+  {
+    return userId;
   }
 }
