@@ -18,7 +18,7 @@
   <property name="windowTitle" >
    <string>Error Log</string>
   </property>
-  <layout class="QGridLayout" name="gridLayoutException" >
+  <layout class="QGridLayout" name="gridLayout" >
    <item row="0" column="0" >
     <layout class="QHBoxLayout" name="horizontalLayoutGroupBy" >
      <item>
@@ -46,7 +46,7 @@
         <enum>com.trolltech.qt.core.Qt.FocusPolicy.WheelFocus</enum>
        </property>
        <property name="currentIndex" >
-        <number>2</number>
+        <number>5</number>
        </property>
        <item>
         <property name="text" >
@@ -55,22 +55,27 @@
        </item>
        <item>
         <property name="text" >
-         <string>Name</string>
+         <string>State</string>
         </property>
        </item>
        <item>
         <property name="text" >
-         <string>Date</string>
+         <string>Vendor code</string>
         </property>
        </item>
        <item>
         <property name="text" >
-         <string>Exception</string>
+         <string>Classname</string>
         </property>
        </item>
        <item>
         <property name="text" >
-         <string>File</string>
+         <string>Filename</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Created</string>
         </property>
        </item>
       </widget>
@@ -334,10 +339,13 @@
        <property name="text" >
         <string>&amp;Ok</string>
        </property>
+       <property name="shortcut" >
+        <string>Ctrl+O</string>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnCancel" >
+      <widget class="QPushButton" name="btnReload" >
        <property name="minimumSize" >
         <size>
          <width>75</width>
@@ -354,7 +362,16 @@
         <enum>com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus</enum>
        </property>
        <property name="text" >
-        <string>C&amp;ancel</string>
+        <string>&amp;Reload</string>
+       </property>
+       <property name="shortcut" >
+        <string>Ctrl+R</string>
+       </property>
+       <property name="autoDefault" >
+        <bool>true</bool>
+       </property>
+       <property name="default" >
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -370,8 +387,6 @@
   <tabstop>textBrowserSqlMessage</tabstop>
   <tabstop>textBrowserMessage</tabstop>
   <tabstop>btnSendMail</tabstop>
-  <tabstop>btnOk</tabstop>
-  <tabstop>btnCancel</tabstop>
  </tabstops>
  <resources/>
  <connections/>

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'ExceptionLogBase.jui'
 **
-** Created: Fr 6. Feb 11:53:15 2009
+** Created: Mi 11. Feb 16:26:41 2009
 **      by: Qt User Interface Compiler version 4.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -14,7 +14,7 @@ import com.trolltech.qt.gui.*;
 
 public class UiExceptionLogBase
 {
-    public QGridLayout gridLayoutException;
+    public QGridLayout gridLayout;
     public QHBoxLayout horizontalLayoutGroupBy;
     public QLabel labelGroupBy;
     public QComboBox comboBoxGroupBy;
@@ -35,7 +35,7 @@ public class UiExceptionLogBase
     public QPushButton btnSendMail;
     public QSpacerItem horizontalSpacer;
     public QPushButton btnOk;
-    public QPushButton btnCancel;
+    public QPushButton btnReload;
 
     public UiExceptionLogBase() { super(); }
 
@@ -44,8 +44,8 @@ public class UiExceptionLogBase
         ExceptionLogBase.setObjectName("ExceptionLogBase");
         ExceptionLogBase.resize(new QSize(730, 480).expandedTo(ExceptionLogBase.minimumSizeHint()));
         ExceptionLogBase.setMinimumSize(new QSize(730, 480));
-        gridLayoutException = new QGridLayout(ExceptionLogBase);
-        gridLayoutException.setObjectName("gridLayoutException");
+        gridLayout = new QGridLayout(ExceptionLogBase);
+        gridLayout.setObjectName("gridLayout");
         horizontalLayoutGroupBy = new QHBoxLayout();
         horizontalLayoutGroupBy.setObjectName("horizontalLayoutGroupBy");
         labelGroupBy = new QLabel(ExceptionLogBase);
@@ -62,7 +62,7 @@ public class UiExceptionLogBase
         horizontalLayoutGroupBy.addWidget(comboBoxGroupBy);
 
 
-        gridLayoutException.addLayout(horizontalLayoutGroupBy, 0, 0, 1, 1);
+        gridLayout.addLayout(horizontalLayoutGroupBy, 0, 0, 1, 1);
 
         horizontalLayoutGroupByDate = new QHBoxLayout();
         horizontalLayoutGroupByDate.setObjectName("horizontalLayoutGroupByDate");
@@ -90,14 +90,14 @@ public class UiExceptionLogBase
         horizontalLayoutGroupByDate.addWidget(dateEditSecond);
 
 
-        gridLayoutException.addLayout(horizontalLayoutGroupByDate, 1, 0, 1, 1);
+        gridLayout.addLayout(horizontalLayoutGroupByDate, 1, 0, 1, 1);
 
         treeWidgetExceptions = new QTreeWidget(ExceptionLogBase);
         treeWidgetExceptions.setObjectName("treeWidgetExceptions");
         treeWidgetExceptions.setFocusPolicy(com.trolltech.qt.core.Qt.FocusPolicy.WheelFocus);
         treeWidgetExceptions.setContextMenuPolicy(com.trolltech.qt.core.Qt.ContextMenuPolicy.CustomContextMenu);
 
-        gridLayoutException.addWidget(treeWidgetExceptions, 2, 0, 1, 1);
+        gridLayout.addWidget(treeWidgetExceptions, 2, 0, 1, 1);
 
         gridLayoutSqlMessage = new QGridLayout();
         gridLayoutSqlMessage.setObjectName("gridLayoutSqlMessage");
@@ -121,7 +121,7 @@ public class UiExceptionLogBase
         gridLayoutSqlMessage.addItem(verticalSpacerSqlMessage, 1, 0, 1, 1);
 
 
-        gridLayoutException.addLayout(gridLayoutSqlMessage, 3, 0, 1, 1);
+        gridLayout.addLayout(gridLayoutSqlMessage, 3, 0, 1, 1);
 
         gridLayoutMessage = new QGridLayout();
         gridLayoutMessage.setObjectName("gridLayoutMessage");
@@ -145,7 +145,7 @@ public class UiExceptionLogBase
         gridLayoutMessage.addItem(verticalSpacerMessage, 1, 0, 1, 1);
 
 
-        gridLayoutException.addLayout(gridLayoutMessage, 4, 0, 1, 1);
+        gridLayout.addLayout(gridLayoutMessage, 4, 0, 1, 1);
 
         horizontalLayoutExceptionButtonGroup = new QHBoxLayout();
         horizontalLayoutExceptionButtonGroup.setObjectName("horizontalLayoutExceptionButtonGroup");
@@ -169,16 +169,18 @@ public class UiExceptionLogBase
 
         horizontalLayoutExceptionButtonGroup.addWidget(btnOk);
 
-        btnCancel = new QPushButton(ExceptionLogBase);
-        btnCancel.setObjectName("btnCancel");
-        btnCancel.setMinimumSize(new QSize(75, 23));
-        btnCancel.setMaximumSize(new QSize(75, 23));
-        btnCancel.setFocusPolicy(com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus);
+        btnReload = new QPushButton(ExceptionLogBase);
+        btnReload.setObjectName("btnReload");
+        btnReload.setMinimumSize(new QSize(75, 23));
+        btnReload.setMaximumSize(new QSize(75, 23));
+        btnReload.setFocusPolicy(com.trolltech.qt.core.Qt.FocusPolicy.StrongFocus);
+        btnReload.setAutoDefault(true);
+        btnReload.setDefault(true);
 
-        horizontalLayoutExceptionButtonGroup.addWidget(btnCancel);
+        horizontalLayoutExceptionButtonGroup.addWidget(btnReload);
 
 
-        gridLayoutException.addLayout(horizontalLayoutExceptionButtonGroup, 5, 0, 1, 1);
+        gridLayout.addLayout(horizontalLayoutExceptionButtonGroup, 5, 0, 1, 1);
 
         QWidget.setTabOrder(comboBoxGroupBy, dateEditFirst);
         QWidget.setTabOrder(dateEditFirst, dateEditSecond);
@@ -186,8 +188,6 @@ public class UiExceptionLogBase
         QWidget.setTabOrder(treeWidgetExceptions, textBrowserSqlMessage);
         QWidget.setTabOrder(textBrowserSqlMessage, textBrowserMessage);
         QWidget.setTabOrder(textBrowserMessage, btnSendMail);
-        QWidget.setTabOrder(btnSendMail, btnOk);
-        QWidget.setTabOrder(btnOk, btnCancel);
         retranslateUi(ExceptionLogBase);
 
         comboBoxGroupBy.setCurrentIndex(2);
@@ -218,7 +218,9 @@ public class UiExceptionLogBase
         labelMessage.setText(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Message:"));
         btnSendMail.setText(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "&Send eMail"));
         btnOk.setText(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "&Ok"));
-        btnCancel.setText(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "C&ancel"));
+        btnOk.setShortcut(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Ctrl+O"));
+        btnReload.setText(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "&Reload"));
+        btnReload.setShortcut(com.trolltech.qt.core.QCoreApplication.translate("ExceptionLogBase", "Ctrl+R"));
     } // retranslateUi
 
 }
