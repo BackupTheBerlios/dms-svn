@@ -60,10 +60,10 @@ public class XmlSettings extends QObject
   private QColor             colorValue         = null;
   private char[]             charValue          = null;
   private byte[]             byteValue          = null;
-  private boolean            boolValue          = false;
-  private int                integerValue       = 0;
-  private double             doubleValue        = 0.0;
-  private float              floatValue         = 0.00f;
+  private Boolean            boolValue          = false;
+  private Integer            integerValue       = 0;
+  private Double             doubleValue        = 0.0;
+  private Float              floatValue         = 0.00f;
 
   // ############################## Write/Read elements
   private QDomDocument       readDocument       = null;
@@ -106,7 +106,7 @@ public class XmlSettings extends QObject
 
   // ############################## Getter/Setter methods: START
   /**
-   * Get configuration file
+   * Returns configuration file
    */
   public String configurationFile()
   {
@@ -122,7 +122,7 @@ public class XmlSettings extends QObject
   }
 
   /**
-   * Get application name
+   * Returns application name
    */
   public String applicationName()
   {
@@ -138,7 +138,7 @@ public class XmlSettings extends QObject
   }
 
   /**
-   * Get application version
+   * Returns application version
    */
   public String applicationVersion()
   {
@@ -154,7 +154,7 @@ public class XmlSettings extends QObject
   }
 
   /**
-   * Get application author
+   * Returns application author
    */
   public String applicationAuthor()
   {
@@ -172,10 +172,18 @@ public class XmlSettings extends QObject
   // ############################## Getter/Setter methods: END
 
   // ############################## Getter/Setter for values: START
+
   /**
+   * Set the {@link String} value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          String value
    */
   public void setValue( String section, String key, String value )
   {
@@ -189,9 +197,16 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the {@link ArrayList} value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          ArrayList value
    */
   public void setValue( String section, String key, ArrayList value )
   {
@@ -205,9 +220,16 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the {@link Hashtable} value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          Hashtable value
    */
   public void setValue( String section, String key, Hashtable value )
   {
@@ -221,9 +243,16 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the {@link QSize} value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          QSize value
    */
   public void setValue( String section, String key, QSize value )
   {
@@ -237,9 +266,16 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the {@link QPoint} value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          QPoint value
    */
   public void setValue( String section, String key, QPoint value )
   {
@@ -253,9 +289,16 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the {@link QColor} value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          QColor value
    */
   public void setValue( String section, String key, QColor value )
   {
@@ -269,9 +312,16 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the char[] (array) value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          char[] (array) value
    */
   public void setValue( String section, String key, char[] value )
   {
@@ -285,9 +335,16 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the byte[] (array) value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          byte[] (array) value
    */
   public void setValue( String section, String key, byte[] value )
   {
@@ -301,11 +358,18 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the {@link Boolean} value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          Boolean value
    */
-  public void setValue( String section, String key, boolean value )
+  public void setValue( String section, String key, Boolean value )
   {
     try
     {
@@ -317,11 +381,18 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the {@link Integer} value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          Integer value
    */
-  public void setValue( String section, String key, int value )
+  public void setValue( String section, String key, Integer value )
   {
     try
     {
@@ -333,11 +404,18 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the {@link Double} value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          Double value
    */
-  public void setValue( String section, String key, double value )
+  public void setValue( String section, String key, Double value )
   {
     try
     {
@@ -349,11 +427,18 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Set the {@link Float} value to <strong>section</strong> and
+   * <strong>key</strong>.<br>
+   * <br>
+   * 
    * @param section
+   *          Section for this value
    * @param key
+   *          Key for value
    * @param value
+   *          Float value
    */
-  public void setValue( String section, String key, float value )
+  public void setValue( String section, String key, Float value )
   {
     try
     {
@@ -365,9 +450,17 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a {@link String} value from selected <strong>section</strong> and
+   * selected <strong>key</strong>. If section and/or key not available returns
+   * a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default String value if value on section and key not found
    */
   public void value( String section, String key, String defValue )
   {
@@ -381,9 +474,17 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a {@link ArrayList} value from selected <strong>section</strong>
+   * and selected <strong>key</strong>. If section and/or key not available
+   * returns a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default ArrayList value if value on section and key not found
    */
   public void value( String section, String key, ArrayList defValue )
   {
@@ -397,9 +498,17 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a {@link Hashtable} value from selected <strong>section</strong>
+   * and selected <strong>key</strong>. If section and/or key not available
+   * returns a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default Hashtable value if value on section and key not found
    */
   public void value( String section, String key, Hashtable defValue )
   {
@@ -413,9 +522,17 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a {@link QSize} value from selected <strong>section</strong> and
+   * selected <strong>key</strong>. If section and/or key not available returns
+   * a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default QSize value if value on section and key not found
    */
   public void value( String section, String key, QSize defValue )
   {
@@ -429,9 +546,17 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a {@link QPoint} value from selected <strong>section</strong> and
+   * selected <strong>key</strong>. If section and/or key not available returns
+   * a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default QPoint value if value on section and key not found
    */
   public void value( String section, String key, QPoint defValue )
   {
@@ -445,9 +570,17 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a {@link QColor} value from selected <strong>section</strong> and
+   * selected <strong>key</strong>. If section and/or key not available returns
+   * a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default QColor value if value on section and key not found
    */
   public void value( String section, String key, QColor defValue )
   {
@@ -461,9 +594,17 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a char[] (array) value from selected <strong>section</strong> and
+   * selected <strong>key</strong>. If section and/or key not available returns
+   * a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default char[] (array) value if value on section and key not found
    */
   public void value( String section, String key, char[] defValue )
   {
@@ -477,9 +618,17 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a byte[] (array) value from selected <strong>section</strong> and
+   * selected <strong>key</strong>. If section and/or key not available returns
+   * a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default byte[] (array) value if value on section and key not found
    */
   public void value( String section, String key, byte[] defValue )
   {
@@ -493,9 +642,17 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a {@link Boolean} value from selected <strong>section</strong> and
+   * selected <strong>key</strong>. If section and/or key not available returns
+   * a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default Boolean value if value on section and key not found
    */
   public void value( String section, String key, boolean defValue )
   {
@@ -509,11 +666,19 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a {@link Integer} value from selected <strong>section</strong> and
+   * selected <strong>key</strong>. If section and/or key not available returns
+   * a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default Integer value if value on section and key not found
    */
-  public void value( String section, String key, int defValue )
+  public void value( String section, String key, Integer defValue )
   {
     try
     {
@@ -525,11 +690,19 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a {@link Double} value from selected <strong>section</strong> and
+   * selected <strong>key</strong>. If section and/or key not available returns
+   * a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default Double value if value on section and key not found
    */
-  public void value( String section, String key, double defValue )
+  public void value( String section, String key, Double defValue )
   {
     try
     {
@@ -541,15 +714,22 @@ public class XmlSettings extends QObject
   }
 
   /**
+   * Returns a {@link Float} value from selected <strong>section</strong> and
+   * selected <strong>key</strong>. If section and/or key not available returns
+   * a default value.<br>
+   * <br>
+   * 
    * @param section
+   *          Section where is the value
    * @param key
+   *          Key for determine the value
    * @param defValue
+   *          Default Float value if value on section and key not found
    */
-  public void value( String section, String key, float defValue )
+  public void value( String section, String key, Float defValue )
   {
     try
     {
-
     }
     catch( Exception ex )
     {
@@ -599,12 +779,6 @@ public class XmlSettings extends QObject
    */
   protected void finalizeObjects()
   {
-    configurationFile = null;
-    applicationName = null;
-    applicationVersion = null;
-    applicationAuthor = null;
-    authorMail = null;
-
     stringValue = null;
     arrayValue = null;
     hashTableValue = null;
