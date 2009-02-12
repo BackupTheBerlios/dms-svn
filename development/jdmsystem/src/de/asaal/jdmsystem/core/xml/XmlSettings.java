@@ -5,14 +5,17 @@ import java.util.Hashtable;
 
 import com.trolltech.qt.core.QByteArray;
 import com.trolltech.qt.core.QFile;
+import com.trolltech.qt.core.QIODevice;
 import com.trolltech.qt.core.QObject;
 import com.trolltech.qt.core.QPoint;
 import com.trolltech.qt.core.QSize;
+import com.trolltech.qt.core.QIODevice.OpenModeFlag;
 import com.trolltech.qt.gui.QColor;
 import com.trolltech.qt.xml.QDomDocument;
 import com.trolltech.qt.xml.QDomElement;
 import com.trolltech.qt.xml.QDomNode;
 import com.trolltech.qt.xml.QDomNodeList;
+import com.trolltech.qt.xml.QDomDocument.Result;
 
 /**
  * Copyright (C) 2009 Alexander Saal<br>
@@ -41,17 +44,17 @@ import com.trolltech.qt.xml.QDomNodeList;
 @SuppressWarnings( { "unused", "unchecked" } )
 public class XmlSettings extends QObject
 {
-  // ############################## XmlSetting variable
+  // TODO XmlSetting variable
   private static XmlSettings xmlSettings        = null;
 
-  // ############################## Setting informations
+  // TODO Private setting informations variables
   private String             configurationFile  = null;
   private String             applicationName    = null;
   private String             applicationVersion = null;
   private String             applicationAuthor  = null;
   private String             authorMail         = null;
 
-  // ############################## Default setting values
+  // TODO Private default setting variables
   private String             stringValue        = null;
   private ArrayList          arrayValue         = null;
   private Hashtable          hashTableValue     = null;
@@ -65,7 +68,7 @@ public class XmlSettings extends QObject
   private Double             doubleValue        = 0.0;
   private Float              floatValue         = 0.00f;
 
-  // ############################## Write/Read elements
+  // TODO Private write/read elements variables
   private QDomDocument       readDocument       = null;
   private QDomDocument       writeDocument      = null;
   private QDomElement        element            = null;
@@ -78,12 +81,9 @@ public class XmlSettings extends QObject
   /**
    * Private constructor of {@link XmlSettings}
    */
-  private XmlSettings()
+  private XmlSettings( QObject parent )
   {
     xmlSettings = this;
-
-    readDocument = new QDomDocument();
-    writeDocument = new QDomDocument();
 
     element = new QDomElement();
     subElement = new QDomElement();
@@ -93,18 +93,21 @@ public class XmlSettings extends QObject
 
   /**
    * Returns new instance of {@link XmlSettings} or available instance.
+   * 
+   * @param parent
+   *          Parent {@link QObject}
    */
-  public static XmlSettings xmlSettings()
+  public static XmlSettings xmlSettings( QObject parent )
   {
     if( xmlSettings == null )
     {
-      xmlSettings = new XmlSettings();
+      xmlSettings = new XmlSettings( parent );
     }
 
     return xmlSettings;
   }
 
-  // ############################## Getter/Setter methods: START
+  // TODO Getter/Setter methods
   /**
    * Returns configuration file
    */
@@ -169,9 +172,7 @@ public class XmlSettings extends QObject
     this.applicationAuthor = applicationAuthor;
   }
 
-  // ############################## Getter/Setter methods: END
-
-  // ############################## Getter/Setter for values: START
+  // TODO Getter/Setter for values
 
   /**
    * Set the {@link String} value to <strong>section</strong> and
@@ -736,38 +737,101 @@ public class XmlSettings extends QObject
     }
   }
 
-  // ############################## Getter/Setter for values: END
-
-  // ############################## Public/Private function: START
+  // TODO Public/Private function
   /**
-   * Write configuration file
+   * Read XML configuration file
    */
-  public void write()
+  public boolean read()
   {
     try
     {
-      write( new QFile( configurationFile(), this ) );
+      QFile xmlFile = read( configurationFile() );
+      if( xmlFile != null )
+      {
+        readDocument = new QDomDocument();
+        Result result = readDocument.setContent( xmlFile );
+
+        xmlFile.close();
+        xmlFile.dispose();
+        xmlFile = null;
+
+        return result.success;
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
+    }
+
+    return false;
+  }
+
+  /**
+   * Write XML configuration file
+   */
+  public boolean write()
+  {
+    try
+    {
+      writeDocument = new QDomDocument();
+      write( new QFile( configurationFile(), this ) );
+      return true;
+    }
+    catch( Exception ex )
+    {
+      ex.printStackTrace();
+      return false;
     }
   }
 
   /**
+   * Write XML to selected file
+   * 
    * @param file
+   *          {@link QFile} for writing the XML structure
    */
-  private void write( QFile file )
+  private boolean write( QFile file )
   {
     try
     {
       finalizeObjects();
+      return true;
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
+      return false;
     }
   }
 
-  // ############################## Public/Private function: END
+  /**
+   * Read selected XML file
+   * 
+   * @param file
+   *          {@link String} for reading XML file
+   */
+  private QFile read( String xmlFile )
+  {
+    try
+    {
+      if( !QFile.exists( xmlFile ) )
+      {
+        return null;
+      }
+
+      QFile file = new QFile( xmlFile, this );
+      file.open( new QIODevice.OpenMode( OpenModeFlag.ReadOnly ) );
+
+      finalizeObjects();
+
+      return file;
+    }
+    catch( Exception ex )
+    {
+      ex.printStackTrace();
+      return null;
+    }
+  }
 
   /**
    * Runs the finalization methods of any objects pending finalization. Calling<br>
