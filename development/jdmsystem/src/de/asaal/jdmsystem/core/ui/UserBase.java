@@ -68,7 +68,7 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
       userBase.setGeometry( left, top, userBase.width(), userBase.height() );
 
       instance = this;
-      systemLibrary = JDMSystemBase.systemLibraryInstance();
+      systemLibrary = JDMSystemLibrary.systemLibraryInstance();
 
       initialConnections();
       reloadUsers();

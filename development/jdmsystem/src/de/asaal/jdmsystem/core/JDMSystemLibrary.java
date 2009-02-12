@@ -41,8 +41,7 @@ import de.asaal.jdmsystem.core.iface.IJDMSystem;
  * alex.saal@gmx.de<br>
  * <br>
  * <b>File:</b> JDMSystemLibrary.java<br>
- * <b>Desc:</b> This class represent all global function from interface to
- * interact with database.<br>
+ * <b>Desc:</b> This class represent all function to interact with DMS database.<br>
  * <br>
  * This file is part of DMS - Document Management System<br>
  * <br>
@@ -65,6 +64,7 @@ import de.asaal.jdmsystem.core.iface.IJDMSystem;
 public class JDMSystemLibrary implements IJDMSystem
 {
   private SqlMapClient              sqlMapper     = null;
+  private static JDMSystemLibrary   systemLibrary = null;
 
   private List< ExceptionStackDTO > exceptionDTOs = null;
 
@@ -85,14 +85,27 @@ public class JDMSystemLibrary implements IJDMSystem
   private static String             userDatabase  = null;
 
   /**
-   * @param parent
+   * Construct new instance of {@link JDMSystemLibrary} and initial all needed
+   * variables.
    */
   public JDMSystemLibrary()
   {
     super();
 
+    systemLibrary = this;
+
     initialDriver();
     initalVariables();
+  }
+
+  /**
+   * Returns an instance of {@link JDMSystemLibrary}. This function is usefully
+   * for creating plug-ins for DMS - Document Management System and other stuff
+   * to interact with this class.
+   */
+  public static JDMSystemLibrary systemLibraryInstance()
+  {
+    return systemLibrary;
   }
 
   @Override

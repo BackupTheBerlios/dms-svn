@@ -51,7 +51,7 @@ public class ExceptionLogBase extends UiExceptionLogBase implements IWidget
   {
     super();
 
-    systemLibrary = JDMSystemBase.systemLibraryInstance();
+    systemLibrary = JDMSystemLibrary.systemLibraryInstance();
     instance = this;
 
     exceptionLogBase = new QWidget();

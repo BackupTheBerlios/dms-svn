@@ -81,8 +81,9 @@ public class JDMSystemBase extends QMainWindow implements IMainWindow
     super( parent );
 
     systemBase = this;
-    systemLibrary = library;
 
+
+    systemLibrary = library;
     systemBase.setMinimumSize( new QSize( 800, 600 ) );
 
     QDesktopWidget desktop = QApplication.desktop();
@@ -98,11 +99,6 @@ public class JDMSystemBase extends QMainWindow implements IMainWindow
 
     setContextMenuPolicy( ContextMenuPolicy.CustomContextMenu );
     customContextMenuRequested.connect( this, "customContextMenuRequested( QPoint )" );
-  }
-
-  public static JDMSystemLibrary systemLibraryInstance()
-  {
-    return systemLibrary;
   }
 
   public static JDMSystemBase systemBase()
