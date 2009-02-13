@@ -2,20 +2,20 @@ package de.asaal.jdmsystem.core.dto;
 
 public class ExceptionStackDTO
 {
-  private String sqlId           = null;
-  private String sqlMessage      = null;
-  private String sqlState        = null;
-  private String sqlVendorCode   = null;
+  protected String sqlId           = null;
+  private String   sqlMessage      = null;
+  private String   sqlState        = null;
+  private String   sqlVendorCode   = null;
 
-  private String message         = null;
-  private String className       = null;
-  private String fileName        = null;
-  private String lineNumber      = null;
-  private String methodeName     = null;
-  private String hashCode        = null;
-  private String isNativeMethode = null;
+  private String   message         = null;
+  private String   className       = null;
+  private String   fileName        = null;
+  private String   lineNumber      = null;
+  private String   methodeName     = null;
+  private String   hashCode        = null;
+  private String   isNativeMethode = null;
 
-  private String created         = null;
+  private String   created         = null;
 
   public ExceptionStackDTO()
   {}

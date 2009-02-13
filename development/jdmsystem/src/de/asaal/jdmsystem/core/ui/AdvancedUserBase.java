@@ -149,6 +149,28 @@ public class AdvancedUserBase extends UiAdvancedUserBase implements IDialog
   }
 
   /**
+   * Returns if all value is empty
+   */
+  public boolean isEmpty()
+  {
+    try
+    {
+      return lineEditCity.text().isEmpty() &&
+             lineEditCountry.text().isEmpty() &&
+             lineEditFirstName.text().isEmpty() &&
+             lineEditLastName.text().isEmpty() &&
+             lineEditPostalCode.text().isEmpty() &&
+             lineEditStreetName.text().isEmpty() &&
+             lineEditStreetNumber.text().isEmpty();
+    }
+    catch( Exception ex )
+    {
+      ex.printStackTrace();
+      return false;
+    }
+  }
+  
+  /**
    * Returns the internal user id
    */
   private String getUserId()

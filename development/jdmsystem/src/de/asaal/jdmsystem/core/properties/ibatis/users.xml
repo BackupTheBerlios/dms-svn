@@ -16,8 +16,7 @@
 		<result property="updated" column="UPDATED" />
 	</resultMap>
 
-	<resultMap id="UserDTOResult" class="de.asaal.jdmsystem.core.dto.UserDTO"
-		extends="UserDataDTOResult">
+	<resultMap id="UserDTOResult" class="de.asaal.jdmsystem.core.dto.UserDTO" extends="UserDataDTOResult">
 		<result property="userId" column="UID" />
 		<result property="userName" column="USERNAME" />
 		<result property="userPwd" column="USERPASSWD" />
@@ -25,11 +24,11 @@
 		<result property="created" column="CREATED" />
 		<result property="updated" column="UPDATED" />
 	</resultMap>
-
+	
 	<select id="selectAllUsers" resultMap="UserDTOResult">
 		SELECT U.*, UD.* FROM USERS U LEFT JOIN USERSDATA UD ON U.UID = UD.UID
 	</select>
-
+	
 	<select id="selectUserByName" resultClass="java.lang.String">
 		SELECT U.UID FROM USERS U WHERE LOWER( U.USERNAME ) = LOWER( #value# )
 	</select>

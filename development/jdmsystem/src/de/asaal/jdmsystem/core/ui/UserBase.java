@@ -2,6 +2,7 @@ package de.asaal.jdmsystem.core.ui;
 
 import java.util.List;
 
+import com.trolltech.qt.core.QModelIndex;
 import com.trolltech.qt.core.QRect;
 import com.trolltech.qt.core.Qt.ItemDataRole;
 import com.trolltech.qt.gui.QApplication;
@@ -11,7 +12,6 @@ import com.trolltech.qt.gui.QTreeWidget;
 import com.trolltech.qt.gui.QTreeWidgetItem;
 import com.trolltech.qt.gui.QWidget;
 
-import de.asaal.jdmsystem.JDMSystemBase;
 import de.asaal.jdmsystem.core.JDMSystemLibrary;
 import de.asaal.jdmsystem.core.dto.UserDTO;
 import de.asaal.jdmsystem.core.dto.UserDataDTO;
@@ -44,13 +44,14 @@ import de.asaal.jdmsystem.core.iface.IWidget;
  */
 public class UserBase extends UiUserBase implements IUserBase, IWidget
 {
-  private QWidget          userBase      = null;
-  private JDMSystemLibrary systemLibrary = null;
-  private static UserBase  instance      = null;
-  private String           userId        = null;
-  private UserDTO          userDTO       = null;
-  private List< UserDTO >  userDTOs      = null;
-  private UserDataDTO      userDataDTO   = null;
+  private QWidget          userBase         = null;
+  private JDMSystemLibrary systemLibrary    = null;
+  private static UserBase  instance         = null;
+  private AdvancedUserBase advancedUserBase = null;
+  private String           userId           = null;
+  private UserDTO          userDTO          = null;
+  private List< UserDTO >  userDTOs         = null;
+  private UserDataDTO      userDataDTO      = null;
 
   public UserBase()
   {
@@ -93,6 +94,8 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
     try
     {
       treeWidgetUser.itemClicked.connect( this, "treeWidgetItemClicked( QTreeWidgetItem, Integer )" );
+      treeWidgetUser.itemDoubleClicked.connect( this, "treeWidgetItemDoubleClicked( QTreeWidgetItem, Integer )" );
+
       btnAdvanceUser.clicked.connect( this, "advanceUser()" );
       btnAddUser.clicked.connect( this, "addUser()" );
       btnUpdateUser.clicked.connect( this, "updateUser()" );
@@ -144,7 +147,7 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
     {
       if( getUserId() != null && !getUserId().isEmpty() )
       {
-        AdvancedUserBase advancedUserBase = new AdvancedUserBase();
+        advancedUserBase = new AdvancedUserBase();
         advancedUserBase.setUserId( getUserId() );
         if( advancedUserBase.exec() == 1 )
         {
@@ -158,6 +161,7 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
             advancedUserBase = null;
           }
         }
+        advancedUserBase = null;
       }
     }
     catch( Exception ex )
@@ -305,6 +309,65 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
   }
 
   /**
+   * Called from {@link QTreeWidget} if you click double on an item
+   * 
+   * @param index
+   *          The {@link QModelIndex}
+   */
+  protected void treeWidgetItemDoubleClicked( QTreeWidgetItem item, Integer column )
+  {
+    try
+    {
+      if( item != null )
+      {
+        UserDTO itemData = (UserDTO)item.data( 0, ItemDataRole.UserRole );
+        if( userDTOs != null && userDTOs.size() >= 1 )
+        {
+          for( UserDTO userDTO : userDTOs )
+          {
+            QApplication.processEvents();
+
+            if( userDTO.getUserId().equalsIgnoreCase( itemData.getUserId() ) )
+            {
+              UserDataDTO userDataDTO = (UserDataDTO )userDTO;
+              
+              advancedUserBase = new AdvancedUserBase();
+              advancedUserBase.setUserId( userDTO.getUserId() );
+              advancedUserBase.setUserDataDTO( (UserDataDTO )userDTO );
+              if( advancedUserBase.exec() == 1 )
+              {
+                userDataDTO = advancedUserBase.getUserDataDTO();
+                if( userDataDTO != null )
+                {
+                  if( !advancedUserBase.isEmpty() )
+                  {
+                    systemLibrary.createUserData( userDataDTO );
+                  }
+                  else
+                  {
+                    systemLibrary.updateUser( userDTO, userDataDTO );
+                  }
+
+                  reloadUsers();
+                  clearFileds();
+
+                  advancedUserBase = null;
+                }
+              }
+              advancedUserBase = null;
+              return;
+            }
+          }
+        }
+      }
+    }
+    catch( Exception ex )
+    {
+      systemLibrary.createExceptions( ex, null );
+    }
+  }
+
+  /**
    * Clear text fields
    */
   private void clearFileds()
@@ -321,7 +384,7 @@ public class UserBase extends UiUserBase implements IUserBase, IWidget
       systemLibrary.createExceptions( ex, null );
     }
   }
-  
+
   /**
    * Returns the internal user id
    */

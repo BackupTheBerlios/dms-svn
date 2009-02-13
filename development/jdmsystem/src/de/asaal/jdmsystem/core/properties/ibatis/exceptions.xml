@@ -23,7 +23,7 @@
 
 	<insert id="createException" parameterClass="de.asaal.jdmsystem.core.dto.ExceptionStackDTO">
 		INSERT INTO EXCEPTIONS (
-			`SQLID,
+			`SQLID`,
 			`SQLMESSAGE`,
 			`SQLSTATE`,
 			`SQLVENDORCODE`,

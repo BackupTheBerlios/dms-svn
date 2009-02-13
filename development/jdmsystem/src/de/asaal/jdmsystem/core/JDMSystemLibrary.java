@@ -1,11 +1,13 @@
 package de.asaal.jdmsystem.core;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
@@ -442,6 +444,12 @@ public class JDMSystemLibrary implements IJDMSystem
   public void createExceptions( Exception exception, SQLException sqlException )
   {
     ExceptionStackDTO stackDTO = null;
+
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    PrintStream printStream = new PrintStream( outputStream );
+    exception.printStackTrace( printStream );
+    String message = outputStream.toString();
+
     for( StackTraceElement element : exception.getStackTrace() )
     {
       stackDTO = new ExceptionStackDTO();
@@ -460,7 +468,7 @@ public class JDMSystemLibrary implements IJDMSystem
       stackDTO.setHashCode( String.valueOf( element.hashCode() ) );
       stackDTO.setIsNativeMethode( String.valueOf( element.isNativeMethod() ) );
       stackDTO.setLineNumber( String.valueOf( element.getLineNumber() ) );
-      stackDTO.setMessage( exception.getMessage() );
+      stackDTO.setMessage( message );
       stackDTO.setMethodeName( element.getMethodName() );
 
       try
@@ -468,6 +476,7 @@ public class JDMSystemLibrary implements IJDMSystem
         if( sqlMapper != null )
         {
           sqlMapper.insert( "createException", stackDTO );
+          break;
         }
       }
       catch( SQLException e )
