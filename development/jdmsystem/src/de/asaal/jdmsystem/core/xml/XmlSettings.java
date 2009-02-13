@@ -9,7 +9,9 @@ import com.trolltech.qt.core.QIODevice;
 import com.trolltech.qt.core.QObject;
 import com.trolltech.qt.core.QPoint;
 import com.trolltech.qt.core.QSize;
+import com.trolltech.qt.core.QTextStream;
 import com.trolltech.qt.core.QIODevice.OpenModeFlag;
+import com.trolltech.qt.gui.QApplication;
 import com.trolltech.qt.gui.QColor;
 import com.trolltech.qt.xml.QDomDocument;
 import com.trolltech.qt.xml.QDomElement;
@@ -85,6 +87,7 @@ public class XmlSettings extends QObject
   {
     xmlSettings = this;
 
+    writeDocument = new QDomDocument();
     element = new QDomElement();
     subElement = new QDomElement();
     node = new QDomNode();
@@ -463,15 +466,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default String value if value on section and key not found
    */
-  public void value( String section, String key, String defValue )
+  public String value( String section, String key, String defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -487,15 +502,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default ArrayList value if value on section and key not found
    */
-  public void value( String section, String key, ArrayList defValue )
+  public ArrayList value( String section, String key, ArrayList defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -511,15 +538,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default Hashtable value if value on section and key not found
    */
-  public void value( String section, String key, Hashtable defValue )
+  public Hashtable value( String section, String key, Hashtable defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -535,15 +574,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default QSize value if value on section and key not found
    */
-  public void value( String section, String key, QSize defValue )
+  public QSize value( String section, String key, QSize defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -559,15 +610,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default QPoint value if value on section and key not found
    */
-  public void value( String section, String key, QPoint defValue )
+  public QPoint value( String section, String key, QPoint defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -583,15 +646,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default QColor value if value on section and key not found
    */
-  public void value( String section, String key, QColor defValue )
+  public QColor value( String section, String key, QColor defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -607,15 +682,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default char[] (array) value if value on section and key not found
    */
-  public void value( String section, String key, char[] defValue )
+  public char[] value( String section, String key, char[] defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -631,15 +718,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default byte[] (array) value if value on section and key not found
    */
-  public void value( String section, String key, byte[] defValue )
+  public byte[] value( String section, String key, byte[] defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -655,15 +754,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default Boolean value if value on section and key not found
    */
-  public void value( String section, String key, boolean defValue )
+  public boolean value( String section, String key, boolean defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -679,15 +790,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default Integer value if value on section and key not found
    */
-  public void value( String section, String key, Integer defValue )
+  public Integer value( String section, String key, Integer defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -703,15 +826,27 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default Double value if value on section and key not found
    */
-  public void value( String section, String key, Double defValue )
+  public Double value( String section, String key, Double defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
 
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   /**
@@ -727,17 +862,51 @@ public class XmlSettings extends QObject
    * @param defValue
    *          Default Float value if value on section and key not found
    */
-  public void value( String section, String key, Float defValue )
+  public Float value( String section, String key, Float defValue )
   {
     try
     {
+      if( readDocument != null && !readDocument.isNull() )
+      {
+        node = readDocument.firstChild();
+        while( !node.isNull() )
+        {
+          QApplication.processEvents();
+
+          node = node.nextSibling();
+        }
+      }
     }
     catch( Exception ex )
     {
+      ex.printStackTrace();
     }
+
+    return defValue;
   }
 
   // TODO Public/Private function
+  /**
+   * Read XML configuration file
+   * 
+   * @param configurationFile
+   *          XML file to write
+   */
+  public boolean read( String configurationFile )
+  {
+    try
+    {
+      setConfigurationFile( configurationFile );
+      return read();
+    }
+    catch( Exception ex )
+    {
+      ex.printStackTrace();
+    }
+
+    return false;
+  }
+
   /**
    * Read XML configuration file
    */
@@ -745,9 +914,11 @@ public class XmlSettings extends QObject
   {
     try
     {
-      QFile xmlFile = read( configurationFile() );
+      QFile xmlFile = new QFile( configurationFile(), this );
       if( xmlFile != null )
       {
+        xmlFile.open( new QIODevice.OpenMode( QIODevice.OpenModeFlag.ReadOnly, QIODevice.OpenModeFlag.Text ) );
+
         readDocument = new QDomDocument();
         Result result = readDocument.setContent( xmlFile );
 
@@ -768,68 +939,57 @@ public class XmlSettings extends QObject
 
   /**
    * Write XML configuration file
+   * 
+   * @param configurationFile
+   *          XML file to write
+   */
+  public boolean write( String configurationFile )
+  {
+    try
+    {
+      setConfigurationFile( configurationFile );
+      return write();
+    }
+    catch( Exception ex )
+    {
+      ex.printStackTrace();
+    }
+
+    return false;
+  }
+
+  /**
+   * Write XML configuration file
    */
   public boolean write()
   {
-    try
-    {
-      writeDocument = new QDomDocument();
-      write( new QFile( configurationFile(), this ) );
-      return true;
-    }
-    catch( Exception ex )
-    {
-      ex.printStackTrace();
-      return false;
-    }
-  }
+    boolean writeOk = false;
 
-  /**
-   * Write XML to selected file
-   * 
-   * @param file
-   *          {@link QFile} for writing the XML structure
-   */
-  private boolean write( QFile file )
-  {
     try
     {
-      finalizeObjects();
-      return true;
-    }
-    catch( Exception ex )
-    {
-      ex.printStackTrace();
-      return false;
-    }
-  }
+      QTextStream out = null;
+      QFile xmlFile = null;
 
-  /**
-   * Read selected XML file
-   * 
-   * @param file
-   *          {@link String} for reading XML file
-   */
-  private QFile read( String xmlFile )
-  {
-    try
-    {
-      if( !QFile.exists( xmlFile ) )
+      xmlFile = new QFile( configurationFile(), this );
+      xmlFile.open( new QIODevice.OpenMode( QIODevice.OpenModeFlag.WriteOnly, QIODevice.OpenModeFlag.Truncate )  );
       {
-        return null;
+        out = new QTextStream( xmlFile );
+        out.writeString( writeDocument.toString() );
+        out.flush();
+        out = null;
       }
-
-      QFile file = new QFile( xmlFile, this );
-      file.open( new QIODevice.OpenMode( OpenModeFlag.ReadOnly ) );
+      writeOk = xmlFile.flush();
+      xmlFile.close();
+      xmlFile = null;
 
       finalizeObjects();
 
-      return file;
+      return writeOk;
     }
     catch( Exception ex )
     {
       ex.printStackTrace();
-      return null;
+      return writeOk;
     }
   }
 

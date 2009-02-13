@@ -6,7 +6,7 @@
 	<classpathentry kind="lib" path="lib/qtjambi-runtime.jar"/>
 	<classpathentry kind="lib" path="lib/qtjambi.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="file:/D:/Devel/QtJ443/doc/html/"/>
+			<attribute name="javadoc_location" value="file:/D:/QtJambi/doc/html/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/ibatis.jar" sourcepath="D:/Devel/Java/lib/ibatis/src"/>
