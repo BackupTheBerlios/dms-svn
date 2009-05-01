@@ -324,9 +324,9 @@ QString LibDMS::getUserId( const QString &user )
 	return userId;
 }
 
-QMap<QString, QString> LibDMS::geDocuments()
+QList< LibDMS::DocumentInfo* > LibDMS::geDocuments()
 {
-	documentList.clear();
+	m_documentList.clear();
 
 	QSqlQuery queryGroup( m_qsqld );
 	QString sqlGroupQuery = QString( "" );
@@ -357,7 +357,7 @@ QMap<QString, QString> LibDMS::geDocuments()
 			else
 			{
 				errorMessage = queryGroup.lastError().text();
-				return documentList;
+				return m_documentList;
 			}
 
 			// sql statement for get group name
@@ -371,7 +371,7 @@ QMap<QString, QString> LibDMS::geDocuments()
 			else
 			{
 				errorMessage = queryGroup.lastError().text();
-				return documentList;
+				return m_documentList;
 			}
 
 
@@ -384,20 +384,26 @@ QMap<QString, QString> LibDMS::geDocuments()
 			QString updated = queryDocList.value( 5 ).toString();
 			QString checkedout = queryDocList.value( 6 ).toString();
 
-			QString document = uid + "#" + gid + "#" + docname + "#"  + docpath + "#"  + updated + "#" + checkedout;
-
-			documentList.insert( did, document );
+      m_documentInfo = new DocumentInfo;
+      m_documentInfo->docId = did;
+      m_documentInfo->userId = uid;
+      m_documentInfo->groupId = gid;
+      m_documentInfo->docName = docname;
+      m_documentInfo->docPath = docpath;
+      m_documentInfo->update = updated;
+      m_documentInfo->checkedOut = checkedout;
+      m_documentList.append( m_documentInfo );
 		}
 	}
 	else
 		errorMessage = queryDocList.lastError().text();
 
-	return documentList;
+	return m_documentList;
 }
 
-QMap<QString, QString> LibDMS::geDocuments( const QString &userId )
+QList< LibDMS::DocumentInfo* > LibDMS::geDocuments( const QString &userId )
 {
-	documentList.clear();
+	m_documentList.clear();
 
 	QSqlQuery queryGroup( m_qsqld );
 	QString sqlGroupQuery = QString( "" );
@@ -426,7 +432,7 @@ QMap<QString, QString> LibDMS::geDocuments( const QString &userId )
 			else
 			{
 				errorMessage = queryGroup.lastError().text();
-				return documentList;
+				return m_documentList;
 			}
 
 			// sql statement for get group name
@@ -440,7 +446,7 @@ QMap<QString, QString> LibDMS::geDocuments( const QString &userId )
 			else
 			{
 				errorMessage = queryGroup.lastError().text();
-				return documentList;
+				return m_documentList;
 			}
 
 
@@ -453,30 +459,44 @@ QMap<QString, QString> LibDMS::geDocuments( const QString &userId )
 			QString updated = queryDocList.value( 5 ).toString();
 			QString checkedout = queryDocList.value( 6 ).toString();
 
-			QString document = uid + "#" + gid + "#" + docname + "#"  + docpath + "#"  + updated + "#" + checkedout;
-
-			documentList.insert( did, document );
+      m_documentInfo = new DocumentInfo;
+      m_documentInfo->docId = did;
+      m_documentInfo->userId = uid;
+      m_documentInfo->groupId = gid;
+      m_documentInfo->docName = docname;
+      m_documentInfo->docPath = docpath;
+      m_documentInfo->update = updated;
+      m_documentInfo->checkedOut = checkedout;
+      m_documentList.append( m_documentInfo );
 		}
 	}
 	else
 		errorMessage = queryDocList.lastError().text();
 
-	return documentList;
+	return m_documentList;
 }
 
 QString LibDMS::getDocId( const QString &userId, const QString &docname )
 {
-	QSqlQuery queryDocId( m_qsqld );
-	QString sqlDocIdQuery = QString( "" );
-	sqlDocIdQuery = "SELECT DID FROM DOCUMENTS WHERE UID = '" + userId + "' AND DOCNAME = '" + docname + "'";
-	queryDocId.exec( sqlDocIdQuery );
+  if( m_documentList.isEmpty() || m_documentList.size() <= 0 ) {
 
-	if ( queryDocId.isActive() )
-		while ( queryDocId.next() )
-			docId = queryDocId.value( 0 ).toString();
-	else
-		errorMessage = queryDocId.lastError().text();
+    QSqlQuery queryDocId( m_qsqld );
+    QString sqlDocIdQuery = QString( "" );
+    sqlDocIdQuery = "SELECT DID FROM DOCUMENTS WHERE UID = '" + userId + "' AND DOCNAME = '" + docname + "'";
+    queryDocId.exec( sqlDocIdQuery );
 
+    if ( queryDocId.isActive() )
+      while ( queryDocId.next() )
+        docId = queryDocId.value( 0 ).toString();
+    else
+      errorMessage = queryDocId.lastError().text();
+  } else {
+    foreach( DocumentInfo *docInfo, m_documentList ){
+      if( docInfo->userId == userId && docInfo->docName == docname ) {
+        return docInfo->docId;
+      }
+    }
+  }
 
 	return docId;
 }

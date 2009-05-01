@@ -100,7 +100,7 @@ class EXPORT_ASAAL DMSWorkSheet : public QWidget, public Ui::UiWorkSheetBase
 		LibDMS *_dms;
 		QWorkspace *_ws;
 
-		QMap<QString, QString> documents;
+    QList< LibDMS::DocumentInfo* > documents;
 
 		QTreeWidgetItem *docItem;
 		QTreeWidgetItem *groupItem;

@@ -148,31 +148,18 @@ void DMSWorkSheet::loadDocuments()
 
 	documents = _dms->geDocuments( _dms->getUserId( _dms->loggedUser ) );
 
-	QMap< QString, QString>::const_iterator docIt = documents.begin();
+  foreach( LibDMS::DocumentInfo *docInfo, documents ) {
 
-	while ( docIt != documents.end() )
-	{
-		qApp->processEvents();
+    docItem = new QTreeWidgetItem( getGroupItem( docInfo->groupId ) );
+    docItem->setText( 0, docInfo->docName );
+    docItem->setText( 1, docInfo->docName );
+    docItem->setText( 2, QVariant( docInfo->update ).toString() );
 
-		QString uname = docIt.value().split( "#" ).value( 0 );
-		QString gname = docIt.value().split( "#" ).value( 1 );
-		QString docname = docIt.value().split( "#" ).value( 2 );
-		QString docpath = docIt.value().split( "#" ).value( 3 );
-		QString updated = docIt.value().split( "#" ).value( 4 );
-		QString checkedout = docIt.value().split( "#" ).value( 5 );
-
-		docItem = new QTreeWidgetItem( getGroupItem( gname ) );
-		docItem->setText( 0, docname );
-		docItem->setText( 1, docpath );
-		docItem->setText( 2, updated );
-
-		if ( checkedout == "0" )
-			docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-closed_16.png" ) ) );
-		else if ( checkedout == "1" )
-			docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-open_16.png" ) ) );
-
-		++docIt;
-	}
+    if ( docInfo->checkedOut == "0" )
+      docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-closed_16.png" ) ) );
+    else if ( docInfo->checkedOut == "1" )
+      docItem->setIcon( 3, QIcon( QString::fromUtf8( ":/picture/16/images/16x16/folder-open_16.png" ) ) );
+  }
 }
 
 void DMSWorkSheet::newDocument()

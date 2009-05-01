@@ -58,6 +58,9 @@ void DMSSearch::closeEvent( QCloseEvent *e )
 
 void DMSSearch::search()
 {
+  if( documents.size() <= 0 || documents.isEmpty() )
+    return;
+
 	treeWidgetSearchDocument->clear();
 
 	QString searchword = lineEditSearchWord->text();
@@ -69,18 +72,16 @@ void DMSSearch::search()
 	progressBarSearch->setMaximum( documents.size() );
 
 	int progress = 0;
-	QMap<QString, QString>::const_iterator docIt = documents.begin();
-
-	while ( docIt != documents.end() )
+  foreach( LibDMS::DocumentInfo *docInfo, documents )
 	{
 		qApp->processEvents();
 
-		QString uname = docIt.value().split( "#" ).value( 0 );
-		QString gname = docIt.value().split( "#" ).value( 1 );
-		QString docname = docIt.value().split( "#" ).value( 2 );
-		QString docpath = docIt.value().split( "#" ).value( 3 );
-		QString updated = docIt.value().split( "#" ).value( 4 );
-		QString checkedout = docIt.value().split( "#" ).value( 5 );
+		QString uname = docInfo->userId;
+		QString gname = docInfo->groupId;
+		QString docname = docInfo->docName;
+		QString docpath = docInfo->docPath;
+		QString updated = docInfo->update;
+		QString checkedout = docInfo->checkedOut;
 
 		if ( uname == searchuser && gname == searchgroup )
 		{
@@ -141,10 +142,7 @@ void DMSSearch::search()
 
 
 		progress++;
-
 		progressBarSearch->setValue( progress );
-
-		++docIt;
 	}
 
 

@@ -361,25 +361,20 @@ void DMSDocument::loadDocuments()
 	treeWidgetDocument->clear();
 
 	documents = _dms->geDocuments( _dms->getUserId( _dms->loggedUser ) );
-
-	QMap< QString, QString>::const_iterator docIt = documents.begin();
-
-	while ( docIt != documents.end() )
+  foreach( LibDMS::DocumentInfo *docInfo, documents )
 	{
 		qApp->processEvents();
 
-		QString uname = docIt.value().split( "#" ).value( 0 );
-		QString docname = docIt.value().split( "#" ).value( 2 );
-		QString gname = docIt.value().split( "#" ).value( 1 );
-		QString docpath = docIt.value().split( "#" ).value( 3 );
+		QString uname = docInfo->userId;
+		QString docname = docInfo->docName;
+		QString gname = docInfo->groupId;
+		QString docpath = docInfo->docPath;
 
 		docItem = new QTreeWidgetItem( treeWidgetDocument );
 		docItem->setText( 0, uname );
 		docItem->setText( 1, docname );
 		docItem->setText( 2, gname );
 		docItem->setText( 3, docpath );
-
-		++docIt;
 	}
 }
 

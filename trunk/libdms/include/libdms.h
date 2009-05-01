@@ -134,12 +134,12 @@ class EXPORT_ASAAL LibDMS : public QObject
       /**
        * Document updated?
        */
-      bool update;
+      QString update;
 
       /**
        * Document checked out?
        */
-      bool checkedOut;
+      QString checkedOut;
     };
 
     /**
@@ -302,7 +302,7 @@ class EXPORT_ASAAL LibDMS : public QObject
 		*
 		* @return <a href="http://doc.trolltech.com/4.4/qmap.html#QMap">QMap</a><DocId, Documents> with all users
 		*/
-		QMap<QString, QString> geDocuments();
+		QList< DocumentInfo* > geDocuments();
 
 		/*!
 		* Get documents from database
@@ -311,7 +311,7 @@ class EXPORT_ASAAL LibDMS : public QObject
 		*
 		* @return <a href="http://doc.trolltech.com/4.4/qmap.html#QMap">QMap</a><DocId, Documents>
 		*/
-		QMap<QString, QString> geDocuments( const QString &userId );
+		QList< DocumentInfo* > geDocuments( const QString &userId );
 
 		/*!
 		* Get the document id
@@ -581,7 +581,9 @@ class EXPORT_ASAAL LibDMS : public QObject
     UserInfo *userInfo;
 		QList< UserInfo* > userList;
 		QMap<QString, QString> groupList;
-		QMap<QString, QString> documentList;
+    //QMap<QString, QString> documentList;
+    DocumentInfo *m_documentInfo;
+    QList< DocumentInfo * > m_documentList;
 		QMap<QString, QString> appSettList;
 		QMap<QString, QStringList> tableColumnList;
 
